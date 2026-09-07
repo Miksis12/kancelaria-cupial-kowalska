@@ -1,0 +1,2079 @@
+/* ============================================================
+   KANCELARIA ADWOKACKA BEATA CUPIAŁ-KOWALSKA — design system v2
+   Kierunek: „list od Twojego adwokata" — jasny len, szeryf w treści,
+   grotesk w nagłówkach, brąz z logo tylko tam, gdzie coś jest klikalne.
+   v2: każda sekcja ma własny układ. Rytm robią zmiany kompozycji,
+   nie ozdoby: wykrwawione zdjęcia, szyna boczna, oś czasu, wyimek.
+   Jeden arkusz napędza design-system.html i mockup.html.
+   ============================================================ */
+
+/* ---------- Tokeny ---------- */
+:root {
+  color-scheme: light;
+
+  /* płaszczyzny — wyłącznie jasne, bez ciemnych sekcji (brief) */
+  --biel:       #FDFCFA;   /* najjaśniejsza płaszczyzna: sekcje i karty. Ciepła biel, nie chirurgiczna */
+  --len:        #F3EDE3;   /* tło strony: ciepły len, nie biel */
+  --piasek:     #E9E0D0;   /* pasy sekcji, pole formularza, placeholder zdjęcia */
+  --piasek-2:   #DFD4C0;   /* głębszy piasek: pas zachęty, aktywne stany */
+  --krem:       #FAF7F1;   /* kafle i karty na lnie */
+
+  /* tekst */
+  --umbra:      #3A2F27;   /* tekst podstawowy: ciepły brąz, nie czerń */
+  --umbra-2:    #6A5E55;   /* tekst drugorzędny (AA na lnie 5,1:1, na piasku 4,8:1) */
+
+  /* linie */
+  --linia:        rgba(58, 47, 39, .14);
+  --linia-mocna:  rgba(58, 47, 39, .32);
+
+  /* akcent — brąz wyprowadzony ze złota logo klientki (#C19B69) */
+  --braz:       #7E5E36;   /* linki, hover, etykiety, focus (AA na lnie 5,1:1) */
+  --braz-jasny: #B8955E;   /* wyłącznie dekoracja: monogram, cienkie linie, numery */
+  --braz-tlo:   rgba(140, 106, 63, .10);
+  --blad:       #9A3B2E;   /* tylko komunikat błędu formularza */
+
+  /* kroje */
+  --font-display: "Schibsted Grotesk", "Segoe UI", system-ui, sans-serif;
+  --font-body:    "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-ui:      var(--font-display);
+
+  /* skala */
+  --fs-h1:    clamp(2.6rem, 5vw, 4.25rem);
+  --fs-h2:    clamp(1.9rem, 3.1vw, 2.7rem);
+  --fs-h3:    1.25rem;
+  --fs-lead:  clamp(1.15rem, 1.4vw, 1.3rem);
+  --fs-body:  1.0625rem;
+  --fs-small: .9375rem;
+  --fs-label: .75rem;
+
+  /* rytm */
+  --kontener:       1200px;
+  --pad-x:          clamp(1.25rem, 4vw, 3rem);
+  --kontener-tresc: calc(var(--kontener) - 2 * var(--pad-x));
+  --sekcja:         clamp(4.5rem, 8vw, 7.5rem);
+  --nav-h:          72px;
+
+  /* kształt — jeden system: 8 px karty i zdjęcia, 6 px przyciski i pola */
+  --r-karta: 8px;
+  --r-btn:   6px;
+
+  /* ruch — jeden easing, dwa czasy */
+  --ease:  cubic-bezier(.2, .6, .2, 1);
+  --t:     220ms;
+  --t-2:   600ms;
+}
+
+/* ---------- Reset / baza ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+body {
+  background: var(--len);
+  color: var(--umbra);
+  font-family: var(--font-body);
+  font-size: var(--fs-body);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-variant-numeric: oldstyle-nums;
+}
+
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+button { font: inherit; cursor: pointer; background: none; border: 0; color: inherit; }
+strong { font-weight: 600; }
+
+::selection { background: var(--piasek-2); color: var(--umbra); }
+:focus-visible { outline: 2px solid var(--braz); outline-offset: 3px; border-radius: 2px; }
+
+/* ---------- Typografia ---------- */
+h1, h2, h3, h4, .display {
+  font-family: var(--font-display);
+  font-weight: 500;
+  letter-spacing: -.018em;
+  text-wrap: balance;
+  overflow-wrap: break-word;
+}
+h1 { font-size: var(--fs-h1); line-height: 1.05; }
+h2 { font-size: var(--fs-h2); line-height: 1.12; }
+h3 { font-size: var(--fs-h3); line-height: 1.3; font-weight: 600; letter-spacing: -.01em; }
+h4 { font-size: 1.05rem; line-height: 1.35; font-weight: 600; letter-spacing: 0; }
+
+/* akcent w nagłówku: ta sama rodzina, tylko kolor */
+h1 em, h2 em { font-style: normal; color: var(--braz); }
+
+.lead {
+  font-size: var(--fs-lead);
+  line-height: 1.6;
+  color: var(--umbra-2);
+  max-width: 36em;
+}
+.lead--ciemny { color: var(--umbra); }
+
+p + p { margin-top: 1em; }
+.tekst { max-width: 62ch; }
+.tekst p + p { margin-top: 1.1em; }
+
+.male { font-size: var(--fs-small); }
+.nowrap { white-space: nowrap; }
+.drugorzedny { color: var(--umbra-2); }
+.ui { font-family: var(--font-ui); }
+.liczby { font-variant-numeric: tabular-nums lining-nums; }
+
+/* etykieta sekcji — maksymalnie 3 na stronie (hero, zakres, kontakt) */
+.etykieta {
+  display: inline-block;
+  font-family: var(--font-ui);
+  font-size: var(--fs-label);
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--braz);
+  margin-bottom: 1.1rem;
+}
+
+/* link tekstowy z podkreśleniem w brązie */
+.link {
+  font-family: var(--font-ui);
+  font-weight: 500;
+  color: var(--braz);
+  text-decoration: underline;
+  text-decoration-color: var(--braz-jasny);
+  text-underline-offset: .22em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+.link:hover { text-decoration-color: var(--braz); color: var(--umbra); }
+
+/* fakty do potwierdzenia z klientką */
+.todo {
+  background: var(--braz-tlo);
+  color: var(--braz);
+  padding: 0 .3em;
+  border-radius: 3px;
+  cursor: help;
+  text-decoration: underline dotted;
+  text-underline-offset: .2em;
+}
+
+/* ---------- Layout ---------- */
+.kontener {
+  max-width: var(--kontener);
+  margin-inline: auto;
+  padding-inline: var(--pad-x);
+}
+
+.sekcja { padding-block: var(--sekcja); }
+/* ta sama płaszczyzna dwa razy pod rząd: odstęp równy jednemu modułowi, nie dwóm.
+   Przy zmianie płaszczyzny (len → biel) odstęp zostaje pełny, bo inaczej treść
+   zaczynałaby się dokładnie na krawędzi koloru. */
+.sekcja:not(.pas):not(.biel):not(.zacheta) + .sekcja:not(.pas):not(.biel):not(.zacheta) { padding-top: 0; }
+.sekcja.biel + .sekcja.biel { padding-top: 0; }
+
+.pas { background: var(--piasek); }
+.pas--gleboki { background: var(--piasek-2); }
+/* background-color, nie skrót: hero ma własny gradient w background-image */
+.biel { background-color: var(--biel); }
+
+.naglowek-sekcji { margin-bottom: clamp(2.5rem, 4.5vw, 4rem); max-width: 40em; }
+.naglowek-sekcji .lead { margin-top: 1.1rem; }
+
+.naglowek-sekcji--rozdzielony {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap; max-width: none;
+}
+
+.siatka-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.siatka-5-7 { display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.siatka-7-5 { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: clamp(2rem, 5vw, 5rem); align-items: center; }
+.siatka-4-8 { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 8fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+
+.linia-gora { border-top: 1px solid var(--linia); }
+
+/* ---------- Przyciski ---------- */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
+  min-height: 3rem;
+  padding: .8rem 1.5rem;
+  border-radius: var(--r-btn);
+  border: 1px solid transparent;
+  font-family: var(--font-ui);
+  font-size: .95rem;
+  font-weight: 500;
+  letter-spacing: .005em;
+  /* cyfry w przyciskach: wersalikowe, ale nie tabularne — tabular-nums
+     nadaje dwukropkowi szerokość cyfry i robi dziurę w „Zadzwoń:" */
+  font-variant-numeric: lining-nums;
+  white-space: nowrap;
+  transition: background-color var(--t) var(--ease), border-color var(--t) var(--ease),
+              color var(--t) var(--ease), transform var(--t) var(--ease);
+}
+.btn:active { transform: translateY(1px); }
+.btn .strzalka { transition: transform var(--t) var(--ease); }
+.btn:hover .strzalka { transform: translateX(3px); }
+
+.btn--pelny { background: var(--umbra); color: var(--len); }
+.btn--pelny:hover { background: var(--braz); color: var(--krem); }
+
+.btn--obrys { border-color: var(--linia-mocna); color: var(--umbra); background: transparent; }
+.btn--obrys:hover { border-color: var(--braz); color: var(--braz); }
+
+.btn--maly { min-height: 2.5rem; padding: .55rem 1.1rem; font-size: .9rem; }
+
+/* ---------- Nawigacja ---------- */
+.nav {
+  position: sticky; top: 0; z-index: 50;
+  background: rgba(253, 252, 250, .92);
+  -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--linia);
+}
+.nav__wnetrze {
+  height: var(--nav-h);
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+}
+.marka { display: inline-flex; align-items: center; gap: .8rem; }
+.marka__sygnet { width: 40px; height: 44px; flex: none; color: var(--braz-jasny); }
+.marka__sygnet text { font-family: var(--font-display); font-weight: 600; fill: var(--umbra); }
+.marka__nazwa { display: flex; flex-direction: column; line-height: 1.1; }
+.marka__nazwa b { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; letter-spacing: -.01em; }
+.marka__nazwa span { font-family: var(--font-ui); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2); margin-top: .25rem; }
+
+.nav__menu { display: flex; align-items: center; gap: 1.9rem; }
+.nav__menu a {
+  font-family: var(--font-ui); font-size: .95rem; font-weight: 500;
+  padding: .3rem 0; border-bottom: 1px solid transparent;
+  transition: border-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+.nav__menu a:hover, .nav__menu a[aria-current="page"] { border-bottom-color: var(--braz); }
+.nav__akcje { display: flex; align-items: center; gap: 1.25rem; }
+.nav__tel { font-family: var(--font-ui); font-weight: 500; font-variant-numeric: tabular-nums; }
+.nav__burger { display: none; width: 44px; height: 44px; align-items: center; justify-content: center; border-radius: var(--r-btn); border: 1px solid var(--linia-mocna); }
+
+/* ---------- Zdjęcia ---------- */
+/* kolor, ciepłe światło, miękki róg, delikatny lniany filtr */
+.foto {
+  position: relative; overflow: hidden;
+  border-radius: var(--r-karta);
+  background: var(--piasek);
+}
+.foto img { width: 100%; height: 100%; object-fit: cover; filter: saturate(.88) contrast(.97); }
+.foto::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: rgba(184, 149, 94, .06);
+  mix-blend-mode: multiply;
+}
+.foto--4-5 { aspect-ratio: 4 / 5; }
+.foto--3-4 { aspect-ratio: 3 / 4; }
+.foto--4-3 { aspect-ratio: 4 / 3; }
+.foto--1-1 { aspect-ratio: 1 / 1; }
+
+/* placeholder zdjęcia z opisem kadru (do czasu sesji) */
+.foto--placeholder { display: grid; place-items: center; text-align: center; padding: 1.5rem; }
+.foto--placeholder span { font-family: var(--font-ui); font-size: .85rem; color: var(--umbra-2); max-width: 18em; line-height: 1.5; }
+.foto--placeholder span b { display: block; font-weight: 600; color: var(--umbra); margin-bottom: .3rem; }
+
+.podpis-foto {
+  font-family: var(--font-ui); font-size: .82rem; color: var(--umbra-2);
+  margin-top: .8rem; line-height: 1.5; max-width: 46ch;
+}
+
+/* ---------- 01 · Hero v2: siatka wykrwawiona w prawo ----------
+   Strona główna używa dziś .wstep (na końcu pliku). Ten blok trzyma
+   jeszcze hero w mockup.html — nie usuwać, dopóki mockup jest w użyciu. */
+/* kolumny liczone tak, że skrajne 1fr są równe marginesom .kontener */
+.hero-sekcja {
+  padding-top: clamp(2rem, 4vw, 3.25rem);
+  padding-bottom: var(--sekcja);
+  background-image: radial-gradient(58% 52% at 20% 18%, rgba(184, 149, 94, .13), transparent 68%);
+  background-repeat: no-repeat;
+}
+.hero {
+  --hero-gap: clamp(1.75rem, 4vw, 4.5rem);
+  display: grid;
+  grid-template-columns:
+    [pelna-start] minmax(var(--pad-x), 1fr)
+    [tekst-start] minmax(0, calc((var(--kontener-tresc) - var(--hero-gap)) * .55))
+    [tekst-end] var(--hero-gap)
+    [foto-start] minmax(0, calc((var(--kontener-tresc) - var(--hero-gap)) * .45))
+    [foto-end] minmax(var(--pad-x), 1fr)
+    [pelna-end];
+  align-items: center;
+}
+.hero__tekst { grid-column: tekst-start / tekst-end; padding-block: clamp(1rem, 3vw, 2.5rem); }
+.hero__tekst h1 { max-width: 11em; }
+.hero__tekst .lead { margin-top: 1.4rem; max-width: 30em; }
+.hero__akcje { margin-top: 2.2rem; display: flex; gap: .85rem; flex-wrap: wrap; }
+.hero__foto { grid-column: foto-start / pelna-end; }
+.hero__foto .foto {
+  height: clamp(21rem, 40vw, 33rem);
+  border-radius: var(--r-karta) 0 0 var(--r-karta);
+}
+
+/* mikrofakty: pas pod hero, w rytmie kontenera */
+.mikrofakty {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  border-top: 1px solid var(--linia-mocna);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+.mikrofakt { padding: 1.5rem 2rem 0 0; }
+.mikrofakt + .mikrofakt { border-left: 1px solid var(--linia); padding-left: 2rem; }
+.mikrofakt b {
+  display: block; font-family: var(--font-display); font-weight: 600;
+  font-size: 1.08rem; line-height: 1.3; letter-spacing: -.01em;
+}
+.mikrofakt p { margin-top: .35rem; color: var(--umbra-2); font-size: var(--fs-small); line-height: 1.5; }
+
+/* ---------- 02 · Sytuacje: szyna boczna + wiersze zdań ---------- */
+.sytuacje { border-top: 1px solid var(--linia-mocna); }
+.sytuacja {
+  display: grid; grid-template-columns: minmax(0, 1fr) auto;
+  gap: .4rem 1.5rem; align-items: baseline;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--linia);
+  transition: padding-left var(--t) var(--ease);
+}
+.sytuacja__zdanie { font-size: 1.1rem; line-height: 1.45; transition: color var(--t) var(--ease); }
+.sytuacja__obszar {
+  font-family: var(--font-ui); font-size: .8rem; font-weight: 500;
+  color: var(--braz); white-space: nowrap;
+  display: inline-flex; align-items: center; gap: .5rem;
+}
+.sytuacja__obszar .strzalka { transition: transform var(--t) var(--ease); }
+a.sytuacja:hover { padding-left: .5rem; }
+a.sytuacja:hover .sytuacja__zdanie { color: var(--braz); }
+a.sytuacja:hover .strzalka { transform: translateX(3px); }
+
+.sytuacje-szyna { display: grid; gap: 1.5rem; align-content: start; }
+.sytuacje-szyna .foto { width: min(100%, 15rem); }
+
+/* ---------- 03 · Zakres spraw: trzy duże kafle + indeks ---------- */
+.kafle { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1rem; }
+.kafle--wiodace { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.kafel {
+  display: flex; flex-direction: column; gap: .7rem;
+  min-height: 13.5rem;
+  padding: 1.6rem 1.5rem 1.4rem;
+  background: var(--biel);
+  border: 1px solid var(--linia);
+  border-radius: var(--r-karta);
+  transition: border-color var(--t) var(--ease), transform var(--t) var(--ease);
+}
+.kafel:hover { border-color: var(--braz-jasny); transform: translateY(-2px); }
+.kafel h3 { font-size: 1.12rem; }
+.kafel p { color: var(--umbra-2); font-size: var(--fs-small); line-height: 1.55; }
+.kafel__stopka {
+  margin-top: auto; padding-top: .9rem;
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--font-ui); font-size: .85rem; font-weight: 500; color: var(--braz);
+}
+.kafel__stopka .strzalka { transition: transform var(--t) var(--ease); }
+.kafel:hover .kafel__stopka .strzalka { transform: translateX(3px); }
+
+.kafel--duzy { min-height: 18rem; padding: 1.9rem 1.8rem 1.6rem; gap: .85rem; }
+.kafel--duzy h3 { font-size: 1.4rem; }
+.kafel--duzy p { font-size: var(--fs-body); line-height: 1.6; }
+
+/* chipy pod-usług */
+.chipy { display: flex; flex-wrap: wrap; gap: .4rem; }
+.chip {
+  font-family: var(--font-ui); font-size: .8rem; font-weight: 500;
+  padding: .3rem .65rem; border-radius: var(--r-btn);
+  background: var(--piasek); color: var(--umbra);
+}
+
+/* indeks pozostałych obszarów: wiersze, nie kafle */
+.indeks { border-top: 1px solid var(--linia-mocna); margin-top: clamp(2.25rem, 4vw, 3.25rem); }
+.indeks__poz {
+  display: grid; grid-template-columns: 15rem minmax(0, 1fr) 1.5rem;
+  gap: .3rem 1.75rem; align-items: baseline;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--linia);
+  transition: padding-left var(--t) var(--ease);
+}
+.indeks__poz b { font-family: var(--font-display); font-weight: 600; font-size: 1.06rem; letter-spacing: -.01em; }
+.indeks__poz span { color: var(--umbra-2); font-size: var(--fs-small); line-height: 1.5; }
+.indeks__poz .strzalka { color: var(--braz); justify-self: end; transition: transform var(--t) var(--ease); }
+.indeks__poz:hover { padding-left: .5rem; }
+.indeks__poz:hover b { color: var(--braz); }
+.indeks__poz:hover .strzalka { transform: translateX(3px); }
+
+/* ---------- 04 · O mnie: portret przesunięty, oś czasu, wyimek ---------- */
+.omnie { display: grid; grid-template-columns: minmax(0, 4fr) minmax(0, 7fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.omnie__foto { position: relative; }
+.omnie__foto .foto,
+.omnie__foto .portret { width: min(100%, 24rem); aspect-ratio: 3 / 4; }
+.omnie__tekst h2 { margin-bottom: 1.25rem; }
+
+.osczasu {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 1.25rem;
+  border-top: 1px solid var(--linia-mocna);
+  margin-top: clamp(2rem, 4vw, 3rem);
+}
+.osczasu__poz { padding-top: 1.2rem; position: relative; }
+.osczasu__poz::before {
+  content: ""; position: absolute; top: -4px; left: 0;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--braz);
+}
+.osczasu__rok {
+  font-family: var(--font-ui); font-weight: 600; font-size: 1rem;
+  font-variant-numeric: tabular-nums lining-nums; letter-spacing: .01em;
+}
+.osczasu__poz p { margin-top: .4rem; font-size: var(--fs-small); color: var(--umbra-2); line-height: 1.5; }
+
+.wyimek {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  padding-left: clamp(1rem, 2vw, 1.75rem);
+  border-left: 2px solid var(--braz-jasny);
+  font-size: clamp(1.45rem, 2.5vw, 2.05rem);
+  line-height: 1.32; font-style: italic; color: var(--umbra);
+  max-width: 20em;
+}
+.wyimek__podpis {
+  display: block; margin-top: 1.1rem;
+  font-family: var(--font-ui); font-style: normal; font-weight: 500;
+  font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; color: var(--umbra-2);
+}
+
+/* ---------- 05 · Pas foto: pełna szerokość, bez paddingów ---------- */
+.pas-foto { padding-block: 0; }
+.pas-foto .foto { border-radius: 0; height: clamp(15rem, 28vw, 24rem); }
+.pas-foto .podpis-foto { margin-top: .9rem; }
+
+/* ---------- 06 · Współpraca: oś czterech kroków ---------- */
+.kroki { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 2rem; border-top: 1px solid var(--linia-mocna); }
+.krok { padding-top: 1.4rem; position: relative; }
+.krok::before {
+  content: ""; position: absolute; top: -4px; left: 0;
+  width: 7px; height: 7px; border-radius: 50%; background: var(--braz);
+}
+.krok__nr {
+  display: block;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: 2.1rem; line-height: 1; letter-spacing: -.03em;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--braz-jasny);
+}
+.krok h3 { margin-top: .7rem; font-size: 1.15rem; }
+.krok p { margin-top: .55rem; color: var(--umbra-2); font-size: var(--fs-small); line-height: 1.55; }
+
+/* ---------- 07 · Pytania: przyklejona szyna + akordeon ---------- */
+.faq-szyna { display: grid; gap: 1.5rem; align-content: start; }
+.szyna-karta {
+  border: 1px solid var(--linia); border-radius: var(--r-karta);
+  background: var(--biel); padding: 1.3rem 1.4rem;
+}
+.szyna-karta p { font-size: var(--fs-small); color: var(--umbra-2); }
+.szyna-karta a { display: inline-block; margin-top: .6rem; }
+
+.faq { border-top: 1px solid var(--linia-mocna); }
+.faq__poz { border-bottom: 1px solid var(--linia); }
+.faq__poz summary {
+  list-style: none; cursor: pointer;
+  display: flex; align-items: flex-start; justify-content: space-between; gap: 1.5rem;
+  padding: 1.15rem 0;
+  font-family: var(--font-display); font-weight: 600; font-size: 1.08rem; line-height: 1.35; letter-spacing: -.01em;
+}
+.faq__poz summary::-webkit-details-marker { display: none; }
+.faq__poz summary .plus { flex: none; width: 1.6rem; height: 1.6rem; display: grid; place-items: center; color: var(--braz); transition: transform var(--t) var(--ease); }
+.faq__poz[open] summary .plus { transform: rotate(45deg); }
+.faq__poz summary:hover { color: var(--braz); }
+.faq__tresc { padding: 0 3.5rem 1.4rem 0; color: var(--umbra-2); max-width: 56ch; }
+
+/* ---------- 08 · Pas zachęty: asymetryczny, nie wyśrodkowany ---------- */
+.zacheta {
+  background: var(--piasek-2);
+  background-image: radial-gradient(50% 60% at 82% 30%, rgba(250, 247, 241, .55), transparent 70%);
+}
+.zacheta__siatka {
+  display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4.5rem); align-items: end;
+}
+.zacheta h2 { max-width: 12em; }
+.zacheta p { margin-top: 1.1rem; font-size: var(--fs-lead); color: var(--umbra-2); max-width: 30em; }
+.zacheta__akcje { display: grid; gap: .75rem; justify-items: end; }
+.zacheta__akcje .btn { width: min(100%, 17rem); }
+
+/* ---------- 09 · Kontakt: trzy kolumny + mapa na całą szerokość ---------- */
+.kontakt-siatka {
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.75rem, 3vw, 3rem);
+  border-top: 1px solid var(--linia-mocna);
+  padding-top: clamp(1.75rem, 3vw, 2.5rem);
+}
+.kontakt-kol h4 {
+  font-family: var(--font-ui); font-size: var(--fs-label); font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2);
+  margin-bottom: 1rem;
+}
+.kontakt-kol p + p { margin-top: .6rem; }
+.kontakt-kol a { text-decoration: underline; text-decoration-color: var(--braz-jasny); text-underline-offset: .22em; }
+.kontakt-kol a:hover { color: var(--braz); }
+
+.godziny { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums lining-nums; }
+.godziny td { padding: .4rem 0; border-bottom: 1px solid var(--linia); vertical-align: top; font-size: var(--fs-small); }
+.godziny td:first-child { font-family: var(--font-ui); font-weight: 500; width: 7.5rem; }
+.godziny tr:last-child td { border-bottom: 0; }
+.godziny td:last-child { color: var(--umbra-2); }
+
+.mapa {
+  border-radius: var(--r-karta);
+  background: var(--piasek); border: 1px solid var(--linia);
+  display: grid; place-items: center; text-align: center; padding: 1.5rem;
+  font-family: var(--font-ui); color: var(--umbra-2); font-size: .9rem;
+}
+.mapa b { display: block; color: var(--umbra); font-weight: 600; margin-bottom: .3rem; }
+.mapa--pas { height: clamp(14rem, 24vw, 20rem); margin-top: clamp(2rem, 4vw, 3rem); }
+
+/* dane kontaktowe jako lista definicji (podstrona kontaktu) */
+.dane { display: grid; grid-template-columns: 9rem minmax(0, 1fr); gap: .5rem 1.5rem; align-items: baseline; }
+.dane dt { font-family: var(--font-ui); font-size: var(--fs-label); font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2); padding-top: .15rem; }
+.dane dd { font-size: var(--fs-body); }
+.dane dd a { text-decoration: underline; text-decoration-color: var(--braz-jasny); text-underline-offset: .22em; }
+.dane dd a:hover { color: var(--braz); }
+
+/* ---------- Formularz ---------- */
+.pole { display: grid; gap: .45rem; }
+.pole__etykieta { font-family: var(--font-ui); font-size: .85rem; font-weight: 600; }
+.pole__wejscie {
+  width: 100%; min-height: 3rem;
+  padding: .7rem .9rem;
+  font: inherit; font-family: var(--font-ui); font-size: .95rem;
+  color: var(--umbra); background: var(--krem);
+  border: 1px solid var(--linia-mocna); border-radius: var(--r-btn);
+  transition: border-color var(--t) var(--ease), box-shadow var(--t) var(--ease);
+}
+.pole__wejscie::placeholder { color: rgba(106, 94, 85, .8); }
+.pole__wejscie:focus { outline: 0; border-color: var(--braz); box-shadow: 0 0 0 3px var(--braz-tlo); }
+textarea.pole__wejscie { min-height: 8rem; resize: vertical; }
+.pole__pomoc { font-family: var(--font-ui); font-size: .8rem; color: var(--umbra-2); }
+.pole__blad { font-family: var(--font-ui); font-size: .8rem; color: var(--blad); }
+.pole--blad .pole__wejscie { border-color: var(--blad); }
+.zgoda { display: flex; gap: .7rem; align-items: flex-start; font-family: var(--font-ui); font-size: .85rem; color: var(--umbra-2); }
+.zgoda input { margin-top: .3rem; accent-color: var(--braz); width: 1rem; height: 1rem; }
+
+/* ---------- Stopka ---------- */
+.stopka { border-top: 1px solid var(--linia-mocna); padding-block: 3.5rem 2rem; }
+.stopka__siatka { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 2.5rem; }
+.stopka__opis { margin-top: 1rem; color: var(--umbra-2); font-size: var(--fs-small); max-width: 26em; }
+.stopka h4 { font-family: var(--font-ui); font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2); margin-bottom: 1rem; font-weight: 600; }
+.stopka li + li { margin-top: .5rem; }
+.stopka li a { font-family: var(--font-ui); font-size: .95rem; }
+.stopka li a:hover { color: var(--braz); }
+.stopka__prawna {
+  margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--linia);
+  display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap;
+  font-family: var(--font-ui); font-size: .8rem; color: var(--umbra-2);
+}
+
+/* ---------- Ruch: odsłanianie treści ---------- */
+/* stan początkowy ustawia wyłącznie JS (klasa .js na <html>) — bez JS wszystko jest widoczne */
+.js [data-odslon] { opacity: 0; transform: translateY(14px); transition: opacity var(--t-2) var(--ease), transform var(--t-2) var(--ease); }
+.js [data-odslon].widoczne { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  .js [data-odslon] { opacity: 1; transform: none; transition: none; }
+  .btn, .kafel, .link, .sytuacja, .indeks__poz, .faq__poz summary .plus { transition: none; }
+}
+
+/* ---------- Notatki do mockupu (nie są częścią strony) ---------- */
+.nota {
+  margin: 0 0 2.25rem;
+  padding: .9rem 1.1rem 1rem;
+  border: 1px dashed var(--braz);
+  border-radius: var(--r-karta);
+  background: rgba(250, 247, 241, .9);
+  font-family: var(--font-ui); font-size: .85rem; line-height: 1.5; color: var(--umbra);
+}
+.nota__tytul {
+  display: flex; align-items: center; gap: .6rem;
+  font-size: var(--fs-label); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--braz);
+  margin-bottom: .45rem;
+}
+.nota__tytul::before { content: ""; width: 8px; height: 8px; border-radius: 2px; background: var(--braz); }
+.nota p + p { margin-top: .35rem; }
+.nota b { font-weight: 600; }
+.nota--wstep { border-style: solid; background: var(--krem); }
+.nota--wstep ul { margin-top: .5rem; display: grid; gap: .3rem; }
+.nota--wstep li { padding-left: 1.1rem; position: relative; }
+.nota--wstep li::before { content: ""; position: absolute; left: 0; top: .55em; width: 5px; height: 5px; border-radius: 50%; background: var(--braz-jasny); }
+.pas .nota, .zacheta .nota { background: rgba(250, 247, 241, .78); }
+.bez-notatek .nota, .bez-notatek .mock-pasek { display: none !important; }
+
+.mock-pasek {
+  background: var(--umbra); color: var(--len);
+  font-family: var(--font-ui); font-size: .85rem;
+  padding: .6rem 0;
+}
+.mock-pasek .kontener { display: flex; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+.mock-pasek b { font-weight: 600; }
+.mock-pasek a { text-decoration: underline; text-underline-offset: .2em; }
+
+.mock-przelacznik {
+  position: fixed; right: 1rem; bottom: 1rem; z-index: 90;
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .6rem 1rem; border-radius: 999px;
+  background: var(--umbra); color: var(--len);
+  font-family: var(--font-ui); font-size: .85rem; font-weight: 500;
+  border: 1px solid rgba(243, 237, 227, .2);
+  box-shadow: 0 8px 24px rgba(58, 47, 39, .18);
+}
+.mock-przelacznik:hover { background: var(--braz); }
+
+/* ---------- Responsywność ---------- */
+@media (min-width: 1025px) {
+  .faq-szyna, .sytuacje-szyna { position: sticky; top: calc(var(--nav-h) + 2.5rem); }
+}
+
+@media (max-width: 1024px) {
+  .kafle { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .kroki, .osczasu { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.75rem; }
+  .nav__menu { display: none; }
+  .nav__burger { display: inline-flex; }
+  .nav__tel { display: none; }
+  .kontakt-siatka { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2rem; }
+}
+
+@media (max-width: 860px) {
+  .siatka-2, .siatka-5-7, .siatka-7-5, .siatka-4-8, .omnie { grid-template-columns: 1fr; gap: 2rem; }
+  .hero { display: flex; flex-direction: column-reverse; gap: 2rem; }
+  .hero__tekst { padding-inline: var(--pad-x); padding-block: 0; }
+  .hero__tekst h1, .hero__tekst .lead { max-width: none; }
+  .hero__foto .foto { height: 19rem; border-radius: 0; }
+  .mikrofakty { grid-template-columns: 1fr; }
+  .mikrofakt { padding: 1.1rem 0; }
+  .mikrofakt + .mikrofakt { border-left: 0; padding-left: 0; border-top: 1px solid var(--linia); }
+  .kafle--wiodace { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .indeks__poz { grid-template-columns: minmax(0, 1fr) 1.5rem; }
+  .indeks__poz span { grid-column: 1 / 2; }
+  .omnie__foto .foto,
+  .omnie__foto .portret { width: min(100%, 20rem); }
+  .zacheta__siatka { grid-template-columns: 1fr; gap: 2rem; align-items: start; }
+  .zacheta__akcje { justify-items: start; }
+  .zacheta__akcje .btn { width: auto; min-width: 14rem; }
+  .stopka__siatka { grid-template-columns: 1fr 1fr; }
+  .faq__tresc { padding-right: 0; }
+  .dane { grid-template-columns: 1fr; gap: .15rem 0; }
+  .dane dt { margin-top: .9rem; }
+}
+
+@media (max-width: 560px) {
+  .kafle, .kafle--wiodace { grid-template-columns: 1fr; }
+  .kafel, .kafel--duzy { min-height: 0; }
+  .kroki, .osczasu, .kontakt-siatka, .stopka__siatka { grid-template-columns: 1fr; gap: 1.5rem; }
+  .sytuacja { grid-template-columns: 1fr; }
+  .hero__akcje .btn, .zacheta__akcje .btn { width: 100%; }
+  .nav__akcje .btn { display: none; }
+}
+
+/* ============================================================
+   STRONA GŁÓWNA v3 — komponenty wymuszone przez copy 1.0.
+   Reszta strony jedzie na komponentach zdefiniowanych wyżej
+   (hero, mikrofakty, kafle, foto, faq, kontakt, stopka).
+   ============================================================ */
+
+/* ---------- Nawigacja: działające menu mobilne ---------- */
+.nav__menu-tel { display: none; }
+
+@media (max-width: 1024px) {
+  .nav[data-menu="otwarte"] .nav__menu {
+    display: grid;
+    position: absolute; left: 0; right: 0; top: var(--nav-h);
+    background: var(--len);
+    border-bottom: 1px solid var(--linia-mocna);
+    padding: .5rem var(--pad-x) 1.25rem;
+    box-shadow: 0 14px 24px -18px rgba(58, 47, 39, .5);
+  }
+  .nav[data-menu="otwarte"] .nav__menu a {
+    padding: .9rem 0;
+    border-bottom: 1px solid var(--linia);
+    font-size: 1.05rem;
+  }
+  .nav[data-menu="otwarte"] .nav__menu a:hover { border-bottom-color: var(--linia); color: var(--braz); }
+  .nav__menu-tel { display: block; font-variant-numeric: tabular-nums lining-nums; color: var(--braz); }
+}
+
+/* ---------- 05 · Podejście: nagłówek z wyimkiem po lewej, esej po prawej ---------- */
+.podejscie {
+  display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 5vw, 4.5rem); align-items: start;
+}
+.podejscie__esej { font-size: var(--fs-lead); line-height: 1.6; max-width: 44ch; }
+.podejscie__esej p + p { margin-top: 1.1em; }
+.podejscie .wyimek { margin-top: clamp(1.75rem, 3vw, 2.5rem); }
+
+
+/* ---------- Co dostajesz: ciąg dalszy sekcji „o mnie” ---------- */
+.atuty-blok {
+  margin-top: clamp(2.75rem, 5vw, 4rem);
+  scroll-margin-top: calc(var(--nav-h) + 2rem);
+}
+.atuty__tytul {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.5rem, 2.3vw, 2rem); line-height: 1.2; letter-spacing: -.018em;
+  max-width: 16em;
+  margin-bottom: clamp(1.75rem, 3.5vw, 2.5rem);
+}
+/* akcent w h3 — reguła bazowa koloruje em tylko w h1 i h2 */
+.atuty__tytul em { font-style: normal; color: var(--braz); }
+
+/* ---------- 10 · Kontakt: telefon jako element typograficzny ---------- */
+.telefon-duzy {
+  display: inline-flex; align-items: center; gap: .85rem;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.8rem, 3.2vw, 2.5rem); line-height: 1.1; letter-spacing: -.02em;
+  font-variant-numeric: lining-nums tabular-nums;
+  transition: color var(--t) var(--ease);
+}
+.telefon-duzy svg { color: var(--braz-jasny); flex: none; transition: color var(--t) var(--ease); }
+.telefon-duzy:hover, .telefon-duzy:hover svg { color: var(--braz); }
+.telefon-podpis { margin-top: .7rem; font-family: var(--font-ui); font-size: var(--fs-small); color: var(--umbra-2); max-width: 32em; }
+
+/* ---------- Responsywność nowych układów ---------- */
+@media (max-width: 860px) {
+  .podejscie { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+/* mapa osadzona zamiast placeholdera */
+.mapa--osadzona { padding: 0; display: block; overflow: hidden; }
+.mapa--osadzona iframe { width: 100%; height: 100%; border: 0; display: block; filter: saturate(.85) contrast(.97); }
+
+/* poprawka v3: .hero bazowo ma align-items:center; po zmianie na flex-column
+   centrowanie ściskało kolumny do max-content i rozpychało stronę w poziomie */
+@media (max-width: 860px) {
+  .hero { align-items: stretch; }
+}
+
+/* ---------- Biel: konsekwencje wplecenia trzeciej płaszczyzny ---------- */
+/* pas foto stoi teraz na własnym tle, więc podpis potrzebuje dolnego marginesu */
+.pas-foto { padding-bottom: clamp(1.5rem, 3vw, 2.5rem); }
+/* obszar poza dokumentem (pod stopką, przy przewinięciu) w bieli, nie we lnie */
+html { background: var(--biel); }
+
+/* ============================================================
+   WSTĘP — pierwszy ekran strony głównej (zastępuje hero v2).
+   Blok „01 · Hero" wyżej został, bo trzyma jeszcze mockup.html.
+
+   Trzy decyzje, których nie ma w reszcie strony:
+   1. Szeryf w H1. Na tym ekranie są dokładnie dwa kroje:
+      Source Serif 4 (nagłówek) i Schibsted Grotesk (nadtytuł,
+      lead, przycisk, nota, nawigacja). Reszta strony ma nadal
+      grotesk w nagłówkach — do decyzji, czy to rozciągamy dalej.
+   2. Obie kolumny mają wspólną górę i wspólny dół: wysokość
+      bierze się z --wstep-h, a kolumna tekstu rozkłada się
+      po niej przez space-between.
+   3. Wysokość sekcji liczona tak, żeby nad zgięciem została
+      widoczna górna krawędź pasa faktów (--wstep-zajawka).
+   ============================================================ */
+
+.wstep-sekcja {
+  --wstep-zajawka: 3.5rem;   /* ile pasa faktów widać nad zgięciem */
+  min-height: calc(100vh - var(--nav-h) - var(--wstep-zajawka));
+  min-height: calc(100svh - var(--nav-h) - var(--wstep-zajawka));
+  display: flex; flex-direction: column; justify-content: center;
+  padding-block: clamp(2rem, 5vh, 3.5rem);
+  background-image: radial-gradient(50% 44% at 12% 14%, rgba(184, 149, 94, .13), transparent 70%);
+  background-repeat: no-repeat;
+}
+
+.wstep {
+  --wstep-h: clamp(22rem, 60vh, 33rem);
+  display: grid;
+  /* druga kolumna to dokładnie 3:4 wysokości bloku — kontener na portret */
+  grid-template-columns: minmax(0, 1fr) calc(var(--wstep-h) * .75);
+  gap: clamp(2rem, 4vw, 4rem);
+  align-items: stretch;
+}
+
+/* svh liczy się od małego okna mobilnego — bez tego pasek adresu chowa wysokość */
+@supports (height: 1svh) {
+  .wstep { --wstep-h: clamp(22rem, 60svh, 33rem); }
+}
+
+.wstep__tekst {
+  min-height: var(--wstep-h);
+  display: flex; flex-direction: column; justify-content: space-between;
+  gap: 1.1rem;
+}
+/* odstępy w tej kolumnie liczy wyłącznie gap i space-between */
+.wstep__tekst p + p { margin-top: 0; }
+
+/* nadtytuł: ta sama etykieta co w reszcie strony, o stopień większa */
+.etykieta--wstep { font-size: .8125rem; letter-spacing: .16em; margin-bottom: 0; }
+
+.wstep__tytul {
+  font-family: var(--font-body);          /* szeryf — jedyny taki nagłówek na stronie */
+  font-weight: 500;
+  font-size: clamp(2.05rem, 3.25vw, 3.05rem);
+  line-height: 1.14;
+  letter-spacing: -.005em;
+}
+/* łamanie ręczne: każdy wiersz to własny blok, żeby nie było sierot.
+   Poniżej 1025 px wiersze wracają do zwykłego, płynnego łamania. */
+.wstep__wiersz { display: block; }
+
+.wstep__lead {
+  font-family: var(--font-ui);
+  font-size: clamp(1.2rem, 1.45vw, 1.35rem);   /* nie mniej niż 19 px */
+  line-height: 1.55;
+  color: var(--umbra);                          /* 12,7:1 na bieli */
+  max-width: 64ch;
+}
+
+.wstep__akcja { display: flex; }
+.btn--duzy { min-height: 3.5rem; padding: 1rem 1.9rem; font-size: 1.0625rem; }
+
+.wstep__nota {
+  font-family: var(--font-ui);
+  font-size: 1.0625rem; line-height: 1.5;
+  color: var(--umbra-2);
+  max-width: 52ch;
+}
+.wstep__nota span { display: block; }
+.wstep__nota span + span { margin-top: .25rem; }
+
+/* ---------- Miejsce na portret ---------- */
+/* Świadomy placeholder, nie zdjęcie: ciepła faktura z palety plus sygnet.
+   Podmiana na zdjęcie nie rusza layoutu — wystarczy wstawić <img> zamiast treści. */
+.wstep__foto { display: flex; }
+.portret {
+  flex: 1; width: 100%;
+  border-radius: var(--r-karta);
+  border: 1px solid var(--linia);
+  background-color: var(--piasek);
+  background-image:
+    radial-gradient(78% 56% at 50% 26%, rgba(253, 252, 250, .82), transparent 70%),
+    linear-gradient(165deg, var(--len) 0%, var(--piasek-2) 100%);
+  display: grid; align-content: center; justify-items: center; gap: 1.1rem;
+  padding: 1.5rem; text-align: center;
+  overflow: hidden;
+}
+.portret img { width: 100%; height: 100%; object-fit: cover; }
+.portret__znak { width: clamp(3.75rem, 6vw, 5.25rem); color: var(--braz-jasny); opacity: .55; }
+.portret__opis { font-family: var(--font-ui); font-size: .9rem; line-height: 1.5; color: var(--umbra-2); max-width: 17em; }
+.portret__opis b { display: block; font-weight: 600; color: var(--umbra); margin-bottom: .15rem; }
+
+/* pas faktów: własna sekcja, żeby jego górna krawędź mogła zostać nad zgięciem */
+.fakty { padding-top: 0; }
+.fakty .mikrofakty { margin-top: 0; }
+
+@media (max-width: 1024px) {
+  .wstep-sekcja {
+    min-height: 0;
+    display: block;
+    padding-block: clamp(2rem, 6vw, 3rem) clamp(2.5rem, 6vw, 3.5rem);
+  }
+  .wstep { grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 2.75rem); }
+  .wstep__tekst { min-height: 0; gap: 1.35rem; }
+  .wstep__wiersz { display: inline; }
+  .wstep__foto { justify-content: flex-start; }
+  .portret { flex: none; width: min(100%, 21rem); aspect-ratio: 3 / 4; }
+}
+
+@media (max-width: 560px) {
+  .wstep__akcja .btn { width: 100%; }
+  .portret { width: 100%; }
+}
+
+/* ============================================================
+   ZAKRES SPRAW — rejestr sytuacji.
+   Wiersz jest linkiem. Obszar stoi jako nadtytuł nad sytuacją,
+   żeby nazwa dziedziny czytała się przed opisem problemu; opis
+   idzie do drugiej kolumny, więc wiersz jest niski. Zero kart,
+   zero cieni. Hover: brązowa belka wjeżdża w margines kontenera,
+   treść przesuwa się o pół centymetra.
+   ============================================================ */
+
+.rejestr { list-style: none; border-top: 1px solid var(--linia-mocna); }
+.rejestr li { border-bottom: 1px solid var(--linia); }
+
+.rejestr__poz {
+  position: relative;
+  display: grid;
+  /* nazwa obszaru jest krótka, opis długi — druga kolumna dostaje więcej */
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.6fr) 1.5rem;
+  gap: clamp(1.5rem, 3vw, 3rem);
+  align-items: center;
+  padding-block: clamp(1.5rem, 2.6vw, 2.1rem);
+  transition: padding-left var(--t) var(--ease);
+}
+/* belka siedzi w marginesie kontenera, więc jej pojawienie się nie rusza siatki */
+.rejestr__poz::before {
+  content: ""; position: absolute; left: -1.25rem; top: 50%;
+  width: 3px; height: 0; border-radius: 2px;
+  background: var(--braz);
+  transform: translateY(-50%);
+  transition: height var(--t) var(--ease);
+}
+
+.rejestr__tytul {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.35rem, 2vw, 1.75rem); line-height: 1.22; letter-spacing: -.015em;
+  transition: color var(--t) var(--ease);
+}
+.rejestr__opis { color: var(--umbra-2); line-height: 1.55; }
+/* zdanie o sytuacji otwiera opis i jest ciemniejsze, żeby dawało się skanować */
+.rejestr__sytuacja { color: var(--umbra); }
+.rejestr__strzalka { color: var(--braz); justify-self: end; }
+.rejestr .strzalka { transition: transform var(--t) var(--ease); }
+
+.rejestr__poz:hover { padding-left: .75rem; }
+.rejestr__poz:hover::before { height: calc(100% - 2.4rem); }
+.rejestr__poz:hover .rejestr__tytul { color: var(--braz); }
+.rejestr__poz:hover .strzalka { transform: translateX(4px); }
+
+@media (max-width: 860px) {
+  .rejestr__poz { grid-template-columns: minmax(0, 1fr) 1.5rem; gap: .8rem 1.5rem; align-items: start; }
+  .rejestr__opis { grid-column: 1 / 2; }
+  .rejestr__strzalka { grid-row: 1 / 2; grid-column: 2 / 3; }
+}
+
+/* ============================================================
+   MEDIACJE — panel domykający zakres spraw.
+   Nie jest osobną sekcją: siedzi w środku „Zakresu spraw", pod
+   rejestrem, jako informacja, że poza drogą sądową jest jeszcze
+   mediacja. Dlatego piasek, a nie biel — panel stoi na lnie
+   i musi się od niego odciąć.
+   Siatka ma trzy pola: etykieta wisi nad nagłówkiem w lewej
+   kolumnie i ma własny wiersz, więc akapity po prawej równają
+   się do nagłówka, a nie do etykiety.
+   ============================================================ */
+
+.panel-mediacje {
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+  scroll-margin-top: calc(var(--nav-h) + 2rem);
+  background-color: var(--piasek);
+  border-radius: var(--r-karta);
+  padding: clamp(1.75rem, 4vw, 3.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: clamp(1.75rem, 4vw, 3.5rem);
+  row-gap: 0;
+  align-items: start;
+}
+.panel-mediacje__etykieta { grid-column: 1 / 2; grid-row: 1; }
+.panel-mediacje__glowa    { grid-column: 1 / 2; grid-row: 2; }
+.panel-mediacje__tekst    { grid-column: 2 / 3; grid-row: 2; }
+
+.panel-mediacje__tytul {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.6rem, 2.5vw, 2.15rem); line-height: 1.2; letter-spacing: -.018em;
+  max-width: 13em;
+}
+.panel-mediacje__tytul em { font-style: normal; color: var(--braz); }
+.panel-mediacje__akcja { margin-top: clamp(1.5rem, 3vw, 2.25rem); }
+.panel-mediacje__tekst { max-width: 58ch; }
+.panel-mediacje__tekst p { line-height: 1.6; }
+.panel-mediacje__tekst p:first-child { font-size: var(--fs-lead); line-height: 1.55; }
+
+@media (max-width: 860px) {
+  .panel-mediacje { grid-template-columns: 1fr; row-gap: clamp(1.5rem, 4vw, 2rem); }
+  .panel-mediacje__etykieta,
+  .panel-mediacje__glowa,
+  .panel-mediacje__tekst { grid-column: 1 / -1; grid-row: auto; }
+  .panel-mediacje__etykieta { margin-bottom: 0; }
+}
+
+/* ============================================================
+   DYŻURY I OPINIE — dwie osobne sekcje.
+   Dyżury w punktach pomocy prawnej to inny dowód niż opinie
+   w Google, więc nie stoją już w jednym bloku.
+   ============================================================ */
+
+/* ---------- Dyżury: nagłówek, kreska, dwa akapity w łamach ---------- */
+.dyzury h2 { max-width: 16em; }
+.dyzury__tresc {
+  margin-top: clamp(1.75rem, 3.5vw, 2.75rem);
+  padding-top: clamp(1.5rem, 3vw, 2.25rem);
+  border-top: 1px solid var(--linia-mocna);
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: start;
+}
+/* każdy akapit jest osobną komórką siatki — bez tego p + p rozjeżdża łamy */
+.dyzury__tresc p { max-width: 46ch; line-height: 1.6; }
+.dyzury__tresc p + p { margin-top: 0; }
+
+/* ---------- Opinie: cytat wiodący na całą szerokość, pod nim trzy łamy ---------- */
+.gwiazdki { display: block; color: var(--braz-jasny); flex: none; }
+
+.opinia-wiodaca {
+  padding-left: clamp(1rem, 2vw, 1.75rem);
+  border-left: 2px solid var(--braz-jasny);
+}
+.opinia-wiodaca__cytat {
+  margin-top: .9rem;
+  font-family: var(--font-body);
+  font-size: clamp(1.35rem, 2.3vw, 1.95rem); line-height: 1.34;
+}
+.opinia-wiodaca__autor {
+  margin-top: 1.1rem;
+  font-family: var(--font-ui); font-size: .82rem; font-weight: 500;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--umbra-2);
+}
+
+.opinie-rzad {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.opinia-kolumna { border-top: 1px solid var(--linia-mocna); padding-top: 1.1rem; }
+.opinia-kolumna__cytat { margin-top: .8rem; font-size: var(--fs-small); line-height: 1.6; }
+.opinia-kolumna__autor {
+  margin-top: .9rem;
+  font-family: var(--font-ui); font-size: .85rem; font-weight: 600; color: var(--umbra);
+}
+
+@media (max-width: 860px) {
+  .dyzury__tresc { grid-template-columns: 1fr; gap: 1.1rem; }
+  .dyzury__tresc p { max-width: 62ch; }
+  .dyzury__tresc p + p { margin-top: 1em; }
+  .opinie-rzad { grid-template-columns: 1fr; gap: 1.5rem; }
+}
+
+/* ============================================================
+   CO DOSTAJESZ — trzy warianty do wyboru (W1–W3).
+   Zasady przyjęte za skillem projektowym: żadnych czterech
+   równych kafli, żadnego numerowania pozycji, jeden akcent,
+   jeden promień zaokrąglenia, ruch tylko wtedy, gdy coś znaczy.
+   PO WYBORZE: zostawić reguły jednego, resztę wyciąć.
+   ============================================================ */
+
+/* ---------- W1 · bento: jeden argument wiodący, trzy obok ---------- */
+.bento-atuty { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 1rem; }
+.bento-atuty__glowny {
+  grid-column: span 5;
+  background-color: var(--piasek);
+  border-radius: var(--r-karta);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex; flex-direction: column; justify-content: space-between; gap: 1.5rem;
+}
+.bento-atuty__glowny h4 {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.45rem, 2.3vw, 2rem); line-height: 1.18; letter-spacing: -.02em;
+}
+.bento-atuty__glowny p { line-height: 1.6; max-width: 30ch; }
+.bento-atuty__reszta { grid-column: span 7; display: grid; gap: 1rem; align-content: start; }
+.bento-atuty__poz {
+  background-color: var(--biel);
+  border-radius: var(--r-karta);
+  padding: clamp(1.25rem, 2.2vw, 1.75rem);
+}
+.bento-atuty__poz h4 { font-size: 1.15rem; line-height: 1.3; }
+.bento-atuty__poz p { margin-top: .5rem; color: var(--umbra-2); font-size: var(--fs-small); line-height: 1.6; max-width: 60ch; }
+
+@media (max-width: 1024px) {
+  .bento-atuty__glowny { grid-column: span 12; }
+  .bento-atuty__reszta { grid-column: span 12; }
+}
+
+/* ============================================================
+   PODSTRONA KONTAKT (kontakt.html)
+   Nowe komponenty: .uklad-kontakt (siatka sekcji danych), .wizytowka
+   (kanały kontaktu) i .formularz. Reszta strony
+   stoi na komponentach zdefiniowanych wyżej: .siatka-7-5 / -2 /
+   -4-8, .naglowek-sekcji, .telefon-duzy, .szyna-karta, .dane,
+   .mapa--osadzona.
+   ============================================================ */
+
+/* karta „wolisz napisać": dotąd .szyna-karta trzymała tylko akapit i link.
+   Wariant --krem, bo na płaszczyźnie bieli karta w bieli znika. */
+.szyna-karta h2 { font-size: 1.2rem; line-height: 1.3; margin-bottom: .55rem; }
+.szyna-karta--krem { background: var(--krem); }
+
+/* ---------- Wizytówka: kanały kontaktu jako osobne bloki, nie lista ---------- */
+/* Powód: dane w <dl> czytały się jak dalszy ciąg tekstu z sąsiedniej kolumny.
+   Telefon i e-mail są klikalne i stoją w bieli, adres jest statyczny i stoi
+   w kremie — kolor karty mówi, w co da się kliknąć. Dane rejestrowe schodzą
+   drobnym drukiem pod kreskę, w komponencie .dane. */
+.wizytowka { display: grid; gap: .9rem; margin-top: clamp(1.75rem, 3vw, 2.25rem); }
+
+.wizytowka__kanal,
+.wizytowka__blok {
+  display: grid; gap: .45rem;
+  padding: clamp(1.1rem, 2vw, 1.4rem) clamp(1.2rem, 2.2vw, 1.6rem);
+  border: 1px solid var(--linia); border-radius: var(--r-karta);
+}
+.wizytowka__kanal {
+  background: var(--biel);
+  transition: border-color var(--t) var(--ease), transform var(--t) var(--ease);
+}
+.wizytowka__blok { background: var(--krem); }
+.wizytowka__kanal:hover { border-color: var(--braz-jasny); transform: translateY(-2px); }
+
+.wizytowka__etykieta {
+  display: flex; align-items: center; gap: .5rem;
+  font-family: var(--font-ui); font-size: var(--fs-label); font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2);
+}
+.wizytowka__etykieta svg { flex: none; color: var(--braz-jasny); }
+
+.wizytowka__wartosc {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.15rem, 1.7vw, 1.4rem); line-height: 1.3; letter-spacing: -.015em;
+  overflow-wrap: anywhere;
+  transition: color var(--t) var(--ease);
+}
+.wizytowka__kanal:hover .wizytowka__wartosc { color: var(--braz); }
+.wizytowka__opis { font-size: var(--fs-small); line-height: 1.5; color: var(--umbra-2); }
+
+/* dane rejestrowe pod kreską — bez wyróżnienia, to nie jest kanał kontaktu */
+.wizytowka > .dane { padding-top: 1.35rem; border-top: 1px solid var(--linia); }
+.wizytowka > .dane dd { font-size: var(--fs-small); color: var(--umbra-2); }
+
+/* ---------- Układ sekcji „Kontakt" ---------- */
+/* Nagłówek zajmuje tylko lewą kolumnę i własny wiersz, dzięki czemu prawa
+   kolumna („Zanim przyjedziesz") startuje na wysokości pierwszej karty
+   wizytówki, a nie na wysokości h2. Odstęp pod nagłówkiem robi row-gap,
+   dlatego .wizytowka traci tu swój margines górny. */
+.uklad-kontakt {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2rem, 5vw, 5rem);
+  row-gap: clamp(1.75rem, 3vw, 2.25rem);
+  align-items: start;
+}
+.uklad-kontakt__tytul        { grid-column: 1; grid-row: 1; }
+.uklad-kontakt > .wizytowka  { grid-column: 1; grid-row: 2; margin-top: 0; }
+.uklad-kontakt > .dojazd     { grid-column: 2; grid-row: 2; }
+
+/* dojazd: blok tekstu z własnym śródtytułem */
+.dojazd h3 { margin-bottom: 1rem; }
+
+@media (max-width: 860px) {
+  .uklad-kontakt { grid-template-columns: 1fr; }
+  .uklad-kontakt > * { grid-column: 1; grid-row: auto; }
+}
+
+/* ---------- Formularz „oddzwonię" ---------- */
+/* Pola (.pole, .pole__wejscie, .zgoda) są z design systemu — tutaj tylko rytm
+   pionowy i para imię + telefon. Odstępy robi gap, nie marginesy akapitów. */
+.formularz { display: grid; gap: clamp(1rem, 1.6vw, 1.25rem); }
+.formularz p + p { margin-top: 0; }
+.formularz__para {
+  display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1rem, 1.6vw, 1.25rem);
+}
+.formularz__stopka {
+  display: grid; gap: 1.25rem; justify-items: start;
+  margin-top: .35rem; padding-top: 1.35rem;
+  border-top: 1px solid var(--linia);
+}
+.formularz__nota {
+  font-family: var(--font-ui); font-size: .8rem; line-height: 1.55;
+  color: var(--umbra-2); max-width: 48ch;
+}
+
+@media (max-width: 560px) {
+  .formularz__para { grid-template-columns: 1fr; }
+  .formularz__stopka .btn { width: 100%; }
+}
+
+/* ---------- Przeniesione z atrybutow style w index.html (zasada: zero CSS inline) ---------- */
+.kontakt-telefon { margin-bottom: clamp(2.5rem, 5vw, 3.5rem); }
+.omnie__wiecej { margin-top: 1.75rem; }
+
+/* ============================================================
+   PODSTRONA O MNIE (o-mnie.html)
+
+   Osiem sekcji, z czego pięć jedzie na komponentach, które już
+   stoją: .dyzury__tresc, .podejscie + .wyimek, .rejestr,
+   .telefon-duzy, .dane, .portret, siatki 7-5 / 4-8 / 2.
+   Nowe są cztery rzeczy, każda dlatego, że istniejący komponent
+   trzymałby treść gorzej, a nie dlatego, że ładniej wygląda:
+
+   1. .sylwetka  — pierwsza sekcja treści podstrony: portret po
+      lewej, tytuł zawodowy, nazwisko i dwa akapity po prawej.
+      To NIE jest hero: .wstep ze strony głównej ma wysokość na
+      cały ekran i H1 będące zdaniem. Tu nagłówek jest H2 (H1
+      zabiera .naglowek-strony) i stoi w skali sekcji.
+   2. .akcent     — akapit wyróżniony (nie cytat). Trzy sekcje
+      copy domykają się zdaniem, które ma być wyjęte z toku
+      tekstu. .wyimek jest na to za duży i kursywny, karta
+      .szyna-karta za bardzo „na boku".
+   3. .wykaz      — ścieżka zawodowa: rok po lewej, fakt po
+      prawej, linia pod pozycją. .osczasu jest poziomą osią na
+      cztery pola, .indeks wierszem-linkiem ze strzałką.
+   4. .rozwidlenie — dwie wykluczające się role (pełnomocnik albo
+      mediator). Jedyne miejsce na stronie, gdzie treść jest
+      schematem; żaden komponent nie trzyma pary „albo / albo".
+   ============================================================ */
+
+/* ---------- 01 · Sylwetka: portret po lewej, informacje po prawej ---------- */
+.sylwetka {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
+}
+.sylwetka__foto .portret { aspect-ratio: 3 / 4; }
+
+.sylwetka__tekst { display: grid; align-content: center; gap: clamp(1.15rem, 2vw, 1.6rem); }
+/* odstępy w tej kolumnie liczy wyłącznie gap */
+.sylwetka__tekst p + p { margin-top: 0; }
+
+/* H1 w dwóch wierszach: tytuł zawodowy groteskiem, nazwisko szeryfem.
+   Nadtytuł zastępuje tu .etykieta — dwa mikronapisy pod rząd byłyby szumem. */
+.sylwetka__tytul { display: grid; gap: .75rem; }
+.sylwetka__zawod {
+  font-family: var(--font-ui);
+  font-size: .8125rem; font-weight: 600; line-height: 1.2;
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--braz);
+}
+/* skala sekcji, nie hero: o stopień wyżej niż h2, żeby zostało widać, że to H1 */
+.sylwetka__nazwa {
+  font-family: var(--font-body); font-weight: 500;
+  font-size: clamp(2rem, 3.4vw, 2.9rem);
+  line-height: 1.08; letter-spacing: -.01em;
+  color: var(--umbra);
+}
+
+/* Oba akapity o sobie chodzą na tej samej klasie: jeden krój (szeryf, bo to
+   treść, nie interfejs), jeden stopień, jedna miara i jeden kolor. Wcześniej
+   pierwszy był leadem w grotesku, przez co dwa sąsiadujące akapity czytały się
+   jak dwa różne poziomy tekstu. Miara węższa niż .tekst, bo stoją w kolumnie
+   obok portretu, a nie na całej szerokości kontenera. */
+.sylwetka__akapit {
+  font-size: 1.15rem;
+  line-height: 1.7;
+  max-width: 52ch;
+}
+
+.sylwetka__akcja { display: flex; }
+
+@media (max-width: 1024px) {
+  .sylwetka { grid-template-columns: 1fr; gap: clamp(2rem, 5vw, 2.75rem); }
+  /* na wąskim ekranie pierwsze jest nazwisko, portret schodzi pod nie */
+  .sylwetka__tekst { order: -1; }
+  .sylwetka__foto .portret { width: min(100%, 21rem); }
+}
+@media (max-width: 560px) {
+  .sylwetka__akcja .btn { width: 100%; }
+  .sylwetka__foto .portret { width: 100%; }
+}
+
+/* ---------- Akapit wyróżniony ---------- */
+/* Płaszczyzna piasku na lnie i na bieli; na sekcji .pas musi ustąpić bieli,
+   bo panel w kolorze tła przestaje być panelem. */
+.akcent {
+  background-color: var(--piasek);
+  border-radius: var(--r-karta);
+  padding: clamp(1.35rem, 2.6vw, 2rem) clamp(1.4rem, 2.8vw, 2.25rem);
+  font-size: 1.08rem;
+  line-height: 1.6;
+  max-width: 56ch;
+}
+.akcent--luz { margin-top: clamp(2rem, 4vw, 3rem); }
+.pas .akcent, .zacheta .akcent { background-color: var(--biel); }
+
+/* ---------- Esej prowadzony wielkością leadu ---------- */
+/* 54ch, nie 46: przy 46 esej kończył się grubo przed krawędzią swojej kolumny
+   i zostawiał pas pustki po prawej. 54 znaki to nadal miara w zakresie
+   czytelności, a wypełnia zarówno połowę kontenera (mediacja), jak i kolumnę
+   7/12 (dlaczego sama). */
+.tekst--lead { font-size: var(--fs-lead); line-height: 1.6; max-width: 54ch; }
+
+/* ---------- 03 · Wykaz: rok, fakt, linia ---------- */
+.wykaz { list-style: none; border-top: 1px solid var(--linia-mocna); }
+.wykaz__poz {
+  display: grid;
+  grid-template-columns: minmax(0, 8.5rem) minmax(0, 1fr);
+  column-gap: clamp(1.5rem, 3.5vw, 3.5rem);
+  row-gap: .3rem;
+  align-items: baseline;
+  padding-block: clamp(1.25rem, 2.4vw, 1.85rem);
+  border-bottom: 1px solid var(--linia);
+}
+.wykaz__rok {
+  grid-column: 1; grid-row: 1 / span 2;
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.5rem, 2.2vw, 1.95rem); line-height: 1.05;
+  letter-spacing: -.02em;
+  font-variant-numeric: lining-nums tabular-nums;
+  color: var(--braz-jasny);
+}
+/* dopóki daty nie ma, w miejscu liczby stoi znacznik .todo — musi być mały,
+   bo w rozmiarze roku pięć znaczników pod rząd zjadłoby sekcję */
+.wykaz__rok .todo {
+  font-family: var(--font-ui); font-weight: 600;
+  font-size: .8rem; letter-spacing: .08em; text-transform: uppercase;
+  vertical-align: .45em;
+}
+.wykaz__tytul {
+  grid-column: 2; grid-row: 1;
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.05rem, 1.5vw, 1.2rem); line-height: 1.3; letter-spacing: -.01em;
+}
+.wykaz__opis {
+  grid-column: 2; grid-row: 2;
+  color: var(--umbra-2); font-size: var(--fs-small); line-height: 1.55;
+}
+
+@media (max-width: 560px) {
+  .wykaz__poz { grid-template-columns: 1fr; row-gap: .25rem; }
+  .wykaz__rok { grid-column: 1; grid-row: 1; font-size: 1.35rem; }
+  .wykaz__tytul { grid-column: 1; grid-row: 2; }
+  .wykaz__opis { grid-column: 1; grid-row: 3; }
+}
+
+/* ---------- 05 · Rozwidlenie ról: albo pełnomocnik, albo mediator ---------- */
+.rozwidlenie {
+  margin-top: clamp(2.25rem, 4.5vw, 3.5rem);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+  column-gap: clamp(1rem, 2.5vw, 2rem);
+  row-gap: clamp(1.25rem, 2.5vw, 1.75rem);
+  align-items: stretch;
+}
+.rozwidlenie__rola {
+  background-color: var(--biel);
+  border: 1px solid var(--linia);
+  border-radius: var(--r-karta);
+  padding: clamp(1.25rem, 2.6vw, 1.9rem) clamp(1.35rem, 2.8vw, 2rem);
+  display: grid; align-content: center;
+}
+.rozwidlenie__rola h3 {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.2rem, 1.9vw, 1.5rem); line-height: 1.22; letter-spacing: -.015em;
+}
+/* spójnik jako element rysunku: kreska, słowo, kreska */
+.rozwidlenie__albo {
+  align-self: center;
+  display: grid; justify-items: center; gap: .7rem;
+  font-family: var(--font-ui); font-size: .78rem; font-weight: 600;
+  letter-spacing: .16em; text-transform: uppercase; color: var(--umbra-2);
+}
+.rozwidlenie__albo::before,
+.rozwidlenie__albo::after {
+  content: ""; width: 1px; height: clamp(1.25rem, 3vw, 2.25rem);
+  background: var(--linia-mocna);
+}
+.rozwidlenie__nota {
+  grid-column: 1 / -1;
+  font-family: var(--font-ui);
+  font-size: var(--fs-small); line-height: 1.6;
+  color: var(--umbra-2);
+  max-width: 64ch;
+}
+
+@media (max-width: 640px) {
+  .rozwidlenie { grid-template-columns: 1fr; }
+  .rozwidlenie__albo { justify-items: start; }
+  .rozwidlenie__albo::before,
+  .rozwidlenie__albo::after { display: none; }
+}
+
+
+/* ============================================================
+   NAWIGACJA — drop-down „Usługi"
+   Menu ma pozycję z listą obszarów. Desktop: panel pod hasłem,
+   otwierany hoverem, klikiem i klawiaturą (:focus-within).
+   Poniżej 1024 px: akordeon wewnątrz rozwiniętego menu mobilnego.
+   Kolory, promienie i czasy — z tokenów, żadnych nowych wartości.
+   ============================================================ */
+
+.nav__grupa { position: relative; display: flex; align-items: center; }
+
+.nav__rozwin {
+  display: inline-flex; align-items: center; gap: .4rem;
+  font-family: var(--font-ui); font-size: .95rem; font-weight: 500;
+  padding: .3rem 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+.nav__rozwin:hover,
+.nav__rozwin[data-aktywna="tak"],
+.nav__grupa[data-otwarte="tak"] .nav__rozwin { border-bottom-color: var(--braz); }
+
+.nav__strzalka { flex: none; color: var(--braz-jasny); transition: transform var(--t) var(--ease); }
+.nav__grupa[data-otwarte="tak"] .nav__strzalka { transform: rotate(180deg); }
+
+.nav__podmenu {
+  position: absolute; top: 100%; left: -1rem; z-index: 60;
+  min-width: 16.5rem;
+  margin-top: .9rem; padding: .5rem;
+  display: grid; gap: .1rem;
+  background: var(--biel);
+  border: 1px solid var(--linia); border-radius: var(--r-karta);
+  box-shadow: 0 18px 30px -22px rgba(58, 47, 39, .55);
+  opacity: 0; visibility: hidden; transform: translateY(-6px);
+  transition: opacity var(--t) var(--ease), transform var(--t) var(--ease), visibility var(--t);
+}
+.nav__grupa[data-otwarte="tak"] > .nav__podmenu { opacity: 1; visibility: visible; transform: none; }
+
+.nav__menu .nav__podmenu a {
+  display: block;
+  padding: .6rem .8rem; border-radius: var(--r-btn); border-bottom: 0;
+  font-size: .95rem; line-height: 1.35;
+  transition: background var(--t) var(--ease), color var(--t) var(--ease);
+}
+.nav__menu .nav__podmenu a:hover,
+.nav__menu .nav__podmenu a[aria-current="page"] { background: var(--krem); color: var(--braz); }
+
+/* mysz na szerokim ekranie: hover i klawiatura otwierają bez klikania */
+@media (hover: hover) and (min-width: 1025px) {
+  .nav__grupa:hover > .nav__podmenu,
+  .nav__grupa:focus-within > .nav__podmenu { opacity: 1; visibility: visible; transform: none; }
+  .nav__grupa:hover .nav__rozwin { border-bottom-color: var(--braz); }
+}
+
+/* menu mobilne: grupa jest akordeonem, nie unoszącym się panelem */
+@media (max-width: 1024px) {
+  .nav__grupa { display: block; }
+  .nav[data-menu="otwarte"] .nav__rozwin {
+    width: 100%; justify-content: space-between;
+    padding: .9rem 0; font-size: 1.05rem;
+    border-bottom: 1px solid var(--linia);
+  }
+  .nav[data-menu="otwarte"] .nav__rozwin[data-aktywna="tak"] { color: var(--braz); }
+  .nav__podmenu {
+    position: static; min-width: 0; margin: 0; padding: 0;
+    background: none; border: 0; border-radius: 0; box-shadow: none;
+    display: none; opacity: 1; visibility: visible; transform: none;
+  }
+  .nav__grupa[data-otwarte="tak"] > .nav__podmenu { display: grid; padding: .35rem 0 .6rem; }
+  .nav[data-menu="otwarte"] .nav__menu .nav__podmenu a {
+    padding: .7rem 0 .7rem 1rem;
+    border-left: 1px solid var(--linia); border-bottom: 0; border-radius: 0;
+    font-size: 1rem;
+  }
+}
+
+/* ============================================================
+   NAGŁÓWEK STRONY — krótka sekcja otwierająca podstronę.
+   Komponent wspólny dla wszystkich podstron: okruszki, nazwa
+   zakładki jako H1 i jedno zdanie podtytułu. Wysokość ok. 300 px
+   na desktopie — na tyle, żeby był to pełny blok, a nie pasek,
+   i na tyle mało, żeby pierwsza sekcja treści była widoczna
+   nad zgięciem.
+
+   Płaszczyzna to piasek, nie biel: nawigacja jest biała, więc
+   biały nagłówek zlałby się z nią w jedno pole bez początku.
+   Piasek daje stronie wyraźną krawędź startu, a sekcja pod nim
+   wraca do bieli — stąd cykl piasek → biel → len na tej stronie.
+
+   Okruszki wstrzykuje `site.js` z tablicy NAV w miejsce
+   <div data-okruszki></div>; nagłówek i podtytuł stoją w HTML,
+   bo są treścią konkretnej podstrony.
+   ============================================================ */
+
+/* Siatka, nie flex: element flex z max-width i marginesami auto kurczy się
+   do szerokości treści i ląduje na środku sekcji. W siatce .kontener rozciąga
+   się domyślnie, więc treść nagłówka stoi na tej samej krawędzi co portret
+   w sekcji niżej. */
+.naglowek-strony {
+  min-height: clamp(13rem, 24vw, 19rem);   /* ~208–304 px */
+  display: grid; align-content: center;
+  padding-block: clamp(2.5rem, 5vw, 3.5rem);
+}
+/* width:100% NIE jest tu ozdobnikiem — bez niego nagłówek ląduje na środku.
+   .kontener ma margin-inline:auto, a automatyczne marginesy wyłączają
+   rozciąganie elementu siatki (tak samo jak elementu flex): przy width:auto
+   pudełko kurczy się do szerokości treści, a marginesy auto je centrują.
+   Jawna szerokość przywraca zachowanie blokowe: pełna szerokość obszaru,
+   przycięta przez max-width kontenera. Dzięki temu treść nagłówka stoi na tej
+   samej krawędzi co portret w sekcji niżej. */
+.naglowek-strony .kontener {
+  width: 100%;
+  display: grid;
+  gap: clamp(.9rem, 1.8vw, 1.35rem);
+}
+/* szeryf, tak jak nagłówek hero na stronie głównej i nazwisko w sylwetce —
+   duży krój treściowy jest na tej witrynie sygnaturą tytułów, nie ozdobą */
+.naglowek-strony__tytul {
+  font-family: var(--font-body); font-weight: 500;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  line-height: 1.04; letter-spacing: -.015em;
+}
+.naglowek-strony__podtytul {
+  font-family: var(--font-ui);
+  font-size: clamp(1.05rem, 1.35vw, 1.2rem);
+  line-height: 1.5;
+  color: var(--umbra-2);
+  max-width: 46ch;
+}
+
+.okruszki { list-style: none; display: flex; flex-wrap: wrap; align-items: center; gap: .5rem .8rem; }
+.okruszki li {
+  display: flex; align-items: center; gap: .5rem .8rem;
+  font-family: var(--font-ui); font-size: .8125rem; line-height: 1.3;
+}
+/* strzałka rysowana rogiem ramki, nie znakiem: nie zależy od kroju ani od tego,
+   czy font zdążył się wczytać */
+.okruszki li + li::before {
+  content: ""; flex: none;
+  width: 5px; height: 5px;
+  border-top: 1px solid var(--linia-mocna);
+  border-right: 1px solid var(--linia-mocna);
+  transform: rotate(45deg);
+}
+.okruszki a { color: var(--umbra-2); transition: color var(--t) var(--ease); }
+.okruszki a:hover { color: var(--braz); }
+/* nazwa grupy z drop-downu — nie jest linkiem, bo rodzic nie ma własnego adresu */
+.okruszki__grupa { color: var(--umbra-2); }
+/* nazwa zakładki, na której stoimy — spokojnie, bez wersalików i brązu:
+   akcent bierze na siebie H1 tuż pod spodem, dwa wyróżnienia pod rząd
+   biłyby się ze sobą */
+.okruszki__tu { font-weight: 600; color: var(--umbra); }
+
+@media (max-width: 560px) {
+  .okruszki li { font-size: .78rem; }
+}
+
+/* ============================================================
+   PODSTRONA USŁUGOWA — ROZWÓD I SPRAWY RODZINNE
+   (rozwod-i-sprawy-rodzinne.html)
+
+   Jedenaście sekcji, z czego DZIESIĘĆ jedzie na komponentach,
+   które już stoją: .naglowek-strony, .naglowek-sekcji,
+   .mikrofakty, .faq (dwa razy — raz jako wykaz spraw, raz jako
+   pytania), .panel-mediacje, .rozwidlenie, .kroki, .podejscie
+   + .wyimek, .dyzury__tresc, .opinie-rzad, .telefon-duzy,
+   .kontakt-siatka, .siatka-4-8.
+
+   Portretu na tej podstronie NIE MA — decyzja Mikołaja z 7 września
+   2026. Zdjęcia z sesji jeszcze nie istnieją, a placeholder 3:4
+   w tak długiej stronie czytał się jak brak, nie jak układ.
+
+   NOWY jest jeden komponent: .rozpoznanie. Powód jest treściowy,
+   nie estetyczny. Sekcja „Czy to Twoja sytuacja" to sześć par:
+   zdanie wypowiedziane przez klienta w pierwszej osobie
+   i spokojna odpowiedź adwokatki. Żaden istniejący komponent
+   nie trzyma takiej pary:
+     .rejestr  — wiersz jest linkiem i prowadzi gdzieś dalej;
+                 tu nie ma dokąd prowadzić,
+     .kafle    — karta z ramką robi z cudzej wypowiedzi produkt,
+     .faq      — pytanie chowa odpowiedź; te sześć zdań ma być
+                 widocznych naraz, bo czyta się je skanując,
+     .wykaz    — po lewej stoi liczba, tu po lewej stoi cudzysłów,
+     .mikrofakty — pas trzech faktów, nie sześciu wypowiedzi.
+   ============================================================ */
+
+/* ---------- .rozpoznanie — sześć zdań klienta i sześć odpowiedzi ---------- */
+/* Dwie kolumny bez kart, bez ramek i bez teł. Całą robotę robią trzy rzeczy:
+   cudzysłów wiszący w marginesie, szeryf w cytacie i krótka brązowa kreska,
+   od której zaczyna się odpowiedź. Pozycje nie są klikalne i nie udają, że są:
+   nie mają hoveru ani strzałki. */
+.rozpoznanie {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2rem, 5vw, 4.5rem);
+  row-gap: clamp(2.25rem, 4.5vw, 3.5rem);
+}
+
+.rozpoznanie__poz {
+  position: relative;
+  padding-left: clamp(2rem, 3.5vw, 2.75rem);
+}
+/* cudzysłów jest znakiem na marginesie, nie pierwszym znakiem zdania: dzięki
+   temu pierwsze słowa wszystkich sześciu cytatów stoją w jednej pionowej linii.
+   Rysowany przez ::before, więc nie ma go w treści i nie miesza się w zaznaczaniu. */
+.rozpoznanie__poz::before {
+  content: "„";
+  position: absolute; left: 0; top: 0;
+  /* pudełko wysokości PIERWSZEGO wiersza cytatu, glif wyśrodkowany w pionie
+     przy zerowej interlinii — dzięki temu znak siada na pierwszym wierszu
+     niezależnie od tego, czy cytat ma jeden wiersz, czy dwa.
+     Clamp to dokładnie clamp cytatu (1.15–1.35rem) razy jego interlinia 1.34,
+     więc wyrównanie trzyma się na każdej szerokości, nie tylko na desktopie. */
+  height: clamp(1.54rem, 2.28vw, 1.81rem);
+  display: grid; align-items: center;
+  font-family: var(--font-body);
+  font-size: clamp(2.4rem, 4vw, 3rem);
+  line-height: 0;
+  color: var(--braz-jasny);
+}
+
+/* szeryf, bo to cudza wypowiedź, a nie tytuł sekcji — ta sama zasada
+   co w .wyimek i .opinia-wiodaca__cytat. Kursywy nie ma: kursywa w tym
+   systemie należy do .wyimek i nie może znaczyć dwóch rzeczy naraz. */
+.rozpoznanie__cytat {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(1.15rem, 1.7vw, 1.35rem);
+  line-height: 1.34;
+  letter-spacing: -.005em;
+  color: var(--umbra);
+  max-width: 24ch;
+  /* dwa wiersze na sztywno: cytaty mają jeden albo dwa wiersze, a bez tego
+     kreska i odpowiedź startowały w sąsiadujących kolumnach na różnej
+     wysokości i cała siatka czytała się jak krzywa */
+  min-height: 2.68em;
+}
+
+/* krótka kreska, nie linia przez całą kolumnę: to granica między głosem
+   klienta a głosem kancelarii, a nie podział listy na wiersze. Nigdzie
+   indziej na stronie kreska nie jest krótsza od kolumny, w której stoi. */
+.rozpoznanie__odp {
+  position: relative;
+  margin-top: 1.05rem;
+  padding-top: 1.2rem;
+  color: var(--umbra-2);
+  line-height: 1.6;
+  max-width: 54ch;
+}
+.rozpoznanie__odp::before {
+  content: "";
+  position: absolute; left: 0; top: 0;
+  width: 2.25rem; height: 1px;
+  background: var(--braz);
+}
+
+/* domknięcie sekcji: kreska na całą szerokość i jedno wezwanie */
+.rozpoznanie__cta {
+  margin-top: clamp(2.5rem, 5vw, 3.75rem);
+  padding-top: clamp(1.75rem, 3vw, 2.25rem);
+  border-top: 1px solid var(--linia-mocna);
+}
+
+@media (max-width: 860px) {
+  .rozpoznanie { grid-template-columns: 1fr; row-gap: clamp(1.75rem, 5vw, 2.5rem); }
+  .rozpoznanie__cytat { max-width: 28ch; }
+}
+@media (max-width: 560px) {
+  .rozpoznanie__poz { padding-left: 1.85rem; }
+  .rozpoznanie__poz::before { font-size: 2.5rem; }
+  .rozpoznanie__cta .btn { width: 100%; }
+}
+
+/* ---------- Warianty istniejących komponentów (bez nowego CSS-u „na zapas") ---------- */
+
+/* para przycisków w toku sekcji (nie w hero — .wstep__akcja trzyma jeden) */
+.akcje-para { display: flex; flex-wrap: wrap; gap: .75rem; }
+@media (max-width: 560px) { .akcje-para .btn { width: 100%; } }
+
+/* ---------- .faq--wykaz — ponumerowany wykaz spraw jako akordeon ----------
+   Sekcja „Sprawy rodzinne, które prowadzę" jest akordeonem na życzenie
+   Mikołaja: nazwy spraw do skanowania, opis dopiero po otwarciu.
+   Zachowanie bierze z .faq (<details>, nic nowego), ale wiersz jest inny
+   w dwóch miejscach i oba wynikają z uwag Mikołaja z 7 września 2026:
+
+   1. ZAJAWKA W ZAMKNIĘTYM WIERSZU. Sześć samych nazw dawało listę słów;
+      jedno zdanie pod nazwą sprawia, że zamknięta sekcja też coś mówi
+      i że wiersze mają różną „wagę" do skanowania.
+   2. OPIS NA CAŁĄ SZEROKOŚĆ SEKCJI. Decyzja Mikołaja z 7 września 2026,
+      podtrzymana po tym, jak zgłosiłem zastrzeżenie: przy kontenerze 1200 px
+      wiersz ma około 120 znaków, czyli powyżej normy czytelności 65–75.
+      Wersja pośrednia (proza 7/5 z panelem „warto wiedzieć" po prawej)
+      została odrzucona — panel wypadł, tekst idzie pełną szerokością.
+      Gdyby wiersz okazał się jednak za długi, najmniejszą zmianą jest
+      `max-width` na `.faq--wykaz .faq__tresc p`; nic innego nie trzeba ruszać.
+
+   Numer stoi tam, gdzie .wykaz stawia rok — dzięki niemu dwa akordeony na
+   jednej stronie nie czytają się jak dwa bloki pytań. */
+.faq__glowa { display: flex; align-items: baseline; gap: 1rem; min-width: 0; }
+.faq--wykaz .faq__glowa { align-items: flex-start; }
+.faq__nr {
+  flex: none; min-width: 2.25rem;
+  font-family: var(--font-display); font-weight: 500;
+  font-variant-numeric: lining-nums tabular-nums;
+  letter-spacing: -.01em;
+  color: var(--braz-jasny);
+}
+/* nazwa sprawy + zajawka: dwa wiersze o różnym kroju i ciężarze.
+   summary ma grotesk 600, więc zajawka musi się z tego wypisać jawnie. */
+.faq__tytul { display: grid; gap: .3rem; min-width: 0; }
+.faq__zajawka {
+  font-family: var(--font-body); font-weight: 400;
+  font-size: var(--fs-small); line-height: 1.5;
+  color: var(--umbra-2);
+  max-width: 54ch;
+}
+.faq__poz[open] .faq__zajawka { color: var(--umbra); }
+
+/* Opis: wcięty do nazwy sprawy (nie do numeru) i puszczony pełną szerokością.
+   Bazowy .faq__tresc ma max-width 56ch i prawy padding 3.5rem pod akordeon
+   pytań — tutaj oba muszą zejść, inaczej „pełna szerokość" nie jest pełna. */
+.faq--wykaz .faq__tresc {
+  padding-left: 3.25rem;
+  padding-right: 0;
+  max-width: none;
+}
+.faq--wykaz .faq__tresc p { max-width: none; }
+.faq--wykaz .faq__tresc p + p { margin-top: 1em; }
+
+@media (max-width: 560px) {
+  .faq__glowa { gap: .75rem; }
+  .faq__nr { min-width: 1.9rem; }
+  .faq--wykaz .faq__tresc { padding-left: 2.65rem; }
+}
+
+/* oś kroków na TRZY pola. Bazowe .kroki są na cztery i przy 1024 px schodzą
+   do dwóch — przy trzech krokach dałoby to 2 + 1 sierotę, więc trzy kolumny
+   trzymają się do 860 px i dopiero tam spadają do jednej. */
+.kroki--trzy { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+@media (max-width: 860px) {
+  .kroki--trzy { grid-template-columns: 1fr; row-gap: 1.75rem; }
+}
+
+/* rząd opinii bez cytatu wiodącego nad sobą: górny margines liczył odstęp
+   od tego cytatu, a tutaj nad rzędem stoi już .naglowek-sekcji */
+.opinie-rzad--sama { margin-top: 0; }
+
+/* panel mediacji otwierający własną sekcję: górny margines liczył odstęp od
+   rejestru na stronie głównej, a tu nad panelem nie ma już nic prócz padding-u
+   sekcji — dwa odstępy pod rząd rozciągałyby sekcję ponad rytm strony */
+.kontener > .panel-mediacje:first-child { margin-top: 0; }
+
+/* ============================================================
+   BAZA WIEDZY — archiwum wpisów (baza-wiedzy.html) i szablon
+   pojedynczego wpisu (wpis-szablon.html).
+
+   Dwie strony, CZTERY nowe komponenty. Cała reszta jedzie na
+   tym, co już stoi: .naglowek-strony, .naglowek-sekcji,
+   .siatka-7-5, .siatka-4-8, .siatka-5-7, .szyna-karta, .dane,
+   .chipy/.chip, .akcent, .wyimek, .zacheta, .telefon-duzy, .btn.
+
+   Dlaczego nowe komponenty w ogóle — każdy z osobna:
+
+   .archiwum  Grupa wpisów pod nazwą kategorii, z licznikiem po
+              prawej. .kafle robią z wpisu kartę, a archiwum ma
+              się skanować w pionie; .indeks nie ma nagłówków
+              grup, a to one niosą tu podział na kategorie.
+   .wpisy     Wiersz wpisu: data, tytuł, zajawka, strzałka.
+              Najbliższy jest .rejestr, ale tam po lewej stoi
+              nazwa obszaru, a opis idzie do DRUGIEJ kolumny —
+              tu po lewej stoi data, a zajawka siedzi POD
+              tytułem, bo tytuł wpisu jest długi i nie zniesie
+              obok siebie drugiej kolumny tekstu.
+   .wpis-tresc Proza wpisu: własne śródtytuły, listy, wyimek,
+              linki w toku zdania. Nigdzie wcześniej na tej
+              stronie nie było długiego tekstu, który sam się
+              dzieli na rozdziały — .tekst to blok akapitów
+              bez hierarchii.
+   .spis      Spis treści wpisu w szynie bocznej: numerowane
+              skróty do śródtytułów, przyklejone przy scrollu.
+
+   Zero cieni, zero nowych kolorów, zero nowych promieni —
+   wszystko z tokenów w :root.
+   ============================================================ */
+
+/* ---------- Filtr kategorii: jeden wybór dla całej listy ----------
+   Zakładki, nie chipy. Chipy przegrały, bo w tym systemie chip jest
+   ETYKIETĄ (statyczna plakietka pod-usługi w .kafel), a nie kontrolką —
+   sześć chipów pod nagłówkiem czytało się jak lista tagów, a nie jak
+   wybór, którym można coś zrobić. Zakładka z brązową kreską pod spodem
+   powtarza to, co w tym systemie już znaczy „tu jesteś": aktywną pozycję
+   menu i .okruszki__tu.
+
+   Pozycje są LINKAMI do grup (`#k-…`), nie przyciskami: bez JS-a działają
+   jak spis kategorii i prowadzą do właściwego miejsca na stronie. Dopiero
+   `site.js` przechwytuje kliknięcie i zamienia je w filtr. */
+.filtr-kategorii {
+  display: flex; flex-wrap: wrap;
+  gap: 0 clamp(1.25rem, 2.5vw, 2rem);
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+  border-bottom: 1px solid var(--linia-mocna);
+}
+.filtr-kategorii__poz {
+  display: inline-flex; align-items: baseline; gap: .45rem;
+  padding: .75rem 0;
+  /* zakładka siada NA kresce kontenera, nie nad nią */
+  margin-bottom: -1px;
+  border-bottom: 2px solid transparent;
+  font-family: var(--font-ui); font-size: 1rem; font-weight: 500; line-height: 1.35;
+  color: var(--umbra-2);
+  transition: color var(--t) var(--ease), border-color var(--t) var(--ease);
+}
+.filtr-kategorii__poz:hover { color: var(--umbra); border-bottom-color: var(--linia-mocna); }
+.filtr-kategorii__poz[aria-current="true"] { color: var(--braz); border-bottom-color: var(--braz); }
+
+.filtr-kategorii__ile {
+  font-size: .78rem; font-weight: 600; letter-spacing: .04em;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--braz-jasny);
+}
+.filtr-kategorii__poz[aria-current="true"] .filtr-kategorii__ile { color: var(--braz); }
+
+/* grupa schowana filtrem — atrybut `hidden` wystarczy, ale .archiwum jest
+   siatką, więc deklaracja stoi tu wprost, żeby nic jej nie nadpisało */
+.archiwum__grupa[hidden] { display: none; }
+
+@media (max-width: 560px) {
+  .filtr-kategorii { gap: 0 1.1rem; }
+  .filtr-kategorii__poz { font-size: .92rem; padding: .6rem 0; }
+}
+
+/* ---------- Siatka archiwum: lista wpisów + kolumna autorki ----------
+   Odwrotność .siatka-4-8: tam szyna stoi po lewej i prowadzi treść,
+   tu treścią jest lista, a kolumna po prawej tylko jej towarzyszy. */
+.siatka-8-4 {
+  display: grid;
+  grid-template-columns: minmax(0, 8fr) minmax(0, 4fr);
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: start;
+}
+@media (max-width: 1024px) {
+  .siatka-8-4 { grid-template-columns: minmax(0, 7fr) minmax(0, 5fr); gap: 2.5rem; }
+}
+@media (max-width: 860px) {
+  .siatka-8-4 { grid-template-columns: 1fr; gap: clamp(2.5rem, 6vw, 3.5rem); }
+}
+
+/* ---------- Karta autorki wpisów ----------
+   Biel na lnie, tak jak .szyna-karta — karta w kolorze tła przestaje być
+   kartą. Przyklejona od 1025 px, więc towarzyszy całej liście, także po
+   zawężeniu jej filtrem. */
+.karta-autora {
+  background: var(--biel);
+  border: 1px solid var(--linia);
+  border-radius: var(--r-karta);
+  padding: clamp(1.35rem, 2.4vw, 1.75rem);
+}
+@media (min-width: 1025px) {
+  .karta-autora { position: sticky; top: calc(var(--nav-h) + 2.5rem); }
+}
+.karta-autora .etykieta { margin-bottom: 1rem; }
+
+/* placeholder portretu w skali karty: kadr 4:5 zamiast 3:4, drobniejszy
+   sygnet i podpis — 3:4 w wąskiej kolumnie zjadałoby pół ekranu */
+.karta-autora__foto { display: flex; margin-bottom: 1.25rem; }
+.karta-autora__foto .portret { aspect-ratio: 4 / 5; padding: 1.1rem; gap: .75rem; }
+.karta-autora__foto .portret__znak { width: clamp(2.4rem, 4vw, 3.25rem); }
+.karta-autora__foto .portret__opis { font-size: .78rem; max-width: 14em; }
+
+.karta-autora__nazwa { font-size: 1.3rem; line-height: 1.2; font-weight: 500; }
+.karta-autora__rola {
+  margin-top: .35rem;
+  font-family: var(--font-ui); font-size: var(--fs-small); color: var(--braz);
+}
+.karta-autora__opis {
+  margin-top: 1rem; padding-top: 1rem;
+  border-top: 1px solid var(--linia);
+  font-size: var(--fs-small); line-height: 1.6; color: var(--umbra-2);
+}
+.karta-autora__akcje {
+  margin-top: 1.25rem;
+  display: grid; gap: .9rem; justify-items: start;
+}
+.karta-autora__akcje .btn { width: 100%; }
+
+/* ---------- Wpis wiodący: najnowszy tekst nad archiwum ----------
+   Siatkę bierze z .siatka-7-5, więc tu zostaje tylko rozmiar
+   tytułu: h2 w skali sekcji byłby za mały, żeby czytać się jako
+   POJEDYNCZY wpis, a nie jako nagłówek listy pod nim. */
+.wpis-wiodacy__tytul {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.75rem, 2.8vw, 2.45rem); line-height: 1.15; letter-spacing: -.018em;
+  max-width: 15em;
+}
+.wpis-wiodacy__tytul a { transition: color var(--t) var(--ease); }
+.wpis-wiodacy__tytul a:hover { color: var(--braz); }
+.wpis-wiodacy__zajawka { margin-top: 1.1rem; font-size: var(--fs-lead); line-height: 1.6; color: var(--umbra-2); max-width: 34em; }
+.wpis-wiodacy__akcja { margin-top: clamp(1.5rem, 3vw, 2.25rem); }
+
+/* ---------- Archiwum: grupy kategorii ---------- */
+.archiwum { display: grid; gap: clamp(2.75rem, 5.5vw, 4.5rem); }
+
+.archiwum__grupa { scroll-margin-top: calc(var(--nav-h) + 2rem); }
+
+/* nazwa kategorii i licznik na jednej linii bazowej; kreska pod nimi
+   należy już do .wpisy, żeby nagłówek i lista były jednym blokiem */
+.archiwum__glowa {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: .4rem 2rem; flex-wrap: wrap;
+  margin-bottom: 1.1rem;
+}
+.archiwum__glowa h3 {
+  font-family: var(--font-display); font-weight: 500;
+  font-size: clamp(1.3rem, 2vw, 1.65rem); line-height: 1.2; letter-spacing: -.015em;
+}
+.archiwum__licznik {
+  font-family: var(--font-ui); font-size: var(--fs-label); font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--umbra-2);
+  font-variant-numeric: lining-nums;
+}
+
+/* ---------- Wpisy: wiersz na wpis ----------
+   Ten sam ruch co w .rejestr — brązowa belka wjeżdża w margines
+   kontenera, treść przesuwa się o pół centymetra — żeby lista
+   wpisów zachowywała się jak lista spraw na stronie głównej. */
+.wpisy { list-style: none; border-top: 1px solid var(--linia-mocna); }
+.wpisy li { border-bottom: 1px solid var(--linia); }
+
+.wpis-poz {
+  position: relative;
+  display: grid;
+  grid-template-columns: 8.5rem minmax(0, 1fr) 1.5rem;
+  column-gap: clamp(1.5rem, 3vw, 3rem);
+  row-gap: .35rem;
+  align-items: baseline;
+  padding-block: clamp(1.15rem, 2.2vw, 1.7rem);
+  transition: padding-left var(--t) var(--ease);
+}
+.wpis-poz::before {
+  content: ""; position: absolute; left: -1.25rem; top: 50%;
+  width: 3px; height: 0; border-radius: 2px;
+  background: var(--braz);
+  transform: translateY(-50%);
+  transition: height var(--t) var(--ease);
+}
+
+.wpis-poz__data {
+  grid-column: 1; grid-row: 1 / span 2;
+  font-family: var(--font-ui); font-size: var(--fs-label); font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2);
+  font-variant-numeric: tabular-nums lining-nums;
+  /* data siada na linii bazowej TYTUŁU, nie na własnej: bez tego
+     wersalik .75rem wisiałby wyżej niż pierwsza litera tytułu */
+  position: relative; top: -.08em;
+}
+/* dopóki dat nie ma, w kolumnie stoi znacznik .todo — ta sama zasada
+   co w .wykaz__rok na „O mnie": znacznik nie może być większy od tekstu,
+   który zastępuje, bo dwanaście sztuk pod rząd zjadłoby sekcję */
+.wpis-poz__data .todo { letter-spacing: .08em; }
+
+.wpis-poz__tytul {
+  grid-column: 2; grid-row: 1;
+  font-family: var(--font-display); font-weight: 600;
+  font-size: clamp(1.06rem, 1.5vw, 1.24rem); line-height: 1.32; letter-spacing: -.01em;
+  transition: color var(--t) var(--ease);
+}
+.wpis-poz__zajawka {
+  grid-column: 2; grid-row: 2;
+  color: var(--umbra-2); font-size: var(--fs-small); line-height: 1.55;
+  max-width: 62ch;
+}
+.wpis-poz__strzalka { grid-column: 3; grid-row: 1; color: var(--braz); justify-self: end; }
+.wpis-poz .strzalka { transition: transform var(--t) var(--ease); }
+
+.wpis-poz:hover { padding-left: .75rem; }
+.wpis-poz:hover::before { height: calc(100% - 2rem); }
+.wpis-poz:hover .wpis-poz__tytul { color: var(--braz); }
+.wpis-poz:hover .strzalka { transform: translateX(4px); }
+
+@media (max-width: 560px) {
+  .wpis-poz { grid-template-columns: minmax(0, 1fr) 1.5rem; row-gap: .3rem; }
+  .wpis-poz__data { grid-column: 1; grid-row: 1; top: 0; }
+  .wpis-poz__tytul { grid-column: 1; grid-row: 2; }
+  .wpis-poz__zajawka { grid-column: 1; grid-row: 3; }
+  .wpis-poz__strzalka { grid-column: 2; grid-row: 2; }
+}
+
+/* ============================================================
+   SZABLON WPISU — wpis-szablon.html
+   ============================================================ */
+
+/* ---------- Nagłówek wpisu ----------
+   Wpis jedzie w tej samej sekcji .naglowek-strony co pozostałe podstrony:
+   ta sama płaszczyzna, te same okruszki, ten sam rytm. Zdanie wprowadzające
+   bierze wprost .naglowek-strony__podtytul, bo pełni tę samą rolę.
+   Własną klasę dostaje TYLKO tytuł: nazwa zakładki to jedno słowo i znosi
+   4 rem, tytuł wpisu jest całym zdaniem i w tej skali zająłby pół ekranu.
+   Krój zostaje szeryfowy — na tej witrynie duży szeryf jest sygnaturą
+   tytułów, a wpis nie ma powodu wyłamywać się z tej zasady.
+
+   UWAGA: .naglowek-strony .kontener jest siatką z własnym `gap`, więc
+   odstępy pionowe w tym nagłówku liczy ona, a nie marginesy elementów.
+   Stąd tutaj żadnego margin-top poza świadomą dokładką przy metryczce. */
+.wpis-glowa__tytul {
+  font-family: var(--font-body); font-weight: 500;
+  font-size: clamp(2rem, 3.6vw, 3rem);
+  line-height: 1.08; letter-spacing: -.015em;
+  max-width: 17em;
+}
+
+/* ---------- Metryczka wpisu ----------
+   Data, kategoria i autor pod zdaniem wprowadzającym, odcięte hairlinem:
+   to już nie jest tytuł strony, tylko informacja o tekście. Kreska idzie
+   przez całą szerokość kontenera, bo domyka nagłówek wpisu. */
+.wpis-meta {
+  display: flex; flex-wrap: wrap; align-items: baseline;
+  gap: .5rem 1.75rem;
+  margin-top: .35rem;
+  padding-top: clamp(1rem, 2vw, 1.4rem);
+  border-top: 1px solid var(--linia);
+  font-family: var(--font-ui); font-size: var(--fs-small); color: var(--umbra-2);
+}
+.wpis-meta b { font-weight: 600; color: var(--umbra); }
+.wpis-meta a { color: var(--braz); }
+.wpis-meta a:hover { text-decoration: underline; text-underline-offset: .22em; }
+
+/* ---------- Szyna wpisu: spis treści + kontakt ---------- */
+.wpis-szyna { display: grid; gap: 1.5rem; align-content: start; }
+@media (min-width: 1025px) {
+  .wpis-szyna { position: sticky; top: calc(var(--nav-h) + 2.5rem); }
+}
+
+.spis__tytul {
+  font-family: var(--font-ui); font-size: var(--fs-label); font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--umbra-2);
+}
+.spis__lista {
+  list-style: none; counter-reset: spis;
+  margin-top: .9rem; display: grid; gap: .1rem;
+}
+.spis__lista a {
+  counter-increment: spis;
+  display: grid; grid-template-columns: 1.6rem minmax(0, 1fr); gap: .5rem;
+  padding: .45rem 0;
+  font-family: var(--font-ui); font-size: .9rem; line-height: 1.4; color: var(--umbra-2);
+  transition: color var(--t) var(--ease);
+}
+.spis__lista a::before {
+  content: counter(spis, decimal-leading-zero);
+  color: var(--braz-jasny); font-weight: 600; font-size: .78rem;
+  font-variant-numeric: tabular-nums lining-nums;
+  /* numer siada na linii bazowej hasła, nie nad nią */
+  align-self: baseline;
+}
+.spis__lista a:hover { color: var(--braz); }
+.spis__lista a:hover::before { color: var(--braz); }
+
+/* ---------- Treść wpisu: proza z własnymi śródtytułami ----------
+   66ch, nie 62ch jak .tekst: .tekst to blok akapitów wewnątrz
+   sekcji, a to jest cała treść strony i znosi nieco dłuższy wiersz. */
+.wpis-tresc { max-width: 66ch; }
+.wpis-tresc > * + * { margin-top: 1.15em; }
+.wpis-tresc p { line-height: 1.68; }
+
+/* zdanie otwierające wpis — większe, ale wciąż szeryfem */
+.wpis-tresc > .lead:first-child { max-width: none; margin-bottom: .4em; }
+
+.wpis-tresc h2 {
+  font-size: clamp(1.5rem, 2.2vw, 1.95rem); line-height: 1.2;
+  margin-top: clamp(2.5rem, 4.5vw, 3.5rem);
+  padding-top: clamp(1.25rem, 2.5vw, 1.75rem);
+  border-top: 1px solid var(--linia);
+  scroll-margin-top: calc(var(--nav-h) + 2rem);
+}
+.wpis-tresc h3 {
+  font-size: 1.15rem;
+  margin-top: clamp(1.75rem, 3vw, 2.25rem);
+  scroll-margin-top: calc(var(--nav-h) + 2rem);
+}
+.wpis-tresc h2 + p, .wpis-tresc h3 + p { margin-top: .8em; }
+
+.wpis-tresc ul, .wpis-tresc ol { padding-left: 1.4rem; display: grid; gap: .55rem; }
+.wpis-tresc li { line-height: 1.6; }
+.wpis-tresc li::marker { color: var(--braz-jasny); font-variant-numeric: lining-nums; }
+
+.wpis-tresc strong { font-weight: 600; color: var(--umbra); }
+
+/* linki w toku zdania dostają wygląd .link bez pisania klasy przy każdym
+   z osobna — w prozie klasy na linkach są nie do utrzymania */
+.wpis-tresc a {
+  color: var(--braz);
+  text-decoration: underline; text-decoration-color: var(--braz-jasny);
+  text-underline-offset: .22em; text-decoration-thickness: 1px;
+  transition: text-decoration-color var(--t) var(--ease), color var(--t) var(--ease);
+}
+.wpis-tresc a:hover { text-decoration-color: var(--braz); color: var(--umbra); }
+
+/* wyimek w prozie: .wyimek ma górny margines liczony od końca sekcji,
+   w toku tekstu byłby dziurą */
+.wpis-tresc .wyimek { margin-top: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: clamp(1.75rem, 3vw, 2.5rem); }
+
+/* zastrzeżenie na końcu wpisu — .akcent, ale odcięty kreską od treści */
+.wpis-tresc .akcent {
+  margin-top: clamp(2.5rem, 4.5vw, 3.5rem);
+  font-size: var(--fs-small); line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  /* szyna przestaje być szyną: spis treści ląduje nad tekstem, kontakt pod nim */
+  .wpis-szyna { gap: 1.25rem; }
+}

@@ -1,0 +1,402 @@
+/* =========================================================================
+   site.js — NAWIGACJA i STOPKA definiowane RAZ, wstrzykiwane na każdej stronie.
+   Obsługuje też menu mobilne i odsłanianie treści przy scrollu ([data-odslon]).
+
+   UŻYCIE na stronie:
+     w <head>:  <script src="js/site.js" defer></script>   (po linku do styles.css)
+     w <body>:  <div data-nav></div>      tuż po otwarciu <body>
+                <div data-okruszki></div> okruszki w .naglowek-strony (podstrony)
+                <div data-footer></div>   w miejscu stopki
+
+   DODANIE POZYCJI MENU / ZMIANA DANYCH KONTAKTU = edycja TUTAJ (NAV / KONTAKT).
+   Wchodzi od razu na wszystkich stronach. NIE wpisuj menu ani stopki do HTML.
+
+   HOME = 'index.html', bo projekt chodzi lokalnie z pliku. Przy imporcie na
+   WordPressa zmienia się na '/' — to jedyna linia do ruszenia.
+   ========================================================================= */
+(function () {
+  "use strict";
+
+  var HOME = "index.html";
+  var here = location.pathname.split("/").pop() || "index.html";
+  var onHome = (here === "" || here === "index.html");
+
+  /* ---------- Usługi: jedna lista na menu i na stopkę ----------
+     Pozycje bez własnej podstrony prowadzą na razie do rejestru spraw na stronie
+     głównej. Gdy powstanie kolejna, podmieniasz sam `href` i dodajesz `match`
+     — wchodzi naraz w drop-down, w stopkę i w okruszki. */
+  var USLUGI = [
+    { label: "Rozwód i sprawy rodzinne",        href: "rozwod-i-sprawy-rodzinne.html", match: ["rozwod-i-sprawy-rodzinne.html"] },
+    { label: "Spadki i dział spadku",           href: "#sprawy" },
+    { label: "Prawo jazdy i jazda po alkoholu", href: "#sprawy" },
+    { label: "Sprawy karne",                    href: "#sprawy" },
+    { label: "Sprawy cywilne",                  href: "#sprawy" },
+    { label: "Mediacje",                        href: "#mediacje" }
+  ];
+
+  /* ---------- Pozycje menu ----------
+     href zaczynające się od '#' = sekcja na stronie głównej (na podstronach
+     dostaje prefiks HOME). match = pliki, na których pozycja jest aktywna.
+     Pozycja z tablicą `children` renderuje się jako drop-down. */
+  var NAV = [
+    { label: "Strona główna", href: HOME, match: ["index.html"] },
+    { label: "Usługi",        children: USLUGI },
+    { label: "O mnie",        href: "o-mnie.html", match: ["o-mnie.html"] },
+    /* Zakładka z wpisami. Etykieta „Baza wiedzy”, a nie „Aktualności”: treść
+       evergreen nie starzeje się jak newsy. Powrót do dawnej nazwy = zmiana
+       samego `label` (plik i tak zostaje). Szablon wpisu celowo NIE jest
+       w menu — to plik do klonowania, nie zakładka. */
+    { label: "Baza wiedzy",   href: "baza-wiedzy.html", match: ["baza-wiedzy.html"] },
+    { label: "Kontakt",       href: "kontakt.html", match: ["kontakt.html"] }
+  ];
+
+  /* ---------- Jedyne źródło danych kontaktowych ---------- */
+  var KONTAKT = {
+    tel: "+48534477596",
+    telTekst: "534 477 596",
+    email: "kancelaria@cupial-kowalska.pl",
+    firma: "Kancelaria Adwokacka Beata Cupiał-Kowalska",
+    ulica: "ul. Kilińskiego 5 lok. 4",
+    miasto: "42-202 Częstochowa",
+    nip: null,          /* 【DO UZUPEŁNIENIA】 numer NIP kancelarii */
+    izba: "Adwokat wpisana na listę Okręgowej Rady Adwokackiej w Częstochowie"
+  };
+
+  /* ---------- Linki stopki ---------- */
+  var STOPKA_SPRAWY = USLUGI;
+  var STOPKA_KANCELARIA = [
+    { label: "O mnie", href: "o-mnie.html", match: ["o-mnie.html"] },
+    { label: "Baza wiedzy", href: "baza-wiedzy.html", match: ["baza-wiedzy.html"] },
+    { label: "Pytania", href: "#pytania" },
+    { label: "Kontakt", href: "kontakt.html", match: ["kontakt.html"] },
+    { label: "Opinie w Google", href: "#" },
+    { label: "Polityka prywatności", href: "#" }
+  ];
+
+  /* ---------- Pomocnicze ---------- */
+  function url(href) {
+    /* samo "#" to placeholder — nie ma dokąd prowadzić, więc nie doklejamy HOME */
+    if (href === "#") return "#";
+    if (href.charAt(0) === "#") return onHome ? href : HOME + href;
+    return href;
+  }
+  function aktywna(poz) {
+    return !!(poz.match && poz.match.indexOf(here) !== -1);
+  }
+  function dzieckoAktywne(poz) {
+    if (!poz.children) return false;
+    for (var i = 0; i < poz.children.length; i++) {
+      if (aktywna(poz.children[i])) return true;
+    }
+    return false;
+  }
+  function lista(pozycje) {
+    return pozycje.map(function (p) {
+      var a = aktywna(p) ? ' aria-current="page"' : "";
+      return '<li><a href="' + url(p.href) + '"' + a + ">" + p.label + "</a></li>";
+    }).join("");
+  }
+
+  /* sygnet: sześciokąt z monogramem „B" — pełny w marce, sam obrys w portrecie */
+  function sygnet() {
+    return '<svg class="marka__sygnet" viewBox="0 0 40 44" aria-hidden="true">'
+      + '<polygon points="20,1.5 38,12 38,32 20,42.5 2,32 2,12" fill="none" stroke="currentColor" stroke-width="1.5"/>'
+      + '<text x="20" y="29" text-anchor="middle" font-size="20">B</text>'
+      + "</svg>";
+  }
+  function marka(opis) {
+    return '<a class="marka" href="' + (onHome ? "#gora" : HOME) + '" aria-label="' + opis + '">'
+      + sygnet()
+      + '<span class="marka__nazwa"><b>Beata Cupiał-Kowalska</b><span>Adwokat</span></span>'
+      + "</a>";
+  }
+  function ikonaTelefonu(rozmiar, grubosc) {
+    return '<svg width="' + rozmiar + '" height="' + rozmiar + '" viewBox="0 0 24 24" fill="none" aria-hidden="true">'
+      + '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" '
+      + 'stroke="currentColor" stroke-width="' + grubosc + '" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+
+  /* ---------- Nawigacja ---------- */
+  function nawigacjaHTML() {
+    var pozycje = NAV.map(function (p, i) {
+      if (p.children) {
+        var id = "podmenu-" + i;
+        return '<div class="nav__grupa" data-rozwijane data-otwarte="nie">'
+          +   '<button class="nav__rozwin" type="button" aria-expanded="false" aria-controls="' + id + '"'
+          +     (dzieckoAktywne(p) ? ' data-aktywna="tak"' : "") + ">"
+          +     p.label
+          +     '<svg class="nav__strzalka" width="10" height="6" viewBox="0 0 10 6" fill="none" aria-hidden="true">'
+          +       '<path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+          +   "</button>"
+          +   '<ul class="nav__podmenu" id="' + id + '">' + lista(p.children) + "</ul>"
+          + "</div>";
+      }
+      var a = aktywna(p) ? ' aria-current="page"' : "";
+      return '<a href="' + url(p.href) + '"' + a + ">" + p.label + "</a>";
+    }).join("");
+
+    return '<header class="nav" id="nawigacja">'
+      + '<div class="kontener nav__wnetrze">'
+      +   marka("Beata Cupiał-Kowalska, adwokat, strona główna")
+      +   '<nav class="nav__menu" id="menu-glowne" aria-label="Nawigacja główna">'
+      +     pozycje
+      +     '<a class="nav__menu-tel" href="tel:' + KONTAKT.tel + '">' + KONTAKT.telTekst + "</a>"
+      +   "</nav>"
+      +   '<div class="nav__akcje">'
+      +     '<a class="btn btn--obrys btn--maly" href="tel:' + KONTAKT.tel + '">'
+      +       ikonaTelefonu(15, "1.7") + KONTAKT.telTekst
+      +     "</a>"
+      +     '<button class="nav__burger" id="burger" type="button" aria-label="Otwórz menu" aria-expanded="false" aria-controls="menu-glowne">'
+      +       '<svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.5"/></svg>'
+      +     "</button>"
+      +   "</div>"
+      + "</div></header>";
+  }
+
+  /* ---------- Okruszki: ścieżka do strony głównej ----------
+     Nazwę zakładki bierze z NAV — także z pozycji drop-downu „Usługi" — więc
+     nowa podstrona dostaje okruszki sama z siebie, gdy tylko trafi do menu
+     z `match`. Strona spoza menu może podać nazwę ręcznie:
+     <div data-okruszki="Nazwa zakładki"></div>.
+     Głębszą ścieżkę podaje ten sam atrybut, przez pionową kreskę:
+     <div data-okruszki="Baza wiedzy|Tytuł wpisu"></div>. Krok, którego nazwa
+     zgadza się z pozycją menu, sam staje się linkiem — dzięki temu wpis
+     na blogu wraca do archiwum jednym kliknięciem, a w HTML wpisu stoi
+     tylko jego własny tytuł.
+     Rodzic drop-downu nie ma własnego adresu, więc w okruszkach nie jest
+     linkiem — stoi jako nazwa grupy.
+
+     Sam nie rysuje żadnego tła: wynik wkłada się do sekcji .naglowek-strony,
+     która stoi w HTML, bo jej nagłówek i podtytuł są treścią danej podstrony. */
+  /* adres pozycji menu o danej nazwie — potrzebny, gdy ścieżkę podaje HTML:
+     krok, który nazywa się tak jak zakładka, ma być do niej linkiem */
+  function adresZNav(label) {
+    for (var i = 0; i < NAV.length; i++) {
+      var p = NAV[i];
+      if (p.label === label && p.href && p.href !== "#") return url(p.href);
+      if (p.children) {
+        for (var j = 0; j < p.children.length; j++) {
+          var d = p.children[j];
+          if (d.label === label && d.href && d.href !== "#") return url(d.href);
+        }
+      }
+    }
+    return null;
+  }
+
+  function sciezka(nazwaZHtml) {
+    for (var i = 0; i < NAV.length; i++) {
+      var p = NAV[i];
+      if (aktywna(p)) return [{ label: p.label }];
+      if (p.children) {
+        for (var j = 0; j < p.children.length; j++) {
+          if (aktywna(p.children[j])) return [{ label: p.label }, { label: p.children[j].label }];
+        }
+      }
+    }
+    if (!nazwaZHtml) return [];
+    return nazwaZHtml.split("|").map(function (s) {
+      var label = s.replace(/^\s+|\s+$/g, "");
+      return { label: label, href: adresZNav(label) };
+    }).filter(function (k) { return k.label !== ""; });
+  }
+
+  function okruszkiHTML(nazwaZHtml) {
+    var kroki = sciezka(nazwaZHtml);
+    /* na stronie głównej i na stronie spoza menu bez nazwy okruszki nie powstają */
+    if (onHome || !kroki.length) return "";
+
+    var pozycje = '<li><a href="' + HOME + '">Strona główna</a></li>';
+    kroki.forEach(function (k, i) {
+      var tresc;
+      if (i === kroki.length - 1) {
+        /* krok, na którym stoimy */
+        tresc = '<span class="okruszki__tu" aria-current="page">' + k.label + "</span>";
+      } else if (k.href) {
+        /* krok pośredni o znanym adresie — np. archiwum nad wpisem */
+        tresc = '<a href="' + k.href + '">' + k.label + "</a>";
+      } else {
+        /* nazwa grupy z drop-downu: rodzic nie ma własnego adresu */
+        tresc = '<span class="okruszki__grupa">' + k.label + "</span>";
+      }
+      pozycje += "<li>" + tresc + "</li>";
+    });
+
+    return '<nav aria-label="Ścieżka nawigacji"><ol class="okruszki">' + pozycje + "</ol></nav>";
+  }
+
+  /* ---------- Stopka ---------- */
+  function stopkaHTML() {
+    var nip = KONTAKT.nip
+      ? "NIP: " + KONTAKT.nip
+      : 'NIP: <span class="todo" title="Do uzupełnienia przez klientkę: numer NIP kancelarii">do uzupełnienia</span>';
+
+    return '<footer class="stopka biel">'
+      + '<div class="kontener">'
+      +   '<div class="stopka__siatka">'
+      +     "<div>"
+      +       marka("Beata Cupiał-Kowalska, adwokat")
+      +       '<p class="stopka__opis">'
+      +         KONTAKT.firma + "<br>"
+      +         KONTAKT.ulica + ", " + KONTAKT.miasto + "<br>"
+      +         '<a class="liczby" href="tel:' + KONTAKT.tel + '">' + KONTAKT.telTekst + "</a><br>"
+      +         '<a href="mailto:' + KONTAKT.email + '">' + KONTAKT.email + "</a><br>"
+      +         nip
+      +       "</p>"
+      +     "</div>"
+      +     "<div><h4>Sprawy</h4><ul>" + lista(STOPKA_SPRAWY) + "</ul></div>"
+      +     "<div><h4>Kancelaria</h4><ul>" + lista(STOPKA_KANCELARIA) + "</ul></div>"
+      +   "</div>"
+      +   '<div class="stopka__prawna">'
+      +     "<span>© " + new Date().getFullYear() + " " + KONTAKT.firma + "</span>"
+      +     "<span>" + KONTAKT.izba + "</span>"
+      +   "</div>"
+      + "</div></footer>";
+  }
+
+  /* ---------- Menu mobilne ---------- */
+  function menuMobilne() {
+    var nav = document.getElementById("nawigacja");
+    var burger = document.getElementById("burger");
+    var menu = document.getElementById("menu-glowne");
+    if (!nav || !burger || !menu) return;
+
+    function ustawMenu(otwarte) {
+      nav.setAttribute("data-menu", otwarte ? "otwarte" : "zamkniete");
+      burger.setAttribute("aria-expanded", otwarte ? "true" : "false");
+      burger.setAttribute("aria-label", otwarte ? "Zamknij menu" : "Otwórz menu");
+    }
+    ustawMenu(false);
+
+    burger.addEventListener("click", function () {
+      ustawMenu(nav.getAttribute("data-menu") !== "otwarte");
+    });
+    menu.addEventListener("click", function (e) {
+      if (e.target.closest("a")) { ustawMenu(false); }
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && nav.getAttribute("data-menu") === "otwarte") {
+        ustawMenu(false);
+        burger.focus();
+      }
+    });
+  }
+
+  /* ---------- Drop-down w menu ----------
+     Na desktopie otwiera też hover i :focus-within (czysty CSS), tutaj jest
+     klik — dla dotyku i dla klawiatury. Na wąskim ekranie to akordeon. */
+  function rozwijane() {
+    var grupy = document.querySelectorAll("[data-rozwijane]");
+    if (!grupy.length) return;
+
+    function ustaw(grupa, otwarte) {
+      grupa.setAttribute("data-otwarte", otwarte ? "tak" : "nie");
+      grupa.querySelector(".nav__rozwin").setAttribute("aria-expanded", otwarte ? "true" : "false");
+    }
+    function zamknijWszystkie(oprocz) {
+      Array.prototype.forEach.call(grupy, function (g) { if (g !== oprocz) ustaw(g, false); });
+    }
+
+    Array.prototype.forEach.call(grupy, function (g) {
+      g.querySelector(".nav__rozwin").addEventListener("click", function (e) {
+        e.stopPropagation();
+        var otwarte = g.getAttribute("data-otwarte") === "tak";
+        zamknijWszystkie(g);
+        ustaw(g, !otwarte);
+      });
+      /* wybór usługi zamyka listę (przy kotwicy na tej samej stronie nic się nie przeładuje) */
+      g.querySelector(".nav__podmenu").addEventListener("click", function () { ustaw(g, false); });
+    });
+
+    document.addEventListener("click", function (e) {
+      if (!e.target.closest("[data-rozwijane]")) zamknijWszystkie(null);
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") zamknijWszystkie(null);
+    });
+  }
+
+  /* ---------- Odsłanianie treści przy scrollu: raz, bez JS wszystko widoczne ---------- */
+  function odslanianie() {
+    var cele = document.querySelectorAll("[data-odslon]");
+    var bezRuchu = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (bezRuchu || !("IntersectionObserver" in window)) {
+      Array.prototype.forEach.call(cele, function (el) { el.classList.add("widoczne"); });
+      return;
+    }
+    var io = new IntersectionObserver(function (wpisy) {
+      wpisy.forEach(function (w) {
+        if (w.isIntersecting) { w.target.classList.add("widoczne"); io.unobserve(w.target); }
+      });
+    }, { rootMargin: "0px 0px -8% 0px" });
+    Array.prototype.forEach.call(cele, function (el) { io.observe(el); });
+  }
+
+  /* ---------- Filtr kategorii w archiwum wpisów ----------
+     Ulepszenie, nie warunek działania: pozycje paska są zwykłymi linkami
+     do grup, więc bez JS-a strona pokazuje wszystkie wpisy, a pasek działa
+     jak spis kategorii. Tutaj kliknięcie zamienia się w zawężenie listy —
+     chowamy CAŁE grupy, więc nagłówki kategorii zostają na swoich miejscach.
+     Wejście z adresem `…#k-spadki` (np. z metryczki wpisu) od razu zawęża. */
+  function filtrKategorii() {
+    var pasek = document.querySelector("[data-filtr]");
+    var archiwum = document.querySelector(".archiwum");
+    if (!pasek || !archiwum) return;
+
+    var grupy = archiwum.querySelectorAll(".archiwum__grupa");
+    var pozycje = pasek.querySelectorAll(".filtr-kategorii__poz");
+    if (!grupy.length || !pozycje.length) return;
+
+    function istnieje(klucz) {
+      for (var i = 0; i < grupy.length; i++) if (grupy[i].id === klucz) return true;
+      return false;
+    }
+
+    function ustaw(klucz) {
+      if (klucz !== "wszystkie" && !istnieje(klucz)) klucz = "wszystkie";
+      Array.prototype.forEach.call(grupy, function (g) {
+        g.hidden = !(klucz === "wszystkie" || g.id === klucz);
+      });
+      Array.prototype.forEach.call(pozycje, function (p) {
+        if (p.getAttribute("data-kategoria") === klucz) p.setAttribute("aria-current", "true");
+        else p.removeAttribute("aria-current");
+      });
+    }
+
+    Array.prototype.forEach.call(pozycje, function (p) {
+      p.addEventListener("click", function (e) {
+        /* bez skoku: lista zawęża się w miejscu, pasek zostaje pod ręką */
+        e.preventDefault();
+        ustaw(p.getAttribute("data-kategoria"));
+      });
+    });
+
+    /* linki spoza paska (karta najnowszego wpisu, metryczka wpisu) zmieniają
+       tylko hasz — stąd nasłuch, żeby i one zawężały listę */
+    window.addEventListener("hashchange", function () {
+      ustaw(location.hash.replace("#", "") || "wszystkie");
+    });
+
+    ustaw(location.hash.replace("#", "") || "wszystkie");
+  }
+
+  function wstrzyknij() {
+    var n = document.querySelector("[data-nav]");
+    if (n) n.outerHTML = nawigacjaHTML();
+    var o = document.querySelector("[data-okruszki]");
+    /* pusty wynik znaczy „ta strona nie ma okruszków" — placeholder wtedy znika */
+    if (o) o.outerHTML = okruszkiHTML(o.getAttribute("data-okruszki"));
+    var s = document.querySelector("[data-footer]");
+    if (s) s.outerHTML = stopkaHTML();
+    menuMobilne();
+    rozwijane();
+    filtrKategorii();
+    odslanianie();
+  }
+
+  /* klasa .js włącza stan początkowy [data-odslon] — zanim cokolwiek się pokaże */
+  document.documentElement.classList.add("js");
+
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", wstrzyknij);
+  else wstrzyknij();
+})();

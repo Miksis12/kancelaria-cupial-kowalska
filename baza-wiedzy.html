@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Baza wiedzy · Adwokat Beata Cupiał-Kowalska, Częstochowa</title>
+  <meta name="description" content="Wyjaśnienia adwokat Beaty Cupiał-Kowalskiej z Częstochowy: rozwody i sprawy rodzinne, spadki, prawo jazdy, sprawy karne i cywilne, mediacje. Odpowiedzi na pytania, które najczęściej padają w kancelarii.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+
+  <div data-nav></div>
+
+  <main id="gora">
+
+    <!-- ============ 01 · NAGŁÓWEK STRONY ============
+         Ten sam komponent co na „O mnie": okruszki, nazwa zakładki jako H1,
+         jedno zdanie podtytułu, płaszczyzna piasku. Okruszki wstrzykuje
+         site.js z tablicy NAV — pozycja „Baza wiedzy" ma tam `match`,
+         więc ścieżka składa się sama. -->
+    <section class="naglowek-strony pas">
+      <div class="kontener">
+        <div data-okruszki></div>
+        <h1 class="naglowek-strony__tytul">Baza wiedzy</h1>
+        <p class="naglowek-strony__podtytul">Odpowiedzi na pytania, które najczęściej padają w kancelarii</p>
+      </div>
+    </section>
+
+    <!-- ============ 02 · NAJNOWSZY WPIS ============
+         Jeden wpis wyjęty przed archiwum. Układ 7-5 występuje na tej stronie
+         tylko tutaj: po lewej tytuł i zajawka, po prawej metryczka w karcie.
+         Karta jest biała, bo sekcja jest biała — ramka niesie granicę,
+         nie kolor. -->
+    <section class="sekcja biel">
+      <div class="kontener">
+        <div class="siatka-7-5">
+          <div data-odslon>
+            <p class="etykieta">Najnowszy wpis</p>
+            <h2 class="wpis-wiodacy__tytul">
+              <a href="wpis-szablon.html">Ile trwa rozwód i od czego to naprawdę zależy</a>
+            </h2>
+            <p class="wpis-wiodacy__zajawka">Zgoda co do samego rozwodu, spór o winę i sprawy dzieci — każdy z tych trzech elementów przesuwa termin gdzie indziej. Po pierwszej rozmowie zwykle da się powiedzieć, w którym scenariuszu jesteś.</p>
+            <p class="wpis-wiodacy__akcja">
+              <a class="btn btn--pelny" href="wpis-szablon.html">
+                Czytaj wpis
+                <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </a>
+            </p>
+          </div>
+
+          <div class="szyna-karta" data-odslon>
+            <dl class="dane">
+              <dt>Kategoria</dt>
+              <dd><a class="link" href="#k-rodzinne">Rozwód i sprawy rodzinne</a></dd>
+
+              <dt>Data</dt>
+              <dd><span class="todo" title="Do uzupełnienia: data publikacji wpisu">do uzupełnienia</span></dd>
+
+              <dt>Autor</dt>
+              <dd>Beata Cupiał-Kowalska, adwokat</dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 · ARCHIWUM ============
+         Wpisy pogrupowane pod nazwami kategorii. Kategorie odpowiadają
+         tablicy USLUGI w site.js i stoją w tej samej kolejności — po
+         imporcie na WordPressa mapują się 1:1 na kategorie WP.
+         Chipy nad listą to skróty do grup, nie filtr: działają bez JS
+         i nie chowają niczego przed wyszukiwarką. -->
+    <section class="sekcja" id="archiwum">
+      <div class="kontener">
+
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Wszystkie <em>wpisy</em></h2>
+          <p class="lead">Dwanaście tekstów w sześciu kategoriach. Wybierz obszar, żeby zawęzić listę do jednej dziedziny.</p>
+        </div>
+
+        <!-- Wybór kategorii dla CAŁEJ listy. Pozycje są linkami do grup, więc
+             bez JS-a działają jak spis kategorii i prowadzą do właściwego
+             miejsca. Z JS-em `site.js` przechwytuje kliknięcie i chowa
+             pozostałe grupy — nagłówki kategorii zostają tam, gdzie były,
+             zmienia się tylko to, ile ich widać. -->
+        <nav class="filtr-kategorii" data-filtr aria-label="Kategorie wpisów" data-odslon>
+          <a class="filtr-kategorii__poz" href="#archiwum" data-kategoria="wszystkie" aria-current="true">Wszystkie <span class="filtr-kategorii__ile">12</span></a>
+          <a class="filtr-kategorii__poz" href="#k-rodzinne" data-kategoria="k-rodzinne">Rozwód i sprawy rodzinne <span class="filtr-kategorii__ile">3</span></a>
+          <a class="filtr-kategorii__poz" href="#k-spadki" data-kategoria="k-spadki">Spadki i dział spadku <span class="filtr-kategorii__ile">2</span></a>
+          <a class="filtr-kategorii__poz" href="#k-prawo-jazdy" data-kategoria="k-prawo-jazdy">Prawo jazdy i alkohol <span class="filtr-kategorii__ile">2</span></a>
+          <a class="filtr-kategorii__poz" href="#k-karne" data-kategoria="k-karne">Sprawy karne <span class="filtr-kategorii__ile">2</span></a>
+          <a class="filtr-kategorii__poz" href="#k-cywilne" data-kategoria="k-cywilne">Sprawy cywilne <span class="filtr-kategorii__ile">1</span></a>
+          <a class="filtr-kategorii__poz" href="#k-mediacje" data-kategoria="k-mediacje">Mediacje <span class="filtr-kategorii__ile">2</span></a>
+        </nav>
+
+        <div class="siatka-8-4">
+
+        <div class="archiwum">
+
+          <!-- ---- Rozwód i sprawy rodzinne ---- -->
+          <section class="archiwum__grupa" id="k-rodzinne" data-odslon>
+            <div class="archiwum__glowa">
+              <h3>Rozwód i sprawy rodzinne</h3>
+              <p class="archiwum__licznik">3 wpisy</p>
+            </div>
+            <ul class="wpisy">
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Ile trwa rozwód i od czego to naprawdę zależy</span>
+                  <span class="wpis-poz__zajawka">Zgoda co do samego rozwodu, spór o winę i sprawy dzieci — każdy z tych trzech elementów przesuwa termin gdzie indziej.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Rozwód z orzekaniem o winie czy bez</span>
+                  <span class="wpis-poz__zajawka">Co daje orzeczenie o winie, ile kosztuje w czasie i w nerwach, i w których sytuacjach naprawdę ma znaczenie.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Alimenty: co sąd bierze pod uwagę</span>
+                  <span class="wpis-poz__zajawka">Usprawiedliwione potrzeby dziecka po jednej stronie, możliwości zarobkowe rodzica po drugiej. Co warto przygotować przed sprawą.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ---- Spadki i dział spadku ---- -->
+          <section class="archiwum__grupa" id="k-spadki" data-odslon>
+            <div class="archiwum__glowa">
+              <h3>Spadki i dział spadku</h3>
+              <p class="archiwum__licznik">2 wpisy</p>
+            </div>
+            <ul class="wpisy">
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Odrzucenie spadku — termin, o którym nie wolno zapomnieć</span>
+                  <span class="wpis-poz__zajawka">Od kiedy biegnie sześć miesięcy, co się dzieje po terminie i jak w tym wszystkim chronić dzieci.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Stwierdzenie nabycia spadku a dział spadku</span>
+                  <span class="wpis-poz__zajawka">Dwa różne postępowania i dwa różne cele. Które z nich zamyka sprawę, a które jest dopiero wstępem.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ---- Prawo jazdy i jazda po alkoholu ---- -->
+          <section class="archiwum__grupa" id="k-prawo-jazdy" data-odslon>
+            <div class="archiwum__glowa">
+              <h3>Prawo jazdy i jazda po alkoholu</h3>
+              <p class="archiwum__licznik">2 wpisy</p>
+            </div>
+            <ul class="wpisy">
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Zatrzymali prawo jazdy — co zrobić w pierwszym tygodniu</span>
+                  <span class="wpis-poz__zajawka">Część terminów biegnie od razu, a każdy tydzień zwłoki zamyka kolejne możliwości. Od czego zacząć.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Blokada alkoholowa i skrócenie zakazu prowadzenia</span>
+                  <span class="wpis-poz__zajawka">Kiedy wniosek w ogóle jest dopuszczalny, co trzeba wykazać i jak wygląda takie postępowanie.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ---- Sprawy karne ---- -->
+          <section class="archiwum__grupa" id="k-karne" data-odslon>
+            <div class="archiwum__glowa">
+              <h3>Sprawy karne</h3>
+              <p class="archiwum__licznik">2 wpisy</p>
+            </div>
+            <ul class="wpisy">
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Wezwanie na policję: świadek czy podejrzany</span>
+                  <span class="wpis-poz__zajawka">Te dwie role dają zupełnie inne prawa. Jak sprawdzić, w której jesteś, zanim wejdziesz na przesłuchanie.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Dobrowolne poddanie się karze — kiedy warto</span>
+                  <span class="wpis-poz__zajawka">Szybciej i taniej nie zawsze znaczy korzystniej. Co tracisz, godząc się na karę bez procesu.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ---- Sprawy cywilne ---- -->
+          <section class="archiwum__grupa" id="k-cywilne" data-odslon>
+            <div class="archiwum__glowa">
+              <h3>Sprawy cywilne</h3>
+              <p class="archiwum__licznik">1 wpis</p>
+            </div>
+            <ul class="wpisy">
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Nakaz zapłaty z e-sądu</span>
+                  <span class="wpis-poz__zajawka">Co znaczy pismo z Lublina, ile masz czasu na sprzeciw i dlaczego zignorowanie go jest najgorszym z możliwych wyborów.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+          <!-- ---- Mediacje ---- -->
+          <section class="archiwum__grupa" id="k-mediacje" data-odslon>
+            <div class="archiwum__glowa">
+              <h3>Mediacje</h3>
+              <p class="archiwum__licznik">2 wpisy</p>
+            </div>
+            <ul class="wpisy">
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Mediacja czy sąd — czym różnią się w praktyce</span>
+                  <span class="wpis-poz__zajawka">Kto decyduje o wyniku, ile to trwa i kiedy mediacja nie ma sensu.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+              <li>
+                <a class="wpis-poz" href="wpis-szablon.html">
+                  <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+                  <span class="wpis-poz__tytul">Co się dzieje z porozumieniem zawartym przed mediatorem</span>
+                  <span class="wpis-poz__zajawka">Droga od ugody do dokumentu, który ma realną moc. Co robi sąd, a czego nie zrobi za strony.</span>
+                  <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+                </a>
+              </li>
+            </ul>
+          </section>
+
+        </div>
+
+          <!-- Karta autorki bloga. Przyklejona od 1025 px, więc towarzyszy
+               całej liście. Portret to ten sam placeholder .portret co na
+               „O mnie" — po sesji zdjęciowej podmienia się na <img> bez
+               ruszania układu. -->
+          <aside class="karta-autora" data-odslon>
+            <p class="etykieta">Autorka wpisów</p>
+
+            <div class="karta-autora__foto">
+              <div class="portret">
+                <svg class="portret__znak" viewBox="0 0 40 44" aria-hidden="true">
+                  <polygon points="20,1.5 38,12 38,32 20,42.5 2,32 2,12" fill="none" stroke="currentColor" stroke-width="1"/>
+                </svg>
+                <p class="portret__opis"><b>Miejsce na portret</b>po sesji zdjęciowej</p>
+              </div>
+            </div>
+
+            <h3 class="karta-autora__nazwa">Beata <span class="nowrap">Cupiał-Kowalska</span></h3>
+            <p class="karta-autora__rola">Adwokat i mediator w Częstochowie</p>
+
+            <p class="karta-autora__opis">Prowadzę kancelarię sama i sama prowadzę każdą sprawę. Teksty w tej bazie odpowiadają na pytania, które najczęściej padają w kancelarii.</p>
+
+            <div class="karta-autora__akcje">
+              <a class="link" href="o-mnie.html">Więcej o mnie</a>
+              <a class="btn btn--obrys btn--maly liczby" href="tel:+48534477596">
+                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                534 477 596
+              </a>
+            </div>
+          </aside>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 · ZACHĘTA ============
+         Domknięcie zakładki: tekst na stronie nie zastąpi rozmowy o Twojej
+         sprawie. Płaszczyzna piasek-2, żeby odciąć się od lnu archiwum. -->
+    <section class="sekcja zacheta">
+      <div class="kontener">
+        <div class="zacheta__siatka" data-odslon>
+          <div>
+            <h2>Twojej sytuacji <em>nie ma na tej liście</em></h2>
+            <p>Wpisy tłumaczą to, co powtarza się w wielu sprawach. Twoja sprawa ma swoje szczegóły, a te rozstrzygają najczęściej o wszystkim. Zadzwoń i opowiedz, co się stało.</p>
+          </div>
+          <div class="zacheta__akcje">
+            <a class="btn btn--pelny liczby" href="tel:+48534477596">
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              534 477 596
+            </a>
+            <a class="btn btn--obrys" href="kontakt.html">
+              Poproś o telefon
+              <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+</body>
+</html>

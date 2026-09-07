@@ -1,0 +1,1130 @@
+@charset "UTF-8";
+/* ============================================================================
+   KANCELARIA TACZKOWSKA — arkusz mockupu katalogowego
+   Implementacja /docs/DESIGN-SYSTEM.md w wersji 1.0
+
+   Struktura pliku:
+     0. Fonty
+     1. Tokeny (:root)
+     2. Reset i podstawy
+     3. Siatka i sekcje
+     4. Elementy atomowe
+     5. Rama strony (nagłówek, panel, stopka)
+     6. Sekcje
+     7. Ruch
+     8. Chrom katalogu (NIE jest częścią systemu — tylko ten mockup)
+   ========================================================================== */
+
+/* ---------- 0. FONTY -------------------------------------------------------
+   Inter i Geist Mono — obie licencje SIL OFL 1.1, samohostowane.
+   Powód doboru: /docs/DESIGN-SYSTEM.md 1.2 (SuisseInt'l z referencji jest
+   krojem komercyjnym Swiss Typefaces i nie da się go użyć bez licencji).      */
+
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/inter-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF,
+                 U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/inter-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/geistmono-latin-ext.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF,
+                 U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF, U+2020,
+                 U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: 'Geist Mono';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('fonts/geistmono-latin.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+                 U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122,
+                 U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ---------- 1. TOKENY ---------------------------------------------------- */
+
+:root {
+  /* --- kolory: płaszczyzny --- */
+  --jt-tlo:          #FFFFFF; /* tło podstawowe serwisu */
+  --jt-pasmo:        #EFEDE6; /* pasmo sekcji, tło pod zdjęciem, pole formularza */
+  --jt-material:     #C9C4B4; /* hero, stopka, panel menu, przesłona zdjęcia */
+  --jt-tusz:         #101413; /* tekst, sekcja odwrócona, przycisk główny */
+
+  /* --- kolory: typografia drugorzędna --- */
+  --jt-etykieta:     #63625B; /* nadnagłówki, podpisy, tekst nieaktywny (6,1:1 na bieli) */
+
+  /* --- kolory: linie i stany --- */
+  --jt-linia:        rgba(16, 20, 19, .28);
+  --jt-linia-jasna:  rgba(255, 255, 255, .32);
+  --jt-akcent:       #101413;
+  --jt-fokus:        #101413;
+  --jt-blad:         #8A2B1E;
+
+  /* --- kroje --- */
+  --jt-font:      'Inter', system-ui, -apple-system, 'Segoe UI', Arial, sans-serif;
+  --jt-font-mono: 'Geist Mono', ui-monospace, 'SFMono-Regular', Consolas, monospace;
+
+  /* --- skala typograficzna --- */
+  --jt-fs-hero:  clamp(2.75rem, 7.4vw, 7rem);      /*  44 – 112 px */
+  --jt-fs-d1:    clamp(2.25rem, 5vw, 4.5rem);      /*  36 –  72 px */
+  --jt-fs-d2:    clamp(1.75rem, 3.4vw, 3rem);      /*  28 –  48 px */
+  --jt-fs-h2:    clamp(1.5rem, 2.2vw, 2.125rem);   /*  24 –  34 px */
+  --jt-fs-h3:    clamp(1.25rem, 1.5vw, 1.5rem);    /*  20 –  24 px */
+  --jt-fs-lead:  1.25rem;                          /*  20 px */
+  --jt-fs-body:  1.0625rem;                        /*  17 px */
+  --jt-fs-small: .9375rem;                         /*  15 px */
+  --jt-fs-label: .8125rem;                         /*  13 px */
+
+  /* --- interlinie --- */
+  /* Referencja ma 80% w hero. Przy polskich wersalikach to nie działa: akcent
+     nad Ó sięga 0,93 em ponad linię bazową swojego wiersza, więc przy 80–95%
+     ląduje na linii bazowej wiersza wyżej i czyta się jak literówka
+     (sprawdzone na "PRAWO / MEDIÓW"). 105% daje 0,12 em prześwitu. */
+  --jt-lh-hero: 1.05;
+  --jt-lh-d1:  1.02;
+  --jt-lh-d2:  1.15;
+  --jt-lh-h:   1.2;
+  --jt-lh-h3:  1.25;
+  --jt-lh-lead:1.5;
+  --jt-lh-body:1.6;
+
+  /* --- odstępy --- */
+  --jt-s-1:  .25rem;  --jt-s-2:  .5rem;   --jt-s-3:  .75rem;  --jt-s-4: 1rem;
+  --jt-s-5: 1.5rem;   --jt-s-6: 2rem;     --jt-s-7: 2.5rem;   --jt-s-8: 3.5rem;
+  --jt-s-9: 4.5rem;   --jt-s-10: 6rem;    --jt-s-11: 8rem;    --jt-s-12: 10rem;
+
+  /* --- geometria --- */
+  --jt-promien: 0;
+  --jt-kontener: 1320px;
+  --jt-margines: 24px;
+  --jt-rynna: 24px;
+  --jt-szyna: 40px;
+  --jt-linia-grubosc: 1px;
+  --jt-akcent-grubosc: 3px;
+  --jt-akcent-szerokosc: 80px;
+  --jt-sciecie: 40px;
+  --jt-naglowek-h: 80px;
+
+  /* --- ruch --- */
+  --jt-czas-mikro: 160ms;
+  --jt-czas-hover: 240ms;
+  --jt-czas-odslon: 400ms;
+  --jt-czas-naglowek: 500ms;
+  --jt-czas-zoom: 800ms;
+  --jt-krzywa: cubic-bezier(.2, .6, .2, 1);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --jt-margines: 20px;
+    --jt-szyna: 20px;
+    --jt-naglowek-h: 60px;
+    --jt-sciecie: 24px;
+    --jt-akcent-szerokosc: 56px;
+  }
+}
+
+/* ---------- 2. RESET I PODSTAWY ------------------------------------------ */
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  background: var(--jt-tlo);
+  color: var(--jt-tusz);
+  font-family: var(--jt-font);
+  font-size: var(--jt-fs-body);
+  line-height: var(--jt-lh-body);
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  hyphens: none;
+}
+
+img, svg, video { display: block; max-width: 100%; }
+img, video { height: auto; }
+
+h1, h2, h3, h4, p, ul, ol, figure, blockquote { margin: 0; }
+ul, ol { padding: 0; list-style: none; }
+
+a { color: inherit; }
+
+button, input, select, textarea {
+  font: inherit;
+  color: inherit;
+  border-radius: var(--jt-promien);
+}
+
+:focus-visible {
+  outline: 2px solid var(--jt-fokus);
+  outline-offset: 2px;
+}
+.jt-odwrocone :focus-visible,
+.jt-hero--obraz :focus-visible { outline-color: var(--jt-tlo); }
+
+/* pomijanie do treści */
+.jt-skip {
+  position: absolute; left: -9999px; top: 0; z-index: 999;
+  background: var(--jt-tusz); color: var(--jt-tlo);
+  padding: var(--jt-s-3) var(--jt-s-5);
+}
+.jt-skip:focus { left: 0; }
+
+.jt-tylko-czytnik {
+  position: absolute; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+/* ---------- 3. SIATKA I SEKCJE ------------------------------------------- */
+
+.jt-kontener {
+  width: 100%;
+  max-width: calc(var(--jt-kontener) + 2 * var(--jt-margines));
+  margin-inline: auto;
+  padding-inline: var(--jt-margines);
+}
+
+.jt-szyna { padding-inline: var(--jt-szyna); }
+
+.jt-siatka {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: var(--jt-rynna);
+}
+
+/* cztery klasy wysokości sekcji — DESIGN-SYSTEM.md 2.2 */
+.jt-sekcja { padding-block: var(--jt-s-10); }
+.jt-sekcja--zwarta       { padding-block: var(--jt-s-9); }
+.jt-sekcja--rozstrzelona { padding-block: var(--jt-s-11); }
+.jt-sekcja--scisla       { padding-block: var(--jt-s-8); }
+
+@media (max-width: 1023px) {
+  .jt-sekcja, .jt-sekcja--rozstrzelona { padding-block: var(--jt-s-9); }
+  .jt-sekcja--zwarta, .jt-sekcja--scisla { padding-block: var(--jt-s-8); }
+}
+@media (max-width: 767px) {
+  .jt-sekcja, .jt-sekcja--zwarta,
+  .jt-sekcja--rozstrzelona, .jt-sekcja--scisla { padding-block: var(--jt-s-8); }
+  /* Jedna kolumna. `!important` jest konieczne, bo szerokości kolumn w mockupie
+     są zapisane stylem inline (grid-column: span N) — inaczej span 5 w siatce
+     4-kolumnowej tworzy kolumnę domyślną i rozpycha układ. */
+  .jt-siatka { grid-template-columns: 1fr; row-gap: var(--jt-s-8); }
+  .jt-siatka > * { grid-column: 1 / -1 !important; }
+}
+
+/* tła sekcji */
+.jt-pasmo     { background: var(--jt-pasmo); }
+.jt-material  { background: var(--jt-material); }
+/* Na tle materiału #C9C4B4 kolor etykiety #63625B daje 3,51:1 — poniżej AA.
+   Nadpisujemy token w tym kontekście: #4A4943 daje 5,18:1. Wszystko, co używa
+   --jt-etykieta wewnątrz, poprawia się samo. */
+.jt-material, .jt-stopka, .jt-panel { --jt-etykieta: #464540; }
+.jt-odwrocone { background: var(--jt-tusz); color: var(--jt-tlo); }
+.jt-odwrocone .jt-nad { color: var(--jt-material); }
+
+/* ---------- 4. ELEMENTY ATOMOWE ------------------------------------------ */
+
+/* A1 · nadnagłówek [M] */
+.jt-nad {
+  font-family: var(--jt-font-mono);
+  font-size: var(--jt-fs-label);
+  line-height: var(--jt-lh-h);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--jt-etykieta);
+  margin-bottom: var(--jt-s-6);
+}
+
+/* stopnie nagłówków */
+.jt-d1 { font-size: var(--jt-fs-d1);   line-height: var(--jt-lh-d1); font-weight: 300; letter-spacing: -.02em; }
+.jt-d2 { font-size: var(--jt-fs-d2);   line-height: var(--jt-lh-d2); font-weight: 400; letter-spacing: -.01em; }
+.jt-h2 { font-size: var(--jt-fs-h2);   line-height: var(--jt-lh-h);  font-weight: 400; letter-spacing: -.01em; }
+.jt-h3 { font-size: var(--jt-fs-h3);   line-height: var(--jt-lh-h3); font-weight: 500; }
+.jt-lead  { font-size: var(--jt-fs-lead);  line-height: var(--jt-lh-lead); max-width: 32em; }
+.jt-tekst { max-width: 34em; }
+.jt-tekst p + p { margin-top: var(--jt-s-5); }
+.jt-small { font-size: var(--jt-fs-small); }
+
+/* A2 · przycisk [W — odstępstwo od referencji, DESIGN-SYSTEM.md 5.3] */
+.jt-btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-height: 56px;
+  padding: 1.125rem 2rem;
+  background: var(--jt-tusz);
+  color: var(--jt-tlo);
+  border: var(--jt-linia-grubosc) solid var(--jt-tusz);
+  font-weight: 500;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--jt-czas-hover) ease, color var(--jt-czas-hover) ease;
+}
+.jt-btn:hover { background: var(--jt-tlo); color: var(--jt-tusz); }
+
+.jt-btn--obrys { background: transparent; color: var(--jt-tusz); }
+.jt-btn--obrys:hover { background: var(--jt-tusz); color: var(--jt-tlo); }
+
+.jt-btn--odwrocony {
+  background: var(--jt-tlo); color: var(--jt-tusz);
+  border-color: var(--jt-tlo);
+}
+.jt-btn--odwrocony:hover { background: transparent; color: var(--jt-tlo); }
+
+.jt-btny { display: flex; flex-wrap: wrap; gap: var(--jt-s-3); }
+@media (max-width: 559px) {
+  .jt-btny { flex-direction: column; }
+  .jt-btn { width: 100%; min-height: 52px; padding: 1rem 1.5rem; }
+}
+
+/* A3 · przycisk tekstowy [M] */
+.jt-link {
+  position: relative;
+  display: inline-flex; align-items: center; gap: var(--jt-s-3);
+  padding-block: 12px; margin-block: -12px;
+  font-family: var(--jt-font-mono);
+  font-size: var(--jt-fs-label);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--jt-etykieta);
+  text-decoration: none;
+  transition: color var(--jt-czas-hover) ease;
+}
+.jt-link::after {
+  content: ""; position: absolute; left: 0; bottom: 8px;
+  width: 100%; height: var(--jt-linia-grubosc);
+  background: currentColor;
+  transition: width var(--jt-czas-hover) ease, left var(--jt-czas-hover) ease;
+}
+.jt-link:hover { color: var(--jt-tusz); }
+.jt-link:hover::after { left: auto; right: 0; width: 0; }
+.jt-odwrocone .jt-link { color: var(--jt-material); }
+.jt-odwrocone .jt-link:hover { color: var(--jt-tlo); }
+
+/* A4 · link w tekście [M]
+   Dwa warianty, bo pseudoelement o szerokości 100% rozjeżdża się na linku
+   łamiącym się między wierszami:
+   - .jt-tekst a  — link wewnątrz akapitu, może być wielowierszowy → text-decoration
+   - .jt-a        — link jednowierszowy (telefon, e-mail) → zwijana linia z hoveru */
+.jt-tekst a {
+  text-decoration: underline;
+  text-decoration-thickness: var(--jt-linia-grubosc);
+  text-underline-offset: 5px;
+  transition: color var(--jt-czas-hover) ease, text-decoration-color var(--jt-czas-hover) ease;
+}
+.jt-tekst a:hover { text-decoration-color: transparent; }
+.jt-odwrocone .jt-tekst a:hover { color: var(--jt-material); }
+
+.jt-a {
+  position: relative; text-decoration: none; white-space: nowrap;
+  transition: color var(--jt-czas-hover) ease;
+}
+.jt-a::before {
+  content: ""; position: absolute; left: 0; bottom: -2px;
+  width: 100%; height: var(--jt-linia-grubosc);
+  background: currentColor;
+  transition: width var(--jt-czas-hover) ease, left var(--jt-czas-hover) ease;
+}
+.jt-a:hover { color: var(--jt-etykieta); }
+.jt-a:hover::before { left: auto; right: 0; width: 0; }
+.jt-odwrocone .jt-a:hover, .jt-material .jt-a:hover { color: inherit; opacity: .7; }
+
+/* A5 · strzałka [M] — jedyna ikona systemu obok × */
+.jt-strzalka { width: 24px; height: 24px; flex: 0 0 auto; }
+.jt-strzalka--dol { transform: rotate(90deg); }
+.jt-strzalka--ukos { transform: rotate(-45deg); }
+@media (max-width: 767px) { .jt-strzalka { width: 20px; height: 20px; } }
+
+/* A6 · etykieta zakresu [G — bez tła i bez promienia] */
+.jt-zakres { display: flex; flex-wrap: wrap; gap: var(--jt-s-2); }
+.jt-zakres li {
+  padding: .5rem .875rem;
+  border: var(--jt-linia-grubosc) solid var(--jt-linia);
+  font-size: var(--jt-fs-small);
+  line-height: 1.35;
+}
+@media (max-width: 767px) { .jt-zakres li { padding: .375rem .75rem; font-size: .875rem; } }
+
+/* A7 · pasek akcentu [M — pozycja ustalona, nie losowa] */
+.jt-akcent-pasek {
+  position: absolute; left: 0; bottom: -2px;
+  width: var(--jt-akcent-szerokosc); height: var(--jt-akcent-grubosc);
+  background: var(--jt-akcent);
+  transform-origin: 0 50%;
+}
+.jt-akcent-pasek--prawo { left: auto; right: 0; transform-origin: 100% 50%; }
+
+/* tytuł sekcji z linią i paskiem — [M] two-column-section .__title */
+.jt-tytul {
+  position: relative;
+  display: flex; flex-direction: column; justify-content: flex-end;
+  min-height: 120px;
+  padding-bottom: var(--jt-s-5);
+  border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia);
+  margin-bottom: var(--jt-s-8);
+}
+.jt-tytul .jt-nad { margin-bottom: var(--jt-s-3); }
+
+/* A8 · podpis pod zdjęciem [O] */
+.jt-podpis {
+  margin-top: var(--jt-s-7);
+  font-size: var(--jt-fs-small);
+  color: var(--jt-etykieta);
+  max-width: 34em;
+}
+
+/* placeholder zdjęcia — mockup, w produkcji <img> */
+.jt-foto {
+  position: relative;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--jt-pasmo);
+  border: var(--jt-linia-grubosc) solid var(--jt-linia);
+  overflow: hidden;
+}
+.jt-foto--portret { aspect-ratio: 2 / 3; }
+.jt-foto--kadr    { aspect-ratio: 3 / 2; }
+.jt-foto--szeroki { aspect-ratio: 16 / 9; }
+.jt-foto--panorama{ aspect-ratio: 21 / 9; }
+.jt-foto--kwadrat { aspect-ratio: 4 / 3; }
+.jt-foto__opis {
+  font-family: var(--jt-font-mono);
+  font-size: var(--jt-fs-label);
+  line-height: 1.5;
+  color: var(--jt-etykieta);
+  text-align: center;
+  max-width: 26ch;
+  padding: var(--jt-s-4);
+}
+.jt-foto__opis b { display: block; font-weight: 400; color: var(--jt-tusz); margin-bottom: var(--jt-s-2); }
+/* na paśmie placeholder ma to samo tło co sekcja i przestaje być widoczny */
+.jt-pasmo .jt-foto { background: #E5E2D9; }
+
+/* ---------- 5. RAMA ------------------------------------------------------ */
+
+/* B1 · nagłówek [M] + telefon [W] */
+.jt-header { width: 100%; background: var(--jt-tlo); position: relative; z-index: 20; }
+.jt-header__in {
+  display: flex; align-items: center; gap: var(--jt-s-5);
+  height: var(--jt-naglowek-h);
+  position: relative;
+}
+.jt-header__in::after {
+  content: ""; position: absolute; inset: auto 0 0 0;
+  height: var(--jt-linia-grubosc); background: var(--jt-linia);
+}
+.jt-logo {
+  font-size: 1.375rem; font-weight: 500; letter-spacing: .14em;
+  text-transform: uppercase; text-decoration: none; white-space: nowrap;
+}
+.jt-logo small {
+  display: block; font-family: var(--jt-font-mono); font-size: .6875rem;
+  letter-spacing: .12em; color: var(--jt-etykieta); margin-top: 3px;
+}
+.jt-nav { display: flex; gap: var(--jt-s-5); margin-left: auto; }
+.jt-nav a {
+  position: relative; text-decoration: none; padding-block: 10px;
+}
+.jt-nav a::after {
+  content: ""; position: absolute; left: 0; bottom: 4px;
+  width: 0; height: var(--jt-linia-grubosc); background: currentColor;
+  transition: width var(--jt-czas-hover) ease;
+}
+.jt-nav a:hover::after, .jt-nav a[aria-current="page"]::after { width: 100%; }
+.jt-header__prawo { display: flex; align-items: center; gap: var(--jt-s-5); margin-left: var(--jt-s-6); }
+.jt-header__tel { font-family: var(--jt-font-mono); font-size: var(--jt-fs-small); text-decoration: none; white-space: nowrap; }
+.jt-header--ciemny { background: var(--jt-tusz); color: var(--jt-tlo); }
+.jt-header--ciemny .jt-header__in::after { background: var(--jt-linia-jasna); }
+.jt-header--ciemny .jt-logo small { color: var(--jt-material); }
+/* Nagłówek przezroczysty leży na fotografii, której jasności nie kontrolujemy.
+   Bez własnej przesłony biały tekst potrafi zejść do 3,2:1. Delikatny gradient
+   od góry rozwiązuje to bez zmiany wyglądu. */
+.jt-header--przezr { background: transparent; color: var(--jt-tlo); position: relative; }
+.jt-header--przezr::before {
+  content: ""; position: absolute; inset: 0 0 -32px 0; pointer-events: none;
+  background: linear-gradient(180deg, rgba(16,20,19,.62) 0%, rgba(16,20,19,.38) 62%, rgba(16,20,19,0) 100%);
+}
+.jt-header--przezr .jt-header__in { z-index: 2; }
+.jt-header--przezr .jt-header__in::after { background: var(--jt-linia-jasna); }
+.jt-header--przezr .jt-logo small { color: var(--jt-pasmo); }
+
+.jt-jezyk { display: flex; gap: var(--jt-s-2); font-family: var(--jt-font-mono); font-size: var(--jt-fs-label); letter-spacing: .1em; }
+.jt-jezyk [aria-current] { border-bottom: var(--jt-linia-grubosc) solid currentColor; }
+.jt-jezyk span:not([aria-current]) { color: var(--jt-etykieta); }
+/* Na tle ciemnym i na zdjęciu --jt-etykieta daje 3,1:1 — poniżej progu AA.
+   Nieaktywny język przechodzi wtedy na --jt-material (11,7:1). */
+.jt-header--ciemny .jt-jezyk span:not([aria-current]),
+.jt-header--przezr .jt-jezyk span:not([aria-current]),
+.jt-odwrocone .jt-jezyk span:not([aria-current]) { color: var(--jt-material); }
+
+/* B3 · hamburger [M] */
+.jt-burger {
+  width: 44px; height: 44px; flex: 0 0 auto;
+  display: flex; flex-direction: column; justify-content: center; align-items: flex-end; gap: 7px;
+  background: none; border: 0; cursor: pointer; padding: 0;
+}
+.jt-burger span {
+  display: block; width: 28px; height: 2px; background: currentColor;
+  transition: width var(--jt-czas-hover) ease;
+}
+.jt-burger:hover span:nth-child(2) { width: 22px; }
+.jt-burger:hover span:nth-child(3) { width: 16px; }
+
+@media (max-width: 1023px) {
+  .jt-nav { display: none; }
+  .jt-header__prawo { margin-left: auto; }
+}
+@media (max-width: 559px) { .jt-header__tel { display: none; } }
+
+/* B2 · panel menu [M] */
+.jt-panel { background: var(--jt-material); padding-block: var(--jt-s-9); }
+.jt-panel__gora { display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--jt-s-9); }
+.jt-panel__grupy { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--jt-rynna); }
+.jt-panel__grupa h2, .jt-panel__grupa h3 { font-size: var(--jt-fs-h3); font-weight: 400; margin-bottom: var(--jt-s-5); }
+.jt-panel__grupa li + li { margin-top: var(--jt-s-2); }
+.jt-panel__grupa a { text-decoration: none; position: relative; }
+.jt-panel__grupa a::after {
+  content: ""; position: absolute; left: 0; bottom: -2px; width: 0;
+  height: var(--jt-linia-grubosc); background: currentColor;
+  transition: width var(--jt-czas-hover) ease;
+}
+.jt-panel__grupa a:hover::after { width: 100%; }
+.jt-panel__kontakt { font-family: var(--jt-font-mono); font-size: var(--jt-fs-small); line-height: 1.7; }
+.jt-panel__dol {
+  margin-top: var(--jt-s-9); padding-top: var(--jt-s-5);
+  border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--jt-s-4);
+  font-family: var(--jt-font-mono); font-size: var(--jt-fs-label); letter-spacing: .08em;
+}
+@media (max-width: 767px) {
+  .jt-panel__grupy { grid-template-columns: 1fr; gap: var(--jt-s-8); }
+  .jt-panel__gora { margin-bottom: var(--jt-s-8); }
+}
+
+/* B4 · stopka */
+.jt-stopka { background: var(--jt-material); border-top: var(--jt-linia-grubosc) solid var(--jt-linia); position: relative; }
+.jt-stopka__gora { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--jt-rynna); }
+.jt-stopka__kol h2, .jt-stopka__kol h3 {
+  font-family: var(--jt-font-mono); font-size: var(--jt-fs-label);
+  letter-spacing: .16em; text-transform: uppercase; font-weight: 400;
+  color: var(--jt-etykieta); margin-bottom: var(--jt-s-5);
+}
+.jt-stopka__kol li + li { margin-top: var(--jt-s-2); }
+.jt-stopka__kol a { text-decoration: none; }
+.jt-stopka__adres { font-family: var(--jt-font-mono); font-size: var(--jt-fs-small); line-height: 1.8; font-style: normal; }
+.jt-stopka__pustka { height: var(--jt-s-12); }
+.jt-stopka__dol {
+  padding-top: var(--jt-s-5);
+  border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+  display: flex; justify-content: space-between; flex-wrap: wrap; gap: var(--jt-s-4);
+  font-family: var(--jt-font-mono); font-size: var(--jt-fs-label); letter-spacing: .06em;
+  color: var(--jt-etykieta);
+}
+.jt-stopka__cta { background: var(--jt-tusz); color: var(--jt-tlo); }
+.jt-stopka__cta .jt-siatka { align-items: center; }
+@media (max-width: 767px) {
+  .jt-stopka__gora { grid-template-columns: 1fr; gap: var(--jt-s-8); }
+  .jt-stopka__pustka { height: var(--jt-s-9); }
+}
+
+/* ---------- 6. SEKCJE ---------------------------------------------------- */
+
+/* C1 · HERO */
+.jt-hero__tytul {
+  font-size: var(--jt-fs-hero); line-height: var(--jt-lh-hero);
+  font-weight: 300; letter-spacing: -.02em; text-transform: uppercase;
+}
+.jt-hero__tytul span { display: block; }
+
+/* HERO-A — pełnoekranowy ze zdjęciem */
+.jt-hero--obraz {
+  position: relative; min-height: 560px; height: 88vh; max-height: 900px;
+  background: var(--jt-material); color: var(--jt-tlo);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  overflow: hidden;
+}
+.jt-hero--obraz .jt-foto {
+  position: absolute; inset: 0; border: 0; aspect-ratio: auto;
+  background: var(--jt-material);
+}
+.jt-hero--obraz .jt-foto__opis { color: rgba(16,20,19,.78); max-width: 34ch; }
+.jt-hero--obraz .jt-foto__opis b { color: var(--jt-tusz); }
+/* Przesłona pod nagłówkiem. Zaczyna się na 30% wysokości i osiąga 0,72 już
+   w 45% — przy starcie na 40% górny wiersz tytułu miał tylko 1,7:1 na jasnej
+   fotografii. Teraz najsłabszy punkt to ok. 4,4:1 przy progu 3:1 dla 107 px. */
+.jt-hero--obraz::after {
+  content: ""; position: absolute; inset: 30% 0 0 0;
+  background: linear-gradient(180deg,
+    rgba(16,20,19,0) 0%, rgba(16,20,19,.72) 45%, rgba(16,20,19,.88) 100%);
+}
+.jt-hero__tresc { position: relative; z-index: 2; padding-bottom: var(--jt-s-7); }
+.jt-hero__stopa {
+  position: relative; z-index: 2;
+  display: flex; justify-content: space-between; align-items: flex-end; gap: var(--jt-s-5);
+  padding-bottom: var(--jt-s-7);
+}
+@media (max-width: 767px) {
+  .jt-hero--obraz { height: 72vh; min-height: 460px; }
+  .jt-hero__stopa .jt-strzalka { display: none; }
+}
+
+/* HERO-B — typograficzny */
+.jt-hero--typo { padding-block: var(--jt-s-12) var(--jt-s-10); position: relative; }
+.jt-hero--typo .jt-hero__tytul { text-transform: none; font-size: var(--jt-fs-d1); line-height: var(--jt-lh-d1); max-width: 16em; }
+.jt-hero--typo .jt-lead { margin-top: var(--jt-s-6); }
+.jt-hero--typo .jt-btny { margin-top: var(--jt-s-8); }
+.jt-hero--typo .jt-hero__linia {
+  position: relative; margin-top: var(--jt-s-10);
+  border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+}
+
+/* HERO-C — podzielony */
+.jt-hero--dwa { padding-block: var(--jt-s-9); }
+.jt-hero--dwa .jt-siatka { align-items: center; }
+.jt-hero--dwa .jt-hero__tytul { text-transform: none; font-size: var(--jt-fs-d1); line-height: var(--jt-lh-d1); }
+.jt-hero--dwa .jt-lead { margin-top: var(--jt-s-5); }
+.jt-hero--dwa .jt-btny { margin-top: var(--jt-s-7); }
+.jt-hero__liczby {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  margin-top: var(--jt-s-8); border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+}
+.jt-hero__liczby div { padding: var(--jt-s-5) var(--jt-s-4) 0 0; }
+.jt-hero__liczby div + div { border-left: var(--jt-linia-grubosc) solid var(--jt-linia); padding-left: var(--jt-s-5); }
+.jt-hero__liczby b { display: block; font-size: 2rem; font-weight: 300; font-variant-numeric: tabular-nums; }
+.jt-hero__liczby span { font-size: var(--jt-fs-small); color: var(--jt-etykieta); }
+
+/* C2 · MANIFEST [M] */
+.jt-manifest p {
+  font-size: var(--jt-fs-d2); line-height: var(--jt-lh-d2);
+  font-weight: 400; letter-spacing: -.01em; max-width: 20em;
+}
+.jt-manifest--srodek { text-align: center; }
+.jt-manifest--srodek p { margin-inline: auto; }
+
+/* G1 · LICZBY [G] */
+.jt-liczby { display: grid; grid-template-columns: repeat(4, 1fr); }
+.jt-liczby div { padding-right: var(--jt-s-5); }
+.jt-liczby div + div { border-left: var(--jt-linia-grubosc) solid var(--jt-linia); padding-left: var(--jt-s-6); }
+.jt-liczby b {
+  display: block; font-size: var(--jt-fs-d1); line-height: var(--jt-lh-d1);
+  font-weight: 300; letter-spacing: -.02em; font-variant-numeric: tabular-nums;
+  margin-bottom: var(--jt-s-3);
+}
+.jt-liczby span { display: block; font-size: var(--jt-fs-small); color: var(--jt-etykieta); max-width: 20em; }
+.jt-odwrocone .jt-liczby div + div { border-left-color: var(--jt-linia-jasna); }
+.jt-odwrocone .jt-liczby span { color: var(--jt-material); }
+@media (max-width: 767px) {
+  .jt-liczby { grid-template-columns: repeat(2, 1fr); gap: var(--jt-s-6) 0; }
+  .jt-liczby div:nth-child(odd) { border-left: 0; padding-left: 0; }
+}
+@media (max-width: 479px) {
+  .jt-liczby { grid-template-columns: 1fr; }
+  .jt-liczby div + div { border-left: 0; padding-left: 0; padding-top: var(--jt-s-6); border-top: var(--jt-linia-grubosc) solid var(--jt-linia); }
+}
+
+/* D1 · USLUGI-A — lista wierszy [M] + numeracja [O] */
+.jt-wiersze li { border-top: var(--jt-linia-grubosc) solid var(--jt-linia); position: relative; }
+.jt-wiersze li:last-child { border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-wiersz {
+  position: relative; display: flex; align-items: center; gap: var(--jt-s-5);
+  min-height: 140px; padding-block: var(--jt-s-4);
+  text-decoration: none; overflow: hidden;
+}
+.jt-wiersz::before {
+  content: ""; position: absolute; inset: 0 auto 0 0; width: 0;
+  background: var(--jt-pasmo);
+  transition: width var(--jt-czas-hover) ease;
+}
+.jt-wiersz__nr {
+  position: relative; z-index: 2; flex: 0 0 56px;
+  font-family: var(--jt-font-mono); font-size: var(--jt-fs-label);
+  letter-spacing: .1em; color: var(--jt-etykieta);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--jt-czas-hover) ease;
+}
+.jt-wiersz__tytul {
+  position: relative; z-index: 2; flex: 1 1 auto;
+  font-size: var(--jt-fs-h2); line-height: var(--jt-lh-h);
+  font-weight: 400; letter-spacing: -.01em;
+  transition: transform var(--jt-czas-hover) ease;
+}
+.jt-wiersz__strzalka { position: relative; z-index: 2; transition: transform var(--jt-czas-hover) ease .08s; }
+.jt-wiersz:hover::before { width: 100%; }
+.jt-wiersz:hover .jt-wiersz__tytul { transform: translateX(16px); }
+.jt-wiersz:hover .jt-wiersz__strzalka { transform: translateX(-12px); }
+.jt-wiersz:hover .jt-wiersz__nr { color: var(--jt-tusz); }
+@media (max-width: 767px) {
+  .jt-wiersz { min-height: 96px; flex-wrap: wrap; gap: var(--jt-s-2) var(--jt-s-4); }
+  .jt-wiersz__nr { flex-basis: 100%; }
+  .jt-wiersz__tytul { flex: 1 1 60%; }
+}
+
+/* D2 · USLUGI-B — siatka z liniami [G] */
+.jt-pola { display: grid; grid-template-columns: repeat(2, 1fr); border-top: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-pole {
+  padding: var(--jt-s-7);
+  border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia);
+  border-right: var(--jt-linia-grubosc) solid var(--jt-linia);
+  text-decoration: none; display: block;
+  transition: background var(--jt-czas-hover) ease;
+}
+.jt-pole:nth-child(2n) { border-right: 0; }
+.jt-pole:hover { background: var(--jt-pasmo); }
+.jt-pole__nr {
+  font-family: var(--jt-font-mono); font-size: var(--jt-fs-label);
+  letter-spacing: .1em; color: var(--jt-etykieta); display: block; margin-bottom: var(--jt-s-5);
+}
+/* celujemy w klasę, nie w element — poziom nagłówka zależy od kontekstu strony */
+.jt-pole .jt-h3 { margin-bottom: var(--jt-s-4); }
+.jt-pole p { max-width: 30em; margin-bottom: var(--jt-s-6); }
+.jt-pole:hover .jt-link { color: var(--jt-tusz); }
+.jt-pole:hover .jt-link::after { left: auto; right: 0; width: 0; }
+@media (max-width: 767px) {
+  .jt-pola { grid-template-columns: 1fr; }
+  .jt-pole { border-right: 0; padding: var(--jt-s-5) 0; }
+}
+
+/* D3 · USLUGI-C — obszar + zakres [G] */
+.jt-obszar { padding-block: var(--jt-s-8); border-top: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-obszar:last-child { border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-obszar__nr {
+  font-family: var(--jt-font-mono); font-size: var(--jt-fs-label);
+  letter-spacing: .1em; color: var(--jt-etykieta); display: block; margin-bottom: var(--jt-s-4);
+}
+.jt-obszar__tytul { font-size: var(--jt-fs-h2); line-height: var(--jt-lh-h); font-weight: 400; letter-spacing: -.01em; margin-bottom: var(--jt-s-5); }
+
+/* E1 · O-MNIE-A */
+.jt-funkcje li {
+  border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+  padding-block: var(--jt-s-4);
+}
+.jt-funkcje li:last-child { border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia); }
+
+/* E2 · O-MNIE-B [G] */
+.jt-podpis-odreczny {
+  margin-top: var(--jt-s-6);
+  height: 56px; width: 220px;
+  border: var(--jt-linia-grubosc) dashed var(--jt-linia-jasna);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--jt-font-mono); font-size: .6875rem; letter-spacing: .1em;
+  color: var(--jt-material); text-align: center;
+}
+
+/* F2 · LISTA-B — zakładki [O] */
+.jt-zakladki__lista { border-top: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-zakladka {
+  position: relative; display: block; width: 100%; text-align: left;
+  background: none; border: 0; border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia);
+  padding: var(--jt-s-4) var(--jt-s-4) var(--jt-s-4) var(--jt-s-5);
+  font-size: var(--jt-fs-h3); font-weight: 400; color: var(--jt-etykieta);
+  cursor: pointer;
+  transition: color var(--jt-czas-hover) ease;
+}
+.jt-zakladka:hover { color: var(--jt-tusz); }
+.jt-zakladka[aria-selected="true"] { color: var(--jt-tusz); font-weight: 500; }
+.jt-zakladka[aria-selected="true"]::before {
+  content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
+  width: var(--jt-akcent-grubosc); height: 28px; background: var(--jt-akcent);
+}
+.jt-zakladka__ile { float: right; font-family: var(--jt-font-mono); font-size: var(--jt-fs-label); color: var(--jt-etykieta); }
+.jt-panel-tresc[hidden] { display: none; }
+.jt-pozycje li { border-top: var(--jt-linia-grubosc) solid var(--jt-linia); padding-block: var(--jt-s-4); }
+.jt-pozycje li:first-child { border-top: 0; padding-top: 0; }
+.jt-pozycje__meta { display: block; font-family: var(--jt-font-mono); font-size: var(--jt-fs-label); color: var(--jt-etykieta); margin-top: var(--jt-s-2); }
+
+/* H2 · PROCES */
+.jt-kroki { display: grid; grid-template-columns: repeat(4, 1fr); }
+.jt-krok { padding-right: var(--jt-s-5); }
+.jt-krok + .jt-krok { border-left: var(--jt-linia-grubosc) solid var(--jt-linia); padding-left: var(--jt-s-6); }
+.jt-krok__nr {
+  display: block; font-size: var(--jt-fs-d1); line-height: 1;
+  font-weight: 300; color: var(--jt-etykieta); font-variant-numeric: tabular-nums;
+  margin-bottom: var(--jt-s-5); padding-bottom: var(--jt-s-5);
+  border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia);
+}
+.jt-krok h3 { margin-bottom: var(--jt-s-3); }
+.jt-krok p { max-width: 26em; }
+@media (max-width: 1023px) {
+  .jt-kroki { grid-template-columns: repeat(2, 1fr); gap: var(--jt-s-8) 0; }
+  .jt-krok:nth-child(odd) { border-left: 0; padding-left: 0; }
+}
+@media (max-width: 559px) {
+  .jt-kroki { grid-template-columns: 1fr; }
+  .jt-krok + .jt-krok { border-left: 0; padding-left: 0; }
+}
+
+/* G2 · WYROZNIKI — kafel ze ściętym rogiem [M] */
+.jt-kafel {
+  position: relative; min-height: 560px;
+  display: flex; align-items: flex-end;
+  background: var(--jt-tusz); color: var(--jt-tlo);
+  clip-path: polygon(100% 0, 100% calc(100% - var(--jt-sciecie)), calc(100% - var(--jt-sciecie)) 100%, 0 100%, 0 0);
+  overflow: hidden;
+}
+.jt-kafel__foto { position: absolute; inset: 0; border: 0; aspect-ratio: auto; background: var(--jt-material); }
+.jt-kafel::after { content: ""; position: absolute; inset: 0; background: rgba(16,20,19,.86); }
+/* opis placeholdera musi być NAD przesłoną, inaczej czyta się jak brud na tle */
+.jt-kafel__foto .jt-foto__opis {
+  position: relative; z-index: 3;
+  color: rgba(255,255,255,.62); margin-left: auto; max-width: 22ch;
+  padding-right: var(--jt-s-7);
+}
+.jt-kafel__foto .jt-foto__opis b { color: rgba(255,255,255,.8); }
+.jt-kafel__tresc { position: relative; z-index: 2; padding: var(--jt-s-7); max-width: 46em; }
+.jt-kafel__tresc .jt-btn { margin-top: var(--jt-s-7); }
+@media (max-width: 767px) { .jt-kafel { min-height: 420px; } .jt-kafel__tresc { padding: var(--jt-s-5); } }
+
+/* G3 · OPINIE / G4 · CYTATY */
+.jt-cytaty { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--jt-rynna) var(--jt-s-7); align-items: start; }
+.jt-cytat blockquote { max-width: 30em; }
+.jt-cytat__zrodlo {
+  margin-top: var(--jt-s-5); padding-top: var(--jt-s-4);
+  border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+  font-size: var(--jt-fs-small); color: var(--jt-etykieta);
+}
+.jt-cytat--duzy blockquote { font-size: var(--jt-fs-h3); line-height: var(--jt-lh-h3); font-weight: 400; }
+@media (max-width: 1023px) { .jt-cytaty { grid-template-columns: repeat(2, 1fr); gap: var(--jt-s-8) var(--jt-s-7); } }
+@media (max-width: 767px) { .jt-cytaty { grid-template-columns: 1fr; gap: var(--jt-s-8); } }
+
+/* G3 · OPINIE — układ wierszowy, świadomie inny niż siatka CYTATY-A.
+   Pierwsza wersja była trzykolumnową siatką cytatów i czytała się jako ten sam
+   komponent co CYTATY-A. Skoro obie sekcje się wykluczają, wybór między nimi
+   musi być wyborem układu, nie tylko treści. */
+.jt-opinie li { border-top: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-opinie li:last-child { border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-opinia {
+  display: grid; grid-template-columns: 4fr 8fr; gap: var(--jt-rynna);
+  padding-block: var(--jt-s-7); margin: 0;
+}
+.jt-opinia__kto { font-size: var(--jt-fs-small); color: var(--jt-etykieta); line-height: 1.6; }
+.jt-opinia__kto b { display: block; font-weight: 500; color: var(--jt-tusz); margin-bottom: var(--jt-s-1); }
+.jt-opinia blockquote {
+  font-size: var(--jt-fs-lead); line-height: var(--jt-lh-lead);
+  max-width: 32em; margin: 0;
+}
+@media (max-width: 767px) {
+  .jt-opinia { grid-template-columns: 1fr; gap: var(--jt-s-4); padding-block: var(--jt-s-6); }
+  .jt-opinia__kto { order: 2; }
+}
+
+/* G5 · W-MEDIACH */
+.jt-media li { border-top: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-media li:last-child { border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-media a {
+  display: grid; grid-template-columns: 112px 1fr auto auto;
+  gap: var(--jt-s-5); align-items: baseline;
+  padding-block: var(--jt-s-5); text-decoration: none;
+}
+.jt-media__data { font-family: var(--jt-font-mono); font-size: var(--jt-fs-label); color: var(--jt-etykieta); font-variant-numeric: tabular-nums; }
+.jt-media__tytul { transition: transform var(--jt-czas-hover) ease; }
+.jt-media__zrodlo { font-size: var(--jt-fs-small); color: var(--jt-etykieta); text-align: right; }
+.jt-media a:hover .jt-media__tytul { transform: translateX(8px); }
+.jt-media a:hover .jt-strzalka { transform: rotate(-45deg) translateX(4px); }
+@media (max-width: 767px) {
+  .jt-media a { grid-template-columns: 1fr auto; gap: var(--jt-s-2) var(--jt-s-4); }
+  .jt-media__data { order: 2; }
+  .jt-media__tytul { grid-column: 1 / -1; }
+  .jt-media__zrodlo { order: 3; text-align: left; }
+  .jt-media .jt-strzalka { order: 4; }
+}
+
+/* H1 · FAQ */
+.jt-faq { border-top: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-faq__poz { border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-faq__btn {
+  display: flex; align-items: flex-start; gap: var(--jt-s-5);
+  width: 100%; text-align: left; background: none; border: 0;
+  padding: var(--jt-s-5) 0; cursor: pointer;
+}
+.jt-faq__nr { font-family: var(--jt-font-mono); font-size: var(--jt-fs-label); color: var(--jt-etykieta); flex: 0 0 40px; padding-top: .35em; }
+.jt-faq__pytanie { flex: 1 1 auto; font-size: var(--jt-fs-h3); font-weight: 500; line-height: var(--jt-lh-h3); transition: transform var(--jt-czas-hover) ease; }
+.jt-faq__znak { position: relative; flex: 0 0 20px; height: 20px; margin-top: .35em; }
+.jt-faq__znak::before, .jt-faq__znak::after {
+  content: ""; position: absolute; background: var(--jt-tusz);
+  transition: transform var(--jt-czas-hover) ease, opacity var(--jt-czas-hover) ease;
+}
+.jt-faq__znak::before { left: 0; top: 9px; width: 20px; height: 1px; }
+.jt-faq__znak::after { left: 9px; top: 0; width: 1px; height: 20px; }
+.jt-faq__btn[aria-expanded="true"] .jt-faq__znak::after { transform: rotate(90deg); opacity: 0; }
+.jt-faq__btn:hover .jt-faq__pytanie { transform: translateX(8px); }
+.jt-faq__odp { padding: 0 0 var(--jt-s-5) calc(40px + var(--jt-s-5)); }
+.jt-faq__odp[hidden] { display: none; }
+@media (max-width: 767px) { .jt-faq__odp { padding-left: 0; } }
+
+/* I1 · WPISY */
+.jt-karty { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--jt-rynna); align-items: stretch; }
+/* kolumna flex + margin-top:auto na linku — inaczej "Czytaj" ląduje na różnej
+   wysokości w każdej karcie, bo tytuły mają różną liczbę wierszy */
+.jt-karta { display: flex; flex-direction: column; text-decoration: none; height: 100%; }
+.jt-karta .jt-link { margin-top: auto; align-self: flex-start; }
+.jt-karta__foto { position: relative; overflow: hidden; margin-bottom: var(--jt-s-3); }
+.jt-karta__foto img, .jt-karta__foto .jt-foto { transition: transform var(--jt-czas-zoom) ease; }
+.jt-karta:hover .jt-karta__foto .jt-foto { transform: scale(1.06); }
+.jt-karta__kat {
+  position: absolute; top: var(--jt-s-5); left: var(--jt-s-5); z-index: 2;
+  font-family: var(--jt-font-mono); font-size: var(--jt-fs-label);
+  letter-spacing: .16em; text-transform: uppercase;
+  color: var(--jt-tlo); background: rgba(16,20,19,.86); padding: .375rem .625rem;
+}
+.jt-karta__data { display: block; font-family: var(--jt-font-mono); font-size: var(--jt-fs-label); color: var(--jt-etykieta); margin-bottom: var(--jt-s-3); }
+.jt-karta__tytul { margin-bottom: var(--jt-s-5); }
+.jt-karta:hover .jt-link { color: var(--jt-tusz); }
+.jt-karta:hover .jt-link::after { left: auto; right: 0; width: 0; }
+@media (max-width: 1023px) { .jt-karty { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 767px) { .jt-karty { grid-template-columns: 1fr; gap: var(--jt-s-8); } }
+
+/* I3 · KONTAKT — formularz [O] */
+.jt-form { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--jt-s-6) var(--jt-rynna); }
+.jt-pole-form { display: flex; flex-direction: column; }
+.jt-pole-form--pelne { grid-column: 1 / -1; }
+.jt-pole-form label {
+  font-family: var(--jt-font-mono); font-size: var(--jt-fs-label);
+  letter-spacing: .16em; text-transform: uppercase; color: var(--jt-etykieta);
+  margin-bottom: var(--jt-s-4);
+}
+.jt-pole-form input,
+.jt-pole-form select,
+.jt-pole-form textarea {
+  background: transparent; border: 0;
+  border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia);
+  padding: .75rem 0; min-height: 48px;
+  transition: border-color var(--jt-czas-hover) ease;
+}
+.jt-pole-form textarea { min-height: 120px; resize: vertical; }
+.jt-pole-form input:hover, .jt-pole-form select:hover, .jt-pole-form textarea:hover { border-bottom-color: var(--jt-tusz); }
+.jt-pole-form input:focus, .jt-pole-form select:focus, .jt-pole-form textarea:focus {
+  border-bottom: 2px solid var(--jt-tusz); outline: 2px solid var(--jt-fokus); outline-offset: 4px;
+}
+.jt-zgoda { grid-column: 1 / -1; display: flex; gap: var(--jt-s-4); align-items: flex-start; }
+.jt-zgoda input {
+  appearance: none; -webkit-appearance: none;
+  width: 20px; height: 20px; flex: 0 0 20px; margin-top: 2px;
+  border: var(--jt-linia-grubosc) solid var(--jt-linia); background: transparent; cursor: pointer;
+}
+.jt-zgoda input:checked { background: var(--jt-tusz); border-color: var(--jt-tusz); }
+.jt-zgoda label {
+  font-size: var(--jt-fs-small); color: var(--jt-etykieta); line-height: 1.55;
+  max-width: 40em; /* bez tego klauzula RODO rozciąga się na 83 znaki w wierszu */
+}
+@media (max-width: 767px) {
+  .jt-form { grid-template-columns: 1fr; gap: var(--jt-s-6); }
+  .jt-pole-form input, .jt-pole-form select, .jt-pole-form textarea { min-height: 52px; }
+}
+
+.jt-dane { font-style: normal; font-family: var(--jt-font-mono); line-height: 1.9; }
+@media (max-width: 767px) { .jt-dane { font-size: var(--jt-fs-small); line-height: 1.8; } }
+.jt-dane strong { font-weight: 400; }
+.jt-dane__blok + .jt-dane__blok { margin-top: var(--jt-s-6); }
+.jt-dane__etyk {
+  display: block; font-size: var(--jt-fs-label); letter-spacing: .16em;
+  text-transform: uppercase; color: var(--jt-etykieta); margin-bottom: var(--jt-s-2);
+}
+
+/* I2 · CTA pośrednie */
+.jt-cta .jt-siatka { align-items: center; }
+.jt-cta__czas { margin-top: var(--jt-s-4); font-size: var(--jt-fs-small); color: var(--jt-etykieta); }
+.jt-odwrocone .jt-cta__czas { color: var(--jt-material); }
+
+/* ---------- 7. RUCH ------------------------------------------------------- */
+
+.jt-anim { opacity: 0; transform: translateY(16px); }
+.jt-anim.jest {
+  opacity: 1; transform: none;
+  transition: opacity var(--jt-czas-odslon) var(--jt-krzywa),
+              transform var(--jt-czas-odslon) var(--jt-krzywa);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
+  .jt-anim { opacity: 1 !important; transform: none !important; }
+}
+
+
+/* ============================================================================
+   9. KOMPONENTY WŁAŚCIWEJ STRONY
+   Rzeczy, których nie było w katalogu, a wymaga ich copy.
+   ========================================================================== */
+
+/* --- pasek zaufania ------------------------------------------------------ */
+.jt-zaufanie { display: grid; grid-template-columns: repeat(4, 1fr); }
+.jt-zaufanie li { padding-right: var(--jt-s-5); }
+.jt-zaufanie li + li { border-left: var(--jt-linia-grubosc) solid var(--jt-linia); padding-left: var(--jt-s-6); }
+.jt-zaufanie b {
+  display: block; font-size: var(--jt-fs-h3); line-height: var(--jt-lh-h3);
+  font-weight: 500; margin-bottom: var(--jt-s-2);
+}
+.jt-zaufanie span { display: block; font-size: var(--jt-fs-small); color: var(--jt-etykieta); }
+.jt-odwrocone .jt-zaufanie li + li { border-left-color: var(--jt-linia-jasna); }
+.jt-odwrocone .jt-zaufanie span { color: var(--jt-material); }
+.jt-zaufanie__prog {
+  margin-top: var(--jt-s-8); padding-top: var(--jt-s-5);
+  border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+  font-size: var(--jt-fs-lead); line-height: var(--jt-lh-lead); max-width: 44em;
+}
+.jt-odwrocone .jt-zaufanie__prog { border-top-color: var(--jt-linia-jasna); }
+@media (max-width: 767px) {
+  .jt-zaufanie { grid-template-columns: 1fr; }
+  .jt-zaufanie li { padding-right: 0; }
+  .jt-zaufanie li + li {
+    border-left: 0; padding-left: 0; margin-top: var(--jt-s-5);
+    padding-top: var(--jt-s-5); border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+  }
+  .jt-odwrocone .jt-zaufanie li + li { border-top-color: var(--jt-linia-jasna); }
+}
+
+/* --- blok usługi pełnej szerokości --------------------------------------- */
+.jt-usluga { padding-block: var(--jt-s-9); border-top: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-usluga:last-child { border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-usluga__nr {
+  display: block; font-family: var(--jt-font-mono); font-size: var(--jt-fs-label);
+  letter-spacing: .1em; color: var(--jt-etykieta); margin-bottom: var(--jt-s-4);
+}
+.jt-usluga__tytul {
+  font-size: var(--jt-fs-h2); line-height: var(--jt-lh-h);
+  font-weight: 400; letter-spacing: -.01em; margin-bottom: var(--jt-s-5);
+}
+.jt-usluga__lead {
+  font-size: var(--jt-fs-lead); line-height: var(--jt-lh-lead);
+  max-width: 32em; margin-bottom: var(--jt-s-5);
+}
+.jt-usluga__opis { max-width: 34em; margin-bottom: var(--jt-s-6); }
+.jt-usluga__etyk {
+  display: block; font-family: var(--jt-font-mono); font-size: var(--jt-fs-label);
+  letter-spacing: .16em; text-transform: uppercase; color: var(--jt-etykieta);
+  margin-bottom: var(--jt-s-4);
+}
+
+/* --- pas sprawy pilnej --------------------------------------------------- */
+.jt-pilna__pas { display: grid; grid-template-columns: 7fr 5fr; gap: var(--jt-rynna); align-items: center; }
+.jt-pilna__pas .jt-btny { justify-content: flex-end; }
+@media (max-width: 767px) {
+  .jt-pilna__pas { grid-template-columns: 1fr; }
+  .jt-pilna__pas .jt-btny { justify-content: flex-start; }
+}
+
+/* --- kolumny „dlaczego ja” ----------------------------------------------- */
+.jt-filary { display: grid; grid-template-columns: repeat(3, 1fr); }
+.jt-filar { padding-right: var(--jt-s-6); display: flex; flex-direction: column; }
+.jt-filar + .jt-filar { border-left: var(--jt-linia-grubosc) solid var(--jt-linia); padding-left: var(--jt-s-7); }
+.jt-filar h3 { margin-bottom: var(--jt-s-5); }
+.jt-filar p { margin-bottom: var(--jt-s-6); }
+.jt-filar .jt-link { margin-top: auto; align-self: flex-start; }
+@media (max-width: 1023px) {
+  .jt-filary { grid-template-columns: 1fr; }
+  .jt-filar { padding-right: 0; }
+  .jt-filar + .jt-filar {
+    border-left: 0; padding-left: 0; margin-top: var(--jt-s-8);
+    padding-top: var(--jt-s-8); border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+  }
+}
+
+/* wariant wierszowy filarów */
+.jt-filary--wiersze { display: block; }
+.jt-filary--wiersze .jt-filar {
+  display: grid; grid-template-columns: 4fr 8fr; gap: var(--jt-rynna);
+  padding: var(--jt-s-7) 0; border-left: 0 !important; border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+  margin: 0 !important;
+}
+.jt-filary--wiersze .jt-filar:last-child { border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-filary--wiersze .jt-filar h3 { margin-bottom: 0; }
+.jt-filary--wiersze .jt-filar p { margin-bottom: var(--jt-s-4); max-width: 34em; }
+@media (max-width: 767px) { .jt-filary--wiersze .jt-filar { grid-template-columns: 1fr; gap: var(--jt-s-4); } }
+
+/* --- kroki w wariancie wierszowym ---------------------------------------- */
+.jt-kroki--wiersze { display: block; }
+.jt-kroki--wiersze .jt-krok {
+  display: grid; grid-template-columns: 96px 4fr 8fr; gap: var(--jt-rynna); align-items: baseline;
+  padding: var(--jt-s-6) 0; border-left: 0 !important; padding-left: 0 !important;
+  border-top: var(--jt-linia-grubosc) solid var(--jt-linia);
+}
+.jt-kroki--wiersze .jt-krok:last-child { border-bottom: var(--jt-linia-grubosc) solid var(--jt-linia); }
+.jt-kroki--wiersze .jt-krok__nr {
+  font-size: var(--jt-fs-h2); margin: 0; padding: 0; border: 0;
+}
+.jt-kroki--wiersze .jt-krok h3 { margin: 0; }
+@media (max-width: 767px) {
+  .jt-kroki--wiersze .jt-krok { grid-template-columns: 1fr; gap: var(--jt-s-3); }
+}
+
+/* --- czego nie prowadzę --------------------------------------------------- */
+.jt-nie { display: grid; grid-template-columns: 5fr 7fr; gap: var(--jt-rynna); align-items: start; }
+@media (max-width: 767px) { .jt-nie { grid-template-columns: 1fr; } }
+
+/* --- kontakt: pas danych -------------------------------------------------- */
+.jt-kontakt__pas { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--jt-rynna); }
+@media (max-width: 767px) { .jt-kontakt__pas { grid-template-columns: 1fr; gap: var(--jt-s-7); } }
+
+/* --- oznaczenie faktów do potwierdzenia ---------------------------------- */
+[data-potwierdz] { position: relative; }
+body.jt-tryb-roboczy [data-potwierdz] {
+  background: rgba(138, 43, 30, .10);
+  box-shadow: 0 0 0 2px rgba(138, 43, 30, .10);
+}
+body.jt-tryb-roboczy [data-potwierdz]::after {
+  content: "?"; display: inline-block; margin-left: .35em;
+  font-family: var(--jt-font-mono); font-size: .75em; font-weight: 400;
+  color: var(--jt-blad); vertical-align: super;
+}
+
+/* ============================================================================
+   11. RÓŻNICE WŁAŚCIWEJ STRONY WZGLĘDEM KATALOGU
+   ========================================================================== */
+
+/* Nagłówek jest przyklejony. W katalogu pokazywaliśmy też wariant przezroczysty
+   na hero, ale przy przełączalnych hero nie da się go utrzymać przewidywalnie:
+   dwa z trzech wariantów nie mają pod spodem zdjęcia. Biały, przyklejony
+   nagłówek działa z każdym. */
+.jt-header { position: sticky; top: 0; }
+
+/* kotwice z menu nie mogą chować nagłówka pod przyklejonym paskiem */
+.jt-sek, [id] { scroll-margin-top: calc(var(--jt-naglowek-h) + 8px); }
+
+@media (prefers-reduced-motion: no-preference) {
+  html { scroll-behavior: smooth; }
+}
+
+/* panel menu wysuwany spod nagłówka */
+.jt-panel[hidden] { display: none; }
+
+/* Trzy zdania hero czytają się jako trzy osobne uderzenia, nie jako blok tekstu
+   — odstęp między nimi jest częścią przekazu. Na małym ekranie każde zdanie
+   zajmuje dwa wiersze, więc bez tego odstępu robi się ściana. */
+.jt-hero__tytul span + span { margin-top: .12em; }
+@media (max-width: 559px) {
+  .jt-hero--typo .jt-hero__tytul,
+  .jt-hero--dwa .jt-hero__tytul { font-size: 1.875rem; }
+  .jt-hero__tytul span + span { margin-top: .3em; }
+}
+
+/* W hero pełnoekranowym opis placeholdera musi trzymać się z dala od nagłówka,
+   który siedzi w lewym dolnym rogu. Docelowo jest tu <img> i problem znika. */
+.jt-hero--obraz .jt-foto { align-items: flex-start; justify-content: flex-end; }
+.jt-hero--obraz .jt-foto__opis { text-align: right; padding: var(--jt-s-8) var(--jt-szyna); }
+
+/* Pytanie FAQ jest nagłówkiem h3 opakowującym przycisk — wzorzec dostępny
+   i czytelny dla wyszukiwarek. Nagłówek nie wnosi własnej typografii. */
+.jt-faq__h { margin: 0; font: inherit; }

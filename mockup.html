@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cupiał-Kowalska — mockup strony głównej v2</title>
+  <meta name="description" content="Mockup strony głównej Kancelarii Adwokackiej Beaty Cupiał-Kowalskiej, wersja 2: dziewięć sekcji w dziewięciu różnych układach, z komentarzami.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ===== pasek mockupu (nie jest częścią strony) ===== -->
+  <div class="mock-pasek">
+    <div class="kontener">
+      <span><b>Mockup strony głównej · wersja 2 · 3 września 2026.</b> Ramki z kropką to notatki dla nas i klientki, nie element strony.</span>
+      <a href="design-system.html">Design system</a>
+    </div>
+  </div>
+
+  <header class="nav">
+    <div class="kontener nav__wnetrze">
+      <a class="marka" href="#gora" aria-label="Beata Cupiał-Kowalska, Adwokat, strona główna">
+        <svg class="marka__sygnet" viewBox="0 0 40 44" aria-hidden="true">
+          <polygon points="20,1.5 38,12 38,32 20,42.5 2,32 2,12" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <text x="20" y="29" text-anchor="middle" font-size="20">B</text>
+        </svg>
+        <span class="marka__nazwa"><b>Beata Cupiał-Kowalska</b><span>Adwokat</span></span>
+      </a>
+      <nav class="nav__menu" aria-label="Nawigacja główna">
+        <a href="#sytuacje">Sytuacje</a>
+        <a href="#zakres">Zakres spraw</a>
+        <a href="#o-mnie">O mnie</a>
+        <a href="#wspolpraca">Współpraca</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <div class="nav__akcje">
+        <a class="nav__tel" href="tel:+48534477596">534 477 596</a>
+        <a class="btn btn--pelny btn--maly" href="#kontakt">Umów spotkanie</a>
+        <button class="nav__burger" type="button" aria-label="Otwórz menu">
+          <svg width="20" height="14" viewBox="0 0 20 14" aria-hidden="true"><path d="M0 1h20M0 7h20M0 13h20" stroke="currentColor" stroke-width="1.5"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main id="gora">
+
+    <!-- ============ 01 HERO ============ -->
+    <section class="sekcja hero-sekcja">
+      <div class="kontener">
+        <aside class="nota nota--wstep">
+          <p class="nota__tytul">Wersja 2 · co się zmieniło</p>
+          <p>Wersja 1 była poprawna, ale wszystkie sekcje wyglądały tak samo: nagłówek, lead, siatka. Teraz <b>każda z dziewięciu sekcji ma inny układ</b>, przy tej samej palecie i tych samych regułach.</p>
+          <ul>
+            <li>Hero: zdjęcie wychodzi poza siatkę i dotyka prawej krawędzi ekranu, pod spodem pas trzech faktów zamiast osobnej sekcji.</li>
+            <li>Nowa sekcja <b>Sytuacje</b>: zdania z życia klienta zamiast nazw gałęzi prawa.</li>
+            <li>Zakres spraw: trzy wiodące obszary jako duże kafle, pozostałe pięć jako indeks w wierszach, zamiast ośmiu identycznych kwadratów.</li>
+            <li>O mnie: oś czasu z czterema datami i duży wyimek z hasłem kancelarii.</li>
+            <li>Nowy pas zdjęciowy na pełną szerokość jako oddech w połowie strony.</li>
+            <li>Pytania i kontakt: przyklejona szyna boczna z telefonem, mapa jako szeroki pas, dane w trzech kolumnach.</li>
+          </ul>
+        </aside>
+        <aside class="nota">
+          <p class="nota__tytul">Notatka · 01 Hero</p>
+          <p><b>Cel:</b> w trzy sekundy powiedzieć, kto to jest, dla kogo i co ma zrobić odwiedzający. Nagłówek jest przeróbką hasła klientki „Stoję na straży Twoich interesów". Dwa przyciski: umówienie spotkania i telefon, ten sam zestaw wraca na dole strony.</p>
+          <p><b>Od klientki:</b> portret z sesji (pion, światło dzienne) zamiast zdjęcia poglądowego; decyzja, czy piszemy „Ty" czy „Pani/Pan". <b>Wariant:</b> zamiast portretu wnętrze kancelarii, jeśli klientka nie chce twarzy na pierwszym ekranie.</p>
+        </aside>
+      </div>
+
+      <div class="hero">
+        <div class="hero__tekst">
+          <p class="etykieta">Kancelaria Adwokacka · Częstochowa</p>
+          <h1>Adwokat, który <em>stoi po Twojej stronie.</em></h1>
+          <p class="lead">Sprawy rodzinne, cywilne, spadkowe i karne. Kancelaria przy ul. Kilińskiego, w której każdą sprawę prowadzę osobiście.</p>
+          <div class="hero__akcje">
+            <a class="btn btn--pelny" href="#kontakt">Umów spotkanie
+              <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn btn--obrys liczby" href="tel:+48534477596">534 477 596</a>
+          </div>
+        </div>
+        <figure class="hero__foto">
+          <div class="foto"><img src="assets/hero.jpg" alt="Zdjęcie poglądowe: docelowo portret adwokat Beaty Cupiał-Kowalskiej" width="960" height="1200"></div>
+        </figure>
+      </div>
+
+      <div class="kontener">
+        <div class="mikrofakty" data-odslon>
+          <div class="mikrofakt"><b>Adwokat od 2017 roku</b><p>wpis na listę adwokatów przy Okręgowej Radzie Adwokackiej w Częstochowie</p></div>
+          <div class="mikrofakt"><b>Każdą sprawę prowadzę osobiście</b><p>od pierwszej rozmowy do zakończenia postępowania</p></div>
+          <div class="mikrofakt"><b>Spotkanie także poza godzinami</b><p>po wcześniejszym umówieniu telefonicznym</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 SYTUACJE ============ -->
+    <section class="sekcja pas" id="sytuacje">
+      <div class="kontener">
+        <aside class="nota">
+          <p class="nota__tytul">Notatka · 02 Sytuacje</p>
+          <p><b>Cel:</b> większość ludzi nie wie, czy ich sprawa to „prawo cywilne", czy „administracyjne". Ta sekcja mówi ich językiem: osiem zdań opisujących sytuację, każde prowadzi do właściwego obszaru. To najkrótsza droga od „mam problem" do „to sprawa dla adwokata".</p>
+          <p><b>Od klientki:</b> osiem sytuacji, z którymi klienci przychodzą najczęściej, opisanych jednym zdaniem. Poniżej propozycja na podstawie zakresu usług z obecnej strony, po jednym zdaniu na każdy obszar. <b>Wariant:</b> skrócenie do sześciu najczęstszych.</p>
+        </aside>
+        <div class="siatka-4-8">
+          <div class="sytuacje-szyna" data-odslon>
+            <h2>Nie wiesz, czy to sprawa <em>dla adwokata?</em></h2>
+            <p class="lead">Poniżej sytuacje, z którymi ludzie przychodzą do mnie najczęściej. Jeśli któraś brzmi znajomo, zadzwoń.</p>
+            <div class="foto foto--4-5"><img src="assets/detal.jpg" alt="Zdjęcie poglądowe: dokumenty na biurku w kancelarii" width="800" height="1000"></div>
+          </div>
+          <div class="sytuacje" data-odslon>
+            <a class="sytuacja" href="#zakres">
+              <span class="sytuacja__zdanie">Chcę się rozwieść, ale nie wiem, od czego zacząć.</span>
+              <span class="sytuacja__obszar">Prawo rodzinne
+                <svg class="strzalka" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <a class="sytuacja" href="#zakres">
+              <span class="sytuacja__zdanie">Dostałem pozew i mam dwa tygodnie na odpowiedź.</span>
+              <span class="sytuacja__obszar">Prawo cywilne
+                <svg class="strzalka" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <a class="sytuacja" href="#zakres">
+              <span class="sytuacja__zdanie">Rodzeństwo nie może się dogadać w sprawie spadku po rodzicach.</span>
+              <span class="sytuacja__obszar">Prawo spadkowe
+                <svg class="strzalka" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <a class="sytuacja" href="#zakres">
+              <span class="sytuacja__zdanie">Zwolnili mnie z dnia na dzień i nie wiem, czy zgodnie z prawem.</span>
+              <span class="sytuacja__obszar">Prawo pracy
+                <svg class="strzalka" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <a class="sytuacja" href="#zakres">
+              <span class="sytuacja__zdanie">Mam wezwanie na komisariat i boję się iść tam sam.</span>
+              <span class="sytuacja__obszar">Prawo karne
+                <svg class="strzalka" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <a class="sytuacja" href="#zakres">
+              <span class="sytuacja__zdanie">Ubezpieczyciel wypłacił połowę tego, co się należy.</span>
+              <span class="sytuacja__obszar">Odszkodowania
+                <svg class="strzalka" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <a class="sytuacja" href="#zakres">
+              <span class="sytuacja__zdanie">Mam podpisać umowę, której nie rozumiem.</span>
+              <span class="sytuacja__obszar">Umowy
+                <svg class="strzalka" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <a class="sytuacja" href="#zakres">
+              <span class="sytuacja__zdanie">Urząd odmówił mi zgody i nie wiem, czy warto się odwoływać.</span>
+              <span class="sytuacja__obszar">Postępowanie administracyjne
+                <svg class="strzalka" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 ZAKRES SPRAW ============ -->
+    <section class="sekcja" id="zakres">
+      <div class="kontener">
+        <aside class="nota">
+          <p class="nota__tytul">Notatka · 03 Zakres spraw</p>
+          <p><b>Cel:</b> formalna mapa praktyki, ale z hierarchią. Trzy wiodące obszary dostają duże kafle z chipami pod-usług, pozostałe pięć to indeks w wierszach. Dzięki temu widać, czym kancelaria zajmuje się na co dzień, a czym też, ale rzadziej. Osiem identycznych kwadratów z wersji 1 nie mówiło nic.</p>
+          <p><b>Od klientki:</b> potwierdzenie, które trzy obszary są wiodące. Na razie założyłem rodzinne, cywilne i spadkowe. Zmiana odpowiedzi zamienia kafle miejscami z wierszami indeksu.</p>
+        </aside>
+        <div class="naglowek-sekcji naglowek-sekcji--rozdzielony" data-odslon>
+          <div>
+            <p class="etykieta">Zakres spraw</p>
+            <h2>W czym mogę pomóc</h2>
+          </div>
+          <p class="lead" style="max-width:28em">Osiem obszarów, w których prowadzę sprawy przed sądami i urzędami. Trzy pierwsze to codzienność kancelarii.</p>
+        </div>
+        <div class="kafle kafle--wiodace" data-odslon>
+          <a class="kafel kafel--duzy" href="#">
+            <h3>Prawo rodzinne</h3>
+            <p>Rozwód, separacja, opieka nad dziećmi i podział wspólnego majątku. Sprawy, w których liczy się nie tylko wyrok, ale i to, jak się rozmawia.</p>
+            <div class="chipy"><span class="chip">rozwód</span><span class="chip">alimenty</span><span class="chip">podział majątku</span><span class="chip">kontakty z dzieckiem</span></div>
+            <span class="kafel__stopka">Więcej
+              <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+          <a class="kafel kafel--duzy" href="#">
+            <h3>Prawo cywilne</h3>
+            <p>Nieruchomości, umowy i spory, które trafiły już do sądu albo dopiero mogą tam trafić. Zaczynamy od tego, co da się załatwić bez procesu.</p>
+            <div class="chipy"><span class="chip">nieruchomości</span><span class="chip">zasiedzenie</span><span class="chip">współwłasność</span><span class="chip">najem</span></div>
+            <span class="kafel__stopka">Więcej
+              <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+          <a class="kafel kafel--duzy" href="#">
+            <h3>Prawo spadkowe</h3>
+            <p>Od stwierdzenia nabycia spadku po zachowek i podział majątku między spadkobierców. Także wtedy, gdy rodzina nie rozmawia ze sobą od lat.</p>
+            <div class="chipy"><span class="chip">nabycie spadku</span><span class="chip">dział spadku</span><span class="chip">zachowek</span><span class="chip">testament</span></div>
+            <span class="kafel__stopka">Więcej
+              <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </span>
+          </a>
+        </div>
+
+        <div class="indeks" data-odslon>
+          <a class="indeks__poz" href="#">
+            <b>Prawo karne</b>
+            <span>Obrona na każdym etapie postępowania oraz reprezentacja pokrzywdzonych i oskarżycieli posiłkowych.</span>
+            <svg class="strzalka" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="indeks__poz" href="#">
+            <b>Prawo pracy</b>
+            <span>Bezpodstawne zwolnienie, nadgodziny, mobbing i dyskryminacja, wypadki przy pracy.</span>
+            <svg class="strzalka" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="indeks__poz" href="#">
+            <b>Umowy</b>
+            <span>Przygotowanie i analiza umów, regulaminów i ogólnych warunków pod kątem ryzyka.</span>
+            <svg class="strzalka" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="indeks__poz" href="#">
+            <b>Postępowanie administracyjne</b>
+            <span>Prawo budowlane i zagospodarowanie przestrzenne, sprawy cudzoziemców, zamówienia publiczne.</span>
+            <svg class="strzalka" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="indeks__poz" href="#">
+            <b>Odszkodowania</b>
+            <span>Dochodzenie odszkodowań od ubezpieczycieli oraz sprawców szkód majątkowych i osobowych.</span>
+            <svg class="strzalka" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 O MNIE ============ -->
+    <section class="sekcja" id="o-mnie">
+      <div class="kontener">
+        <aside class="nota">
+          <p class="nota__tytul">Notatka · 04 O mnie</p>
+          <p><b>Cel:</b> pokazać człowieka, nie CV. Fakty z obecnej strony przepisane w pierwszej osobie, a pod nimi oś czasu: cztery daty, które naprawdę następują po sobie. Wyimek na końcu to własne hasło klientki ze slidera starej strony.</p>
+          <p><b>Od klientki:</b> drugie zdjęcie z sesji (przy biurku, w trakcie pracy), akceptacja drugiego akapitu i wyboru hasła. <b>Wariant:</b> zamiast wyimka krótka lista „Czym się nie zajmuję", jeśli klientka chce jasno odciąć część spraw.</p>
+        </aside>
+        <div class="omnie">
+          <figure class="omnie__foto" data-odslon>
+            <div class="foto foto--3-4"><img src="assets/o-mnie.jpg" alt="Zdjęcie poglądowe: docelowo adwokat przy biurku w kancelarii" width="900" height="1200"></div>
+            <figcaption class="podpis-foto"><span class="todo" title="Do zrobienia na sesji: portret przy biurku, pion 3:4">Docelowo portret przy biurku, w trakcie pracy.</span></figcaption>
+          </figure>
+          <div class="omnie__tekst" data-odslon>
+            <h2>Beata <span class="nowrap">Cupiał-Kowalska</span>, <em>adwokat</em></h2>
+            <div class="tekst">
+              <p>Jestem absolwentką Wydziału Prawa i Administracji Uniwersytetu Łódzkiego. Pracę magisterską z postępowania cywilnego obroniłam w 2013 roku, a od 2014 do 2016 roku odbywałam aplikację adwokacką przy Okręgowej Radzie Adwokackiej w Częstochowie.</p>
+              <p>Pracuję z osobami, które często po raz pierwszy mają do czynienia z sądem albo urzędem. Dlatego tłumaczę każdy krok zwykłym językiem i mówię wprost, jakie są szanse, ile to potrwa i ile będzie kosztować.</p>
+            </div>
+
+            <div class="osczasu">
+              <div class="osczasu__poz">
+                <span class="osczasu__rok liczby">2013</span>
+                <p>Dyplom Wydziału Prawa i Administracji Uniwersytetu Łódzkiego.</p>
+              </div>
+              <div class="osczasu__poz">
+                <span class="osczasu__rok liczby">2014–2016</span>
+                <p>Aplikacja adwokacka przy Okręgowej Radzie Adwokackiej w Częstochowie.</p>
+              </div>
+              <div class="osczasu__poz">
+                <span class="osczasu__rok liczby">2017</span>
+                <p>Egzamin adwokacki i wpis na listę adwokatów.</p>
+              </div>
+              <div class="osczasu__poz">
+                <span class="osczasu__rok">dziś</span>
+                <p>Własna kancelaria w centrum Częstochowy, przy ul. Kilińskiego.</p>
+              </div>
+            </div>
+
+            <blockquote class="wyimek">
+              Bronię Ciebie, kiedy czujesz się bezsilny.
+              <span class="wyimek__podpis">Hasło kancelarii</span>
+            </blockquote>
+
+            <p style="margin-top:1.75rem"><a class="link" href="#">Więcej o mnie</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 PAS FOTO ============ -->
+    <section class="pas-foto">
+      <div class="foto"><img src="assets/wnetrze.jpg" alt="Zdjęcie poglądowe: wnętrze kancelarii w świetle dziennym" width="1800" height="760"></div>
+      <div class="kontener">
+        <p class="podpis-foto">Kancelaria mieści się w lewej oficynie, na pierwszym piętrze, po prawej stronie. <span class="todo" title="Do zrobienia na sesji: zdjęcie wejścia do oficyny">Docelowo zdjęcie wejścia do budynku, żeby łatwiej było trafić.</span></p>
+      </div>
+    </section>
+
+    <!-- ============ 06 WSPÓŁPRACA ============ -->
+    <section class="sekcja pas" id="wspolpraca">
+      <div class="kontener">
+        <aside class="nota">
+          <p class="nota__tytul">Notatka · 06 Jak wygląda współpraca</p>
+          <p><b>Cel:</b> zdjąć strach przed pierwszym kontaktem. Cztery kroki, które naprawdę następują po sobie, dlatego mają numery i wspólną oś. Treść kroków jest propozycją opartą na tym, jak zwykle pracuje jednoosobowa kancelaria.</p>
+          <p><b>Od klientki:</b> jak faktycznie wygląda pierwsze spotkanie i czy chce pisać na stronie o zasadach rozliczenia. <b>Wariant:</b> pod krokami pas konkretów (czas odpowiedzi, forma rozliczenia, zasięg działania).</p>
+        </aside>
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Jak wygląda <em>współpraca</em></h2>
+          <p class="lead">Zanim cokolwiek zaczniemy, wiesz, czym się zajmę, ile to potrwa i na jakich zasadach się rozliczamy.</p>
+        </div>
+        <div class="kroki" data-odslon>
+          <div class="krok"><span class="krok__nr liczby">01</span><h3>Telefon albo wiadomość</h3><p>Opowiadasz w kilku zdaniach, co się dzieje. Ustalamy termin spotkania w kancelarii albo rozmowy telefonicznej.</p></div>
+          <div class="krok"><span class="krok__nr liczby">02</span><h3>Spotkanie</h3><p>Przeglądam dokumenty, zadaję pytania i mówię, jakie są możliwości oraz terminy, których trzeba pilnować.</p></div>
+          <div class="krok"><span class="krok__nr liczby">03</span><h3>Zakres i honorarium</h3><p>Ustalamy na piśmie, czym się zajmuję i na jakich zasadach się rozliczamy, zanim zacznę pracę.</p></div>
+          <div class="krok"><span class="krok__nr liczby">04</span><h3>Prowadzenie sprawy</h3><p>Dostajesz informację po każdym istotnym kroku. Nie musisz dopytywać, co się dzieje.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 PYTANIA ============ -->
+    <section class="sekcja" id="pytania">
+      <div class="kontener">
+        <aside class="nota">
+          <p class="nota__tytul">Notatka · 07 Pytania</p>
+          <p><b>Cel:</b> odpowiedzieć na to, o co ludzie dzwonią, zanim zadzwonią. Cztery odpowiedzi pochodzą z obecnej strony (umawianie, dojazd, godziny), piąta wymaga decyzji klientki i jest oznaczona brązowym podkreśleniem. W wersji 1 lewa kolumna świeciła pustką, teraz jest w niej numer telefonu, który jedzie razem ze scrollem.</p>
+          <p><b>Od klientki:</b> zasada rozliczenia pierwszej konsultacji i ewentualnie dwa własne pytania, które słyszy najczęściej. Maksymalnie sześć; reszta na podstronę.</p>
+        </aside>
+        <div class="siatka-4-8">
+          <div class="faq-szyna" data-odslon>
+            <h2>Pytania, które słyszę <em>najczęściej</em></h2>
+            <div class="szyna-karta">
+              <p>Nie znalazłeś swojego pytania? Zadzwoń, odpowiem od razu.</p>
+              <a class="link liczby" href="tel:+48534477596">534 477 596</a>
+            </div>
+          </div>
+          <div class="faq" data-odslon>
+            <details class="faq__poz" open>
+              <summary>Czy muszę wcześniej umówić spotkanie?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Tak, proszę o wcześniejszy telefon. Część czynności wykonuję poza siedzibą kancelarii, dlatego bez umówienia mogę być niedostępna.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Jak trafić do kancelarii?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Kancelaria mieści się przy ul. Kilińskiego 5 lok. 4 w Częstochowie, w lewej oficynie, na pierwszym piętrze, po prawej stronie.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Czy mogę spotkać się poza godzinami pracy?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Tak. Jeśli standardowe godziny nie pasują, ustalimy telefonicznie inny termin.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Co przygotować na pierwsze spotkanie?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Wszystkie dokumenty związane ze sprawą: umowy, pisma z sądu lub urzędu, korespondencję i krótką notatkę z datami. Dzięki temu od razu ocenię sytuację.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Ile kosztuje pierwsza rozmowa?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc"><mark class="todo" title="Do ustalenia z klientką: stawka albo zasada rozliczenia pierwszej konsultacji">Do ustalenia z klientką: stawka albo zasada rozliczenia pierwszej konsultacji.</mark></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 PAS ZACHĘTY ============ -->
+    <section class="sekcja zacheta">
+      <div class="kontener">
+        <aside class="nota">
+          <p class="nota__tytul">Notatka · 08 Pas zachęty</p>
+          <p><b>Cel:</b> drugi moment decyzji, dla tych, którzy przeczytali całą stronę. Te same dwa przyciski co w hero, żeby nie mnożyć wezwań. Zamiast ciemnego pasa (Stoch, Grubizna) głębszy piasek, a zamiast wyśrodkowania układ asymetryczny: zdanie po lewej, przyciski po prawej.</p>
+        </aside>
+        <div class="zacheta__siatka" data-odslon>
+          <div>
+            <h2>Porozmawiajmy o <em>Twojej sprawie</em></h2>
+            <p>Zadzwoń albo napisz. Powiem, czy i jak mogę pomóc oraz co warto zrobić w pierwszej kolejności. Pierwsza rozmowa niczego nie przesądza.</p>
+          </div>
+          <div class="zacheta__akcje">
+            <a class="btn btn--pelny" href="#kontakt">Umów spotkanie
+              <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+            <a class="btn btn--obrys liczby" href="tel:+48534477596">534 477 596</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 09 KONTAKT ============ -->
+    <section class="sekcja" id="kontakt">
+      <div class="kontener">
+        <aside class="nota">
+          <p class="nota__tytul">Notatka · 09 Kontakt</p>
+          <p><b>Cel:</b> wszystko, co potrzebne, żeby zadzwonić albo przyjść: adres z opisem dojazdu do oficyny, telefon, e-mail i godziny. Dane w całości z obecnej strony. Mapa jest teraz szerokim pasem pod danymi, a nie kwadratem obok nich. Bez formularza na stronie głównej: klientka woli telefon, formularz ląduje na podstronie Kontakt (komponent gotowy w design systemie).</p>
+          <p><b>Od klientki:</b> potwierdzenie godzin i decyzja, czy formularz ma być też tutaj.</p>
+        </aside>
+        <div class="naglowek-sekcji naglowek-sekcji--rozdzielony" data-odslon>
+          <div>
+            <p class="etykieta">Kontakt</p>
+            <h2>Kancelaria przy Kilińskiego</h2>
+          </div>
+          <a class="btn btn--obrys btn--maly" href="https://www.google.com/maps/search/?api=1&query=Kili%C5%84skiego+5+Cz%C4%99stochowa" target="_blank" rel="noopener">Otwórz w mapach</a>
+        </div>
+        <div class="kontakt-siatka" data-odslon>
+          <div class="kontakt-kol">
+            <h4>Adres</h4>
+            <p>ul. Kilińskiego 5 lok. 4<br>42-202 Częstochowa</p>
+            <p class="male drugorzedny">Lewa oficyna, pierwsze piętro, po prawej stronie.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Telefon i e-mail</h4>
+            <p class="liczby"><a href="tel:+48534477596">534 477 596</a></p>
+            <p><a href="mailto:kancelaria@cupial-kowalska.pl">kancelaria@cupial-kowalska.pl</a></p>
+            <p class="male drugorzedny">Proszę o wcześniejszy telefon: część czynności wykonuję poza siedzibą kancelarii.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Godziny</h4>
+            <table class="godziny" aria-label="Godziny otwarcia">
+              <tr><td>Poniedziałek</td><td>8:30 do 17:00</td></tr>
+              <tr><td>Wtorek</td><td>8:30 do 17:00</td></tr>
+              <tr><td>Środa</td><td>8:30 do 15:00</td></tr>
+              <tr><td>Czwartek</td><td>8:30 do 15:00</td></tr>
+              <tr><td>Piątek</td><td>po umówieniu</td></tr>
+            </table>
+            <p class="male drugorzedny" style="margin-top:.8rem">Spotkanie poza godzinami pracy jest możliwe po uzgodnieniu.</p>
+          </div>
+        </div>
+        <div class="mapa mapa--pas" data-odslon><span><b>Mapa Google</b>osadzona z pinezką na ul. Kilińskiego 5, na całą szerokość kontenera</span></div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ============ STOPKA ============ -->
+  <footer class="stopka">
+    <div class="kontener">
+      <div class="stopka__siatka">
+        <div>
+          <a class="marka" href="#gora" aria-label="Beata Cupiał-Kowalska, Adwokat">
+            <svg class="marka__sygnet" viewBox="0 0 40 44" aria-hidden="true">
+              <polygon points="20,1.5 38,12 38,32 20,42.5 2,32 2,12" fill="none" stroke="currentColor" stroke-width="1.5"/>
+              <text x="20" y="29" text-anchor="middle" font-size="20">B</text>
+            </svg>
+            <span class="marka__nazwa"><b>Beata Cupiał-Kowalska</b><span>Adwokat</span></span>
+          </a>
+          <p class="stopka__opis">Kancelaria Adwokacka w Częstochowie. Sprawy rodzinne, cywilne, spadkowe, karne, administracyjne i pracownicze.</p>
+        </div>
+        <div>
+          <h4>Zakres spraw</h4>
+          <ul>
+            <li><a href="#zakres">Prawo rodzinne</a></li>
+            <li><a href="#zakres">Prawo cywilne</a></li>
+            <li><a href="#zakres">Prawo spadkowe</a></li>
+            <li><a href="#zakres">Prawo karne</a></li>
+            <li><a href="#zakres">Prawo pracy</a></li>
+            <li><a href="#zakres">Umowy</a></li>
+            <li><a href="#zakres">Postępowanie administracyjne</a></li>
+            <li><a href="#zakres">Odszkodowania</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Kancelaria</h4>
+          <ul>
+            <li><a href="#o-mnie">O mnie</a></li>
+            <li><a href="#wspolpraca">Jak wygląda współpraca</a></li>
+            <li><a href="#pytania">Pytania</a></li>
+            <li><a href="#kontakt">Kontakt</a></li>
+            <li><a href="#">Polityka prywatności</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="stopka__prawna">
+        <span>© 2026 Adwokat Beata Cupiał-Kowalska · wpis na listę adwokatów Okręgowej Rady Adwokackiej w Częstochowie</span>
+        <a href="#">Polityka prywatności</a>
+      </div>
+    </div>
+  </footer>
+
+  <button class="mock-przelacznik" id="przelacznik" type="button" aria-pressed="false">Ukryj notatki</button>
+
+  <script>
+    (function () {
+      document.documentElement.classList.add("js");
+
+      /* przełącznik notatek (stan zapamiętany w przeglądarce) */
+      var btn = document.getElementById("przelacznik");
+      function ustaw(bez) {
+        document.body.classList.toggle("bez-notatek", bez);
+        btn.textContent = bez ? "Pokaż notatki" : "Ukryj notatki";
+        btn.setAttribute("aria-pressed", bez ? "true" : "false");
+        try { localStorage.setItem("ck-notatki", bez ? "0" : "1"); } catch (e) {}
+      }
+      var bez = false;
+      try { bez = localStorage.getItem("ck-notatki") === "0"; } catch (e) {}
+      ustaw(bez);
+      btn.addEventListener("click", function () { ustaw(!document.body.classList.contains("bez-notatek")); });
+
+      /* odsłanianie treści przy scrollu: raz, bez JS wszystko jest widoczne */
+      var cele = document.querySelectorAll("[data-odslon]");
+      var bezRuchu = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (bezRuchu || !("IntersectionObserver" in window)) {
+        cele.forEach(function (el) { el.classList.add("widoczne"); });
+        return;
+      }
+      var io = new IntersectionObserver(function (wpisy) {
+        wpisy.forEach(function (w) {
+          if (w.isIntersecting) { w.target.classList.add("widoczne"); io.unobserve(w.target); }
+        });
+      }, { rootMargin: "0px 0px -8% 0px" });
+      cele.forEach(function (el) { io.observe(el); });
+    })();
+  </script>
+</body>
+</html>

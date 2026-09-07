@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <!-- =====================================================================
+       SZABLON WPISU — plik do KLONOWANIA, nie zakładka.
+       Nie ma go w menu i nie ma go w stopce; site.js o nim nie wie.
+
+       NOWY WPIS = kopia tego pliku pod własną nazwą (np.
+       `wpis-ile-trwa-rozwod.html`) i podmiana SIEDMIU rzeczy:
+
+         1. <title> i <meta name="description">
+         2. data-okruszki — po pionowej kresce tytuł wpisu
+         3. h1.wpis-glowa__tytul — ten sam tytuł
+         4. p.naglowek-strony__podtytul — jedno zdanie wprowadzające
+         5. .wpis-meta — data, kategoria (link do grupy w archiwum), autor
+         6. .spis__lista + .wpis-tresc — spis treści i sama treść
+         7. .wpisy w sekcji „Przeczytaj też" — trzy inne wpisy
+
+       Potem jeszcze DWA miejsca poza tym plikiem:
+         · baza-wiedzy.html — nowy wiersz w odpowiedniej kategorii
+           (i licznik w nagłówku grupy oraz w chipie),
+         · jeśli wpis ma być najnowszy — sekcja 02 na tamtej stronie.
+
+       Treść poniżej to PRZYKŁAD pokazujący każdy element, jaki wpis może
+       zawierać: lead, śródtytuły h2 i h3, akapity, lista, wyimek, link
+       w toku zdania, wyróżnienie i zastrzeżenie na końcu. Nie jest to
+       tekst zatwierdzony przez klientkę.
+       ===================================================================== -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ile trwa rozwód i od czego to zależy · Adwokat Beata Cupiał-Kowalska</title>
+  <meta name="description" content="Co realnie decyduje o długości sprawy rozwodowej: zgoda stron, orzekanie o winie i sprawy dzieci. Wyjaśnia adwokat Beata Cupiał-Kowalska z Częstochowy.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+
+  <div data-nav></div>
+
+  <main id="gora">
+
+    <!-- ============ 01 · NAGŁÓWEK WPISU ============
+         Ta sama sekcja .naglowek-strony co na pozostałych podstronach.
+         Różnica jest w okruszkach: wpis nie jest zakładką, więc ścieżkę
+         podaje HTML — „Baza wiedzy" po lewej stronie kreski site.js zamieni
+         w link do archiwum, tytuł po prawej zostanie krokiem bieżącym. -->
+    <section class="naglowek-strony pas">
+      <div class="kontener">
+        <div data-okruszki="Baza wiedzy|Ile trwa rozwód"></div>
+
+        <h1 class="wpis-glowa__tytul">Ile trwa rozwód i od czego to naprawdę zależy</h1>
+        <p class="naglowek-strony__podtytul">Uczciwa odpowiedź brzmi: to zależy. Ale nie od przypadku — od trzech rzeczy, które da się nazwać już przy pierwszej rozmowie.</p>
+
+        <p class="wpis-meta">
+          <span><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data publikacji</span></span>
+          <span>Kategoria: <a href="baza-wiedzy.html#k-rodzinne">Rozwód i sprawy rodzinne</a></span>
+          <span><b>Beata Cupiał-Kowalska</b>, adwokat</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 02 · TREŚĆ WPISU ============
+         Układ 4-8: po lewej szyna ze spisem treści i kartą kontaktu
+         (przyklejona od 1025 px), po prawej sama treść w kolumnie 66 znaków.
+         Spis treści jest ręczny — każdy punkt to kotwica do h2 niżej.
+         Dodajesz śródtytuł, dodajesz mu id i wiersz w spisie. -->
+    <section class="sekcja biel">
+      <div class="kontener">
+        <div class="siatka-4-8">
+
+          <div class="wpis-szyna" data-odslon>
+            <div class="szyna-karta">
+              <p class="spis__tytul">W tym wpisie</p>
+              <ul class="spis__lista">
+                <li><a href="#co-decyduje">Co decyduje o terminie</a></li>
+                <li><a href="#za-zgoda">Rozwód, na który zgadzają się oboje</a></li>
+                <li><a href="#kiedy-dluzej">Kiedy sprawa się wydłuża</a></li>
+                <li><a href="#co-zrobic">Co możesz zrobić już teraz</a></li>
+              </ul>
+            </div>
+
+            <div class="szyna-karta">
+              <p>Chcesz wiedzieć, w którym scenariuszu jesteś? Powiedz mi przez telefon, jak wygląda Twoja sytuacja.</p>
+              <a class="link liczby" href="tel:+48534477596">534 477 596</a>
+            </div>
+          </div>
+
+          <article class="wpis-tresc" data-odslon>
+            <p class="lead">Pytanie o czas pada prawie w każdej pierwszej rozmowie o rozwodzie — i słusznie, bo od odpowiedzi zależy bardzo wiele decyzji: o mieszkaniu, o pracy, czasem o tym, komu i kiedy powiedzieć.</p>
+
+            <p>Nie da się podać jednej liczby, która byłaby uczciwa. Da się natomiast pokazać, co dokładnie przesuwa termin — i które z tych rzeczy leżą po Twojej stronie.</p>
+
+            <h2 id="co-decyduje">Co decyduje o terminie</h2>
+
+            <p>Na długość sprawy rozwodowej wpływają przede wszystkim trzy rzeczy. Reszta jest zwykle ich pochodną.</p>
+
+            <ul>
+              <li><strong>Zgoda co do samego rozwodu.</strong> Czy obie strony chcą rozwodu, czy jedna z nich będzie się mu sprzeciwiać.</li>
+              <li><strong>Wina.</strong> Czy sąd ma orzekać o tym, kto odpowiada za rozpad małżeństwa, czy strony z tego rezygnują.</li>
+              <li><strong>Dzieci.</strong> Czy jest porozumienie co do władzy rodzicielskiej, kontaktów i alimentów, czy trzeba to rozstrzygać w sądzie.</li>
+            </ul>
+
+            <p>Im więcej z tych trzech punktów jest uzgodnionych przed pierwszą rozprawą, tym krótsza sprawa. Każdy sporny punkt oznacza dowody, świadków i kolejne terminy.</p>
+
+            <h2 id="za-zgoda">Rozwód, na który zgadzają się oboje</h2>
+
+            <p>Rozwód bez orzekania o winie, gdy obie strony są zgodne, potrafi zamknąć się na jednej rozprawie. To najkrótszy z możliwych scenariuszy i nie jest wcale rzadki — częściej niż się wydaje ludzie dochodzą do wniosku, że nie mają sobie nic do udowodnienia.</p>
+
+            <h3>Co trzeba mieć przygotowane</h3>
+
+            <p>Żeby ten scenariusz był realny, przed rozprawą powinny być ustalone warunki dotyczące dzieci i sposób korzystania ze wspólnego mieszkania. Podział majątku nie musi być rozstrzygnięty w tej samej sprawie — i często lepiej, żeby nie był, bo potrafi ją wydłużyć o wiele miesięcy.</p>
+
+            <div class="wyimek">
+              Najkrótszy rozwód to nie ten, w którym ktoś odpuścił — tylko ten, w którym obie strony wiedziały wcześniej, czego chcą.
+            </div>
+
+            <h2 id="kiedy-dluzej">Kiedy sprawa się wydłuża</h2>
+
+            <p>Sprawa z orzekaniem o winie i sporem o dzieci to zwykle kwestia wielu miesięcy. Sąd musi przeprowadzić dowody: przesłuchać świadków, czasem dopuścić opinię biegłych. Każdy z tych kroków to osobny termin, a terminy zależą od obłożenia konkretnego sądu.</p>
+
+            <p>To nie znaczy, że walka o winę nigdy się nie opłaca — czasem ma znaczenie, o którym warto rozmawiać osobno. Znaczy tylko tyle, że decyzja o niej jest jednocześnie decyzją o czasie.</p>
+
+            <h2 id="co-zrobic">Co możesz zrobić już teraz</h2>
+
+            <p>Zanim złożysz pozew, zbierz dokumenty: odpis aktu małżeństwa, akty urodzenia dzieci i to, co dotyczy sytuacji majątkowej. Spisz też, co jest między Wami uzgodnione, a co nie — to zwykle pokazuje więcej niż długa rozmowa.</p>
+
+            <p>Po pierwszej rozmowie zwykle jestem w stanie powiedzieć, w którym z powyższych scenariuszy prawdopodobnie jesteś. Jeśli chcesz to sprawdzić, <a href="kontakt.html">napisz albo zadzwoń do kancelarii</a>.</p>
+
+            <!-- Zastrzeżenie zostaje w KAŻDYM wpisie, bez zmian. -->
+            <p class="akcent">Ten wpis wyjaśnia zagadnienie ogólnie i nie jest poradą prawną w konkretnej sprawie. O tym, co jest możliwe w Twojej sytuacji, decydują jej szczegóły — te omawiamy indywidualnie.</p>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 · PRZECZYTAJ TEŻ ============
+         Trzy inne wpisy — ten sam komponent .wpisy co w archiwum, więc
+         wiersz zachowuje się identycznie. Podmieniasz trzy pozycje. -->
+    <section class="sekcja">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--rozdzielony" data-odslon>
+          <h2>Przeczytaj <em>też</em></h2>
+          <p><a class="link" href="baza-wiedzy.html">Całe archiwum wpisów</a></p>
+        </div>
+
+        <ul class="wpisy" data-odslon>
+          <li>
+            <a class="wpis-poz" href="wpis-szablon.html">
+              <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+              <span class="wpis-poz__tytul">Rozwód z orzekaniem o winie czy bez</span>
+              <span class="wpis-poz__zajawka">Co daje orzeczenie o winie, ile kosztuje w czasie i w nerwach, i w których sytuacjach naprawdę ma znaczenie.</span>
+              <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="wpis-poz" href="wpis-szablon.html">
+              <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+              <span class="wpis-poz__tytul">Alimenty: co sąd bierze pod uwagę</span>
+              <span class="wpis-poz__zajawka">Usprawiedliwione potrzeby dziecka po jednej stronie, możliwości zarobkowe rodzica po drugiej.</span>
+              <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+          </li>
+          <li>
+            <a class="wpis-poz" href="wpis-szablon.html">
+              <span class="wpis-poz__data"><span class="todo" title="Do uzupełnienia: data publikacji wpisu">data</span></span>
+              <span class="wpis-poz__tytul">Mediacja czy sąd — czym różnią się w praktyce</span>
+              <span class="wpis-poz__zajawka">Kto decyduje o wyniku, ile to trwa i kiedy mediacja nie ma sensu.</span>
+              <span class="wpis-poz__strzalka"><svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 04 · KONTAKT ============
+         Domknięcie wpisu telefonem. Układ 5-7 występuje na tej stronie
+         tylko tutaj; .telefon-duzy stoi na stronie raz. -->
+    <section class="sekcja pas">
+      <div class="kontener">
+        <div class="siatka-5-7">
+          <div data-odslon>
+            <h2>Twoja sprawa ma <em>swoje szczegóły</em></h2>
+            <p class="lead">Ten wpis mówi o tym, co powtarza się w wielu rozwodach. O tym, co jest możliwe u Ciebie, rozstrzygają rzeczy, których nie ma w żadnym tekście.</p>
+          </div>
+
+          <div data-odslon>
+            <a class="telefon-duzy" href="tel:+48534477596">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              534 477 596
+            </a>
+            <p class="telefon-podpis">Jeśli nie odbieram, jestem na rozprawie. Oddzwonię tego samego dnia albo następnego rana.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+</body>
+</html>

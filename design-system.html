@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cupiał-Kowalska — Design System v2</title>
+  <meta name="description" content="Design system nowej strony Kancelarii Adwokackiej Beaty Cupiał-Kowalskiej, wersja 2: tokeny, typografia, dziewięć układów sekcji, komponenty, zdjęcia, ruch, zasady.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <style>
+    /* chrome samego dokumentu design systemu (nie należy do systemu strony) */
+    .ds-naglowek { padding: clamp(3rem, 6vw, 5rem) 0 clamp(2.5rem, 5vw, 4rem); border-bottom: 1px solid var(--linia); }
+    .ds-naglowek h1 { max-width: 14em; }
+    .ds-naglowek .lead { margin-top: 1.4rem; max-width: 44em; }
+    .ds-sekcja { padding-block: clamp(3.25rem, 6vw, 5rem); border-bottom: 1px solid var(--linia); }
+    .ds-sekcja > .kontener > h2 { margin-bottom: .75rem; }
+    .ds-sekcja > .kontener > h2 small { font-family: var(--font-ui); font-size: .8rem; font-weight: 600; letter-spacing: .14em; color: var(--braz); margin-right: .9rem; vertical-align: middle; }
+    .ds-opis { color: var(--umbra-2); max-width: 62ch; margin-bottom: 2.25rem; }
+    .ds-etykieta { font-family: var(--font-ui); font-size: var(--fs-label); font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: var(--umbra-2); margin: 2.5rem 0 1rem; }
+    .ds-etykieta:first-of-type { margin-top: 0; }
+    .ds-kod { font-family: Consolas, "Courier New", monospace; font-size: .8rem; color: var(--umbra-2); }
+    .ds-po { font-family: var(--font-ui); font-size: .88rem; color: var(--umbra-2); margin-top: 1rem; max-width: 62ch; }
+
+    .ds-odczyt { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; margin-top: 2.5rem; }
+    .ds-odczyt div { background: var(--krem); border: 1px solid var(--linia); border-radius: var(--r-karta); padding: 1.4rem 1.5rem; font-family: var(--font-ui); font-size: .92rem; line-height: 1.55; }
+    .ds-odczyt strong { display: block; margin-bottom: .4rem; font-weight: 600; }
+
+    .ds-probki { display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 1rem; }
+    .ds-probka { border: 1px solid var(--linia); border-radius: var(--r-karta); overflow: hidden; background: var(--krem); }
+    .ds-probka__kolor { height: 100px; border-bottom: 1px solid var(--linia); }
+    .ds-probka__tresc { padding: .9rem 1rem 1.1rem; font-family: var(--font-ui); font-size: .85rem; line-height: 1.5; }
+    .ds-probka__tresc b { display: block; font-weight: 600; margin-bottom: .2rem; }
+    .ds-probka__tresc p { color: var(--umbra-2); margin-top: .35rem; font-size: .82rem; }
+
+    .ds-pary { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+    .ds-para { padding: 1.4rem 1.5rem; border: 1px solid var(--linia); border-radius: var(--r-karta); font-family: var(--font-ui); }
+    .ds-para strong { display: block; font-size: 1.05rem; font-weight: 600; }
+    .ds-para span { font-size: .8rem; opacity: .85; }
+
+    .ds-typ { display: grid; grid-template-columns: 15rem minmax(0,1fr); gap: 2rem; align-items: baseline; padding-block: 1.6rem; border-top: 1px solid var(--linia); }
+    .ds-typ:last-of-type { border-bottom: 1px solid var(--linia); }
+
+    .ds-siatka-3 { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+    .ds-kafelek { background: var(--krem); border: 1px solid var(--linia); border-radius: var(--r-karta); padding: 1.3rem 1.4rem; font-family: var(--font-ui); font-size: .9rem; line-height: 1.5; }
+    .ds-kafelek strong { display: block; font-weight: 600; margin-bottom: .3rem; }
+    .ds-kafelek p { color: var(--umbra-2); }
+
+    .ds-demo { border: 1px solid var(--linia); border-radius: var(--r-karta); background: var(--krem); padding: clamp(1.5rem, 3vw, 2.5rem); display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; }
+    .ds-demo--blok { display: block; }
+    .ds-demo--pas { background: var(--piasek); }
+    .ds-demo--goly { padding: 0; border: 0; background: none; }
+    .ds-2kol { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 1rem; align-items: start; }
+
+    /* miniatury układów sekcji */
+    .ds-uklady { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+    .ds-uklad { border: 1px solid var(--linia); border-radius: var(--r-karta); background: var(--krem); overflow: hidden; }
+    .ds-uklad__rys { height: 120px; background: var(--len); border-bottom: 1px solid var(--linia); padding: 12px; display: grid; gap: 6px; }
+    .ds-uklad__tresc { padding: .9rem 1.1rem 1.1rem; font-family: var(--font-ui); font-size: .85rem; line-height: 1.5; }
+    .ds-uklad__tresc b { display: block; font-weight: 600; margin-bottom: .2rem; }
+    .ds-uklad__tresc p { color: var(--umbra-2); font-size: .82rem; }
+    .rys-blok { background: var(--piasek-2); border-radius: 2px; }
+    .rys-blok--jasny { background: var(--piasek); }
+    .rys-blok--braz { background: var(--braz-jasny); opacity: .55; }
+    .rys-linia { height: 1px; background: var(--linia-mocna); }
+
+    .ds-foto { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 1rem; }
+    .ds-foto figure { border: 1px solid var(--linia); border-radius: var(--r-karta); background: var(--krem); padding: .9rem; }
+    .ds-foto figcaption { font-family: var(--font-ui); font-size: .82rem; color: var(--umbra-2); margin-top: .75rem; line-height: 1.5; }
+    .ds-foto .foto--surowe img { filter: none; }
+    .ds-foto .foto--surowe::after { display: none; }
+
+    .ds-zasady { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .ds-zasady ul { border: 1px solid var(--linia); border-radius: var(--r-karta); background: var(--krem); padding: 1.5rem 1.6rem; }
+    .ds-zasady h3 { margin-bottom: .9rem; }
+    .ds-zasady li { position: relative; padding-left: 1.5rem; font-size: .95rem; margin-bottom: .6rem; color: var(--umbra-2); font-family: var(--font-ui); line-height: 1.5; }
+    .ds-zasady li::before { position: absolute; left: 0; font-weight: 600; }
+    .ds-tak li::before { content: "✓"; color: var(--braz); }
+    .ds-nie li::before { content: "✕"; color: var(--blad); }
+
+    .ds-tabela { width: 100%; border-collapse: collapse; font-family: var(--font-ui); font-size: .9rem; }
+    .ds-tabela th, .ds-tabela td { text-align: left; padding: .7rem .8rem; border-bottom: 1px solid var(--linia); vertical-align: top; line-height: 1.45; }
+    .ds-tabela th { font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2); font-weight: 600; }
+    .ds-tabela td:first-child { font-weight: 600; white-space: nowrap; }
+    .ds-przewijanie { overflow-x: auto; }
+
+    @media (max-width: 960px) {
+      .ds-probki, .ds-pary, .ds-uklady { grid-template-columns: repeat(2, minmax(0,1fr)); }
+      .ds-odczyt, .ds-siatka-3, .ds-foto { grid-template-columns: 1fr; }
+      .ds-typ { grid-template-columns: 1fr; gap: .5rem; }
+    }
+    @media (max-width: 700px) {
+      .ds-2kol { grid-template-columns: 1fr; }
+      .nav .btn--maly { display: none; }
+    }
+    @media (max-width: 600px) {
+      .ds-probki, .ds-pary, .ds-zasady, .ds-uklady { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="nav">
+    <div class="kontener nav__wnetrze">
+      <a class="marka" href="design-system.html" aria-label="Beata Cupiał-Kowalska, Adwokat">
+        <svg class="marka__sygnet" viewBox="0 0 40 44" aria-hidden="true">
+          <polygon points="20,1.5 38,12 38,32 20,42.5 2,32 2,12" fill="none" stroke="currentColor" stroke-width="1.5"/>
+          <text x="20" y="29" text-anchor="middle" font-size="20">B</text>
+        </svg>
+        <span class="marka__nazwa"><b>Beata Cupiał-Kowalska</b><span>Adwokat · design system</span></span>
+      </a>
+      <a class="btn btn--obrys btn--maly" href="mockup.html">Zobacz mockup strony głównej
+        <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ WSTĘP ============ -->
+    <section class="ds-naglowek">
+      <div class="kontener">
+        <p class="etykieta">Design system · wersja 2 · 3 września 2026</p>
+        <h1>Jasny len, spokojna typografia, <em>dziewięć różnych układów.</em></h1>
+        <p class="lead">Kierunek graficzny nowej strony Kancelarii Adwokackiej Beaty Cupiał-Kowalskiej.
+          Klientka chce jasno, beżowo i bez przepychu, a wygląd ma służyć treści. System stoi na trzech
+          rzeczach: ciepłej lnianej bazie bez ani jednej ciemnej sekcji, szeryfowym kroju w treści
+          i jednym brązowym akcencie ze złota z jej logo, używanym tylko tam, gdzie coś jest klikalne.
+          Wersja 2 dokłada czwartą: <strong>każda sekcja ma inny układ</strong>, bo strona bez ozdób
+          musi budować rytm kompozycją.</p>
+
+        <div class="ds-odczyt">
+          <div><strong>Odczyt briefu</strong>Strona kancelarii jednoosobowej dla klientów indywidualnych i małych firm z Częstochowy. Język ciepły i rzeczowy. Jedno zadanie strony: doprowadzić do telefonu albo umówienia spotkania.</div>
+          <div><strong>Pokrętła</strong>Wariancja układu 7 (asymetria i wykrwawienia, nadal bez sztuczek). Ruch 3 (hovery i jedno delikatne odsłonięcie). Gęstość 3 (dużo światła, dziewięć sekcji).</div>
+          <div><strong>Czym różnimy się od referencji</strong>Taczkowska: zimna biel, mono, 0 px. Stoch: papier, złota kursywa, ciemne akty. Grubizna: ciemna zieleń, neon. U nas: len, szeryf w treści, miękkie rogi, żadnej ciemnej sekcji, kolorowe zdjęcia w świetle dziennym.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CO ZMIENIŁA WERSJA 2 ============ -->
+    <section class="ds-sekcja" id="wersja-2">
+      <div class="kontener">
+        <h2><small>00</small>Co zmieniła wersja 2</h2>
+        <p class="ds-opis">Wersja 1 była poprawna, ale monotonna: każda sekcja to był nagłówek, lead i siatka równych kafli.
+          Paleta, kroje i reguły zostają bez zmian. Zmienia się kompozycja i to, ile informacji niosą struktury.</p>
+        <div class="ds-przewijanie">
+          <table class="ds-tabela">
+            <thead><tr><th>Sekcja</th><th>Wersja 1</th><th>Wersja 2</th></tr></thead>
+            <tbody>
+              <tr><td>Hero</td><td>Zwykły podział 7/5 wewnątrz kontenera.</td><td>Siatka nazwana: zdjęcie wychodzi poza kontener i dotyka prawej krawędzi ekranu, zaokrąglone tylko od lewej. Pod spodem pas trzech faktów zamiast osobnej sekcji.</td></tr>
+              <tr><td>Sytuacje</td><td>Nie było.</td><td>Nowa sekcja: szyna boczna ze zdjęciem plus wiersze zdań z życia klienta, każdy prowadzi do obszaru.</td></tr>
+              <tr><td>Zakres spraw</td><td>Osiem identycznych kafli w siatce 4 × 2.</td><td>Trzy wiodące obszary jako duże kafle z chipami, pozostałe pięć jako indeks w wierszach. Struktura pokazuje hierarchię praktyki.</td></tr>
+              <tr><td>O mnie</td><td>Zdjęcie po lewej, tekst po prawej.</td><td>Portret w węższej kolumnie z podpisem, oś czasu z czterema datami i wyimek z hasłem kancelarii.</td></tr>
+              <tr><td>Pas foto</td><td>Nie było.</td><td>Zdjęcie na pełną szerokość okna jako oddech w połowie strony, z podpisem pomagającym trafić do oficyny.</td></tr>
+              <tr><td>Współpraca</td><td>Cztery kolumny z małym numerem.</td><td>Oś z kropkami na linii i wielkimi numerami w brązie jasnym.</td></tr>
+              <tr><td>Pytania</td><td>Tytuł po lewej, akordeon po prawej, pusta kolumna.</td><td>Przyklejona szyna z tytułem i kartą z numerem telefonu, która jedzie razem ze scrollem.</td></tr>
+              <tr><td>Pas zachęty</td><td>Wyśrodkowany blok.</td><td>Układ asymetryczny: zdanie po lewej, przyciski po prawej, delikatna poświata w tle.</td></tr>
+              <tr><td>Kontakt</td><td>Dane po lewej, kwadrat mapy po prawej.</td><td>Trzy kolumny (adres, kontakt, godziny) i mapa jako szeroki pas pod spodem.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PALETA ============ -->
+    <section class="ds-sekcja" id="paleta">
+      <div class="kontener">
+        <h2><small>01</small>Paleta</h2>
+        <p class="ds-opis">Pięć jasnych płaszczyzn, dwa odcienie tekstu i jeden akcent. Nie ma czerni:
+          tekst to ciepła umbra. Strona chodzi po trzech tonach — biel, len, piasek — i to ich zmiana,
+          a nie ozdoby, dzieli ją na rozdziały. Biel jest ciepła (żółtawy podkład), nigdy <span class="ds-kod">#FFFFFF</span>:
+          zimna biel jest wykluczona przez klientkę. Brąz pojawia się tylko na linkach, przyciskach w stanie hover,
+          etykietach i monogramie. Nigdy jako tło sekcji.</p>
+
+        <div class="ds-probki">
+          <div class="ds-probka"><div class="ds-probka__kolor" style="background:#FDFCFA"></div><div class="ds-probka__tresc"><b>Biel <span class="ds-kod">#FDFCFA</span></b><p>Najjaśniejsza płaszczyzna: hero, podejście, pas foto, o mnie, kontakt i stopka, a na lnie także kafle i karty. Ciepła, nie <span class="ds-kod">#FFFFFF</span>.</p></div></div>
+          <div class="ds-probka"><div class="ds-probka__kolor" style="background:#F3EDE3"></div><div class="ds-probka__tresc"><b>Len <span class="ds-kod">#F3EDE3</span></b><p>Ton środkowy i tło dokumentu: zakres spraw, pytania. Ciepły, nie „chirurgiczny".</p></div></div>
+          <div class="ds-probka"><div class="ds-probka__kolor" style="background:#E9E0D0"></div><div class="ds-probka__tresc"><b>Piasek <span class="ds-kod">#E9E0D0</span></b><p>Pasy sekcji (sytuacje, współpraca), pola formularza, placeholdery zdjęć.</p></div></div>
+          <div class="ds-probka"><div class="ds-probka__kolor" style="background:#DFD4C0"></div><div class="ds-probka__tresc"><b>Piasek głęboki <span class="ds-kod">#DFD4C0</span></b><p>Pas zachęty, zaznaczenie tekstu, stany aktywne.</p></div></div>
+          <div class="ds-probka"><div class="ds-probka__kolor" style="background:#FAF7F1"></div><div class="ds-probka__tresc"><b>Krem <span class="ds-kod">#FAF7F1</span></b><p>Ton pośredni między bielią a lnem: pola formularza. Karty przeszły na biel.</p></div></div>
+          <div class="ds-probka"><div class="ds-probka__kolor" style="background:#3A2F27"></div><div class="ds-probka__tresc"><b>Umbra <span class="ds-kod">#3A2F27</span></b><p>Tekst podstawowy i przycisk główny. Brąz zamiast czerni: miękcej na lnie.</p></div></div>
+          <div class="ds-probka"><div class="ds-probka__kolor" style="background:#6A5E55"></div><div class="ds-probka__tresc"><b>Umbra jasna <span class="ds-kod">#6A5E55</span></b><p>Leady, opisy, podpisy. AA na lnie (5,1:1) i na piasku (4,8:1).</p></div></div>
+          <div class="ds-probka"><div class="ds-probka__kolor" style="background:#7E5E36"></div><div class="ds-probka__tresc"><b>Brąz <span class="ds-kod">#7E5E36</span></b><p>Akcent: linki, hover, etykiety, focus. Wyprowadzony ze złota logo <span class="ds-kod">#C19B69</span>, przyciemniony do AA (5,1:1).</p></div></div>
+          <div class="ds-probka"><div class="ds-probka__kolor" style="background:#B8955E"></div><div class="ds-probka__tresc"><b>Brąz jasny <span class="ds-kod">#B8955E</span></b><p>Wyłącznie dekoracja: monogram, kreska wyimka, wielkie numery kroków. Nigdy jako tekst do czytania.</p></div></div>
+        </div>
+
+        <p class="ds-etykieta">Pary kontrastów (WCAG)</p>
+        <div class="ds-pary">
+          <div class="ds-para" style="background:#F3EDE3;color:#3A2F27"><strong>Umbra na lnie</strong><span>tekst podstawowy · 13,6:1 · AAA</span></div>
+          <div class="ds-para" style="background:#E9E0D0;color:#6A5E55"><strong>Umbra jasna na piasku</strong><span>opisy na pasach · 4,8:1 · AA</span></div>
+          <div class="ds-para" style="background:#F3EDE3;color:#7E5E36"><strong>Brąz na lnie</strong><span>linki i etykiety · 5,1:1 · AA</span></div>
+          <div class="ds-para" style="background:#3A2F27;color:#F3EDE3;border-color:#3A2F27"><strong>Len na umbrze</strong><span>przycisk główny · 13,6:1 · AAA</span></div>
+          <div class="ds-para" style="background:#7E5E36;color:#FAF7F1;border-color:#7E5E36"><strong>Krem na brązie</strong><span>przycisk główny w hover · 5,5:1 · AA</span></div>
+          <div class="ds-para" style="background:#FAF7F1;color:#3A2F27"><strong>Umbra na kremie</strong><span>kafle i karty · 14,6:1 · AAA</span></div>
+        </div>
+
+        <p class="ds-etykieta">Zasady użycia koloru</p>
+        <div class="ds-siatka-3">
+          <div class="ds-kafelek"><strong>Żadnej ciemnej sekcji</strong><p>Brief klientki mówi „jasno". Rytm strony robią pasy piasku i zmiana układu, nie ciemne akty. Umbra jest tylko tekstem i przyciskiem.</p></div>
+          <div class="ds-kafelek"><strong>Brąz to przyprawa</strong><p>Jeśli coś jest brązowe, można to kliknąć albo jest to etykieta. Wyjątek: brąz jasny jako dekoracja w numerach kroków i kresce wyimka.</p></div>
+          <div class="ds-kafelek"><strong>Alternatywa jednym tokenem</strong><p>Jeżeli klientka woli oryginalne złoto z logo, wymieniamy <span class="ds-kod">--braz</span> na <span class="ds-kod">#8A6A3B</span>. Cały system działa dalej.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ TYPOGRAFIA ============ -->
+    <section class="ds-sekcja" id="typografia">
+      <div class="kontener">
+        <h2><small>02</small>Typografia</h2>
+        <p class="ds-opis">Dwa kroje w odwróconych rolach. <strong>Schibsted Grotesk</strong> (waga 500/600) prowadzi nagłówki,
+          nawigację, przyciski i etykiety: nowoczesny, lekko gazetowy grotesk. <strong>Source Serif 4</strong> składa
+          całą treść: leady, akapity, zdania w sekcji sytuacji, odpowiedzi w FAQ, biogram i wyimek. To odwrotność
+          typowego „szeryf w nagłówku", dzięki czemu strona czyta się jak dobrze złożony list, a nagłówki zostają
+          współczesne. Oba kroje są bezpłatne (Google Fonts, SIL OFL) i mają polskie znaki.</p>
+
+        <div class="ds-typ"><span class="ds-kod">H1 · Schibsted Grotesk 500<br>clamp(2.6rem, 5vw, 4.25rem) · 1.05</span><h1>Adwokat, który <em>stoi po Twojej stronie.</em></h1></div>
+        <div class="ds-typ"><span class="ds-kod">H2 · Schibsted Grotesk 500<br>clamp(1.9rem, 3.1vw, 2.7rem) · 1.12</span><h2>W czym mogę pomóc</h2></div>
+        <div class="ds-typ"><span class="ds-kod">H3 · Schibsted Grotesk 600<br>1.25rem · 1.3</span><h3>Prawo rodzinne</h3></div>
+        <div class="ds-typ"><span class="ds-kod">Etykieta · Schibsted Grotesk 600<br>.75rem · rozstrzelenie .14em · wersaliki</span><p class="etykieta" style="margin:0">Zakres spraw</p></div>
+        <div class="ds-typ"><span class="ds-kod">Lead · Source Serif 4 400<br>clamp(1.15rem, 1.4vw, 1.3rem) · 1.6</span><p class="lead">Sprawy rodzinne, cywilne, spadkowe i karne. Kancelaria, w której każdą sprawę prowadzę osobiście.</p></div>
+        <div class="ds-typ"><span class="ds-kod">Treść · Source Serif 4 400<br>1.0625rem (17 px) · 1.65</span><p class="tekst">Jestem absolwentką Wydziału Prawa i Administracji Uniwersytetu Łódzkiego. Od 2017 roku jestem wpisana na listę adwokatów przy Okręgowej Radzie Adwokackiej w Częstochowie i prowadzę własną kancelarię.</p></div>
+        <div class="ds-typ"><span class="ds-kod">Wyimek · Source Serif 4 kursywa<br>clamp(1.45rem, 2.5vw, 2.05rem) · 1.32</span><blockquote class="wyimek" style="margin-top:0">Bronię Ciebie, kiedy czujesz się bezsilny.<span class="wyimek__podpis">Hasło kancelarii</span></blockquote></div>
+        <div class="ds-typ"><span class="ds-kod">UI · Schibsted Grotesk 500<br>.95rem · przyciski, menu, podpisy</span><p class="ui" style="font-weight:500">Umów spotkanie · Zakres spraw · Otwórz w mapach</p></div>
+        <div class="ds-typ"><span class="ds-kod">Liczby · tabular-nums<br>godziny, telefony, daty, numery kroków</span><p class="ui liczby" style="font-weight:500">534 477 596 · 8:30 do 17:00 · 2014–2016 · 42-202 Częstochowa</p></div>
+
+        <p class="ds-etykieta">Reguły</p>
+        <div class="ds-siatka-3">
+          <div class="ds-kafelek"><strong>Akcent w nagłówku to tylko kolor</strong><p>Wyróżniona fraza w H1 lub H2 dostaje brąz. Bez kursywy i bez zmiany kroju. Maksymalnie jedna fraza na nagłówek i nie w każdym nagłówku.</p></div>
+          <div class="ds-kafelek"><strong>Etykiety racjonowane</strong><p>Małe rozstrzelone wersaliki nad nagłówkiem pojawiają się najwyżej trzy razy na stronie głównej: hero, zakres spraw, kontakt. Reszta sekcji zaczyna się od H2.</p></div>
+          <div class="ds-kafelek"><strong>Szerokość wiersza</strong><p>Treść do 62 znaków w wierszu (klasa <span class="ds-kod">.tekst</span>), lead do 36 em, wyimek do 20 em. Nagłówki z <span class="ds-kod">text-wrap: balance</span>.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ UKŁADY SEKCJI ============ -->
+    <section class="ds-sekcja" id="uklady">
+      <div class="kontener">
+        <h2><small>03</small>Dziewięć układów sekcji</h2>
+        <p class="ds-opis">Najważniejsza reguła wersji 2: <strong>żaden układ nie powtarza się na stronie głównej</strong>.
+          Strona bez cieni, gradientów i ozdób buduje rytm wyłącznie kompozycją, więc każda sekcja musi
+          inaczej dzielić przestrzeń. Poniżej dziewięć schematów w kolejności ze strony.</p>
+        <div class="ds-uklady">
+          <div class="ds-uklad">
+            <div class="ds-uklad__rys" style="grid-template-columns:1.2fr .8fr; margin-right:-12px">
+              <div style="display:grid;gap:6px;align-content:center"><div class="rys-blok" style="height:14px"></div><div class="rys-blok rys-blok--jasny" style="height:8px"></div><div class="rys-blok rys-blok--braz" style="height:12px;width:60%"></div></div>
+              <div class="rys-blok" style="border-radius:2px 0 0 2px"></div>
+            </div>
+            <div class="ds-uklad__tresc"><b>01 · Hero</b><p>Tekst w siatce, zdjęcie wykrwawione do prawej krawędzi ekranu. Pod spodem pas trzech faktów.</p></div>
+          </div>
+          <div class="ds-uklad">
+            <div class="ds-uklad__rys" style="grid-template-columns:.9fr 2fr">
+              <div style="display:grid;gap:6px"><div class="rys-blok" style="height:10px"></div><div class="rys-blok rys-blok--jasny"></div></div>
+              <div style="display:grid;gap:5px;align-content:start"><div class="rys-linia"></div><div class="rys-blok rys-blok--jasny" style="height:9px"></div><div class="rys-linia"></div><div class="rys-blok rys-blok--jasny" style="height:9px"></div><div class="rys-linia"></div><div class="rys-blok rys-blok--jasny" style="height:9px"></div><div class="rys-linia"></div></div>
+            </div>
+            <div class="ds-uklad__tresc"><b>02 · Sytuacje</b><p>Szyna boczna ze zdjęciem plus wiersze zdań oddzielone liniami.</p></div>
+          </div>
+          <div class="ds-uklad">
+            <div class="ds-uklad__rys" style="grid-template-rows:1.4fr 1fr">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px"><div class="rys-blok rys-blok--jasny"></div><div class="rys-blok rys-blok--jasny"></div><div class="rys-blok rys-blok--jasny"></div></div>
+              <div style="display:grid;gap:5px;align-content:start"><div class="rys-linia"></div><div class="rys-blok" style="height:6px;width:70%"></div><div class="rys-linia"></div><div class="rys-blok" style="height:6px;width:55%"></div><div class="rys-linia"></div></div>
+            </div>
+            <div class="ds-uklad__tresc"><b>03 · Zakres spraw</b><p>Trzy duże kafle wiodących obszarów i indeks pozostałych pięciu w wierszach.</p></div>
+          </div>
+          <div class="ds-uklad">
+            <div class="ds-uklad__rys" style="grid-template-columns:.8fr 1.4fr">
+              <div class="rys-blok rys-blok--jasny" style="height:80%"></div>
+              <div style="display:grid;gap:6px;align-content:start"><div class="rys-blok" style="height:10px"></div><div class="rys-blok rys-blok--jasny" style="height:22px"></div><div style="display:grid;grid-template-columns:repeat(4,1fr);gap:4px"><div class="rys-blok rys-blok--braz" style="height:8px"></div><div class="rys-blok rys-blok--braz" style="height:8px"></div><div class="rys-blok rys-blok--braz" style="height:8px"></div><div class="rys-blok rys-blok--braz" style="height:8px"></div></div></div>
+            </div>
+            <div class="ds-uklad__tresc"><b>04 · O mnie</b><p>Portret w węższej kolumnie, tekst, oś czasu z czterema datami, wyimek.</p></div>
+          </div>
+          <div class="ds-uklad">
+            <div class="ds-uklad__rys" style="padding:0;display:block">
+              <div class="rys-blok" style="height:100%;border-radius:0"></div>
+            </div>
+            <div class="ds-uklad__tresc"><b>05 · Pas foto</b><p>Zdjęcie na pełną szerokość okna, bez marginesów i bez zaokrągleń. Oddech w połowie strony.</p></div>
+          </div>
+          <div class="ds-uklad">
+            <div class="ds-uklad__rys" style="grid-template-rows:auto 1fr;align-content:center">
+              <div class="rys-linia" style="background:var(--linia-mocna)"></div>
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;align-content:start;padding-top:6px"><div style="display:grid;gap:4px"><div class="rys-blok rys-blok--braz" style="height:14px;width:60%"></div><div class="rys-blok rys-blok--jasny" style="height:6px"></div></div><div style="display:grid;gap:4px"><div class="rys-blok rys-blok--braz" style="height:14px;width:60%"></div><div class="rys-blok rys-blok--jasny" style="height:6px"></div></div><div style="display:grid;gap:4px"><div class="rys-blok rys-blok--braz" style="height:14px;width:60%"></div><div class="rys-blok rys-blok--jasny" style="height:6px"></div></div><div style="display:grid;gap:4px"><div class="rys-blok rys-blok--braz" style="height:14px;width:60%"></div><div class="rys-blok rys-blok--jasny" style="height:6px"></div></div></div>
+            </div>
+            <div class="ds-uklad__tresc"><b>06 · Współpraca</b><p>Oś czterech kroków: kropki na wspólnej linii, wielkie numery w brązie jasnym.</p></div>
+          </div>
+          <div class="ds-uklad">
+            <div class="ds-uklad__rys" style="grid-template-columns:.9fr 2fr">
+              <div style="display:grid;gap:6px;align-content:start"><div class="rys-blok" style="height:12px"></div><div class="rys-blok rys-blok--jasny" style="height:34px"></div></div>
+              <div style="display:grid;gap:6px;align-content:start"><div class="rys-linia"></div><div class="rys-blok rys-blok--jasny" style="height:8px"></div><div class="rys-linia"></div><div class="rys-blok rys-blok--jasny" style="height:8px"></div><div class="rys-linia"></div><div class="rys-blok rys-blok--jasny" style="height:8px"></div></div>
+            </div>
+            <div class="ds-uklad__tresc"><b>07 · Pytania</b><p>Przyklejona szyna z tytułem i telefonem, akordeon w szerokiej kolumnie.</p></div>
+          </div>
+          <div class="ds-uklad">
+            <div class="ds-uklad__rys" style="grid-template-columns:1.4fr 1fr;align-items:end;background:var(--piasek-2)">
+              <div style="display:grid;gap:6px"><div class="rys-blok" style="height:14px"></div><div class="rys-blok rys-blok--jasny" style="height:8px;width:80%"></div></div>
+              <div style="display:grid;gap:6px;align-content:end"><div class="rys-blok" style="height:12px"></div><div class="rys-blok rys-blok--jasny" style="height:12px"></div></div>
+            </div>
+            <div class="ds-uklad__tresc"><b>08 · Pas zachęty</b><p>Głębszy piasek, układ asymetryczny: zdanie po lewej, przyciski po prawej.</p></div>
+          </div>
+          <div class="ds-uklad">
+            <div class="ds-uklad__rys" style="grid-template-rows:auto 1fr">
+              <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px"><div style="display:grid;gap:4px"><div class="rys-blok" style="height:6px;width:50%"></div><div class="rys-blok rys-blok--jasny" style="height:14px"></div></div><div style="display:grid;gap:4px"><div class="rys-blok" style="height:6px;width:50%"></div><div class="rys-blok rys-blok--jasny" style="height:14px"></div></div><div style="display:grid;gap:4px"><div class="rys-blok" style="height:6px;width:50%"></div><div class="rys-blok rys-blok--jasny" style="height:14px"></div></div></div>
+              <div class="rys-blok rys-blok--jasny" style="margin-top:6px"></div>
+            </div>
+            <div class="ds-uklad__tresc"><b>09 · Kontakt</b><p>Trzy kolumny danych i mapa jako szeroki pas pod spodem.</p></div>
+          </div>
+        </div>
+
+        <p class="ds-etykieta">Rytm i siatka</p>
+        <div class="ds-siatka-3">
+          <div class="ds-kafelek"><strong>Kontener</strong><p>max-width 1200 px · padding boczny clamp(1.25rem, 4vw, 3rem). Token <span class="ds-kod">--kontener-tresc</span> trzyma szerokość samej treści.</p></div>
+          <div class="ds-kafelek"><strong>Wykrwawienie w prawo</strong><p>Hero używa siatki z nazwanymi liniami, w której skrajne kolumny <span class="ds-kod">1fr</span> równają się marginesom kontenera. Zero obliczeń na <span class="ds-kod">100vw</span>, więc nie ma poziomego przewijania.</p></div>
+          <div class="ds-kafelek"><strong>Sekcje</strong><p>padding-block clamp(4.5rem, 8vw, 7.5rem). Ta sama płaszczyzna dwa razy pod rząd: górny padding znika. Przy zmianie tonu odstęp zostaje pełny, żeby treść nie zaczynała się na krawędzi koloru.</p></div>
+          <div class="ds-kafelek"><strong>Rytm trzech tonów</strong><p>Biel → len → piasek i z powrotem, nigdy dwa te same pod rząd. Biel bierze hero, podejście z pasem foto, o mnie oraz kontakt ze stopką; piasek — mediacje, zaufanie i atuty.</p></div>
+          <div class="ds-kafelek"><strong>Kształt</strong><p>Karty, kafle, zdjęcia, mapa: 8 px. Przyciski, pola, chipy: 6 px. Zdjęcia wykrwawione: zaokrąglone tylko od strony treści.</p></div>
+          <div class="ds-kafelek"><strong>Cienie</strong><p>Brak. Hierarchię robi tło (krem na lnie), linia i światło. Jedyny cień: pływający przełącznik notatek w mockupie.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ KOMPONENTY ============ -->
+    <section class="ds-sekcja" id="komponenty">
+      <div class="kontener">
+        <h2><small>04</small>Komponenty</h2>
+        <p class="ds-opis">Wszystko poniżej jest „żywe": ten sam arkusz <span class="ds-kod">css/styles.css</span> napędza mockup strony głównej.</p>
+
+        <p class="ds-etykieta">Przyciski i link</p>
+        <div class="ds-demo">
+          <a class="btn btn--pelny" href="#">Umów spotkanie
+            <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </a>
+          <a class="btn btn--obrys liczby" href="tel:+48534477596">534 477 596</a>
+          <a class="btn btn--obrys btn--maly" href="#">Otwórz w mapach</a>
+          <a class="link" href="#">Więcej o mnie</a>
+        </div>
+        <p class="ds-po">Jedna intencja, jedna etykieta: „Umów spotkanie" w nawigacji, w hero i w pasie zachęty brzmi identycznie. Drugi przycisk to zawsze numer telefonu.</p>
+
+        <p class="ds-etykieta">Kafel wiodącego obszaru i wiersz indeksu</p>
+        <div class="ds-demo ds-demo--goly">
+          <div class="kafle ds-2kol" style="max-width:44rem">
+            <a class="kafel kafel--duzy" href="#">
+              <h3>Prawo spadkowe</h3>
+              <p>Od stwierdzenia nabycia spadku po zachowek i podział majątku między spadkobierców.</p>
+              <div class="chipy"><span class="chip">zachowek</span><span class="chip">dział spadku</span><span class="chip">testament</span></div>
+              <span class="kafel__stopka">Więcej
+                <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <div class="indeks" style="margin-top:0">
+              <a class="indeks__poz" href="#" style="grid-template-columns:minmax(0,1fr) 1.5rem">
+                <b>Prawo pracy</b>
+                <svg class="strzalka" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="grid-column:1/2">Bezpodstawne zwolnienie, nadgodziny, mobbing i dyskryminacja, wypadki przy pracy.</span>
+              </a>
+              <a class="indeks__poz" href="#" style="grid-template-columns:minmax(0,1fr) 1.5rem">
+                <b>Umowy</b>
+                <svg class="strzalka" width="15" height="15" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                <span style="grid-column:1/2">Przygotowanie i analiza umów, regulaminów i ogólnych warunków pod kątem ryzyka.</span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <p class="ds-po">Kafel dostają tylko obszary wiodące. Reszta to wiersze indeksu, które przy najechaniu przesuwają się o pół rem w prawo. Struktura niesie informację: co jest codziennością kancelarii, a co uzupełnieniem.</p>
+
+        <p class="ds-etykieta">Wiersz sytuacji</p>
+        <div class="ds-demo ds-demo--pas ds-demo--blok">
+          <div class="sytuacje">
+            <a class="sytuacja" href="#">
+              <span class="sytuacja__zdanie">Zwolnili mnie z dnia na dzień i nie wiem, czy zgodnie z prawem.</span>
+              <span class="sytuacja__obszar">Prawo pracy
+                <svg class="strzalka" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+            <a class="sytuacja" href="#">
+              <span class="sytuacja__zdanie">Rodzeństwo nie może się dogadać w sprawie spadku po rodzicach.</span>
+              <span class="sytuacja__obszar">Prawo spadkowe
+                <svg class="strzalka" width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </span>
+            </a>
+          </div>
+        </div>
+        <p class="ds-po">Zdanie w szeryfie, obszar w grotesku i brązie. Klient rozpoznaje sytuację, a nie nazwę gałęzi prawa.</p>
+
+        <p class="ds-etykieta">Pas mikrofaktów, oś czasu, krok współpracy</p>
+        <div class="ds-demo ds-demo--blok">
+          <div class="mikrofakty" style="margin-top:0">
+            <div class="mikrofakt"><b>Adwokat od 2017 roku</b><p>wpis na listę adwokatów przy Okręgowej Radzie Adwokackiej w Częstochowie</p></div>
+            <div class="mikrofakt"><b>Każdą sprawę prowadzę osobiście</b><p>od pierwszej rozmowy do zakończenia postępowania</p></div>
+            <div class="mikrofakt"><b>Spotkanie także poza godzinami</b><p>po wcześniejszym umówieniu telefonicznym</p></div>
+          </div>
+          <div class="osczasu" style="margin-top:2.5rem">
+            <div class="osczasu__poz"><span class="osczasu__rok liczby">2013</span><p>Dyplom Wydziału Prawa i Administracji Uniwersytetu Łódzkiego.</p></div>
+            <div class="osczasu__poz"><span class="osczasu__rok liczby">2014–2016</span><p>Aplikacja adwokacka przy Okręgowej Radzie Adwokackiej w Częstochowie.</p></div>
+            <div class="osczasu__poz"><span class="osczasu__rok liczby">2017</span><p>Egzamin adwokacki i wpis na listę adwokatów.</p></div>
+            <div class="osczasu__poz"><span class="osczasu__rok">dziś</span><p>Własna kancelaria w centrum Częstochowy.</p></div>
+          </div>
+          <div class="kroki" style="margin-top:2.5rem;grid-template-columns:repeat(2,minmax(0,1fr))">
+            <div class="krok"><span class="krok__nr liczby">02</span><h3>Spotkanie</h3><p>Przeglądam dokumenty, zadaję pytania i mówię, jakie są możliwości oraz terminy.</p></div>
+            <div class="krok"><span class="krok__nr liczby">03</span><h3>Zakres i honorarium</h3><p>Ustalamy na piśmie, czym się zajmuję i na jakich zasadach się rozliczamy.</p></div>
+          </div>
+        </div>
+        <p class="ds-po">Trzy warianty tej samej idei: rząd elementów pod wspólną linią. Numery i daty są dozwolone tylko wtedy, gdy niosą prawdziwą kolejność. Mikrofakty jej nie mają, więc nie mają numerów.</p>
+
+        <p class="ds-etykieta">Karta szyny i pytanie FAQ</p>
+        <div class="ds-demo ds-demo--goly ds-2kol">
+          <div class="ds-demo ds-demo--blok">
+            <div class="szyna-karta">
+              <p>Nie znalazłeś swojego pytania? Zadzwoń, odpowiem od razu.</p>
+              <a class="link liczby" href="tel:+48534477596">534 477 596</a>
+            </div>
+          </div>
+          <div class="ds-demo ds-demo--blok">
+            <div class="faq">
+              <details class="faq__poz" open>
+                <summary>Czy muszę wcześniej umówić spotkanie?
+                  <span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span>
+                </summary>
+                <div class="faq__tresc">Tak, proszę o wcześniejszy telefon. Część czynności wykonuję poza siedzibą kancelarii.</div>
+              </details>
+              <details class="faq__poz">
+                <summary>Jak trafić do kancelarii?
+                  <span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span>
+                </summary>
+                <div class="faq__tresc">Ul. Kilińskiego 5 lok. 4, lewa oficyna, pierwsze piętro, po prawej stronie.</div>
+              </details>
+            </div>
+          </div>
+        </div>
+
+        <p class="ds-etykieta">Pola formularza</p>
+        <div class="ds-demo ds-demo--blok">
+          <div class="ds-2kol" style="max-width:40rem">
+            <label class="pole">
+              <span class="pole__etykieta">Imię i nazwisko</span>
+              <input class="pole__wejscie" type="text" placeholder="Anna Nowak">
+            </label>
+            <div class="pole pole--blad">
+              <label class="pole__etykieta" for="ds-tel">Telefon</label>
+              <input class="pole__wejscie" id="ds-tel" type="tel" value="534 477" aria-describedby="ds-tel-blad">
+              <span class="pole__blad" id="ds-tel-blad">Numer jest za krótki. Wpisz 9 cyfr.</span>
+            </div>
+          </div>
+          <label class="zgoda" style="margin-top:1rem;max-width:40rem"><input type="checkbox"> Wyrażam zgodę na przetwarzanie moich danych w celu odpowiedzi na zapytanie. Wszystko, co napiszesz, jest objęte tajemnicą adwokacką.</label>
+        </div>
+        <p class="ds-po">Etykieta nad polem, błąd pod polem, placeholder nigdy jako etykieta. Czerwień błędu <span class="ds-kod">#9A3B2E</span> to jedyny kolor spoza palety i pojawia się wyłącznie tu. Formularz stoi na podstronie Kontakt, nie na stronie głównej.</p>
+
+        <p class="ds-etykieta">Kontakt: trzy kolumny i godziny</p>
+        <div class="ds-demo ds-demo--blok">
+          <div class="kontakt-siatka" style="border-top:0;padding-top:0">
+            <div class="kontakt-kol">
+              <h4>Adres</h4>
+              <p>ul. Kilińskiego 5 lok. 4<br>42-202 Częstochowa</p>
+              <p class="male drugorzedny">Lewa oficyna, pierwsze piętro, po prawej stronie.</p>
+            </div>
+            <div class="kontakt-kol">
+              <h4>Telefon i e-mail</h4>
+              <p class="liczby"><a href="tel:+48534477596">534 477 596</a></p>
+              <p><a href="mailto:kancelaria@cupial-kowalska.pl">kancelaria@cupial-kowalska.pl</a></p>
+            </div>
+            <div class="kontakt-kol">
+              <h4>Godziny</h4>
+              <table class="godziny">
+                <tr><td>Poniedziałek</td><td>8:30 do 17:00</td></tr>
+                <tr><td>Środa</td><td>8:30 do 15:00</td></tr>
+                <tr><td>Piątek</td><td>po umówieniu</td></tr>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        <p class="ds-etykieta">Notatka do mockupu</p>
+        <div class="ds-demo ds-demo--goly">
+          <aside class="nota" style="margin:0;max-width:44rem">
+            <p class="nota__tytul">Notatka · 03 Zakres spraw</p>
+            <p>Tak wyglądają komentarze w mockupie strony głównej. Nie są częścią strony: opisują cel sekcji, treść, którą ma dostarczyć klientka, i możliwe warianty. Przełącznik w prawym dolnym rogu chowa je wszystkie.</p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ZDJĘCIA ============ -->
+    <section class="ds-sekcja" id="zdjecia">
+      <div class="kontener">
+        <h2><small>05</small>Zdjęcia</h2>
+        <p class="ds-opis">Fotografia jest kolorowa i dzienna: żadnej sepii ani czerni i bieli, żadnej Temidy, młotka
+          czy paragrafu ze stocka. Zdjęcia dostają lekkie odsycenie (<span class="ds-kod">saturate(.88)</span>)
+          i cieniutką lnianą przesłonę, dzięki czemu wpasowują się w paletę zamiast z nią walczyć.
+          W wersji 2 zdjęcia pracują w trzech rolach: portret w hero wykrwawiony do krawędzi, mniejszy portret
+          z podpisem w sekcji „O mnie" i pas na pełną szerokość w połowie strony.
+          Poniżej zdjęcia poglądowe; docelowo sesja według briefu niżej.</p>
+        <div class="ds-foto">
+          <figure><div class="foto foto--4-5 foto--surowe"><img src="assets/hero.jpg" alt="Zdjęcie poglądowe przed obróbką"></div><figcaption>Przed obróbką: pełne nasycenie walczy z lnem.</figcaption></figure>
+          <figure><div class="foto foto--4-5"><img src="assets/hero.jpg" alt="Zdjęcie poglądowe po obróbce"></div><figcaption>Po obróbce: odsycenie i lniana przesłona. Tak wchodzi każde zdjęcie na stronie.</figcaption></figure>
+          <figure><div class="foto foto--4-5 foto--placeholder"><span><b>Portret adwokat</b>4:5, światło dzienne, wnętrze kancelarii, spojrzenie w obiektyw</span></div><figcaption>Placeholder z opisem kadru. Tak oznaczamy miejsca na zdjęcia z sesji.</figcaption></figure>
+        </div>
+
+        <p class="ds-etykieta">Brief na sesję (minimum)</p>
+        <div class="ds-siatka-3">
+          <div class="ds-kafelek"><strong>1. Portret do hero</strong><p>Pion 4:5, kadr znoszący obcięcie z lewej strony (zdjęcie wychodzi poza ekran). Światło dzienne z okna, neutralne tło. Ubranie w tonacji kremu, beżu, ciemnego brązu lub granatu. Spojrzenie w obiektyw.</p></div>
+          <div class="ds-kafelek"><strong>2. Portret do „O mnie"</strong><p>Pion 3:4. Przy biurku, w trakcie pracy, bez pozowania. Może być półprofil.</p></div>
+          <div class="ds-kafelek"><strong>3. Pas na pełną szerokość</strong><p>Poziom, proporcja około 21:9. Wnętrze kancelarii albo wejście do oficyny (pomaga trafić). Bez logotypów i bez młotka sędziowskiego.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RUCH ============ -->
+    <section class="ds-sekcja" id="ruch">
+      <div class="kontener">
+        <h2><small>06</small>Ruch</h2>
+        <p class="ds-opis">Ruch ma być niewidoczny: obecny, ale nigdy nie rozpraszający. Bez JS strona jest w pełni widoczna,
+          stan początkowy animacji ustawia wyłącznie klasa <span class="ds-kod">.js</span> na elemencie html.</p>
+        <div class="ds-siatka-3">
+          <div class="ds-kafelek"><strong>Easing</strong><p>Jeden: <span class="ds-kod">cubic-bezier(.2, .6, .2, 1)</span>. Czasy: 220 ms (hover), 600 ms (odsłonięcie).</p></div>
+          <div class="ds-kafelek"><strong>Odsłonięcie przy scrollu</strong><p><span class="ds-kod">translateY(14px)</span> + opacity, raz, przez IntersectionObserver. Hero nigdy nie jest animowany: pierwsza klatka ma być kompletna.</p></div>
+          <div class="ds-kafelek"><strong>Hovery</strong><p>Przycisk zmienia kolor, strzałka przesuwa się o 3 px. Kafel unosi się o 2 px. Wiersz sytuacji i indeksu przesuwa się o pół rem w prawo.</p></div>
+          <div class="ds-kafelek"><strong>Przyklejona szyna</strong><p>Szyna w sekcjach „Sytuacje" i „Pytania" jest <span class="ds-kod">sticky</span> tylko powyżej 1024 px. To jedyny efekt zależny od scrolla.</p></div>
+          <div class="ds-kafelek"><strong>Dostępność</strong><p><span class="ds-kod">prefers-reduced-motion</span> wyłącza wszystko. Focus widoczny: obrys 2 px w brązie z odstępem 3 px.</p></div>
+          <div class="ds-kafelek"><strong>Zakazane</strong><p>Parallax, particles, tilt 3D, magnetyczne przyciski, preloader, marquee, liczniki. To strona do czytania, nie do oglądania.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ZASADY ============ -->
+    <section class="ds-sekcja" id="zasady">
+      <div class="kontener">
+        <h2><small>07</small>Zasady</h2>
+        <p class="ds-opis">Wnioski z analizy trzech referencji i briefu klientki. Pełna analiza w <span class="ds-kod">docs/ANALIZA-INSPIRACJI.md</span>.</p>
+        <div class="ds-zasady">
+          <ul class="ds-tak">
+            <h3>Robimy</h3>
+            <li>Len jako tło i pasy piasku jako rytm. Żadnej ciemnej sekcji.</li>
+            <li>Każda sekcja innym układem. Żaden schemat nie wraca na tej samej stronie.</li>
+            <li>Szeryf w treści, grotesk w nagłówkach i UI.</li>
+            <li>Brąz tylko na tym, co klikalne, i na etykietach.</li>
+            <li>Numery i daty wyłącznie tam, gdzie istnieje prawdziwa kolejność.</li>
+            <li>Copy od sytuacji klienta, zwykłym językiem, w drugiej osobie.</li>
+            <li>Fakty, które da się sprawdzić (rok wpisu, adres, godziny). Nic „ponad 500 spraw".</li>
+            <li>Kolorowe zdjęcia w świetle dziennym, w trzech rolach: hero, portret, pas.</li>
+          </ul>
+          <ul class="ds-nie">
+            <h3>Nie robimy</h3>
+            <li>Zimnej bieli <span class="ds-kod">#FFFFFF</span>, granatu, ciemnej zieleni (wykluczone przez klientkę).</li>
+            <li>Kopiowania sygnatur referencji: mono-etykiet, złotej kursywy, ściętego rogu, neonowego kwadracika.</li>
+            <li>Siatek identycznych kafli tam, gdzie treść ma hierarchię.</li>
+            <li>Ciemnych aktów, gradientów, cieni, ikon ze stocka, Temidy i młotka.</li>
+            <li>Slidera w hero i trzech równych kart z ikonami.</li>
+            <li>Nadnagłówków SEO w każdej sekcji („Adwokat Częstochowa…").</li>
+            <li>Więcej niż dziewięciu sekcji na stronie głównej i więcej niż sześciu pytań w FAQ.</li>
+            <li>Wymyślonych liczb, opinii i nazwisk. Opinie tylko prawdziwe, z Google.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ SKĄD CO ============ -->
+    <section class="ds-sekcja" id="inspiracje" style="border-bottom:0">
+      <div class="kontener">
+        <h2><small>08</small>Skąd co pochodzi</h2>
+        <p class="ds-opis">Każdy element systemu ma źródło. To nie kolaż: z referencji bierzemy decyzje, nie wygląd.</p>
+        <div class="ds-przewijanie">
+          <table class="ds-tabela">
+            <thead><tr><th>Element</th><th>Źródło</th><th>Co zmieniliśmy</th></tr></thead>
+            <tbody>
+              <tr><td>Ciepła jasna baza</td><td>Stoch (papier #F7F5F0)</td><td>Głębszy len #F3EDE3 i piasek, bez ciemnych aktów; brief klientki: beże.</td></tr>
+              <tr><td>Dyscyplina palety</td><td>Taczkowska (5 wartości, brak akcentu)</td><td>Zostawiamy jeden akcent, bo potrzebujemy widocznych linków i przycisków. Akcent pochodzi z logo klientki.</td></tr>
+              <tr><td>Hero z portretem</td><td>Stoch</td><td>Kolor zamiast sepii, zdjęcie wykrwawione do krawędzi ekranu zamiast zamkniętego w siatce.</td></tr>
+              <tr><td>Pas faktów</td><td>Taczkowska</td><td>Trzy fakty zamiast czterech, wciągnięte do hero zamiast osobnej sekcji.</td></tr>
+              <tr><td>Copy od sytuacji klienta</td><td>Stoch („Kiedy chcesz mieć spokój…"), Taczkowska (akapity bólu)</td><td>Osobna sekcja z sześcioma zdaniami w pierwszej osobie klienta, każde prowadzi do obszaru.</td></tr>
+              <tr><td>Chipy pod-usług</td><td>Grubizna</td><td>Bez ikon i bez ramek check; tylko w trzech wiodących kaflach, nie we wszystkich ośmiu.</td></tr>
+              <tr><td>Indeks pozostałych obszarów</td><td>Taczkowska (wiersze specjalizacji)</td><td>Bez numerów porządkowych, z przesunięciem wiersza przy najechaniu.</td></tr>
+              <tr><td>Oś kroków współpracy</td><td>Stoch (oś z kropkami)</td><td>Numery w brązie jasnym zamiast złotej kursywy, kropki na hairline zamiast okręgów.</td></tr>
+              <tr><td>FAQ z tytułem z boku</td><td>Taczkowska i Stoch</td><td>Szyna jest przyklejona i zawiera numer telefonu, więc pusta kolumna zaczyna pracować.</td></tr>
+              <tr><td>Kontakt z godzinami i dojazdem</td><td>Taczkowska</td><td>Trzy kolumny i mapa jako szeroki pas; opis dojazdu do oficyny z obecnej strony klientki.</td></tr>
+              <tr><td>Monogram w sześciokącie</td><td>obecne logo klientki</td><td>Odrysowany jako obrys w brązie jasnym, litera w Schibsted Grotesk.</td></tr>
+              <tr><td>Design system jako żywy HTML</td><td>Stoch</td><td>Ten sam format: jeden arkusz CSS dla dokumentu i mockupu.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="stopka">
+    <div class="kontener">
+      <div class="stopka__prawna">
+        <span>Design system v2 · Kancelaria Adwokacka Beata Cupiał-Kowalska · 3 września 2026</span>
+        <a class="link" href="mockup.html">Mockup strony głównej</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

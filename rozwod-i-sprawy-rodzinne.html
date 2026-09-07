@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rozwód i sprawy rodzinne · Adwokat Beata Cupiał-Kowalska, Częstochowa</title>
+  <meta name="description" content="Rozwód, alimenty, kontakty z dzieckiem, władza rodzicielska i podział majątku. Adwokat Beata Cupiał-Kowalska prowadzi sprawy rodzinne w Częstochowie osobiście, od pierwszej rozmowy do końca. Jest też mediatorem. Tel. 534 477 596.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+
+  <div data-nav></div>
+
+  <main id="gora">
+
+    <!-- ============ 01 · NAGŁÓWEK STRONY ============
+         Ten sam komponent co na „O mnie" i w „Bazie wiedzy": okruszki, nazwa
+         zakładki jako H1, jedno zdanie podtytułu, płaszczyzna piasku. Okruszki
+         wstrzykuje site.js z tablicy NAV — pozycja siedzi w drop-downzie
+         „Usługi" i ma `match`, więc ścieżka Strona główna › Usługi › Rozwód
+         i sprawy rodzinne składa się sama. -->
+    <section class="naglowek-strony pas">
+      <div class="kontener">
+        <div data-okruszki></div>
+        <h1 class="naglowek-strony__tytul">Rozwód i sprawy rodzinne</h1>
+        <p class="naglowek-strony__podtytul">Rozwód, alimenty, kontakty z dzieckiem i podział majątku — sprawy rodzinne w Częstochowie</p>
+      </div>
+    </section>
+
+    <!-- ============ 02 · OTWARCIE ============
+         Copy ma tu osobne hero i osobny pasek trzech punktów. Skoro stronę
+         otwiera już .naglowek-strony, hero zwija się do obietnicy, pary
+         przycisków i pasa faktów — jedna sekcja zamiast dwóch. -->
+    <section class="sekcja biel">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Przejdziemy przez to <em>po kolei</em></h2>
+          <p class="lead">Nie musisz przychodzić z gotowym planem ani z kompletem dokumentów. Wystarczy, że opowiesz, co się dzieje. Resztę ułożymy razem.</p>
+        </div>
+
+        <p class="akcje-para" data-odslon>
+          <a class="btn btn--pelny btn--duzy" href="tel:+48534477596"><span>Zadzwoń:&nbsp;534&nbsp;477&nbsp;596</span></a>
+          <a class="btn btn--obrys btn--duzy" href="#zakres">Zobacz, w czym pomagam</a>
+        </p>
+        <p class="male drugorzedny" data-odslon>Spotkania w Częstochowie, a także online i telefonicznie.</p>
+
+        <div class="mikrofakty" data-odslon>
+          <div class="mikrofakt">
+            <b>Prowadzę sprawę osobiście</b>
+            <p>Od pierwszej rozmowy do końca. Nie przekazuję Cię dalej.</p>
+          </div>
+          <div class="mikrofakt">
+            <b>Spotkanie online lub telefonicznie</b>
+            <p>Jeśli nie możesz przyjechać do Częstochowy, umówimy się zdalnie.</p>
+          </div>
+          <div class="mikrofakt">
+            <b>Oddzwaniam</b>
+            <p>Jeśli nie odbieram, jestem na rozprawie. Odezwę się, gdy tylko wyjdę z sali.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 · CZY TO TWOJA SYTUACJA ============
+         NOWY KOMPONENT .rozpoznanie (opis i uzasadnienie w styles.css).
+         Sześć zdań w pierwszej osobie klienta, każde ze spokojną odpowiedzią.
+         Pozycje nie są linkami i nie udają, że są — nie ma dokąd prowadzić. -->
+    <section class="sekcja" id="sytuacje">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <p class="etykieta">Od czego zaczynają moi klienci</p>
+          <h2>Większość osób trafia do mnie w <em>jednej z tych sytuacji</em></h2>
+          <p class="lead">Jeśli rozpoznajesz tu siebie, to dobry moment na rozmowę. Nie musisz jeszcze wiedzieć, czego chcesz.</p>
+        </div>
+
+        <ul class="rozpoznanie" data-odslon>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">Myślę o rozwodzie, ale nie wiem, od czego zacząć</h3>
+            <p class="rozpoznanie__odp">Nie potrzebujesz przygotowania. Pierwsza rozmowa służy temu, żeby nazwać sytuację i sprawdzić, jakie masz opcje. Także tę, żeby jeszcze nic nie robić.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">Dostałam pozew i nie wiem, co teraz</h3>
+            <p class="rozpoznanie__odp">Na odpowiedź jest wyznaczony termin i on biegnie od doręczenia. To jest sytuacja, w której warto zadzwonić od razu, a nie po tygodniu.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">Nie dogadujemy się w sprawie dzieci</h3>
+            <p class="rozpoznanie__odp">Kontakty, miejsce pobytu, decyzje o szkole i leczeniu. To najczęstszy punkt zapalny i zwykle da się go rozwiązać wcześniej niż całą resztę sprawy.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">Nie płaci na dzieci</h3>
+            <p class="rozpoznanie__odp">Alimentów można dochodzić niezależnie od tego, na jakim etapie jest rozwód, a przy zaległościach jest jeszcze droga egzekucji.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">Chcę się rozstać, ale nie chcę wojny</h3>
+            <p class="rozpoznanie__odp">To realny scenariusz, nie naiwność. Rozwód bez orzekania o winie bywa krótszy, tańszy i o wiele mniej wyniszczający dla dzieci.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">Mamy wspólne mieszkanie i kredyt</h3>
+            <p class="rozpoznanie__odp">Podział majątku to osobna, często dłuższa sprawa. Warto od początku wiedzieć, co da się załatwić przy rozwodzie, a co później.</p>
+          </li>
+        </ul>
+
+        <p class="rozpoznanie__cta" data-odslon>
+          <a class="btn btn--pelny" href="tel:+48534477596">
+            <span>Opowiedz mi, co się dzieje:&nbsp;534&nbsp;477&nbsp;596</span>
+          </a>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 04 · ZAKRES POMOCY ============
+         Akordeon na życzenie Mikołaja (7 września 2026): widoczne mają być
+         same nazwy spraw, opis dopiero po otwarciu. Komponent to zwykły .faq
+         w wariancie --wykaz, czyli z numerem tam, gdzie .wykaz stawia rok —
+         dzięki temu nie czyta się jak drugi blok pytań na tej samej stronie.
+         Pierwsza pozycja stoi otwarta, żeby było widać, że wiersze się
+         rozwijają. -->
+    <section class="sekcja pas" id="zakres">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Sprawy rodzinne, <em>które prowadzę</em></h2>
+          <p class="lead">Prowadzę je przed sądami w Częstochowie i w okolicy. Sprawę prowadzę osobiście, od pierwszego pisma do zakończenia. Rozwiń pozycję, żeby zobaczyć, co się w niej mieści.</p>
+        </div>
+
+        <div class="faq faq--wykaz" data-odslon>
+          <details class="faq__poz" open>
+            <summary><span class="faq__glowa"><span class="faq__nr">01</span><span class="faq__tytul">Rozwód<span class="faq__zajawka">Z orzeczeniem o winie i bez orzekania o winie.</span></span></span><span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Przygotowuję pozew albo odpowiedź na pozew, kompletuję dowody i reprezentuję Cię na rozprawach. Jeszcze przed pierwszym terminem można złożyć wniosek o zabezpieczenie, czyli o tymczasowe ustalenie alimentów, kontaktów i sposobu korzystania z mieszkania na czas trwania sprawy.</p>
+              <p>Ile to potrwa, zależy przede wszystkim od tego, czy jest spór o winę i o dzieci. Po pierwszej rozmowie powiem Ci, w którym z tych scenariuszy prawdopodobnie jesteś.</p>
+              <p>W wyroku rozwodowym sąd rozstrzyga także o władzy rodzicielskiej i o tym, gdzie dziecko będzie mieszkać. Te tematy porządkujemy od początku, a nie na końcu.</p>
+            </div>
+          </details>
+          <details class="faq__poz">
+            <summary><span class="faq__glowa"><span class="faq__nr">02</span><span class="faq__tytul">Separacja<span class="faq__zajawka">Kiedy rozwód nie wchodzi w grę albo nie jest tym, czego chcesz.</span></span></span><span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Separacja rozdziela majątki i porządkuje sprawy dzieci, ale nie kończy małżeństwa, więc nie można po niej zawrzeć nowego. Dla części osób to jest właśnie zaleta, a nie brak.</p>
+              <p>Jeżeli oboje jesteście zgodni i nie macie wspólnych małoletnich dzieci, sąd orzeka separację w krótszym postępowaniu. Na pierwszej rozmowie sprawdzimy, czy w Twojej sytuacji to lepsza droga niż rozwód.</p>
+              <p>Separacja nie zamyka drogi do rozwodu. Można ją później zamienić na rozwód i nie trzeba w tym celu zaczynać wszystkiego od nowa.</p>
+            </div>
+          </details>
+          <details class="faq__poz">
+            <summary><span class="faq__glowa"><span class="faq__nr">03</span><span class="faq__tytul">Alimenty<span class="faq__zajawka">Na dzieci i na małżonka — ustalenie, podwyższenie, obniżenie, zaległości.</span></span></span><span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Prowadzę sprawy o ustalenie alimentów, a także o ich podwyższenie albo obniżenie, gdy zmieniły się zarobki jednej ze stron lub potrzeby dziecka. Osobno prowadzę sprawy o zaległości, razem z drogą egzekucyjną, kiedy wyrok jest, a pieniędzy nie ma.</p>
+              <p>Alimentów można dochodzić niezależnie od tego, na jakim etapie jest rozwód. Na czas trwania sprawy składa się wniosek o zabezpieczenie, żeby dzieci nie czekały na rozstrzygnięcie miesiącami.</p>
+              <p>Wysokość liczy się z dwóch rzeczy naraz: z uzasadnionych potrzeb dziecka i z realnych możliwości zarobkowych rodzica — a nie z samej kwoty na pasku wypłaty.</p>
+            </div>
+          </details>
+          <details class="faq__poz">
+            <summary><span class="faq__glowa"><span class="faq__nr">04</span><span class="faq__tytul">Władza rodzicielska<span class="faq__zajawka">Powierzenie, ograniczenie, pozbawienie, przywrócenie.</span></span></span><span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Poza sprawami o samą władzę rodzicielską prowadzę spory o pojedyncze decyzje, w których rodzice nie mogą dojść do porozumienia: paszport, wyjazd dziecka za granicę, wybór szkoły, leczenie.</p>
+              <p>Osobno prowadzę sprawy o ustalenie miejsca pobytu dziecka. To od niego zależy większość codziennych spraw urzędowych, więc bywa, że jest ważniejsze niż sam zapis o władzy.</p>
+              <p>Przy sporze o jedną decyzję sąd zastępuje zgodę drugiego rodzica jednym postanowieniem. Nie trzeba do tego całego postępowania o władzę rodzicielską.</p>
+            </div>
+          </details>
+          <details class="faq__poz">
+            <summary><span class="faq__glowa"><span class="faq__nr">05</span><span class="faq__tytul">Kontakty z dzieckiem<span class="faq__zajawka">Ustalenie harmonogramu, zmiana istniejącego, egzekwowanie kontaktów.</span></span></span><span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Układamy harmonogram od zera albo zmieniamy taki, który przestał pasować, bo dziecko poszło do szkoły albo ktoś zmienił pracę i godziny.</p>
+              <p>Dobry harmonogram obejmuje nie tylko weekendy: także święta, ferie, wakacje i sposób odbierania dziecka. Chodzi o to, żeby nie trzeba było niczego negocjować za każdym razem od nowa.</p>
+              <p>Gdy druga strona nie wydaje dziecka mimo orzeczenia, jest osobne postępowanie: najpierw o zagrożenie nakazaniem zapłaty, potem o zapłatę za każde niezrealizowane spotkanie.</p>
+            </div>
+          </details>
+          <details class="faq__poz">
+            <summary><span class="faq__glowa"><span class="faq__nr">06</span><span class="faq__tytul">Podział majątku wspólnego<span class="faq__zajawka">Mieszkanie, kredyt, oszczędności, samochód, firma.</span></span></span><span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Przy zgodzie co do składników i wartości da się to zrobić szybko, nawet jednym postanowieniem. Przy sporze dochodzi wycena biegłego i trzeba liczyć się z osobnym, dłuższym postępowaniem.</p>
+              <p>Do rozliczenia wchodzą też nakłady z majątku osobistego na wspólny — na przykład pieniądze z darowizny albo ze sprzedaży mieszkania sprzed małżeństwa. Warto od początku wiedzieć, co da się załatwić przy rozwodzie, a co dopiero później.</p>
+              <p>Podział majątku dzieli własność, ale sam w sobie nie zwalnia nikogo z kredytu wobec banku. Mówię o tym wprost na początku, a nie na końcu sprawy.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 · MEDIACJA ============
+         ODSTĘPSTWO OD COPY: copy prosi o „blok na ciemnym tle". Ciemnych
+         sekcji w tym projekcie nie ma (wykluczone przez klientkę w briefie),
+         więc rolę odcięcia bierze piaskowy panel .panel-mediacje stojący na
+         lnie — ten sam komponent i ten sam sens co na stronie głównej.
+         Zastrzeżenie o wykluczaniu się ról jedzie na .rozwidlenie
+         z podstrony „O mnie", bo to dokładnie para „albo / albo". -->
+    <section class="sekcja" id="mediacje">
+      <div class="kontener">
+        <div class="panel-mediacje" data-odslon>
+          <p class="etykieta panel-mediacje__etykieta">Druga droga</p>
+          <div class="panel-mediacje__glowa">
+            <h2 class="panel-mediacje__tytul">Czasem lepiej się dogadać, <em>niż wygrać</em></h2>
+            <p class="panel-mediacje__akcja"><a class="btn btn--obrys" href="index.html#mediacje">Więcej o mediacjach
+              <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a></p>
+          </div>
+          <!-- 【DO UZUPEŁNIENIA】 czy klientka jest wpisana na listę stałych mediatorów
+               przy Sądzie Okręgowym w Częstochowie. Do czasu potwierdzenia stoi tu
+               sformułowanie ze strony głównej („czynny mediator"), które jest pewne. -->
+          <div class="panel-mediacje__tekst">
+            <p>Jestem czynnym mediatorem. Widziałam wystarczająco dużo spraw rodzinnych, żeby wiedzieć, że nie każdą trzeba rozstrzygać wyrokiem.</p>
+            <p>Ugoda zawarta przed mediatorem i zatwierdzona przez sąd ma taką samą moc jak wyrok. Różnica jest taka, że warunki układacie sami, a nie dowiadujecie się o nich na sali rozpraw.</p>
+          </div>
+        </div>
+
+        <div class="rozwidlenie" data-odslon>
+          <div class="rozwidlenie__rola">
+            <h3>Twoim pełnomocnikiem</h3>
+          </div>
+          <p class="rozwidlenie__albo">albo</p>
+          <div class="rozwidlenie__rola">
+            <h3>Mediatorem dla obojga</h3>
+          </div>
+          <p class="rozwidlenie__nota">W jednej sprawie mogę być tylko jedną z tych osób. Mediator musi być bezstronny, więc te dwie role się wykluczają. Na pierwszej rozmowie ustalimy, która droga ma w Twojej sytuacji sens.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 · JAK WYGLĄDA PIERWSZA ROZMOWA ============
+         Komponent .kroki stał w arkuszu od wersji 2 i nie był użyty na żadnej
+         stronie. Jest osią na cztery pola, więc dostał wariant --trzy. -->
+    <section class="sekcja biel" id="rozmowa">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Zanim zdecydujesz się na cokolwiek, <em>po prostu porozmawiajmy</em></h2>
+          <p class="lead">Wiele osób odkłada telefon do prawnika, bo nie wie, czego się spodziewać. Wygląda to tak.</p>
+        </div>
+
+        <div class="kroki kroki--trzy" data-odslon>
+          <div class="krok">
+            <span class="krok__nr">01</span>
+            <h3>Rozmowa</h3>
+            <p>Opowiadasz swoimi słowami, co się dzieje. Nie musisz mieć ze sobą dokumentów ani znać żadnych terminów prawniczych. Ja dopytam o resztę.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">02</span>
+            <h3>Ocena sytuacji i plan</h3>
+            <p>Mówię, jakie masz możliwości, ile realnie może to potrwać i z jakimi kosztami się wiąże. Także wtedy, gdy najlepszym wyjściem jest poczekać.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">03</span>
+            <h3>Prowadzenie sprawy</h3>
+            <p>Jeśli zdecydujesz się na współpracę, przygotowuję pisma i reprezentuję Cię przed sądem. Na bieżąco wiesz, na jakim etapie jesteśmy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 · PODEJŚCIE ============ -->
+    <section class="sekcja pas" id="podejscie">
+      <div class="kontener">
+        <div class="podejscie">
+          <div data-odslon>
+            <h2>Każda sprawa jest inna, bo <em>każda osoba jest inna</em></h2>
+            <blockquote class="wyimek">
+              Do każdego podchodzi się indywidualnie. Każda sprawa jest inna, każda osoba jest inna i trzeba dla każdej znaleźć sposób działania adekwatny do jej sytuacji.
+              <cite class="wyimek__podpis">Adwokat Beata Cupiał-Kowalska</cite>
+            </blockquote>
+          </div>
+          <div class="podejscie__esej" data-odslon>
+            <p>Dwa rozwody nigdy nie wyglądają tak samo, nawet jeśli w papierach różnią się jednym zdaniem. Za każdą sprawą stoi konkretna rodzina, konkretne pieniądze i konkretny strach o dzieci. Dlatego nie mam jednego schematu, który podkładam pod każdą sytuację. Szukam sposobu działania adekwatnego do tego, co masz.</p>
+            <p>Nie ma też znaczenia, z jak dużą sprawą przychodzisz i jaki masz status majątkowy. Pomoc jest tak samo fachowa w każdym z tych przypadków.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 · O MNIE ============
+         BEZ PORTRETU — decyzja Mikołaja z 7 września 2026. Copy prosiło tu
+         o kadr 3:4, ale zdjęć z sesji jeszcze nie ma, a placeholder w tak
+         długiej stronie czyta się jak brak, nie jak układ. Zamiast .omnie
+         idzie .dyzury__tresc: nagłówek, kreska, dwa akapity w łamach.
+         Ten układ nie wraca nigdzie indziej na tej stronie. -->
+    <section class="sekcja dyzury" id="o-mnie">
+      <div class="kontener">
+        <h2 data-odslon>Kto poprowadzi <em>Twoją sprawę</em></h2>
+
+        <div class="dyzury__tresc" data-odslon>
+          <p>Prowadzę kancelarię w Częstochowie samodzielnie. To znaczy, że osobą, z którą rozmawiasz przy pierwszym telefonie, i osobą, która stoi obok Ciebie na sali rozpraw, jest ta sama osoba.</p>
+          <p>Zajmuję się przede wszystkim sprawami rodzinnymi, spadkowymi i karnymi. Jestem też czynnym mediatorem, co w sprawach rodzinnych daje dodatkową drogę tam, gdzie da się jeszcze cokolwiek uzgodnić.</p>
+        </div>
+
+        <p class="omnie__wiecej" data-odslon><a class="link" href="o-mnie.html">Poznaj kancelarię</a></p>
+      </div>
+    </section>
+
+    <!-- ============ 09 · OPINIE ============
+         Trzy opinie z wizytówki Google, imiona jak w źródle. Pierwsza jest ta,
+         która mówi wprost o sprawie rozwodowej. Cytatu wiodącego
+         (.opinia-wiodaca) tu nie ma — zostaje wyróżnikiem strony głównej. -->
+    <section class="sekcja biel" id="opinie">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--rozdzielony" data-odslon>
+          <h2>Opinie osób, którym pomogłam</h2>
+          <!-- 【DO UZUPEŁNIENIA】 link do wizytówki Google -->
+          <a class="link" href="#">Zobacz wszystkie opinie w Google</a>
+        </div>
+
+        <div class="opinie-rzad opinie-rzad--sama" data-odslon>
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Pani adwokat prowadziła moją sprawę rozwodową i kilka innych mniejszych spraw. Wszystko zostało przeprowadzone szybko i sprawnie. W razie jakichkolwiek pytań zawsze pomocna. Pełen profesjonalizm. Gorąco polecam.</p>
+            <footer class="opinia-kolumna__autor">Iza F. · opinia w Google</footer>
+          </blockquote>
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Serdecznie polecam! Pełen profesjonalizm, rzetelne podejście do sprawy i ogromne zaangażowanie. Empatyczna i zawsze dostępna. Fachowe doradztwo i miła atmosfera współpracy. Polecam z całego serca!</p>
+            <footer class="opinia-kolumna__autor">Irys 2006 · opinia w Google</footer>
+          </blockquote>
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Polecam Pani Beata wie co robi zna się na swojej pracy, walczy do samego końca póki nie wygra sprawy klienta, każdemu pomoże do zwycięstwa. Jeszcze raz serdecznie POLECAM</p>
+            <footer class="opinia-kolumna__autor">Karolina Bieniek · opinia w Google</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 10 · NAJCZĘSTSZE PYTANIA ============ -->
+    <section class="sekcja" id="pytania">
+      <div class="kontener">
+        <div class="siatka-4-8">
+          <div class="faq-szyna" data-odslon>
+            <h2>Pytania, które słyszę <em>najczęściej</em></h2>
+            <div class="szyna-karta szyna-karta--krem">
+              <p>Nie ma tu Twojego pytania? Zadzwoń i po prostu je zadaj.</p>
+              <a class="link liczby" href="tel:+48534477596">534 477 596</a>
+            </div>
+          </div>
+
+          <div class="faq" data-odslon>
+            <details class="faq__poz" open>
+              <summary>Ile trwa sprawa o rozwód?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">To zależy przede wszystkim od tego, czy jest spór o winę i o dzieci. Rozwód bez orzekania o winie, przy zgodzie obu stron, potrafi zakończyć się na jednej rozprawie. Sprawa z orzekaniem o winie, z przesłuchaniem świadków i opinią biegłych, ciągnie się znacznie dłużej. Na pierwszej rozmowie powiem Ci, w którym z tych scenariuszy prawdopodobnie jesteś.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Ile kosztuje rozwód?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Są dwie osobne rzeczy. Opłata sądowa od pozwu o rozwód to 600 zł i wnosi ją osoba składająca pozew. Drugą pozycją jest wynagrodzenie za prowadzenie sprawy, które ustalam indywidualnie, zależnie od tego, jak sprawa się zapowiada. Mówię o nim na pierwszej rozmowie, zanim cokolwiek zaczniemy.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Czy muszę udowadniać winę współmałżonka?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Nie. Jeżeli oboje się na to zgadzacie, sąd orzeka rozwód bez orzekania o winie i wtedy nie prowadzi się postępowania dowodowego w tym zakresie. Orzeczenie o winie ma znaczenie przede wszystkim przy alimentach na rzecz małżonka, więc to decyzja, którą warto przemyśleć, a nie podjąć w emocjach.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Czy mogę się rozwieść, jeśli druga strona się nie zgadza?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Zgoda współmałżonka nie jest warunkiem rozwodu. Sąd bada, czy nastąpił trwały i zupełny rozkład pożycia. Brak zgody ma znaczenie w jednej sytuacji: gdy rozwodu żąda małżonek wyłącznie winny rozkładu, a druga strona się temu sprzeciwia. Wtedy sprawa jest trudniejsza, ale nie z góry przegrana.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Który sąd rozpozna moją sprawę?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Sprawy o rozwód i separację rozpoznaje sąd okręgowy, a nie rejonowy. Dla osób mieszkających w Częstochowie i okolicy będzie to zwykle Sąd Okręgowy w Częstochowie. Alimenty, kontakty i władza rodzicielska, jeśli są prowadzone osobno, trafiają do sądu rejonowego.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Czy muszę być obecna na rozprawie?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Co do zasady tak, bo sąd przesłuchuje strony. Nie oznacza to jednak, że jesteś w tym sama. Jestem obok, wiesz wcześniej, o co sąd będzie pytał, i nie dowiadujesz się niczego na sali po raz pierwszy.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Czy da się załatwić alimenty szybciej niż cały rozwód?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Tak. Na czas trwania sprawy można złożyć wniosek o zabezpieczenie, czyli o tymczasowe ustalenie alimentów i kontaktów. Sąd rozpoznaje go szybciej niż całą sprawę, więc dzieci nie czekają na rozstrzygnięcie miesiącami.</div>
+            </details>
+            <details class="faq__poz">
+              <summary>Czy prowadzisz sprawy zdalnie?<span class="plus"><svg width="14" height="14" viewBox="0 0 14 14" aria-hidden="true"><path d="M7 1v12M1 7h12" stroke="currentColor" stroke-width="1.5"/></svg></span></summary>
+              <div class="faq__tresc">Tak. Pierwsza rozmowa może odbyć się telefonicznie albo online i dla wielu osób tak jest po prostu łatwiej. Jeśli sprawa toczy się poza Częstochową, ustalamy to indywidualnie.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 11 · KONTAKT ============ -->
+    <section class="sekcja pas" id="kontakt">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Najtrudniejszy jest ten <em>pierwszy telefon</em></h2>
+          <p class="lead">Potem jest już tylko rozmowa. Zadzwoń i opowiedz, co się dzieje. Powiem Ci, jakie masz możliwości i co warto zrobić w pierwszej kolejności.</p>
+        </div>
+
+        <div class="kontakt-telefon" data-odslon>
+          <a class="telefon-duzy" href="tel:+48534477596">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            534 477 596
+          </a>
+          <p class="telefon-podpis">Jeśli nie odbieram, jestem na rozprawie. Oddzwonię.</p>
+        </div>
+
+        <div class="kontakt-siatka" data-odslon>
+          <div class="kontakt-kol">
+            <h4>E-mail</h4>
+            <p><a href="mailto:kancelaria@cupial-kowalska.pl">kancelaria@cupial-kowalska.pl</a></p>
+            <p class="male drugorzedny">Opisz sprawę w kilku zdaniach i zostaw numer telefonu.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Kancelaria</h4>
+            <p>ul. Kilińskiego 5 lok. 4<br>42-202 Częstochowa</p>
+            <p class="male drugorzedny">Lewa oficyna, pierwsze piętro, po prawej stronie.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Spotkania</h4>
+            <p>Osobiście w Częstochowie, online albo telefonicznie.</p>
+            <p class="male drugorzedny">Dojazd, mapa i formularz z prośbą o telefon: <a href="kontakt.html">strona kontaktu</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Rozwód i sprawy rodzinne",
+        "serviceType": "Prowadzenie spraw rodzinnych: rozwód, separacja, alimenty, władza rodzicielska, kontakty z dzieckiem, podział majątku wspólnego",
+        "areaServed": { "@type": "City", "name": "Częstochowa" },
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "servicePhone": { "@type": "ContactPoint", "telephone": "+48534477596" },
+          "availableLanguage": "pl"
+        },
+        "provider": {
+          "@type": "Attorney",
+          "name": "Kancelaria Adwokacka Beata Cupiał-Kowalska",
+          "telephone": "+48534477596",
+          "email": "kancelaria@cupial-kowalska.pl",
+          "areaServed": "Częstochowa",
+          "knowsLanguage": "pl",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ul. Kilińskiego 5 lok. 4",
+            "postalCode": "42-202",
+            "addressLocality": "Częstochowa",
+            "addressCountry": "PL"
+          },
+          "founder": {
+            "@type": "Person",
+            "name": "Beata Cupiał-Kowalska",
+            "jobTitle": "adwokat"
+          }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Ile trwa sprawa o rozwód?", "acceptedAnswer": { "@type": "Answer", "text": "To zależy przede wszystkim od tego, czy jest spór o winę i o dzieci. Rozwód bez orzekania o winie, przy zgodzie obu stron, potrafi zakończyć się na jednej rozprawie. Sprawa z orzekaniem o winie, z przesłuchaniem świadków i opinią biegłych, ciągnie się znacznie dłużej." } },
+          { "@type": "Question", "name": "Ile kosztuje rozwód?", "acceptedAnswer": { "@type": "Answer", "text": "Są dwie osobne rzeczy. Opłata sądowa od pozwu o rozwód to 600 zł i wnosi ją osoba składająca pozew. Drugą pozycją jest wynagrodzenie za prowadzenie sprawy, ustalane indywidualnie i omawiane na pierwszej rozmowie." } },
+          { "@type": "Question", "name": "Czy muszę udowadniać winę współmałżonka?", "acceptedAnswer": { "@type": "Answer", "text": "Nie. Jeżeli oboje się na to zgadzacie, sąd orzeka rozwód bez orzekania o winie i wtedy nie prowadzi się postępowania dowodowego w tym zakresie. Orzeczenie o winie ma znaczenie przede wszystkim przy alimentach na rzecz małżonka." } },
+          { "@type": "Question", "name": "Czy mogę się rozwieść, jeśli druga strona się nie zgadza?", "acceptedAnswer": { "@type": "Answer", "text": "Zgoda współmałżonka nie jest warunkiem rozwodu. Sąd bada, czy nastąpił trwały i zupełny rozkład pożycia. Brak zgody ma znaczenie wtedy, gdy rozwodu żąda małżonek wyłącznie winny rozkładu, a druga strona się temu sprzeciwia." } },
+          { "@type": "Question", "name": "Który sąd rozpozna moją sprawę?", "acceptedAnswer": { "@type": "Answer", "text": "Sprawy o rozwód i separację rozpoznaje sąd okręgowy. Dla osób mieszkających w Częstochowie i okolicy będzie to zwykle Sąd Okręgowy w Częstochowie. Alimenty, kontakty i władza rodzicielska, jeśli są prowadzone osobno, trafiają do sądu rejonowego." } },
+          { "@type": "Question", "name": "Czy muszę być obecna na rozprawie?", "acceptedAnswer": { "@type": "Answer", "text": "Co do zasady tak, bo sąd przesłuchuje strony. Jestem obok, wiesz wcześniej, o co sąd będzie pytał, i nie dowiadujesz się niczego na sali po raz pierwszy." } },
+          { "@type": "Question", "name": "Czy da się załatwić alimenty szybciej niż cały rozwód?", "acceptedAnswer": { "@type": "Answer", "text": "Tak. Na czas trwania sprawy można złożyć wniosek o zabezpieczenie, czyli o tymczasowe ustalenie alimentów i kontaktów. Sąd rozpoznaje go szybciej niż całą sprawę." } },
+          { "@type": "Question", "name": "Czy prowadzisz sprawy zdalnie?", "acceptedAnswer": { "@type": "Answer", "text": "Tak. Pierwsza rozmowa może odbyć się telefonicznie albo online. Jeśli sprawa toczy się poza Częstochową, ustalamy to indywidualnie." } }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>
