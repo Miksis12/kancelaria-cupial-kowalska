@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprawy karne · Adwokat Beata Cupiał-Kowalska, Częstochowa</title>
+  <meta name="description" content="Obrońca w sprawach karnych w Częstochowie: zatrzymanie, przesłuchanie, zarzuty, apelacja, dozór elektroniczny. Adwokat Beata Cupiał-Kowalska prowadzi sprawy osobiście, rozmowa jest objęta tajemnicą adwokacką. Tel. 534 477 596.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+
+  <div data-nav></div>
+
+  <!-- PODSTRONA USŁUGOWA sklonowana z rozwod-i-sprawy-rodzinne.html (plik-wzorzec),
+       copy: sprawy-karne-copy.md. Te same pola i komponenty; jedyny dodatek to
+       .wykaz-dopisek pod listą spraw (link do strony o jeździe po alkoholu).
+       Etykiety sekcji jak we wzorcu (dwie): copy podaje pięć, a system
+       dopuszcza najwyżej trzy na stronę. -->
+  <main id="gora" class="strona-uslugowa">
+
+    <!-- ============ 01 · NAGŁÓWEK STRONY USŁUGOWEJ ============
+         Pole biel. Okruszki składa site.js z USLUGI: Strona główna › Usługi ›
+         Sprawy karne. W linii meta tajemnica adwokacka zamiast mediatora
+         (tak podaje copy). Bez data-odslon, to pierwszy ekran. -->
+    <section class="naglowek-strony naglowek-strony--uslugi biel">
+      <div class="kontener">
+        <div data-okruszki></div>
+        <h1 class="naglowek-strony__tytul">Obrońca w sprawach karnych, Częstochowa</h1>
+        <p class="naglowek-strony__lead">Przejdziemy przez to po kolei. Nie musisz znać przepisów ani wiedzieć, co dokładnie Ci zarzucają. Wystarczy, że opowiesz, co się wydarzyło i co masz w ręku.</p>
+
+        <p class="naglowek-strony__kontakt">
+          <a class="naglowek-strony__telefon" href="tel:+48534477596">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>534&nbsp;477&nbsp;596</span>
+          </a>
+          <span class="naglowek-strony__spotkania">Spotkania w Częstochowie, online i telefonicznie</span>
+        </p>
+
+        <ul class="naglowek-strony__meta">
+          <li>Sprawę prowadzę osobiście</li>
+          <li>Rozmowa objęta tajemnicą adwokacką</li>
+          <li>Oddzwaniam po rozprawie</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 02 · CZY TO TWOJA SYTUACJA ============
+         Pole beż. Kafle .rozpoznanie: sześć kart i karta z telefonem. -->
+    <section class="sekcja pas" id="sytuacje">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--sytuacje">
+          <p class="etykieta">Od czego zaczynają moi klienci</p>
+          <h2>Większość osób trafia do mnie w <em>jednej z tych sytuacji</em></h2>
+          <p class="lead">Jeśli rozpoznajesz tu siebie, to dobry moment na rozmowę. Nie musisz jeszcze wiedzieć, czego chcesz.</p>
+        </div>
+
+        <ul class="rozpoznanie">
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Zatrzymali kogoś bliskiego i nie wiem, gdzie jest”</h3>
+            <p class="rozpoznanie__odp">Zatrzymanie ma swoje granice czasowe, a zatrzymany ma prawo do kontaktu z adwokatem. To sytuacja na telefon teraz, nie jutro.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Mam wezwanie na przesłuchanie i nie wiem, co mówić”</h3>
+            <p class="rozpoznanie__odp">Zanim pójdziesz, warto wiedzieć, w jakim charakterze jesteś wzywany i z czego naprawdę możesz nie skorzystać.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Usłyszałem zarzuty”</h3>
+            <p class="rozpoznanie__odp">Od tego momentu jesteś stroną postępowania i masz prawo do obrońcy. Im wcześniej wejdzie do sprawy, tym więcej da się w niej zrobić.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Zgłosiłem przestępstwo, a sprawę umorzono”</h3>
+            <p class="rozpoznanie__odp">Na postanowienie o umorzeniu przysługuje zażalenie i jest na nie krótki termin. Pokrzywdzony też ma swoje prawa w tym postępowaniu.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Mam wyrok i chcę odbyć karę w dozorze elektronicznym”</h3>
+            <p class="rozpoznanie__odp">To osobny wniosek do sądu penitencjarnego, z własnymi warunkami. Sprawdzimy, czy je spełniasz.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Prokurator proponuje dobrowolne poddanie się karze”</h3>
+            <p class="rozpoznanie__odp">Zanim podpiszesz, sprawdźmy, co dokładnie akceptujesz i czy to rzeczywiście najlepsze, co można w tej sprawie uzyskać.</p>
+          </li>
+          <li class="rozpoznanie__cta">
+            <div class="rozpoznanie__cta-tekst">
+              <p class="rozpoznanie__cta-tytul">Nie ma tu Twojej sytuacji?</p>
+              <p class="rozpoznanie__cta-opis">Opowiedz mi, co się dzieje. Nie oceniam, tylko sprawdzam, co da się zrobić.</p>
+            </div>
+            <a class="rozpoznanie__przycisk" href="tel:+48534477596">Zadzwoń:&nbsp;534&nbsp;477&nbsp;596</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 03 · ZAKRES POMOCY ============
+         Pole biel. Akordeon .faq--wykaz, grupa wyłączna name="karne".
+         Pod listą .wykaz-dopisek: jedno zdanie z linkiem do strony o jeździe
+         po alkoholu, żeby obie strony nie konkurowały o te same frazy. -->
+    <section class="sekcja biel" id="zakres">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--wykaz">
+          <h2>Sprawy karne, <em>które prowadzę</em></h2>
+          <p class="lead">Każdą z nich zajmuję się osobiście, od pierwszego pisma do zakończenia, przed sądami w Częstochowie i okolicy.</p>
+        </div>
+
+        <div class="faq faq--wykaz">
+          <details class="faq__poz" name="karne" open>
+            <summary><span class="faq__glowa"><span class="faq__nr">01</span><span class="faq__tytul">Zatrzymanie i pierwsze przesłuchanie<span class="faq__zajawka">Etap, na którym zapada najwięcej z tego, co potem trudno odwrócić.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Zatrzymany ma prawo do kontaktu z adwokatem i do odmowy składania wyjaśnień, a jedno i drugie bywa w praktyce trudne do wyegzekwowania bez pomocy. Wchodzę do sprawy jeszcze na etapie postępowania przygotowawczego, czyli zanim akta trafią do sądu. Wyjaśnienia złożone przy pierwszym przesłuchaniu zostają w aktach do samego końca, dlatego to najgorszy moment na improwizację.</p>
+            </div>
+          </details>
+          <details class="faq__poz" name="karne">
+            <summary><span class="faq__glowa"><span class="faq__nr">02</span><span class="faq__tytul">Przestępstwa przeciwko mieniu<span class="faq__zajawka">Kradzież, przywłaszczenie, oszustwo, uszkodzenie mienia.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>To najliczniejsza grupa spraw, w której o kwalifikacji często decyduje wartość i sposób działania, a granica między wykroczeniem a przestępstwem bywa cienka. Sprawdzam, czy materiał dowodowy rzeczywiście wspiera stawiany zarzut, i czy nie da się doprowadzić do łagodniejszej kwalifikacji. Przy naprawieniu szkody i przy sprawcach niekaranych realnie w grę wchodzi rozstrzygnięcie bez skazania.</p>
+            </div>
+          </details>
+          <details class="faq__poz" name="karne">
+            <summary><span class="faq__glowa"><span class="faq__nr">03</span><span class="faq__tytul">Przestępstwa przeciwko osobie i sprawy z tłem rodzinnym<span class="faq__zajawka">Znęcanie się, groźby, uporczywe nękanie, naruszenie nietykalności.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Te sprawy najczęściej wychodzą przy rozwodzie albo tuż po nim i mają dwie strony: bywa, że zarzut jest prawdziwy, i bywa, że jest narzędziem w sporze o dzieci. Prowadzę je w obie strony, zarówno broniąc, jak i reprezentując osobę pokrzywdzoną. Ponieważ zajmuję się też sprawami rodzinnymi, widzę od razu, jak jedno postępowanie wpłynie na drugie.</p>
+            </div>
+          </details>
+          <!-- 【DO UZUPEŁNIENIA】 czy klientka chce być widoczna także jako pełnomocnik
+               pokrzywdzonego (pozycja 04). Jeśli nie, pozycja wypada w całości,
+               a z pozycji 03 i z karty „Zgłosiłem przestępstwo" trzeba zdjąć
+               wątek pokrzywdzonego. -->
+          <details class="faq__poz" name="karne">
+            <summary><span class="faq__glowa"><span class="faq__nr">04</span><span class="faq__tytul">Reprezentacja pokrzywdzonego<span class="faq__zajawka">Nie tylko obrona, także druga strona sali.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Pokrzywdzony może działać jako oskarżyciel posiłkowy, składać wnioski dowodowe, zaskarżać umorzenie i domagać się naprawienia szkody w wyroku karnym. Wiele osób nie korzysta z tych praw, bo nikt im o nich nie powiedział. Prowadzę też sprawy z oskarżenia prywatnego, na przykład o zniesławienie czy naruszenie nietykalności.</p>
+            </div>
+          </details>
+          <details class="faq__poz" name="karne">
+            <summary><span class="faq__glowa"><span class="faq__nr">05</span><span class="faq__tytul">Kara i to, co po wyroku<span class="faq__zajawka">Wyrok nie zawsze jest końcem sprawy.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Występuję o dozór elektroniczny, o odroczenie wykonania kary, o przerwę w karze i o warunkowe przedterminowe zwolnienie, a przy kilku wyrokach także o wyrok łączny. Każdy z tych wniosków ma własne warunki i własny moment, w którym ma sens go złożyć. To obszar, w którym dobrze przygotowany wniosek realnie zmienia sposób odbywania kary.</p>
+            </div>
+          </details>
+          <!-- 【DO UZUPEŁNIENIA】 czy klientka podejmuje się na etapie apelacji spraw
+               prowadzonych wcześniej przez innego obrońcę (ostatnie zdanie pozycji 06). -->
+          <details class="faq__poz" name="karne">
+            <summary><span class="faq__glowa"><span class="faq__nr">06</span><span class="faq__tytul">Apelacja od wyroku<span class="faq__zajawka">Krótkie terminy i jedna szansa.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Na wniosek o uzasadnienie wyroku jest kilka dni od ogłoszenia, a na samą apelację czternaście dni od doręczenia uzasadnienia. Przeanalizuję wyrok i akta, i powiem uczciwie, czy widzę podstawy, czy apelacja byłaby tylko przedłużaniem sprawy. Podejmuję się także spraw prowadzonych wcześniej przez innego pełnomocnika.</p>
+            </div>
+          </details>
+        </div>
+
+        <p class="wykaz-dopisek">Sprawy o jazdę po alkoholu i o odzyskanie prawa jazdy opisałam osobno, bo rządzą się własnymi terminami. <a class="link" href="jazda-po-alkoholu.html">Zobacz stronę o jeździe po alkoholu</a></p>
+      </div>
+    </section>
+
+    <!-- ============ 04 · MEDIACJA ============
+         Pole espresso. Cały blok z rozwidleniem ról i notą w jednym
+         .panel-mediacje--ciemny. -->
+    <section class="sekcja espresso" id="mediacje">
+      <div class="kontener">
+        <div class="panel-mediacje panel-mediacje--ciemny">
+          <p class="etykieta panel-mediacje__etykieta">Druga droga</p>
+          <div class="panel-mediacje__glowa">
+            <h2 class="panel-mediacje__tytul">W sprawach karnych <em>ugoda też jest możliwa</em></h2>
+            <p class="panel-mediacje__akcja"><a class="btn btn--jasny" href="mediacje.html">Więcej o mediacjach
+              <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a></p>
+          </div>
+          <!-- 【DO UZUPEŁNIENIA】 czy klientka jest wpisana na listę stałych mediatorów
+               przy Sądzie Okręgowym w Częstochowie. Do czasu potwierdzenia stoi tu
+               sformułowanie ze strony głównej („czynny mediator"), które jest pewne. -->
+          <div class="panel-mediacje__tekst">
+            <p>Jestem czynnym mediatorem. W postępowaniu karnym mediacja między pokrzywdzonym a oskarżonym jest przewidziana wprost i może zmienić bieg sprawy, szczególnie tam, gdzie po obu stronach są ludzie, którzy będą się jeszcze spotykać: sąsiedzi, byli małżonkowie, rodzina.</p>
+            <p>Porozumienie i naprawienie szkody sąd bierze pod uwagę przy wymiarze kary, a w sprawach z oskarżenia prywatnego pojednanie może zakończyć postępowanie. Dla pokrzywdzonego to często szybsza droga do realnego zadośćuczynienia niż czekanie na wyrok.</p>
+          </div>
+
+          <div class="rozwidlenie">
+            <div class="rozwidlenie__rola">
+              <h3>Twoim obrońcą lub pełnomocnikiem</h3>
+            </div>
+            <p class="rozwidlenie__albo">albo</p>
+            <div class="rozwidlenie__rola">
+              <h3>Mediatorem dla obu stron</h3>
+            </div>
+            <p class="rozwidlenie__nota">W jednej sprawie mogę być tylko jedną z tych osób. Mediator musi być bezstronny, więc te role się wykluczają. Na pierwszej rozmowie ustalimy, która droga ma w Twojej sytuacji sens.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 · JAK WYGLĄDA PIERWSZA ROZMOWA ============
+         Pole biel. .kroki--trzy jak we wzorcu. -->
+    <section class="sekcja biel" id="rozmowa">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Zanim zdecydujesz się na cokolwiek, <em>po prostu porozmawiajmy</em></h2>
+          <p class="lead">Wiele osób odkłada telefon do prawnika, bo nie wie, czego się spodziewać. Wygląda to tak.</p>
+        </div>
+
+        <div class="kroki kroki--trzy" data-odslon>
+          <div class="krok">
+            <span class="krok__nr">01</span>
+            <h3>Rozmowa</h3>
+            <p>Opowiadasz swoimi słowami, co się wydarzyło i co masz w ręku: wezwanie, postanowienie, wyrok. Jeżeli na piśmie jest data doręczenia, podaj ją od razu, bo od niej liczą się terminy.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">02</span>
+            <h3>Ocena sytuacji i plan</h3>
+            <p>Mówię, na jakim etapie jest sprawa, jakie masz prawa i co realnie da się w niej jeszcze zrobić. Także wtedy, gdy najrozsądniejszym wyjściem jest przyjęcie propozycji prokuratora.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">03</span>
+            <h3>Prowadzenie sprawy</h3>
+            <p>Jeśli zdecydujesz się na współpracę, przystępuję do sprawy, zapoznaję się z aktami i reprezentuję Cię w postępowaniu. Na bieżąco wiesz, na jakim etapie jesteśmy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 · PODEJŚCIE I O MNIE ============
+         Pole beż (otwiera ostatnie pole). .osoba w wersji skróconej z copy:
+         dwa krótkie akapity i inny cytat przy portrecie. -->
+    <section class="sekcja pas" id="o-mnie">
+      <div class="kontener">
+        <div class="osoba">
+          <div class="osoba__tekst" data-odslon>
+            <h2>Każda sprawa jest inna, bo <em>każda osoba jest inna</em></h2>
+            <p class="osoba__akapit">Prowadzę kancelarię w Częstochowie samodzielnie. Osoba, z którą rozmawiasz przy pierwszym telefonie, i osoba, która stoi obok Ciebie na sali rozpraw, to ta sama osoba.</p>
+            <p class="osoba__akapit">Wszystko, co powiesz podczas rozmowy, jest objęte tajemnicą adwokacką, także wtedy, gdy po niej nie zdecydujesz się na współpracę.</p>
+            <p class="osoba__wiecej"><a class="link" href="o-mnie.html">Poznaj kancelarię</a></p>
+          </div>
+
+          <div class="osoba__foto" data-odslon>
+            <div class="portret portret--zdjecie">
+              <img src="assets/beata-cupial-kowalska.jpg" srcset="assets/beata-cupial-kowalska-600.jpg 600w, assets/beata-cupial-kowalska.jpg 1024w" sizes="(max-width: 560px) 100vw, 30rem" width="1024" height="1536" alt="Adwokat Beata Cupiał-Kowalska" loading="lazy" decoding="async">
+            </div>
+            <figure class="osoba__cytat">
+              <blockquote class="osoba__slowa">
+                <p>„Bez względu na to, jaki ktoś ma status majątkowy, ta pomoc jest udzielana tak samo fachowo i profesjonalnie.”</p>
+              </blockquote>
+              <figcaption class="osoba__podpis">Adwokat Beata Cupiał-Kowalska</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 · OPINIE ============
+         Pole beż, hairline nad sekcją. Trzy opinie z wizytówki Google, które
+         nie nazywają rodzaju sprawy (te same co na stronie spadków). -->
+    <section class="sekcja pas sekcja--ciag" id="opinie">
+      <div class="kontener">
+        <div class="naglowek-sekcji">
+          <h2>Opinie osób, którym pomogłam</h2>
+        </div>
+
+        <div class="opinie-rzad opinie-rzad--ramka">
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Serdecznie polecam! Pełen profesjonalizm, rzetelne podejście do sprawy i ogromne zaangażowanie. Empatyczna i zawsze dostępna. Fachowe doradztwo i miła atmosfera współpracy. Polecam z całego serca!</p>
+            <footer class="opinia-kolumna__autor">Irys 2006<span class="opinia-kolumna__zrodlo">opinia w Google</span></footer>
+          </blockquote>
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Polecam serdecznie prowadziła mi sprawy z wielkim zaangażowaniem interesowała się każdym szczegółem w sprawie. Kontakt z nią o każdej porze bez problemu. Oczywiscie sprawy wygrane! Polecam w 100 % Pani Mecenas jest najlepsza.</p>
+            <footer class="opinia-kolumna__autor">Kamila Sapota<span class="opinia-kolumna__zrodlo">opinia w Google</span></footer>
+          </blockquote>
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Polecam Pani Beata wie co robi zna się na swojej pracy, walczy do samego końca póki nie wygra sprawy klienta, każdemu pomoże do zwycięstwa. Jeszcze raz serdecznie POLECAM</p>
+            <footer class="opinia-kolumna__autor">Karolina Bieniek<span class="opinia-kolumna__zrodlo">opinia w Google</span></footer>
+          </blockquote>
+        </div>
+
+        <!-- 【DO UZUPEŁNIENIA】 link do wizytówki Google -->
+        <p class="opinie-wszystkie"><a href="#">Zobacz wszystkie opinie w Google</a></p>
+      </div>
+    </section>
+
+    <!-- ============ 08 · NAJCZĘSTSZE PYTANIA ============
+         Pole beż, hairline nad sekcją. .uklad-faq: lewa kolumna sticky,
+         prawa: akordeon name="pytania". -->
+    <section class="sekcja pas sekcja--ciag" id="pytania">
+      <div class="kontener">
+        <div class="uklad-faq">
+          <div class="uklad-faq__szyna">
+            <h2 class="uklad-faq__tytul">Pytania, które słyszę <em>najczęściej</em></h2>
+            <div class="uklad-faq__karta">
+              <p>Nie ma tu Twojego pytania? Zadzwoń i po prostu spytaj.</p>
+              <a class="uklad-faq__telefon" href="tel:+48534477596">534&nbsp;477&nbsp;596</a>
+            </div>
+          </div>
+
+          <div class="faq uklad-faq__lista">
+            <details class="faq__poz" name="pytania" open>
+              <summary>Czy muszę składać wyjaśnienia?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Nie. Podejrzany i oskarżony mają prawo odmówić składania wyjaśnień oraz odpowiedzi na poszczególne pytania, i skorzystanie z tego prawa nie może być poczytane na niekorzyść. Inaczej jest ze świadkiem, który co do zasady ma obowiązek zeznawać, choć i tu są wyjątki. To pierwsza rzecz, którą ustalamy przed przesłuchaniem.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Zatrzymali bliską osobę, co mogę zrobić?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Zatrzymanie może trwać ograniczony czas i albo kończy się zwolnieniem, albo skierowaniem wniosku o tymczasowe aresztowanie. Zatrzymany ma prawo do kontaktu z adwokatem i do zażalenia na samo zatrzymanie. Zadzwoń od razu, bo to jest ten rodzaj sprawy, w którym liczą się godziny.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Jestem wezwany jako świadek, po co mi obrońca?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Charakter, w jakim jesteś wzywany, potrafi się zmienić w trakcie tego samego przesłuchania. Świadek nie ma obrońcy, ale może przyjść z pełnomocnikiem i ma prawo uchylić się od odpowiedzi, gdyby naraziła go na odpowiedzialność karną. Krótka rozmowa przed wizytą na komisariacie kosztuje niewiele, a bywa najważniejszą rzeczą w całej sprawie.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Ile trwa sprawa karna?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Prosta sprawa, w której zapada wyrok nakazowy albo dochodzi do dobrowolnego poddania się karze, kończy się w kilka miesięcy. Sprawa z wieloma świadkami, opinią biegłego i kilkoma terminami rozpraw potrafi trwać ponad rok, a apelacja dokłada kolejne miesiące. Po zapoznaniu się z aktami powiem, w którym z tych scenariuszy prawdopodobnie jesteś.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy wyrok zawsze oznacza więzienie?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Nie. Sąd dysponuje grzywną i ograniczeniem wolności, może warunkowo zawiesić wykonanie kary pozbawienia wolności, a przy osobach niekaranych rozważyć warunkowe umorzenie postępowania, które nie jest skazaniem. To, co realnie wchodzi w grę, zależy od zarzutu, od wcześniejszej karalności i od postawy po zdarzeniu. Nikt uczciwie nie odpowie na to pytanie przez telefon bez znajomości akt.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Co to jest dozór elektroniczny i kto może się o niego starać?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">To odbywanie kary pozbawienia wolności poza zakładem karnym, pod kontrolą urządzenia monitorującego, z wyznaczonymi godzinami przebywania w domu. Decyduje sąd penitencjarny, a warunki dotyczą między innymi wymiaru kary, warunków mieszkaniowych i zgody osób wspólnie zamieszkujących. Wniosek trzeba przygotować, bo sąd ocenia całość sytuacji, a nie samą chęć.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Ile mam czasu na apelację?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Najpierw składa się wniosek o uzasadnienie wyroku, na co jest krótki termin liczony od ogłoszenia, a dopiero potem, po otrzymaniu uzasadnienia, biegnie czternaście dni na apelację. Przekroczenie pierwszego terminu w praktyce zamyka drogę do zaskarżenia. Jeżeli wyrok właśnie zapadł, zadzwoń w tym tygodniu, a nie po świętach.</div>
+            </details>
+            <!-- 【DO UZUPEŁNIENIA】 czy klientka prowadzi obronę w sprawach rozpoznawanych
+                 w pierwszej instancji przez sąd okręgowy. Jeśli nie, wypada zdanie
+                 o sądzie okręgowym (także w JSON-LD). -->
+            <details class="faq__poz" name="pytania">
+              <summary>Który sąd rozpozna moją sprawę w Częstochowie?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Sprawy karne rozpoznaje sąd właściwy dla miejsca popełnienia czynu, a większość spraw trafia do sądu rejonowego. Poważniejsze przestępstwa rozpoznaje w pierwszej instancji sąd okręgowy. Jeżeli mieszkasz poza Częstochową, nie musisz jeździć na każdy termin, bo w wielu sytuacjach mogę reprezentować Cię na rozprawie.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 09 · KONTAKT ============
+         Pole beż, hairline nad sekcją. Opis dojścia z danych realnych
+         (w copy: do uzupełnienia). -->
+    <section class="sekcja pas sekcja--ciag" id="kontakt">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Najtrudniejszy jest ten <em>pierwszy telefon</em></h2>
+          <p class="lead">Potem jest już tylko rozmowa. Zadzwoń i opowiedz, co się dzieje. Powiem Ci, na czym stoisz i co trzeba zrobić w pierwszej kolejności.</p>
+        </div>
+
+        <div class="kontakt-telefon" data-odslon>
+          <a class="telefon-duzy" href="tel:+48534477596">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            534 477 596
+          </a>
+          <p class="telefon-podpis">Jeśli nie odbieram, jestem na rozprawie. Oddzwaniam.</p>
+        </div>
+
+        <div class="kontakt-siatka" data-odslon>
+          <div class="kontakt-kol">
+            <h4>E-mail</h4>
+            <p><a href="mailto:kancelaria@cupial-kowalska.pl">kancelaria@cupial-kowalska.pl</a></p>
+            <p class="male drugorzedny">Odpisuję zwykle tego samego albo następnego dnia.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Kancelaria</h4>
+            <p>ul. Kilińskiego 5 lok. 4<br>42-202 Częstochowa</p>
+            <p class="male drugorzedny">Lewa oficyna, pierwsze piętro, po prawej stronie.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Spotkania</h4>
+            <p>Osobiście w Częstochowie, online albo telefonicznie.</p>
+            <p class="male drugorzedny">Termin dogrywamy telefonicznie. Dojazd, mapa i formularz z prośbą o telefon: <a href="kontakt.html">strona kontaktu</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Sprawy karne",
+        "serviceType": "Obrona w sprawach karnych: zatrzymanie i przesłuchanie, przestępstwa przeciwko mieniu i osobie, wykonanie kary, dozór elektroniczny, apelacja",
+        "areaServed": { "@type": "City", "name": "Częstochowa" },
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "servicePhone": { "@type": "ContactPoint", "telephone": "+48534477596" },
+          "availableLanguage": "pl"
+        },
+        "provider": {
+          "@type": "Attorney",
+          "name": "Kancelaria Adwokacka Beata Cupiał-Kowalska",
+          "telephone": "+48534477596",
+          "email": "kancelaria@cupial-kowalska.pl",
+          "areaServed": "Częstochowa",
+          "knowsLanguage": "pl",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ul. Kilińskiego 5 lok. 4",
+            "postalCode": "42-202",
+            "addressLocality": "Częstochowa",
+            "addressCountry": "PL"
+          },
+          "founder": {
+            "@type": "Person",
+            "name": "Beata Cupiał-Kowalska",
+            "jobTitle": "adwokat"
+          }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Czy muszę składać wyjaśnienia?", "acceptedAnswer": { "@type": "Answer", "text": "Nie. Podejrzany i oskarżony mają prawo odmówić składania wyjaśnień oraz odpowiedzi na poszczególne pytania, i skorzystanie z tego prawa nie może być poczytane na niekorzyść. Inaczej jest ze świadkiem, który co do zasady ma obowiązek zeznawać, choć i tu są wyjątki." } },
+          { "@type": "Question", "name": "Zatrzymali bliską osobę, co mogę zrobić?", "acceptedAnswer": { "@type": "Answer", "text": "Zatrzymanie może trwać ograniczony czas i albo kończy się zwolnieniem, albo skierowaniem wniosku o tymczasowe aresztowanie. Zatrzymany ma prawo do kontaktu z adwokatem i do zażalenia na samo zatrzymanie." } },
+          { "@type": "Question", "name": "Jestem wezwany jako świadek, po co mi obrońca?", "acceptedAnswer": { "@type": "Answer", "text": "Charakter, w jakim jesteś wzywany, potrafi się zmienić w trakcie tego samego przesłuchania. Świadek nie ma obrońcy, ale może przyjść z pełnomocnikiem i ma prawo uchylić się od odpowiedzi, gdyby naraziła go na odpowiedzialność karną." } },
+          { "@type": "Question", "name": "Ile trwa sprawa karna?", "acceptedAnswer": { "@type": "Answer", "text": "Prosta sprawa, w której zapada wyrok nakazowy albo dochodzi do dobrowolnego poddania się karze, kończy się w kilka miesięcy. Sprawa z wieloma świadkami, opinią biegłego i kilkoma terminami rozpraw potrafi trwać ponad rok, a apelacja dokłada kolejne miesiące." } },
+          { "@type": "Question", "name": "Czy wyrok zawsze oznacza więzienie?", "acceptedAnswer": { "@type": "Answer", "text": "Nie. Sąd dysponuje grzywną i ograniczeniem wolności, może warunkowo zawiesić wykonanie kary pozbawienia wolności, a przy osobach niekaranych rozważyć warunkowe umorzenie postępowania, które nie jest skazaniem. To, co realnie wchodzi w grę, zależy od zarzutu, od wcześniejszej karalności i od postawy po zdarzeniu." } },
+          { "@type": "Question", "name": "Co to jest dozór elektroniczny i kto może się o niego starać?", "acceptedAnswer": { "@type": "Answer", "text": "To odbywanie kary pozbawienia wolności poza zakładem karnym, pod kontrolą urządzenia monitorującego, z wyznaczonymi godzinami przebywania w domu. Decyduje sąd penitencjarny, a warunki dotyczą między innymi wymiaru kary, warunków mieszkaniowych i zgody osób wspólnie zamieszkujących." } },
+          { "@type": "Question", "name": "Ile mam czasu na apelację?", "acceptedAnswer": { "@type": "Answer", "text": "Najpierw składa się wniosek o uzasadnienie wyroku, na co jest krótki termin liczony od ogłoszenia, a dopiero potem, po otrzymaniu uzasadnienia, biegnie czternaście dni na apelację. Przekroczenie pierwszego terminu w praktyce zamyka drogę do zaskarżenia." } },
+          { "@type": "Question", "name": "Który sąd rozpozna moją sprawę w Częstochowie?", "acceptedAnswer": { "@type": "Answer", "text": "Sprawy karne rozpoznaje sąd właściwy dla miejsca popełnienia czynu, a większość spraw trafia do sądu rejonowego. Poważniejsze przestępstwa rozpoznaje w pierwszej instancji sąd okręgowy." } }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>

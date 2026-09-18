@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jazda po alkoholu, obrona · Adwokat Beata Cupiał-Kowalska, Częstochowa</title>
+  <meta name="description" content="Zatrzymane prawo jazdy, jazda po alkoholu lub w stanie nietrzeźwości, wyrok nakazowy, przepadek pojazdu, blokada alkoholowa. Adwokat Beata Cupiał-Kowalska prowadzi obronę w Częstochowie osobiście, rozmowa jest objęta tajemnicą adwokacką. Tel. 534 477 596.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+
+  <div data-nav></div>
+
+  <!-- PODSTRONA USŁUGOWA „Jazda po alkoholu" — najważniejsza zakładka kancelarii.
+       Szkielet z rozwod-i-sprawy-rodzinne.html (plik-wzorzec), copy:
+       jazda-po-alkoholu-copy.md. Cztery moduły własne (blok na końcu styles.css):
+         .os-dni      oś czasu pierwszych dni po zatrzymaniu
+         .progi       tabela wykroczenie / przestępstwo (na telefonie dwie karty)
+         .mozliwosci  blok na espresso w miejscu mediacji
+         .dyskrecja   wyśrodkowany blok o tajemnicy adwokackiej
+       Bez bloku mediacji: w tych sprawach nie ma drugiej strony do ugody.
+       Pola: biel (nagłówek) · beż (oś + karty) · biel (progi + zakres) ·
+       espresso (możliwości) · biel (dyskrecja + rozmowa) · beż (podejście,
+       opinie, FAQ, kontakt) · espresso (stopka).
+       Etykiety: trzy (oś, progi, możliwości), bo system dopuszcza najwyżej
+       trzy na stronę; karty sytuacji idą tu bez etykiety.
+       WSZYSTKIE progi, kwoty i długości zakazów do weryfikacji na dzień publikacji. -->
+  <main id="gora" class="strona-uslugowa">
+
+    <!-- ============ 01 · NAGŁÓWEK STRONY USŁUGOWEJ ============
+         Pole biel. Okruszki: Strona główna › Usługi › Jazda po alkoholu. -->
+    <section class="naglowek-strony naglowek-strony--uslugi biel">
+      <div class="kontener">
+        <div data-okruszki></div>
+        <h1 class="naglowek-strony__tytul">Jazda po alkoholu, obrona w Częstochowie</h1>
+        <p class="naglowek-strony__lead">Zatrzymali Ci prawo jazdy i nie wiesz, co się będzie działo dalej. Zadzwoń, zanim cokolwiek podpiszesz. W tych sprawach o wielu rzeczach decydują pierwsze dni.</p>
+
+        <p class="naglowek-strony__kontakt">
+          <a class="naglowek-strony__telefon" href="tel:+48534477596">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>534&nbsp;477&nbsp;596</span>
+          </a>
+          <span class="naglowek-strony__spotkania">Spotkania w Częstochowie, online i telefonicznie</span>
+        </p>
+
+        <ul class="naglowek-strony__meta">
+          <li>Sprawę prowadzę osobiście</li>
+          <li>Rozmowa objęta tajemnicą adwokacką</li>
+          <li>Oddzwaniam po rozprawie</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 02 · OŚ CZASU: PIERWSZE DNI PO ZATRZYMANIU ============
+         Pole beż. NOWY MODUŁ .os-dni: pionowa szyna z numerowanymi węzłami,
+         tytuł kroku po lewej, opis po prawej (na telefonie pod tytułem).
+         Krok 05 ma wypełniony węzeł i znacznik terminu, bo to jedyny krok
+         z terminem liczonym w dniach. Szyna kończy się pełną kropką przy
+         zdaniu „zadzwoń dziś" i przycisku: oś prowadzi do działania.
+         Poprawka literówki z copy: „na wprawę" → „na rozprawę". -->
+    <section class="sekcja pas" id="po-zatrzymaniu">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--modul">
+          <p class="etykieta">Co się dzieje po kolei</p>
+          <h2>Najwięcej spraw przegrywa się <em>w pierwszych dwóch tygodniach</em></h2>
+          <p class="lead">Nie dlatego, że nie było argumentów. Dlatego, że ktoś podpisał pierwszy dokument, który mu podsunięto, albo przegapił termin, o którym nie wiedział.</p>
+        </div>
+
+        <ol class="os-dni">
+          <li class="os-dni__krok">
+            <span class="os-dni__nr" aria-hidden="true">01</span>
+            <h3 class="os-dni__tytul">Badanie i zatrzymanie dokumentu</h3>
+            <p class="os-dni__opis">Policja bada zawartość alkoholu, zwykle urządzeniem elektronicznym, czasem krwią. Prawo jazdy zostaje zatrzymane od razu, a pokwitowanie nie uprawnia do dalszej jazdy.</p>
+          </li>
+          <li class="os-dni__krok">
+            <span class="os-dni__nr" aria-hidden="true">02</span>
+            <h3 class="os-dni__tytul">Twoje wyjaśnienia</h3>
+            <p class="os-dni__opis">Masz prawo odmówić składania wyjaśnień i to prawo nie działa na Twoją niekorzyść. Cokolwiek powiesz na tym etapie, zostaje w aktach do końca sprawy.</p>
+          </li>
+          <li class="os-dni__krok">
+            <span class="os-dni__nr" aria-hidden="true">03</span>
+            <h3 class="os-dni__tytul">Decyzja o dokumencie</h3>
+            <p class="os-dni__opis">Sprawa trafia do prokuratury albo do sądu, a starosta wydaje decyzję o zatrzymaniu uprawnień. To dwie osobne ścieżki, które biegną równolegle.</p>
+          </li>
+          <li class="os-dni__krok">
+            <span class="os-dni__nr" aria-hidden="true">04</span>
+            <h3 class="os-dni__tytul">Propozycja dobrowolnego poddania się karze</h3>
+            <p class="os-dni__opis">Bardzo częsty moment i bardzo częsty błąd. Propozycja bywa rozsądna, ale bywa też surowsza niż to, co realnie orzekłby sąd, i nie zawsze uwzględnia to, co da się jeszcze ugrać.</p>
+          </li>
+          <li class="os-dni__krok os-dni__krok--termin">
+            <span class="os-dni__nr" aria-hidden="true">05</span>
+            <h3 class="os-dni__tytul">Wyrok nakazowy</h3>
+            <div class="os-dni__opis">
+              <p>Sąd może wydać go bez rozprawy, na podstawie samych akt. Przychodzi pocztą i na sprzeciw jest tylko siedem dni od doręczenia. Po tym terminie wyrok się uprawomocnia.</p>
+              <p class="os-dni__termin">Termin: 7 dni od doręczenia</p>
+            </div>
+          </li>
+          <li class="os-dni__krok">
+            <span class="os-dni__nr" aria-hidden="true">06</span>
+            <h3 class="os-dni__tytul">Rozprawa</h3>
+            <p class="os-dni__opis">Jeżeli wniesiemy sprzeciw albo sprawa od razu trafi na rozprawę, dopiero tu jest miejsce na dowody, wnioski i rozmowę o wymiarze kary.</p>
+          </li>
+        </ol>
+
+        <div class="os-dni__final">
+          <p class="os-dni__zdanie">Jeżeli masz w ręku pismo z sądu, sprawdź datę doręczenia i zadzwoń dziś. Terminy w tych sprawach liczy się w dniach, nie w tygodniach.</p>
+          <a class="btn btn--akcent" href="tel:+48534477596">Zadzwoń:&nbsp;534&nbsp;477&nbsp;596</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 03 · CZY TO TWOJA SYTUACJA ============
+         Pole beż, hairline nad sekcją. Kafle .rozpoznanie jak we wzorcu,
+         bez etykiety (limit trzech na stronę). Poprawka z copy: „nie mieszczę
+         mi się to w głowie" → „nie mieści mi się to w głowie". -->
+    <section class="sekcja pas sekcja--ciag" id="sytuacje">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--sytuacje">
+          <h2>Większość osób trafia do mnie w <em>jednej z tych sytuacji</em></h2>
+          <p class="lead">Jeśli rozpoznajesz tu siebie, to dobry moment na rozmowę. Nie musisz jeszcze wiedzieć, czego chcesz.</p>
+        </div>
+
+        <ul class="rozpoznanie">
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Zatrzymali mnie wczoraj i zabrali prawo jazdy”</h3>
+            <p class="rozpoznanie__odp">To najlepszy możliwy moment na telefon. Wtedy jeszcze wszystkie drogi są otwarte.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Dmuchałem rano, po imprezie dzień wcześniej”</h3>
+            <p class="rozpoznanie__odp">Wynik z poranka po alkoholu wypitym wieczorem to inna sytuacja dowodowa niż jazda prosto z imprezy. Warto to wykazać.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Prokurator proponuje mi dobrowolne poddanie się karze”</h3>
+            <p class="rozpoznanie__odp">Zanim podpiszesz, sprawdźmy, co dokładnie akceptujesz i jak długi zakaz się z tym wiąże.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Przyszedł wyrok nakazowy”</h3>
+            <p class="rozpoznanie__odp">Na sprzeciw jest siedem dni od doręczenia. Zadzwoń od razu, bo tego terminu nie da się przywrócić bez ważnej przyczyny.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Jeżdżę zawodowo, bez prawa jazdy tracę pracę”</h3>
+            <p class="rozpoznanie__odp">To okoliczność, którą trzeba pokazać sądowi, i to we właściwym momencie postępowania.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„To był pierwszy raz i nie mieści mi się to w głowie”</h3>
+            <p class="rozpoznanie__odp">Przy niekaranych sprawcach i niskim wyniku bywa dostępna droga, która nie kończy się skazaniem. Sprawdzimy, czy jest w Twoim zasięgu.</p>
+          </li>
+          <li class="rozpoznanie__cta">
+            <div class="rozpoznanie__cta-tekst">
+              <p class="rozpoznanie__cta-tytul">Nie ma tu Twojej sytuacji?</p>
+              <p class="rozpoznanie__cta-opis">Opowiedz mi, co się stało. Nie oceniam, tylko sprawdzam, co da się zrobić.</p>
+            </div>
+            <a class="rozpoznanie__przycisk" href="tel:+48534477596">Zadzwoń:&nbsp;534&nbsp;477&nbsp;596</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 04 · TABELA: WYKROCZENIE CZY PRZESTĘPSTWO ============
+         Pole biel. NOWY MODUŁ .progi. Na desktopie prawdziwa <table> z nagłówkami
+         wierszy i kolumn; poniżej 861 px ta sama treść jako dwie karty <dl>
+         jedna pod drugą (bez przewijania w poziomie). TREŚĆ STOI W DWÓCH
+         MIEJSCACH — zmiana progu albo kwoty = edycja tabeli i karty naraz.
+         Wersja ukryta ma display:none, więc czytnik ekranu czyta tylko jedną.
+         【DO UZUPEŁNIENIA】 progi, kary, zakazy i świadczenie do weryfikacji
+         na dzień publikacji (w copy w nawiasach kwadratowych). -->
+    <section class="sekcja biel" id="progi">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--modul">
+          <p class="etykieta">Dwa różne światy</p>
+          <h2>Granica przebiega <em>przy pół promila</em></h2>
+          <p class="lead">Od tego jednego wyniku zależy, czy sprawa skończy się grzywną i wpisem do rejestru wykroczeń, czy wyrokiem karnym, który zostaje w rejestrze na lata.</p>
+        </div>
+
+        <div class="progi">
+          <table class="progi__tabela">
+            <caption class="wizualnie-ukryte">Porównanie: stan po użyciu alkoholu (wykroczenie) i stan nietrzeźwości (przestępstwo)</caption>
+            <thead>
+              <tr>
+                <td class="progi__rog"></td>
+                <th scope="col" class="progi__kol progi__kol--lzej">Stan po użyciu alkoholu</th>
+                <th scope="col" class="progi__kol progi__kol--ciezej">Stan nietrzeźwości</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">Zawartość alkoholu we krwi</th>
+                <td>od 0,2 do 0,5 promila</td>
+                <td>powyżej 0,5 promila</td>
+              </tr>
+              <tr>
+                <th scope="row">W wydychanym powietrzu</th>
+                <td>od 0,1 do 0,25 mg/l</td>
+                <td>powyżej 0,25 mg/l</td>
+              </tr>
+              <tr class="progi__wiersz--kwalifikacja">
+                <th scope="row">Kwalifikacja</th>
+                <td>wykroczenie</td>
+                <td>przestępstwo</td>
+              </tr>
+              <tr>
+                <th scope="row">Kara</th>
+                <td>areszt albo grzywna nie niższa niż 2500 zł</td>
+                <td>grzywna, ograniczenie wolności albo pozbawienie wolności do 3 lat</td>
+              </tr>
+              <tr>
+                <th scope="row">Zakaz prowadzenia</th>
+                <td>od 6 miesięcy do 3 lat</td>
+                <td>od 3 do 15 lat</td>
+              </tr>
+              <tr>
+                <th scope="row">Świadczenie pieniężne</th>
+                <td>nie orzeka się</td>
+                <td>co najmniej 5000 zł</td>
+              </tr>
+              <tr>
+                <th scope="row">Wpis do Krajowego Rejestru Karnego</th>
+                <td>nie</td>
+                <td>tak, w razie skazania</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="progi__karty">
+            <div class="progi__karta progi__karta--lzej">
+              <p class="progi__karta-tytul">Stan po użyciu alkoholu</p>
+              <dl class="progi__lista">
+                <div><dt>Zawartość alkoholu we krwi</dt><dd>od 0,2 do 0,5 promila</dd></div>
+                <div><dt>W wydychanym powietrzu</dt><dd>od 0,1 do 0,25 mg/l</dd></div>
+                <div class="progi__wiersz--kwalifikacja"><dt>Kwalifikacja</dt><dd>wykroczenie</dd></div>
+                <div><dt>Kara</dt><dd>areszt albo grzywna nie niższa niż 2500 zł</dd></div>
+                <div><dt>Zakaz prowadzenia</dt><dd>od 6 miesięcy do 3 lat</dd></div>
+                <div><dt>Świadczenie pieniężne</dt><dd>nie orzeka się</dd></div>
+                <div><dt>Wpis do Krajowego Rejestru Karnego</dt><dd>nie</dd></div>
+              </dl>
+            </div>
+            <div class="progi__karta progi__karta--ciezej">
+              <p class="progi__karta-tytul">Stan nietrzeźwości</p>
+              <dl class="progi__lista">
+                <div><dt>Zawartość alkoholu we krwi</dt><dd>powyżej 0,5 promila</dd></div>
+                <div><dt>W wydychanym powietrzu</dt><dd>powyżej 0,25 mg/l</dd></div>
+                <div class="progi__wiersz--kwalifikacja"><dt>Kwalifikacja</dt><dd>przestępstwo</dd></div>
+                <div><dt>Kara</dt><dd>grzywna, ograniczenie wolności albo pozbawienie wolności do 3 lat</dd></div>
+                <div><dt>Zakaz prowadzenia</dt><dd>od 3 do 15 lat</dd></div>
+                <div><dt>Świadczenie pieniężne</dt><dd>co najmniej 5000 zł</dd></div>
+                <div><dt>Wpis do Krajowego Rejestru Karnego</dt><dd>tak, w razie skazania</dd></div>
+              </dl>
+            </div>
+          </div>
+
+          <p class="progi__dopisek">Przy wyższych wynikach i w razie wypadku dochodzi przepadek pojazdu albo nawiązka, jeżeli samochód nie należał do kierowcy. Jazda mimo orzeczonego zakazu jest osobnym przestępstwem i traktuje się ją znacznie surowiej.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 · ZAKRES POMOCY ============
+         Pole biel, hairline nad sekcją. Akordeon .faq--wykaz, grupa name="alkohol".
+         POPRAWKA MERYTORYCZNA w pozycji 03: copy mówiło, że przy warunkowym
+         umorzeniu nie ma wpisu do rejestru karnego. Wpis jest, ale czasowy
+         (usuwany po okresie próby). Zdanie przepisane tak, żeby było prawdziwe. -->
+    <section class="sekcja biel sekcja--ciag" id="zakres">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--wykaz">
+          <h2>Sprawy, <em>które prowadzę</em></h2>
+          <p class="lead">Każdą z nich zajmuję się osobiście, od pierwszego pisma do zakończenia, przed sądami w Częstochowie i okolicy.</p>
+        </div>
+
+        <div class="faq faq--wykaz">
+          <details class="faq__poz" name="alkohol" open>
+            <summary><span class="faq__glowa"><span class="faq__nr">01</span><span class="faq__tytul">Jazda w stanie nietrzeźwości<span class="faq__zajawka">Sprawa karna, z wyrokiem i wpisem do rejestru.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Prowadzę obronę od etapu postępowania przygotowawczego, czyli od pierwszego przesłuchania, a nie dopiero na sali sądowej. Sprawdzam prawidłowość badania, sposób jego przeprowadzenia i to, czy okoliczności zdarzenia rzeczywiście odpowiadają temu, co jest w aktach. Nawet gdy sam fakt nie jest sporny, przedmiotem obrony pozostaje wymiar kary i długość zakazu.</p>
+            </div>
+          </details>
+          <details class="faq__poz" name="alkohol">
+            <summary><span class="faq__glowa"><span class="faq__nr">02</span><span class="faq__tytul">Jazda po użyciu alkoholu<span class="faq__zajawka">Wykroczenie, ale z obowiązkowym zakazem prowadzenia.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Wynik mieszczący się w przedziale wykroczenia to inna procedura i inne konsekwencje, ale prawo jazdy tracisz tak samo. Bronię w sprawach o wykroczenia drogowe i występuję o możliwie łagodne rozstrzygnięcie, w tym o najkrótszy możliwy zakaz. Przy wynikach granicznych realne znaczenie ma sposób i moment badania.</p>
+            </div>
+          </details>
+          <details class="faq__poz" name="alkohol">
+            <summary><span class="faq__glowa"><span class="faq__nr">03</span><span class="faq__tytul">Warunkowe umorzenie postępowania<span class="faq__zajawka">Droga, która nie kończy się skazaniem.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Sąd może warunkowo umorzyć postępowanie wobec osoby wcześniej niekaranej za przestępstwo umyślne, jeżeli uzna, że wina i szkodliwość czynu nie są znaczne. Nie ma wtedy wyroku skazującego, wpis w rejestrze karnym jest tylko czasowy i znika po okresie próby, a zakaz prowadzenia jest krótszy. Nie każda sprawa się do tego nadaje, dlatego oceniam to na pierwszej rozmowie, zamiast obiecywać z góry.</p>
+            </div>
+          </details>
+          <details class="faq__poz" name="alkohol">
+            <summary><span class="faq__glowa"><span class="faq__nr">04</span><span class="faq__tytul">Przepadek pojazdu i nawiązka<span class="faq__zajawka">Konsekwencja, która zaskakuje najbardziej.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Przy wyższych wynikach sąd orzeka przepadek pojazdu, a jeżeli samochód nie należał do kierowcy, zamiast przepadku zasądza nawiązkę. Dotyczy to również aut w leasingu i pożyczonych, tylko na innych zasadach. To jeden z tych elementów, o które realnie warto się spierać, bo skutek jest majątkowy i nieodwracalny.</p>
+            </div>
+          </details>
+          <details class="faq__poz" name="alkohol">
+            <summary><span class="faq__glowa"><span class="faq__nr">05</span><span class="faq__tytul">Skrócenie zakazu i blokada alkoholowa<span class="faq__zajawka">Kiedy wyrok już zapadł, a Ty musisz wrócić za kierownicę.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Po upływie połowy okresu zakazu można wystąpić o zmianę sposobu jego wykonywania na prowadzenie wyłącznie pojazdów wyposażonych w blokadę alkoholową. Sąd bierze pod uwagę postawę po wyroku, więc to nie jest formalność, tylko wniosek, który trzeba przygotować. Prowadzę też sprawy o zwrot uprawnień po zakończonym zakazie.</p>
+            </div>
+          </details>
+          <!-- 【DO UZUPEŁNIENIA】 czy klientka prowadzi sprawy o wypadki ze skutkiem
+               śmiertelnym lub z ciężkim uszczerbkiem (pozycja 06). Jeśli nie,
+               pozycja zawęża się do jazdy mimo zakazu. -->
+          <details class="faq__poz" name="alkohol">
+            <summary><span class="faq__glowa"><span class="faq__nr">06</span><span class="faq__tytul">Jazda mimo zakazu i wypadek pod wpływem<span class="faq__zajawka">Najcięższa kategoria w tej grupie spraw.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Prowadzenie pojazdu mimo orzeczonego zakazu jest osobnym przestępstwem i sąd traktuje je surowo, bo to złamanie wcześniejszego orzeczenia. Podobnie wygląda sytuacja, w której pod wpływem alkoholu doszło do kolizji albo wypadku z osobą poszkodowaną. W tych sprawach obrona zaczyna się od bardzo dokładnego ustalenia przebiegu zdarzenia.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 · BLOK MOŻLIWOŚCI ============
+         Pole espresso, w miejscu mediacji z pozostałych podstron usługowych.
+         NOWY MODUŁ .mozliwosci: tekst po lewej (7/12), po prawej ramka ze
+         zdaniem „nie obiecuję wyniku" i telefonem, wyrównana do dołu tekstu.
+         POPRAWKA MERYTORYCZNA jak w zakresie: wpis w rejestrze przy
+         warunkowym umorzeniu jest czasowy, nie „bez wpisu".
+         【DO UZUPEŁNIENIA】 czy klientka chce, żeby strona wprost mówiła
+         o warunkowym umorzeniu jako realnej drodze. -->
+    <section class="sekcja espresso" id="mozliwosci">
+      <div class="kontener">
+        <div class="mozliwosci">
+          <div class="mozliwosci__tekst">
+            <p class="etykieta">To nie jest przesądzone</p>
+            <h2>Nie każda taka sprawa kończy się <em>wyrokiem skazującym</em></h2>
+            <p class="mozliwosci__akapit mozliwosci__akapit--pierwszy">Większość osób, które do mnie dzwonią, jest przekonana, że nie ma nic do zrobienia, bo wynik badania jest wynikiem badania. To nieprawda i to jest najważniejsza rzecz na tej stronie.</p>
+            <p class="mozliwosci__akapit">Przy osobach wcześniej niekaranych i przy niższych wynikach realnie w grę wchodzi warunkowe umorzenie postępowania, czyli rozstrzygnięcie bez skazania, w którym wpis do rejestru karnego jest tylko czasowy. Jeżeli wyrok już zapadł, po połowie okresu zakazu można wystąpić o blokadę alkoholową i wrócić za kierownicę wcześniej.</p>
+          </div>
+          <div class="mozliwosci__ramka">
+            <p class="mozliwosci__uczciwie">Nie obiecuję żadnego wyniku i nie znam prawnika, który uczciwie mógłby to zrobić. Mogę powiedzieć, czy w Twojej sprawie ta droga w ogóle wchodzi w grę, i to zwykle po jednej rozmowie.</p>
+            <a class="btn btn--jasny" href="tel:+48534477596">Zadzwoń:&nbsp;534&nbsp;477&nbsp;596</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 · BLOK DYSKRECJI ============
+         Pole biel. NOWY MODUŁ .dyskrecja: jedyny wyśrodkowany blok na stronie,
+         wąska miara, krótka kreska w akcencie między nagłówkiem a tekstem.
+         Ton rozmowy, nie deklaracji: pierwszy akapit większy, drugi spokojniejszy.
+         【DO UZUPEŁNIENIA】 czy klientka akceptuje zdanie o prawie do obrony
+         (drugi akapit) — najbardziej narażony wizerunkowo fragment strony. -->
+    <section class="sekcja biel" id="dyskrecja">
+      <div class="kontener">
+        <div class="dyskrecja">
+          <h2>Nie musisz <em>się tłumaczyć</em></h2>
+          <p class="dyskrecja__pierwszy">Prawie każdy, kto dzwoni w takiej sprawie, zaczyna od zdania, że normalnie tak nie robi. Nie musisz. Moim zadaniem nie jest ocenianie Cię, tylko sprawdzenie, co da się jeszcze zrobić.</p>
+          <p class="dyskrecja__drugi">Wszystko, co powiesz, jest objęte tajemnicą adwokacką, także wtedy, gdy po rozmowie nie zdecydujesz się na współpracę. Prawo do obrony ma każdy, również człowiek, który popełnił błąd, i to jest fundament, na którym stoi cały system.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 · JAK WYGLĄDA PIERWSZA ROZMOWA ============
+         Pole biel, hairline nad sekcją. .kroki--trzy jak we wzorcu. -->
+    <section class="sekcja biel sekcja--ciag" id="rozmowa">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Zanim zdecydujesz się na cokolwiek, <em>po prostu porozmawiajmy</em></h2>
+          <p class="lead">Wiele osób odkłada telefon do prawnika, bo nie wie, czego się spodziewać. Wygląda to tak.</p>
+        </div>
+
+        <div class="kroki kroki--trzy" data-odslon>
+          <div class="krok">
+            <span class="krok__nr">01</span>
+            <h3>Rozmowa</h3>
+            <p>Opowiadasz swoimi słowami, co się stało, kiedy i co masz w ręku: pokwitowanie, wezwanie, pismo z sądu. Jeżeli masz datę doręczenia, podaj ją od razu, bo od niej liczą się terminy.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">02</span>
+            <h3>Ocena sytuacji i plan</h3>
+            <p>Mówię, czy to sprawa o wykroczenie czy o przestępstwo, jakie realnie są scenariusze i czy warunkowe umorzenie jest w zasięgu. Także wtedy, gdy najrozsądniej jest przyjąć propozycję prokuratora.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">03</span>
+            <h3>Prowadzenie sprawy</h3>
+            <p>Jeśli zdecydujesz się na współpracę, przygotowuję pisma i reprezentuję Cię w postępowaniu. Na bieżąco wiesz, na jakim etapie jesteśmy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 09 · PODEJŚCIE I O MNIE ============
+         Pole beż (otwiera ostatnie pole). .osoba w wersji skróconej z copy. -->
+    <section class="sekcja pas" id="o-mnie">
+      <div class="kontener">
+        <div class="osoba">
+          <div class="osoba__tekst" data-odslon>
+            <h2>Każda sprawa jest inna, bo <em>każda osoba jest inna</em></h2>
+            <p class="osoba__akapit">Prowadzę kancelarię w Częstochowie samodzielnie. Osoba, z którą rozmawiasz przy pierwszym telefonie, i osoba, która stoi obok Ciebie na sali rozpraw, to ta sama osoba.</p>
+            <p class="osoba__wiecej"><a class="link" href="o-mnie.html">Poznaj kancelarię</a></p>
+          </div>
+
+          <div class="osoba__foto" data-odslon>
+            <div class="portret portret--zdjecie">
+              <img src="assets/beata-cupial-kowalska.jpg" srcset="assets/beata-cupial-kowalska-600.jpg 600w, assets/beata-cupial-kowalska.jpg 1024w" sizes="(max-width: 560px) 100vw, 30rem" width="1024" height="1536" alt="Adwokat Beata Cupiał-Kowalska" loading="lazy" decoding="async">
+            </div>
+            <figure class="osoba__cytat">
+              <blockquote class="osoba__slowa">
+                <p>„Bez względu na to, jaki ktoś ma status majątkowy, ta pomoc jest udzielana tak samo fachowo i profesjonalnie.”</p>
+              </blockquote>
+              <figcaption class="osoba__podpis">Adwokat Beata Cupiał-Kowalska</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 10 · OPINIE ============
+         Pole beż, hairline nad sekcją. Trzy opinie z wizytówki Google, które
+         nie nazywają rodzaju sprawy. -->
+    <section class="sekcja pas sekcja--ciag" id="opinie">
+      <div class="kontener">
+        <div class="naglowek-sekcji">
+          <h2>Opinie osób, którym pomogłam</h2>
+        </div>
+
+        <div class="opinie-rzad opinie-rzad--ramka">
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Serdecznie polecam! Pełen profesjonalizm, rzetelne podejście do sprawy i ogromne zaangażowanie. Empatyczna i zawsze dostępna. Fachowe doradztwo i miła atmosfera współpracy. Polecam z całego serca!</p>
+            <footer class="opinia-kolumna__autor">Irys 2006<span class="opinia-kolumna__zrodlo">opinia w Google</span></footer>
+          </blockquote>
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Polecam serdecznie prowadziła mi sprawy z wielkim zaangażowaniem interesowała się każdym szczegółem w sprawie. Kontakt z nią o każdej porze bez problemu. Oczywiscie sprawy wygrane! Polecam w 100 % Pani Mecenas jest najlepsza.</p>
+            <footer class="opinia-kolumna__autor">Kamila Sapota<span class="opinia-kolumna__zrodlo">opinia w Google</span></footer>
+          </blockquote>
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Polecam Pani Beata wie co robi zna się na swojej pracy, walczy do samego końca póki nie wygra sprawy klienta, każdemu pomoże do zwycięstwa. Jeszcze raz serdecznie POLECAM</p>
+            <footer class="opinia-kolumna__autor">Karolina Bieniek<span class="opinia-kolumna__zrodlo">opinia w Google</span></footer>
+          </blockquote>
+        </div>
+
+        <!-- 【DO UZUPEŁNIENIA】 link do wizytówki Google -->
+        <p class="opinie-wszystkie"><a href="#">Zobacz wszystkie opinie w Google</a></p>
+      </div>
+    </section>
+
+    <!-- ============ 11 · NAJCZĘSTSZE PYTANIA ============
+         Pole beż, hairline nad sekcją. .uklad-faq, dwanaście pytań.
+         POPRAWKI MERYTORYCZNE: pytanie o wpis do rejestru karnego (wpis przy
+         warunkowym umorzeniu jest czasowy) i o jazdę mimo zakazu (sąd orzeka
+         kolejny zakaz, a nie „przedłużony"). -->
+    <section class="sekcja pas sekcja--ciag" id="pytania">
+      <div class="kontener">
+        <div class="uklad-faq">
+          <div class="uklad-faq__szyna">
+            <h2 class="uklad-faq__tytul">Pytania, które słyszę <em>najczęściej</em></h2>
+            <div class="uklad-faq__karta">
+              <p>Nie ma tu Twojego pytania? Zadzwoń i po prostu spytaj.</p>
+              <a class="uklad-faq__telefon" href="tel:+48534477596">534&nbsp;477&nbsp;596</a>
+            </div>
+          </div>
+
+          <div class="faq uklad-faq__lista">
+            <details class="faq__poz" name="pytania" open>
+              <summary>Ile promili to wykroczenie, a ile przestępstwo?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Granica przebiega przy pół promila we krwi, czyli 0,25 mg/l w wydychanym powietrzu. Poniżej tej wartości, ale powyżej 0,2 promila, mówimy o stanie po użyciu alkoholu i o wykroczeniu. Powyżej niej jest to stan nietrzeźwości i sprawa karna, z zupełnie innymi konsekwencjami.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Co grozi za jazdę po alkoholu pierwszy raz?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Przy przestępstwie sąd może orzec grzywnę, ograniczenie wolności albo pozbawienie wolności, do tego obowiązkowy zakaz prowadzenia na co najmniej 3 lata i świadczenie pieniężne. To, co realnie zostanie orzeczone, zależy od wyniku badania, okoliczności jazdy i Twojej wcześniejszej karalności. Przy osobach niekaranych i niższych wynikach w grę wchodzi także warunkowe umorzenie.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Zatrzymali mi prawo jazdy, kiedy je odzyskam?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Nie wcześniej niż po zakończeniu sprawy i po upływie orzeczonego zakazu. Jeżeli zakaz trwał dłużej niż rok, do odzyskania uprawnień potrzebny jest ponowny egzamin, a często także badania lekarskie i psychologiczne. Po połowie okresu zakazu można natomiast wystąpić o blokadę alkoholową.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy stracę samochód?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Przy wyższych wynikach przepadek pojazdu jest zasadą, a nie wyjątkiem, choć sąd może od niego odstąpić w szczególnie uzasadnionych wypadkach. Jeżeli samochód nie był Twoją własnością, zamiast przepadku orzeka się nawiązkę. To jeden z elementów, o które warto się spierać, bo skutek jest nieodwracalny.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy da się uniknąć wpisu do rejestru karnego?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Da się uniknąć skazania, a to zmienia bardzo wiele. Przy warunkowym umorzeniu postępowania wpis w rejestrze karnym jest tylko czasowy i usuwa się go po zakończeniu okresu próby, a Ty nie jesteś osobą skazaną. Warunkiem jest między innymi wcześniejsza niekaralność za przestępstwo umyślne oraz ocena, że wina i szkodliwość czynu nie są znaczne. Nie każda sprawa się do tego kwalifikuje i nikt nie powinien Ci tego obiecywać przez telefon.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Dostałem wyrok nakazowy, co teraz?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Sprawdź datę doręczenia, bo na sprzeciw jest siedem dni i ten termin biegnie od niej, a nie od dnia, w którym otworzyłeś kopertę. Sprzeciw powoduje, że wyrok traci moc i sprawa trafia na rozprawę. Jeżeli termin właśnie mija, zadzwoń dziś.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy warto zgodzić się na dobrowolne poddanie się karze?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Czasem tak, bo kończy sprawę szybko i bywa korzystniejsze niż wynik rozprawy. Problem polega na tym, że propozycja przychodzi w momencie, w którym nie masz z czym jej porównać. Przed podpisaniem warto sprawdzić długość zakazu, wysokość świadczenia i to, czy nie przekreślasz sobie drogi do warunkowego umorzenia.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy mogę kwestionować wynik badania alkomatem?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Można kwestionować sposób przeprowadzenia badania, stan urządzenia i jego świadectwo wzorcowania, a także odstępy między pomiarami. Ma to szczególne znaczenie przy wynikach granicznych oraz wtedy, gdy alkohol był spożywany na krótko przed jazdą i jego stężenie mogło jeszcze rosnąć. To nie jest droga na skróty, tylko normalny element obrony.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Co to jest blokada alkoholowa i kiedy mogę o nią wystąpić?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">To urządzenie, które nie pozwala uruchomić samochodu po alkoholu. Po upływie połowy okresu zakazu można wystąpić do sądu o zmianę sposobu wykonywania zakazu na prowadzenie wyłącznie pojazdów z takim urządzeniem. Sąd ocenia postawę po wyroku, więc wniosek trzeba przygotować, a nie tylko złożyć.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Jeżdżę zawodowo, czy to coś zmienia?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Sama utrata pracy nie jest okolicznością, która wyłącza odpowiedzialność, ale sytuacja życiowa i zawodowa ma znaczenie przy wymiarze kary i przy ocenie przesłanek warunkowego umorzenia. Trzeba ją wykazać we właściwym momencie postępowania, a nie wspomnieć o niej na końcu rozprawy. Przy kierowcach zawodowych osobną kwestią są uprawnienia i świadectwo kwalifikacji.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Co grozi za jazdę mimo zakazu?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">To osobne przestępstwo i sądy traktują je znacznie surowiej niż samo prowadzenie po alkoholu, bo oznacza złamanie wcześniejszego orzeczenia. Grozi za to kara pozbawienia wolności, a sąd orzeka kolejny zakaz prowadzenia. Jeżeli już do tego doszło, tym bardziej nie warto iść na tę sprawę bez obrońcy.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Który sąd rozpozna moją sprawę w Częstochowie?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Sprawy o jazdę po alkoholu rozpoznaje sąd rejonowy właściwy dla miejsca popełnienia czynu, więc przy zatrzymaniu w Częstochowie będzie to tutejszy sąd rejonowy. Nie ma znaczenia, gdzie mieszkasz ani gdzie jest zarejestrowany samochód. Jeżeli mieszkasz poza Częstochową, nie musisz jeździć na każdy termin, bo mogę reprezentować Cię na rozprawie.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 12 · KONTAKT ============
+         Pole beż, hairline nad sekcją. Opis dojścia z danych realnych. -->
+    <section class="sekcja pas sekcja--ciag" id="kontakt">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Najtrudniejszy jest ten <em>pierwszy telefon</em></h2>
+          <p class="lead">Potem jest już tylko rozmowa. Zadzwoń i opowiedz, co się stało. Powiem Ci, na czym stoisz i co trzeba zrobić w pierwszej kolejności.</p>
+        </div>
+
+        <div class="kontakt-telefon" data-odslon>
+          <a class="telefon-duzy" href="tel:+48534477596">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            534 477 596
+          </a>
+          <p class="telefon-podpis">Jeśli nie odbieram, jestem na rozprawie. Oddzwaniam.</p>
+        </div>
+
+        <div class="kontakt-siatka" data-odslon>
+          <div class="kontakt-kol">
+            <h4>E-mail</h4>
+            <p><a href="mailto:kancelaria@cupial-kowalska.pl">kancelaria@cupial-kowalska.pl</a></p>
+            <p class="male drugorzedny">Odpisuję zwykle tego samego albo następnego dnia.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Kancelaria</h4>
+            <p>ul. Kilińskiego 5 lok. 4<br>42-202 Częstochowa</p>
+            <p class="male drugorzedny">Lewa oficyna, pierwsze piętro, po prawej stronie.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Spotkania</h4>
+            <p>Osobiście w Częstochowie, online albo telefonicznie.</p>
+            <p class="male drugorzedny">Termin dogrywamy telefonicznie. Dojazd, mapa i formularz z prośbą o telefon: <a href="kontakt.html">strona kontaktu</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Jazda po alkoholu, obrona",
+        "serviceType": "Obrona w sprawach o jazdę po alkoholu i w stanie nietrzeźwości: zatrzymanie prawa jazdy, wyrok nakazowy, warunkowe umorzenie, przepadek pojazdu, blokada alkoholowa, jazda mimo zakazu",
+        "areaServed": { "@type": "City", "name": "Częstochowa" },
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "servicePhone": { "@type": "ContactPoint", "telephone": "+48534477596" },
+          "availableLanguage": "pl"
+        },
+        "provider": {
+          "@type": "Attorney",
+          "name": "Kancelaria Adwokacka Beata Cupiał-Kowalska",
+          "telephone": "+48534477596",
+          "email": "kancelaria@cupial-kowalska.pl",
+          "areaServed": "Częstochowa",
+          "knowsLanguage": "pl",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ul. Kilińskiego 5 lok. 4",
+            "postalCode": "42-202",
+            "addressLocality": "Częstochowa",
+            "addressCountry": "PL"
+          },
+          "founder": {
+            "@type": "Person",
+            "name": "Beata Cupiał-Kowalska",
+            "jobTitle": "adwokat"
+          }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Ile promili to wykroczenie, a ile przestępstwo?", "acceptedAnswer": { "@type": "Answer", "text": "Granica przebiega przy pół promila we krwi, czyli 0,25 mg/l w wydychanym powietrzu. Poniżej tej wartości, ale powyżej 0,2 promila, mówimy o stanie po użyciu alkoholu i o wykroczeniu. Powyżej niej jest to stan nietrzeźwości i sprawa karna." } },
+          { "@type": "Question", "name": "Co grozi za jazdę po alkoholu pierwszy raz?", "acceptedAnswer": { "@type": "Answer", "text": "Przy przestępstwie sąd może orzec grzywnę, ograniczenie wolności albo pozbawienie wolności, do tego obowiązkowy zakaz prowadzenia na co najmniej 3 lata i świadczenie pieniężne. Przy osobach niekaranych i niższych wynikach w grę wchodzi także warunkowe umorzenie." } },
+          { "@type": "Question", "name": "Zatrzymali mi prawo jazdy, kiedy je odzyskam?", "acceptedAnswer": { "@type": "Answer", "text": "Nie wcześniej niż po zakończeniu sprawy i po upływie orzeczonego zakazu. Jeżeli zakaz trwał dłużej niż rok, do odzyskania uprawnień potrzebny jest ponowny egzamin. Po połowie okresu zakazu można wystąpić o blokadę alkoholową." } },
+          { "@type": "Question", "name": "Czy stracę samochód?", "acceptedAnswer": { "@type": "Answer", "text": "Przy wyższych wynikach przepadek pojazdu jest zasadą, a nie wyjątkiem, choć sąd może od niego odstąpić w szczególnie uzasadnionych wypadkach. Jeżeli samochód nie był Twoją własnością, zamiast przepadku orzeka się nawiązkę." } },
+          { "@type": "Question", "name": "Czy da się uniknąć wpisu do rejestru karnego?", "acceptedAnswer": { "@type": "Answer", "text": "Da się uniknąć skazania. Przy warunkowym umorzeniu postępowania wpis w rejestrze karnym jest tylko czasowy i usuwa się go po zakończeniu okresu próby, a osoba nie jest skazana. Warunkiem jest między innymi wcześniejsza niekaralność za przestępstwo umyślne oraz ocena, że wina i szkodliwość czynu nie są znaczne." } },
+          { "@type": "Question", "name": "Dostałem wyrok nakazowy, co teraz?", "acceptedAnswer": { "@type": "Answer", "text": "Na sprzeciw jest siedem dni od daty doręczenia. Sprzeciw powoduje, że wyrok traci moc i sprawa trafia na rozprawę." } },
+          { "@type": "Question", "name": "Czy warto zgodzić się na dobrowolne poddanie się karze?", "acceptedAnswer": { "@type": "Answer", "text": "Czasem tak, bo kończy sprawę szybko i bywa korzystniejsze niż wynik rozprawy. Przed podpisaniem warto sprawdzić długość zakazu, wysokość świadczenia i to, czy nie przekreśla to drogi do warunkowego umorzenia." } },
+          { "@type": "Question", "name": "Czy mogę kwestionować wynik badania alkomatem?", "acceptedAnswer": { "@type": "Answer", "text": "Można kwestionować sposób przeprowadzenia badania, stan urządzenia i jego świadectwo wzorcowania, a także odstępy między pomiarami. Ma to szczególne znaczenie przy wynikach granicznych." } },
+          { "@type": "Question", "name": "Co to jest blokada alkoholowa i kiedy mogę o nią wystąpić?", "acceptedAnswer": { "@type": "Answer", "text": "To urządzenie, które nie pozwala uruchomić samochodu po alkoholu. Po upływie połowy okresu zakazu można wystąpić do sądu o zmianę sposobu wykonywania zakazu na prowadzenie wyłącznie pojazdów z takim urządzeniem." } },
+          { "@type": "Question", "name": "Jeżdżę zawodowo, czy to coś zmienia?", "acceptedAnswer": { "@type": "Answer", "text": "Sama utrata pracy nie wyłącza odpowiedzialności, ale sytuacja życiowa i zawodowa ma znaczenie przy wymiarze kary i przy ocenie przesłanek warunkowego umorzenia. Przy kierowcach zawodowych osobną kwestią są uprawnienia i świadectwo kwalifikacji." } },
+          { "@type": "Question", "name": "Co grozi za jazdę mimo zakazu?", "acceptedAnswer": { "@type": "Answer", "text": "To osobne przestępstwo, traktowane znacznie surowiej niż samo prowadzenie po alkoholu. Grozi za to kara pozbawienia wolności, a sąd orzeka kolejny zakaz prowadzenia." } },
+          { "@type": "Question", "name": "Który sąd rozpozna moją sprawę w Częstochowie?", "acceptedAnswer": { "@type": "Answer", "text": "Sprawy o jazdę po alkoholu rozpoznaje sąd rejonowy właściwy dla miejsca popełnienia czynu, więc przy zatrzymaniu w Częstochowie będzie to tutejszy sąd rejonowy. Nie ma znaczenia, gdzie mieszkasz ani gdzie jest zarejestrowany samochód." } }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mediacje · Adwokat i mediator Beata Cupiał-Kowalska, Częstochowa</title>
+  <meta name="description" content="Mediacje rodzinne, spadkowe i majątkowe w Częstochowie. Adwokat i czynny mediator Beata Cupiał-Kowalska: plan rodzicielski, ugoda zatwierdzana przez sąd, sesje także osobno i zdalnie. Tel. 534 477 596.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+
+  <div data-nav></div>
+
+  <!-- MEDIACJE — zakładka niezależna, nie podstrona usługowa (copy: mediacje-copy.md).
+       W menu stoi w drop-downie „Usługi" (decyzja Mikołaja), ale oddzielona od
+       reszty pozycji hairline'em. Na stronie `strona-uslugowa` daje typografię,
+       pola, akordeon i ciemną stopkę; `strona-mediacje` zawęża drobne korekty
+       komponentów wziętych z innych stron (wykaz, kroki, rozwidlenie).
+       Świadomie BEZ sekcji „Podejście" i BEZ opinii Google: cytat pełnomocnika
+       kłóci się z bezstronnością mediatora, a mediant nie jest klientem.
+       Cztery moduły własne (blok MEDIACJE na końcu styles.css):
+         .dwie-drogi    mediacja albo sąd, jeden panel na dwie kolumny
+         .plan          plan rodzicielski jako arkusz dokumentu
+         .ugoda         co daje ugoda, trzy punkty na espresso
+         .druga-strona  karta z kotwicą #dla-drugiej-strony, do wysłania linkiem
+       Pola: biel (nagłówek) · beż (dwie drogi) · biel (zakres, plan, przebieg) ·
+       espresso (ugoda) · beż (rola, druga strona) · biel (FAQ, kontakt) ·
+       espresso (stopka). Etykiety: trzy (dwie drogi, plan, ugoda).
+       Forma: „Ty" do sekcji 04, od sekcji 05 „Wy" (tak prowadzi copy). -->
+  <main id="gora" class="strona-uslugowa strona-mediacje">
+
+    <!-- ============ 01 · NAGŁÓWEK STRONY ============
+         Pole biel. Okruszki składa site.js: Strona główna › Usługi › Mediacje
+         (copy proponowało bez „Usługi", ale strona siedzi w tym drop-downie). -->
+    <section class="naglowek-strony naglowek-strony--uslugi biel">
+      <div class="kontener">
+        <div data-okruszki></div>
+        <h1 class="naglowek-strony__tytul">Mediacje w Częstochowie</h1>
+        <!-- 【DO UZUPEŁNIENIA】 jeśli klientka jest na liście stałych mediatorów przy
+             Sądzie Okręgowym w Częstochowie, ten konkret wchodzi do leadu. -->
+        <p class="naglowek-strony__lead">Jestem adwokatem i czynnym mediatorem. To znaczy, że w Twojej sprawie widzę obie drogi: tę przez salę rozpraw i tę, która kończy się porozumieniem. Po jednej rozmowie powiem Ci, która jest w Twojej sytuacji realna.</p>
+
+        <p class="naglowek-strony__kontakt">
+          <a class="naglowek-strony__telefon" href="tel:+48534477596">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>534&nbsp;477&nbsp;596</span>
+          </a>
+          <span class="naglowek-strony__spotkania">Spotkania w Częstochowie, online i telefonicznie</span>
+        </p>
+
+        <ul class="naglowek-strony__meta">
+          <li>Mediacje rodzinne, spadkowe i majątkowe</li>
+          <li>Sesje także osobno i zdalnie</li>
+          <li>Oddzwaniam po rozprawie</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 02 · DWIE DROGI ============
+         Pole beż. NOWY MODUŁ .dwie-drogi: jeden panel w bieli podzielony pionowym
+         hairline'em na „mediacja ma sens" i „sąd jest właściwą drogą". Każda
+         kolumna ma ikonę (Lucide: dymki rozmowy / waga) i listę warunków; zdania
+         z copy stoją bez zmian, rozbite na pozycje. Czwarte zdanie kolumny
+         „sąd" to wniosek, więc stoi pod listą. Pod panelem zdanie zamykające. -->
+    <section class="sekcja pas" id="dwie-drogi">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--modul">
+          <p class="etykieta">Od czego zaczynamy</p>
+          <h2>Dogadać się albo rozstrzygnąć. <em>To jest ten wybór</em></h2>
+          <p class="lead">Większość sporów da się zamknąć na dwa sposoby i nie zawsze ten dłuższy jest gorszy. Zależy, z kim macie do czynienia i o co naprawdę idzie.</p>
+        </div>
+
+        <div class="dwie-drogi">
+          <div class="dwie-drogi__droga">
+            <div class="dwie-drogi__glowa">
+              <span class="dwie-drogi__ikona" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2z"/><path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1"/></svg></span>
+              <h3 class="dwie-drogi__tytul">Mediacja ma sens, kiedy</h3>
+            </div>
+            <ul class="dwie-drogi__lista">
+              <li>Obie strony chcą zamknąć temat, nawet jeśli w tej chwili nie potrafią ze sobą rozmawiać.</li>
+              <li>Macie wspólne dziecko, wspólny dom albo wspólne nazwisko w księdze wieczystej, więc i tak będziecie się jeszcze spotykać.</li>
+              <li>Zależy Wam na czasie, na kosztach albo po prostu na tym, żeby nie opowiadać o swoim życiu na jawnej sali.</li>
+            </ul>
+          </div>
+          <div class="dwie-drogi__droga">
+            <div class="dwie-drogi__glowa">
+              <span class="dwie-drogi__ikona" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></svg></span>
+              <h3 class="dwie-drogi__tytul">Sąd jest właściwą drogą, kiedy</h3>
+            </div>
+            <ul class="dwie-drogi__lista">
+              <li>Była przemoc albo jedna strona realnie boi się drugiej.</li>
+              <li>Ktoś ukrywa majątek i bez postępowania dowodowego nie da się go ustalić.</li>
+              <li>Zależy Ci na orzeczeniu o winie albo druga strona nie chce w ogóle rozmawiać.</li>
+            </ul>
+            <p class="dwie-drogi__wniosek">W takiej sytuacji mediacja tylko przesunie sprawę o kilka tygodni, a to nie jest to, czego potrzebujesz.</p>
+          </div>
+        </div>
+
+        <p class="dwie-drogi__zamkniecie">Nie namawiam do mediacji na siłę. Częściej mówię, że w danej sprawie nie ma ona sensu, niż odwrotnie. To też jest odpowiedź, którą warto usłyszeć przed złożeniem pozwu.</p>
+      </div>
+    </section>
+
+    <!-- ============ 03 · W JAKICH SPRAWACH MEDIUJĘ ============
+         Pole biel. Komponent .wykaz z „O mnie": numer tam, gdzie wykaz stawia
+         rok. Opisy są krótkie (dwa zdania), więc bez akordeonu.
+         【DO UZUPEŁNIENIA】 pozycje 04 (zapłata) i 05 (sprawy karne) to propozycja
+         rozszerzenia z copy; jeśli klientka w nich nie mediuje, wypadają. -->
+    <section class="sekcja biel" id="zakres">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--modul">
+          <h2>Sprawy, które prowadzę <em>jako mediator</em></h2>
+          <p class="lead">Mediacja może toczyć się przed skierowaniem sprawy do sądu albo już w trakcie postępowania, jeżeli sąd skieruje Was do mediatora.</p>
+        </div>
+
+        <ol class="wykaz">
+          <li class="wykaz__poz">
+            <span class="wykaz__rok">01</span>
+            <h3 class="wykaz__tytul">Sprawy rodzinne i rozwodowe</h3>
+            <p class="wykaz__opis">Warunki rozstania, opieka nad dziećmi, kontakty, alimenty. Najczęstsza kategoria i ta, w której porozumienie ma największą wartość poza samą sprawą.</p>
+          </li>
+          <li class="wykaz__poz">
+            <span class="wykaz__rok">02</span>
+            <h3 class="wykaz__tytul">Podział majątku wspólnego</h3>
+            <p class="wykaz__opis">Mieszkanie, kredyt, oszczędności, samochód. Podział ustalony przy stole można zamknąć umową, a przy nieruchomości aktem notarialnym.</p>
+          </li>
+          <li class="wykaz__poz">
+            <span class="wykaz__rok">03</span>
+            <h3 class="wykaz__tytul">Dział spadku</h3>
+            <p class="wykaz__opis">Kiedy po rodzicach zostaje dom, a między rodzeństwem lata zaległych pretensji. Ugoda kończy sprawę szybciej niż postępowanie z wyceną i biegłym.</p>
+          </li>
+          <li class="wykaz__poz">
+            <span class="wykaz__rok">04</span>
+            <h3 class="wykaz__tytul">Sprawy o zapłatę</h3>
+            <p class="wykaz__opis">Spory z umów, rozliczenia między wspólnikami, długi między osobami, które znają się prywatnie. Tu mediacja bywa jedyną drogą do pieniędzy w rozsądnym czasie.</p>
+          </li>
+          <li class="wykaz__poz">
+            <span class="wykaz__rok">05</span>
+            <h3 class="wykaz__tytul">Pojednanie w sprawach karnych</h3>
+            <p class="wykaz__opis">Postępowanie karne przewiduje mediację między pokrzywdzonym a oskarżonym. Porozumienie i naprawienie szkody sąd bierze pod uwagę przy wymiarze kary.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ============ 04 · PLAN RODZICIELSKI ============
+         Pole biel, hairline nad sekcją. NOWY MODUŁ .plan: tekst po lewej,
+         po prawej arkusz dokumentu w beżu (ikona pliku, cztery pozycje
+         z haczykiem). Zdanie zamykające pod tekstem, oddzielone hairline'em.
+         【DO UZUPEŁNIENIA】 czy plan rodzicielski faktycznie jest efektem
+         mediacji rodzinnych klientki (cała sekcja stoi na tym założeniu). -->
+    <section class="sekcja biel sekcja--ciag" id="plan-rodzicielski">
+      <div class="kontener">
+        <div class="plan">
+          <div class="plan__tekst">
+            <div class="naglowek-sekcji naglowek-sekcji--modul">
+              <p class="etykieta">Konkretny dokument</p>
+              <h2>Najczęściej wychodzimy z mediacji <em>z planem rodzicielskim</em></h2>
+              <p class="lead">To nie jest deklaracja dobrej woli, tylko spisany dokument, który przewiduje sytuacje, o które zwykle wybucha awantura pół roku po rozwodzie.</p>
+            </div>
+            <p class="plan__nota">Taki plan można dołączyć do sprawy sądowej i wystąpić o jego zatwierdzenie. Sądy patrzą przychylnie na rodziców, którzy przyszli z gotowym porozumieniem, zamiast oczekiwać, że sąd rozstrzygnie za nich.</p>
+          </div>
+
+          <div class="plan__arkusz">
+            <p class="plan__glowa">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
+              <span>Co się w nim znajduje</span>
+            </p>
+            <ul class="plan__lista">
+              <li><svg class="plan__haczyk" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Harmonogram kontaktów na zwykły tydzień, z konkretnymi dniami i godzinami przekazywania dziecka</span></li>
+              <li><svg class="plan__haczyk" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Święta, ferie i wakacje, ustalone z góry na kolejne lata, żeby nie negocjować tego co roku od nowa</span></li>
+              <li><svg class="plan__haczyk" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Decyzje o szkole, leczeniu i wyjazdach za granicę: kto decyduje sam, a co wymaga zgody obojga</span></li>
+              <li><svg class="plan__haczyk" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span>Zasady komunikacji między Wami, łącznie z tym, czego nie załatwia się przez dziecko</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 · JAK TO WYGLĄDA KROK PO KROKU ============
+         Pole biel, hairline nad sekcją. Bazowe .kroki na cztery pola
+         (komponent jest dokładnie na cztery kroki). -->
+    <section class="sekcja biel sekcja--ciag" id="przebieg">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--modul">
+          <h2>Nie musicie siedzieć <em>naprzeciwko siebie</em></h2>
+          <p class="lead">To jest najczęstsza obawa i warto ją zdjąć od razu. Sesje mogą odbywać się osobno, a także zdalnie, jeżeli któreś z Was mieszka poza Częstochową.</p>
+        </div>
+
+        <div class="kroki">
+          <div class="krok">
+            <span class="krok__nr">01</span>
+            <h3>Kontakt i zaproszenie drugiej strony</h3>
+            <p>Dzwoni zwykle jedna osoba. Ustalamy, czy mediacja w tej sprawie ma sens, a potem kontaktuję się z drugą stroną z zaproszeniem. Nikogo do niczego nie przekonuję, przedstawiam propozycję.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">02</span>
+            <h3>Spotkanie informacyjne</h3>
+            <p>Wyjaśniam, na czym polega mediacja, jakie są zasady i czego mogę, a czego nie mogę zrobić. Po tym spotkaniu każde z Was decyduje, czy chce iść dalej. Zgoda jest dobrowolna i można ją wycofać na każdym etapie.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">03</span>
+            <h3>Sesje</h3>
+            <p>Rozmowa o tym, co realnie trzeba ustalić, punkt po punkcie. Wspólnie albo osobno, zależnie od tego, jak wygląda sytuacja między Wami. Ja pilnuję ram rozmowy, ale nie rozstrzygam sporu i nie doradzam żadnej ze stron.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">04</span>
+            <h3>Spisanie ugody</h3>
+            <p>Ustalenia zapisujemy w ugodzie tak, żeby dało się ją wykonać, a nie tylko przeczytać. Ugodę składa się w sądzie z wnioskiem o zatwierdzenie.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 · CO DAJE UGODA ============
+         Pole espresso. NOWY MODUŁ .ugoda: nagłówek po lewej, akapit otwierający
+         po prawej, pod spodem trzy punkty z krótkim paskiem w ciepłym piasku,
+         na końcu zdanie zamykające pod hairline'em.
+         POPRAWKA MERYTORYCZNA (punkt 2): copy mówiło, że przy ugodzie przed
+         rozpoczęciem rozprawy zwrot opłaty jest pełny. Ustawa o kosztach
+         sądowych przewiduje tu zwrot części opłaty (zależny od etapu), nie
+         całości. Zdanie przepisane bez podawania ułamka. -->
+    <section class="sekcja espresso" id="ugoda">
+      <div class="kontener">
+        <div class="ugoda">
+          <div class="ugoda__glowa">
+            <div>
+              <p class="etykieta">To nie jest tylko rozmowa</p>
+              <h2>Ugoda zatwierdzona przez sąd <em>działa jak wyrok</em></h2>
+            </div>
+            <p class="ugoda__wstep">Najczęstsze nieporozumienie dotyczące mediacji brzmi tak: to niezobowiązująca rozmowa, po której i tak trzeba iść do sądu. To nieprawda i to jest najważniejsza informacja na tej stronie.</p>
+          </div>
+
+          <ul class="ugoda__punkty">
+            <li class="ugoda__punkt">
+              <h3 class="ugoda__tytul">Ma moc prawną</h3>
+              <p>Ugoda zawarta przed mediatorem i zatwierdzona przez sąd ma moc ugody sądowej. Jeżeli nadaje się do wykonania, po nadaniu klauzuli wykonalności można na jej podstawie iść do komornika, dokładnie tak samo jak z wyrokiem.</p>
+            </li>
+            <li class="ugoda__punkt">
+              <h3 class="ugoda__tytul">Zwraca się część opłaty sądowej</h3>
+              <p>Zawarcie ugody przed mediatorem w toku sprawy oznacza zwrot części opłaty od pozwu, a im wcześniej do niej dojdzie, tym ten zwrot jest wyższy.</p>
+            </li>
+            <li class="ugoda__punkt">
+              <h3 class="ugoda__tytul">Jest poufna</h3>
+              <p>Mediator nie może być świadkiem co do tego, czego dowiedział się w mediacji, a propozycje składane w jej trakcie nie mogą być potem wykorzystywane przed sądem.</p>
+            </li>
+          </ul>
+
+          <p class="ugoda__zamkniecie">Różnica między ugodą a wyrokiem nie polega więc na sile. Polega na tym, że warunki układacie sami, zamiast dowiadywać się o nich na sali rozpraw.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 · W JAKIEJ ROLI DZIAŁAM ============
+         Pole beż. .rozwidlenie (z „O mnie" i stron usługowych) + dwa akapity
+         w łamach .dyzury__tresc.
+         【DO UZUPEŁNIENIA】 czy klientka akceptuje zdanie, że po nieudanej
+         mediacji nie poprowadzi sprawy żadnej ze stron (drugi akapit). -->
+    <section class="sekcja pas" id="rola">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--modul">
+          <h2>Albo Twoim pełnomocnikiem, albo mediatorem. <em>Nigdy jednym i drugim</em></h2>
+        </div>
+
+        <div class="rozwidlenie">
+          <div class="rozwidlenie__rola">
+            <h3>Twoim pełnomocnikiem</h3>
+          </div>
+          <p class="rozwidlenie__albo">albo</p>
+          <div class="rozwidlenie__rola">
+            <h3>Mediatorem dla obojga</h3>
+          </div>
+        </div>
+
+        <div class="dyzury__tresc">
+          <p>Mediator musi być bezstronny, więc w jednej sprawie nie mogę reprezentować jednej ze stron i jednocześnie prowadzić mediacji. Te role wykluczają się nawzajem i nie jest to formalność, tylko warunek, bez którego mediacja nie miałaby żadnej wartości.</p>
+          <p>Dlatego rolę ustalamy na samym początku, przy pierwszym telefonie, zanim wejdziemy w szczegóły sprawy. Jeżeli mediacja się nie powiedzie, w tej samej sprawie nie będę mogła reprezentować żadnej ze stron przed sądem, i mówię o tym wprost, zanim się na cokolwiek zdecydujecie.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 08 · DLA DRUGIEJ STRONY ============
+         Pole beż, hairline nad sekcją. NOWY MODUŁ .druga-strona: karta w bieli
+         z górnym paskiem w akcencie, odcięta od reszty strony. KOTWICA
+         #dla-drugiej-strony stoi NA KARCIE (nie na sekcji), żeby link wysłany
+         drugiej stronie otwierał się dokładnie na niej, pod menu.
+         Link do wysłania: mediacje.html#dla-drugiej-strony
+         (po imporcie na WordPressa: /mediacje/#dla-drugiej-strony). -->
+    <section class="sekcja pas sekcja--ciag" aria-labelledby="druga-strona-tytul">
+      <div class="kontener">
+        <div class="druga-strona" id="dla-drugiej-strony">
+          <div class="druga-strona__tekst">
+            <h2 id="druga-strona-tytul">Ktoś zaproponował Ci <em>mediację</em></h2>
+            <p class="druga-strona__wstep">Jeżeli trafiłeś tu z linkiem od drugiej strony sporu albo z pisma z sądu, cztery rzeczy warto wiedzieć od razu.</p>
+          </div>
+
+          <ol class="druga-strona__zasady">
+            <li><span class="druga-strona__nr" aria-hidden="true">1</span><p>Udział jest dobrowolny. Możesz się nie zgodzić i możesz wycofać zgodę na każdym etapie, także w trakcie.</p></li>
+            <li><span class="druga-strona__nr" aria-hidden="true">2</span><p>Nic nie podpisujesz z góry. Zgoda na mediację nie jest zgodą na żadne warunki. Ugoda powstaje dopiero wtedy, gdy oboje się na nią zgodzicie.</p></li>
+            <li><span class="druga-strona__nr" aria-hidden="true">3</span><p>Nie reprezentuję osoby, która mediację zaproponowała. Jako mediator jestem bezstronna wobec obojga i nie doradzam żadnej ze stron.</p></li>
+            <li><span class="druga-strona__nr" aria-hidden="true">4</span><p>To, co powiesz w mediacji, jest poufne i nie może być potem użyte przeciwko Tobie przed sądem.</p></li>
+          </ol>
+
+          <div class="druga-strona__stopka">
+            <p>Jeżeli chcesz najpierw zapytać, jak to wygląda, zadzwoń. Rozmowa do niczego Cię nie zobowiązuje.</p>
+            <a class="btn btn--akcent" href="tel:+48534477596">Zadzwoń:&nbsp;534&nbsp;477&nbsp;596</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 09 · NAJCZĘSTSZE PYTANIA ============
+         Pole biel. .uklad-faq, osiem pytań.
+         【DO UZUPEŁNIENIA】 zasady rozliczania kosztów mediacji („zwykle po połowie"). -->
+    <section class="sekcja biel" id="pytania">
+      <div class="kontener">
+        <div class="uklad-faq">
+          <div class="uklad-faq__szyna">
+            <h2 class="uklad-faq__tytul">Pytania, które słyszę <em>najczęściej</em></h2>
+            <div class="uklad-faq__karta">
+              <p>Nie ma tu Twojego pytania? Zadzwoń i po prostu spytaj.</p>
+              <a class="uklad-faq__telefon" href="tel:+48534477596">534&nbsp;477&nbsp;596</a>
+            </div>
+          </div>
+
+          <div class="faq uklad-faq__lista">
+            <details class="faq__poz" name="pytania" open>
+              <summary>Ile kosztuje mediacja?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Koszty mediacji są zwykle wyraźnie niższe niż koszty procesu, bo nie ma tu opinii biegłych ani kolejnych terminów rozpraw. Przy mediacji ze skierowania sądu wysokość wynagrodzenia mediatora określają przepisy, a przy mediacji umownej ustalamy ją przed rozpoczęciem. Strony zwykle dzielą te koszty po połowie, chyba że umówią się inaczej.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Ile trwa mediacja?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Najczęściej od jednego do kilku spotkań rozłożonych na kilka tygodni. Dla porównania, sprawa o podział majątku z wyceną nieruchomości potrafi trwać ponad rok. Tempo zależy głównie od tego, ile spraw naprawdę trzeba ustalić, a nie od tego, jak bardzo jesteście skłóceni.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy muszę się zgodzić na mediację?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Nie. Mediacja jest dobrowolna, także wtedy, gdy sąd skierował do niej sprawę: możesz nie wyrazić zgody i postępowanie toczy się dalej normalnie. Odmowa nie działa na Twoją niekorzyść.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy mediacja jest obowiązkowa przed rozwodem?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Nie ma obowiązku przeprowadzenia mediacji przed złożeniem pozwu o rozwód. Sąd może natomiast skierować strony do mediacji już w toku sprawy, szczególnie gdy są małoletnie dzieci i widać szansę na porozumienie co do kontaktów i alimentów.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy ugoda jest naprawdę wiążąca?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Tak. Po zatwierdzeniu przez sąd ma moc ugody sądowej, a jeżeli nadaje się do egzekucji, po nadaniu klauzuli wykonalności można na jej podstawie prowadzić egzekucję komorniczą. To nie jest dżentelmeńska umowa.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy da się mediować bez spotkania twarzą w twarz?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Tak. Sesje mogą być prowadzone osobno, czyli rozmawiam z każdą ze stron oddzielnie i przenoszę propozycje. Możliwa jest też mediacja zdalna, co ma znaczenie, gdy jedna osoba mieszka w innym mieście albo za granicą.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Co, jeśli druga strona się nie zgodzi?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Wtedy mediacja się nie odbywa i zostaje droga sądowa. Warto jednak wiedzieć, że zaproszenie od mediatora bywa przyjmowane inaczej niż propozycja od byłego partnera, bo nie jest odbierane jako kolejny ruch w sporze.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czym mediator różni się od prawnika?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Prawnik reprezentuje jedną stronę i działa w jej interesie. Mediator nie reprezentuje nikogo, nie doradza i nie ocenia, kto ma rację: prowadzi rozmowę tak, żeby strony same doszły do rozwiązania. Ja pełnię obie te role, ale nigdy w tej samej sprawie.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 10 · KONTAKT ============
+         Pole biel, hairline nad sekcją. Dwa akapity leadu, jak w copy. -->
+    <section class="sekcja biel sekcja--ciag" id="kontakt">
+      <div class="kontener">
+        <div class="naglowek-sekcji">
+          <h2>Pierwszy telefon <em>to jeszcze nie mediacja</em></h2>
+          <p class="lead">Ta rozmowa służy dwóm rzeczom: sprawdzeniu, czy mediacja w Waszej sprawie ma sens, i ustaleniu, jak zaprosić do niej drugą stronę. Nie musisz opowiadać mi całej historii sporu i lepiej, żebyś tego jeszcze nie robił, bo mediator musi zacząć od równego dystansu do obojga.</p>
+          <p class="lead">Jeżeli po tej rozmowie okaże się, że potrzebujesz pełnomocnika, a nie mediatora, powiem Ci to wprost.</p>
+        </div>
+
+        <div class="kontakt-telefon">
+          <a class="telefon-duzy" href="tel:+48534477596">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            534 477 596
+          </a>
+          <p class="telefon-podpis">Jeśli nie odbieram, jestem na rozprawie. Oddzwaniam.</p>
+        </div>
+
+        <div class="kontakt-siatka">
+          <div class="kontakt-kol">
+            <h4>E-mail</h4>
+            <p><a href="mailto:kancelaria@cupial-kowalska.pl">kancelaria@cupial-kowalska.pl</a></p>
+            <p class="male drugorzedny">Odpisuję zwykle tego samego albo następnego dnia.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Kancelaria</h4>
+            <p>ul. Kilińskiego 5 lok. 4<br>42-202 Częstochowa</p>
+            <p class="male drugorzedny">Lewa oficyna, pierwsze piętro, po prawej stronie.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Spotkania</h4>
+            <p>Osobiście w Częstochowie, online albo telefonicznie.</p>
+            <p class="male drugorzedny">Sesje mediacyjne także osobno dla każdej ze stron.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Mediacje",
+        "serviceType": "Mediacje rodzinne i rozwodowe, podział majątku, dział spadku, sprawy o zapłatę, pojednanie w sprawach karnych; plan rodzicielski, ugoda zatwierdzana przez sąd",
+        "areaServed": { "@type": "City", "name": "Częstochowa" },
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "servicePhone": { "@type": "ContactPoint", "telephone": "+48534477596" },
+          "availableLanguage": "pl"
+        },
+        "provider": {
+          "@type": "Attorney",
+          "name": "Kancelaria Adwokacka Beata Cupiał-Kowalska",
+          "telephone": "+48534477596",
+          "email": "kancelaria@cupial-kowalska.pl",
+          "areaServed": "Częstochowa",
+          "knowsLanguage": "pl",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ul. Kilińskiego 5 lok. 4",
+            "postalCode": "42-202",
+            "addressLocality": "Częstochowa",
+            "addressCountry": "PL"
+          },
+          "founder": {
+            "@type": "Person",
+            "name": "Beata Cupiał-Kowalska",
+            "jobTitle": "adwokat, mediator"
+          }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Ile kosztuje mediacja?", "acceptedAnswer": { "@type": "Answer", "text": "Koszty mediacji są zwykle wyraźnie niższe niż koszty procesu, bo nie ma tu opinii biegłych ani kolejnych terminów rozpraw. Przy mediacji ze skierowania sądu wysokość wynagrodzenia mediatora określają przepisy, a przy mediacji umownej ustala się ją przed rozpoczęciem." } },
+          { "@type": "Question", "name": "Ile trwa mediacja?", "acceptedAnswer": { "@type": "Answer", "text": "Najczęściej od jednego do kilku spotkań rozłożonych na kilka tygodni. Tempo zależy głównie od tego, ile spraw naprawdę trzeba ustalić." } },
+          { "@type": "Question", "name": "Czy muszę się zgodzić na mediację?", "acceptedAnswer": { "@type": "Answer", "text": "Nie. Mediacja jest dobrowolna, także wtedy, gdy sąd skierował do niej sprawę: można nie wyrazić zgody i postępowanie toczy się dalej normalnie." } },
+          { "@type": "Question", "name": "Czy mediacja jest obowiązkowa przed rozwodem?", "acceptedAnswer": { "@type": "Answer", "text": "Nie ma obowiązku przeprowadzenia mediacji przed złożeniem pozwu o rozwód. Sąd może natomiast skierować strony do mediacji już w toku sprawy, szczególnie gdy są małoletnie dzieci." } },
+          { "@type": "Question", "name": "Czy ugoda jest naprawdę wiążąca?", "acceptedAnswer": { "@type": "Answer", "text": "Tak. Po zatwierdzeniu przez sąd ma moc ugody sądowej, a jeżeli nadaje się do egzekucji, po nadaniu klauzuli wykonalności można na jej podstawie prowadzić egzekucję komorniczą." } },
+          { "@type": "Question", "name": "Czy da się mediować bez spotkania twarzą w twarz?", "acceptedAnswer": { "@type": "Answer", "text": "Tak. Sesje mogą być prowadzone osobno, z każdą ze stron oddzielnie. Możliwa jest też mediacja zdalna." } },
+          { "@type": "Question", "name": "Co, jeśli druga strona się nie zgodzi?", "acceptedAnswer": { "@type": "Answer", "text": "Wtedy mediacja się nie odbywa i zostaje droga sądowa. Zaproszenie od mediatora bywa jednak przyjmowane inaczej niż propozycja od byłego partnera." } },
+          { "@type": "Question", "name": "Czym mediator różni się od prawnika?", "acceptedAnswer": { "@type": "Answer", "text": "Prawnik reprezentuje jedną stronę i działa w jej interesie. Mediator nie reprezentuje nikogo, nie doradza i nie ocenia, kto ma rację: prowadzi rozmowę tak, żeby strony same doszły do rozwiązania." } }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>

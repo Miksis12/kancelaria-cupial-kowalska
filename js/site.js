@@ -27,11 +27,12 @@
      — wchodzi naraz w drop-down, w stopkę i w okruszki. */
   var USLUGI = [
     { label: "Rozwód i sprawy rodzinne",        href: "rozwod-i-sprawy-rodzinne.html", match: ["rozwod-i-sprawy-rodzinne.html"] },
-    { label: "Spadki i dział spadku",           href: "#sprawy" },
-    { label: "Prawo jazdy i jazda po alkoholu", href: "#sprawy" },
-    { label: "Sprawy karne",                    href: "#sprawy" },
-    { label: "Sprawy cywilne",                  href: "#sprawy" },
-    { label: "Mediacje",                        href: "#mediacje" }
+    { label: "Sprawy spadkowe",                 href: "sprawy-spadkowe.html", match: ["sprawy-spadkowe.html"] },
+    { label: "Jazda po alkoholu",               href: "jazda-po-alkoholu.html", match: ["jazda-po-alkoholu.html"] },
+    { label: "Sprawy karne",                    href: "sprawy-karne.html", match: ["sprawy-karne.html"] },
+    { label: "Sprawy cywilne",                  href: "sprawy-cywilne.html", match: ["sprawy-cywilne.html"] },
+    /* Mediacje to zakładka niezależna: stoi w „Usługach", ale oddzielona hairline'em */
+    { label: "Mediacje",                        href: "mediacje.html", match: ["mediacje.html"], oddzielona: true }
   ];
 
   /* ---------- Pozycje menu ----------
@@ -93,21 +94,16 @@
   function lista(pozycje) {
     return pozycje.map(function (p) {
       var a = aktywna(p) ? ' aria-current="page"' : "";
-      return '<li><a href="' + url(p.href) + '"' + a + ">" + p.label + "</a></li>";
+      var k = p.oddzielona ? ' class="oddzielona"' : "";
+      return "<li" + k + '><a href="' + url(p.href) + '"' + a + ">" + p.label + "</a></li>";
     }).join("");
   }
 
-  /* sygnet: sześciokąt z monogramem „B" — pełny w marce, sam obrys w portrecie */
-  function sygnet() {
-    return '<svg class="marka__sygnet" viewBox="0 0 40 44" aria-hidden="true">'
-      + '<polygon points="20,1.5 38,12 38,32 20,42.5 2,32 2,12" fill="none" stroke="currentColor" stroke-width="1.5"/>'
-      + '<text x="20" y="29" text-anchor="middle" font-size="20">B</text>'
-      + "</svg>";
-  }
+  /* logo klientki (złote, PNG z przezroczystym tłem): sygnet w sześciokącie
+     + nazwisko + „Adwokat" w jednym pliku. Nazwę czyta aria-label linku. */
   function marka(opis) {
     return '<a class="marka" href="' + (onHome ? "#gora" : HOME) + '" aria-label="' + opis + '">'
-      + sygnet()
-      + '<span class="marka__nazwa"><b>Beata Cupiał-Kowalska</b><span>Adwokat</span></span>'
+      + '<img class="marka__logo" src="assets/logo-cupial-kowalska.png" width="213" height="48" alt="">'
       + "</a>";
   }
   function ikonaTelefonu(rozmiar, grubosc) {

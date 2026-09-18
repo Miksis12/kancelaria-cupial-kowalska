@@ -15,6 +15,12 @@ klasy sprawdzaj grepem po słowniku niżej.
    adresu czy linków stopki = edycja `NAV` / `KONTAKT` / `STOPKA_*` w `site.js`.
 3. **Płaszczyzny naprzemiennie** — biel → len → piasek, nigdy dwa te same tła pod rząd.
    Żadnych ciemnych sekcji, granatu, zieleni ani zimnej bieli (wykluczone przez klientkę).
+   **Wyjątek: podstrona usługowa** (`<main class="strona-uslugowa">`, decyzja Mikołaja
+   z 14 września 2026) — tam obowiązują **pola**, nie naprzemienność: tło zmienia się
+   tylko przy zmianie roli treści, sąsiednie sekcje jednego pola dzieli hairline
+   (`.sekcja--ciag`), trzy powierzchnie (biel, beż = `--piasek`, espresso), a mediacja
+   i stopka stoją na **espresso**. Brief klientki ciemnych sekcji nie przewidywał —
+   do potwierdzenia z klientką.
 4. **Żaden układ sekcji nie powtarza się na jednej stronie.** Rytm robią zmiany
    kompozycji, nie ozdoby.
 5. **Ton: „Ty", spokojnie i rzeczowo, bez spoufalania.** Nie wymyślaj faktów, liczb,
@@ -26,7 +32,9 @@ klasy sprawdzaj grepem po słowniku niżej.
 ## Pliki
 
 - `index.html` — strona główna (wstęp, zakres spraw z panelem mediacji, podejście,
-  o mnie + atuty, dyżury, opinie, pytania, kontakt).
+  o mnie + atuty, dyżury, opinie, pytania, kontakt). Hero zostaje w pierwotnym
+  układzie (tekst po lewej, portret 2:3 po prawej) — warianty z 14 września 2026
+  zostały odrzucone i usunięte.
 - `kontakt.html` — **PLIK-WZORZEC do klonowania podstron.** Trzy sekcje: wstęp
   podstrony (biel), dane + mapa (len), formularz (piasek).
 - `o-mnie.html` — podstrona „O mnie", dziewięć sekcji: nagłówek strony (piasek),
@@ -37,16 +45,53 @@ klasy sprawdzaj grepem po słowniku niżej.
   stoi na placeholderach `.todo`** — czeka na daty od klientki; bez nich do
   usunięcia w całości (wtedy „dyżury" muszą przejść z bieli na piasek).
 - `rozwod-i-sprawy-rodzinne.html` — **PLIK-WZORZEC do klonowania PODSTRON USŁUGOWYCH.**
-  Pierwsza podstrona obszaru spraw, jedenaście sekcji: nagłówek strony (piasek),
-  otwarcie z parą przycisków i pasem trzech faktów (biel), „czy to Twoja
-  sytuacja" na `.rozpoznanie` (len), zakres pomocy jako akordeon `.faq--wykaz`
-  (piasek), mediacja `.panel-mediacje` + `.rozwidlenie` (len), pierwsza rozmowa
-  `.kroki--trzy` (biel), podejście (piasek), o mnie (len), opinie (biel),
-  pytania (len), kontakt (piasek) — cykl piasek → biel → len ×3 z domknięciem
-  na piasku. Bez portretu i bez hero: hero zwinięte do otwarcia, bo nagłówek
-  strony wziął H1 na siebie. Copy: `rozwod-i-sprawy-rodzinne-copy.md`.
+  Pierwsza podstrona obszaru spraw, dziewięć sekcji w **sześciu polach** + stopka:
+  POLE biel — zwarty nagłówek `.naglowek-strony--uslugi` (okruszki, H1, lead, linia
+  kontaktu, linia meta); POLE beż — kafle `.rozpoznanie`; POLE biel — zakres pomocy
+  `.faq--wykaz`; POLE espresso — mediacja `.panel-mediacje--ciemny` z `.rozwidlenie`
+  w środku; POLE biel — pierwsza rozmowa `.kroki--trzy`; POLE beż — `.osoba`
+  (portret + cytat), opinie `.opinie-rzad--ramka`, pytania `.uklad-faq`, kontakt;
+  stopka na espresso. Między polami 112 px bez linii, w polu hairline + 96 px.
+  `<main>` ma klasę `.strona-uslugowa` — przy klonowaniu zostaw: daje typografię
+  (serif tylko H1, H2 i cytat w cudzysłowach, reszta Inter), mapowanie powierzchni,
+  pola, wspólny akordeon i ciemną stopkę. Copy: `rozwod-i-sprawy-rodzinne-copy.md`.
   Pozycja siedzi w tablicy `USLUGI` w `site.js`, więc jest naraz w drop-downie
   „Usługi", w kolumnie „Sprawy" w stopce i w okruszkach.
+- `sprawy-spadkowe.html` — druga podstrona usługowa, **klon 1:1**
+  `rozwod-i-sprawy-rodzinne.html` na copy `spadki-copy.md`: te same pola, te same
+  komponenty, zero nowego CSS. Zakres pomocy to grupa `name="spadkowe"`, dwie
+  etykiety jak we wzorcu. W FAQ zdanie o opłacie sądowej stoi jako `.todo`
+  i nie wchodzi do JSON-LD (pytanie 16 w `docs/PYTANIA.md`). Pozycja „Sprawy
+  spadkowe" w `USLUGI`.
+- `sprawy-karne.html` — trzecia podstrona usługowa, **klon 1:1** wzorca na copy
+  `sprawy-karne-copy.md`. Różnice: w linii meta tajemnica adwokacka zamiast
+  mediatora, pod wykazem spraw `.wykaz-dopisek` z linkiem do (przyszłej) strony
+  o jeździe po alkoholu — dziś `index.html#sprawy`, sekcja `.osoba` w wersji
+  skróconej z innym cytatem. Grupa zakresu `name="karne"`. Otwarte pytania 20–23
+  w `docs/PYTANIA.md`. Pozycja „Sprawy karne" w `USLUGI`.
+- `sprawy-cywilne.html` — czwarta podstrona usługowa, **klon 1:1** wzorca na copy
+  `sprawy-cywilne-copy.md`, zero nowego CSS. Sekcja `.osoba` w wersji skróconej
+  (jeden akapit, cytat o statusie majątkowym). Grupa zakresu `name="cywilne"`.
+  Otwarte pytania 24–27 w `docs/PYTANIA.md`. Pozycja „Sprawy cywilne" w `USLUGI`.
+- `jazda-po-alkoholu.html` — **najważniejsza zakładka kancelarii**, podstrona usługowa
+  rozszerzona o cztery moduły własne (`.os-dni`, `.progi`, `.mozliwosci`,
+  `.dyskrecja`), dwanaście sekcji, bez bloku mediacji. Pola: biel (nagłówek) · beż
+  (oś czasu + karty) · biel (tabela + zakres) · espresso (możliwości) · biel
+  (dyskrecja + rozmowa) · beż (podejście, opinie, FAQ na 12 pytań, kontakt).
+  Trzy etykiety: oś, tabela, możliwości. **Tabela progów stoi w kodzie dwa razy**
+  (tabela + karty na telefon) — zmieniaj oba miejsca i FAQ naraz. Copy poprawione
+  merytorycznie (warunkowe umorzenie JEST wpisywane do KRK, czasowo), pytania 28–31
+  w `docs/PYTANIA.md`. Pozycja „Jazda po alkoholu" w `USLUGI`.
+- `mediacje.html` — **zakładka niezależna**, nie podstrona usługowa (copy
+  `mediacje-copy.md`), dziesięć sekcji, **bez „Podejścia" i bez opinii** (bezstronność
+  mediatora). `<main class="strona-uslugowa strona-mediacje">`. Moduły własne:
+  `.dwie-drogi`, `.plan`, `.ugoda`, `.druga-strona`; reszta z komponentów: nagłówek
+  `--uslugi`, `.wykaz` (sprawy), bazowe `.kroki` (cztery kroki), `.rozwidlenie` +
+  `.dyzury__tresc` (rola), `.uklad-faq`, kontakt. Pola: biel · beż (dwie drogi) ·
+  biel (zakres, plan, przebieg) · espresso (ugoda) · beż (rola, druga strona) · biel
+  (FAQ, kontakt). **Kotwica `#dla-drugiej-strony` na karcie** — link wysyłany drugiej
+  stronie sporu. W `USLUGI` z `oddzielona: true` (hairline w drop-downie i odstęp
+  w stopce). Pytania 32–36 w `docs/PYTANIA.md`.
 - `baza-wiedzy.html` — archiwum wpisów, cztery sekcje: nagłówek strony (piasek),
   najnowszy wpis (biel), archiwum (len), zachęta (piasek-2). Sekcja archiwum:
   pasek `.filtr-kategorii` nad całą listą, pod nim `.siatka-8-4` — wpisy
@@ -78,7 +123,16 @@ klasy sprawdzaj grepem po słowniku niżej.
 - Tekst: `--umbra #3A2F27`, drugorzędny `--umbra-2 #6A5E55`. Akcent `--braz #7E5E36`
   (wszystko klikalne), `--braz-jasny #B8955E` (wyłącznie dekoracja).
 - Kroje: Schibsted Grotesk (nagłówki, UI) + Source Serif 4 (treść). `em` w h1/h2
-  to nie kursywa, tylko kolor `--braz`.
+  to nie kursywa, tylko kolor `--braz`. **Podstrona usługowa ma regułę odwrotną**
+  (Mikołaj, 14 września 2026, reguła nadrzędna): Source Serif 4 **wyłącznie dla H1,
+  H2 i cytatów w cudzysłowach**, **Inter** dla wszystkiego innego (nagłówki wierszy,
+  treść, etykiety, przyciski, podpisy, numeracja). `.strona-uslugowa` robi to,
+  podmieniając w swoim zasięgu `--font-display` / `--font-ui` / `--font-body` na
+  Inter, a H1/H2 dostają `--font-serif`. Błąd, który wystąpił dwa razy: H2
+  bezszeryfowy przy szeryfowej treści. W tym zasięgu jest też jeden akcent na
+  jasnym tle (`--braz` → `#6B4A2F`), a na espresso akcentem jest `--braz-jasny`.
+  Na pozostałych stronach H1 podstron (`.naglowek-strony__tytul`,
+  `.wpis-glowa__tytul`) jedzie bazowym groteskiem.
 - Kształt: `--r-karta 8px`, `--r-btn 6px`. **Zero cieni.** Ruch: jeden `--ease`, 220 ms.
 - Rytm: `.kontener` 1200 px, `.sekcja` padding `clamp(4.5rem, 8vw, 7.5rem)`.
   Breakpointy: 1024 px (menu mobilne, kafle 2 kol.), 860 px (siatki → 1 kol.), 560 px.
@@ -87,7 +141,10 @@ klasy sprawdzaj grepem po słowniku niżej.
 ## Słownik komponentów (klasa → co trzyma → kardynalność → tło)
 
 **Układ i typografia**
-- `.sekcja` (+ `.biel` / `.pas` / `.zacheta`) → sekcja strony → tło płaszczyzny.
+- `.sekcja` (+ `.biel` / `.pas` / `.zacheta` / `.espresso`) → sekcja strony → tło
+  płaszczyzny. `.espresso` (tekst `--biel-85`) i `.sekcja--ciag` (sekcja w tym samym
+  polu co poprzednia: hairline na szerokość kontenera, 96 px nad i pod) żyją
+  na podstronie usługowej.
 - `.kontener` → maks. szerokość + padding boczny.
 - `.siatka-2` / `.siatka-5-7` / `.siatka-7-5` / `.siatka-4-8` / `.siatka-8-4` → dwie
   kolumny w różnych proporcjach; wszystkie zwijają się do 1 kolumny przy 860 px.
@@ -109,22 +166,38 @@ klasy sprawdzaj grepem po słowniku niżej.
   sieroty 2 + 1) stoi na `rozwod-i-sprawy-rodzinne.html`.
 - `.osczasu` → oś czasu z latami → N.
 - `.faq` / `.faq__poz` + `.faq-szyna` / `.szyna-karta` → akordeon `<details>` + boczna
-  szyna (sticky od 1025 px) → N → len.
+  szyna (sticky od 1025 px) → N → len. Na podstronie usługowej akordeon ma wspólną
+  mechanikę z `.strona-uslugowa`: hairline na górze wiersza, min. 64 px, tytuł
+  Inter 600 17 px, **jeden glif** — Lucide plus 16 px obracany o 45° (nigdy osobny ×).
+- `.uklad-faq` (+ `__szyna`, `__tytul`, `__karta`, `__telefon`, `__lista`) → pytania:
+  320 px / 1fr, gap 72 px, lewa kolumna sticky (H2 + ramka z telefonem, nic więcej),
+  prawa — akordeon `name="pytania"`. `top` liczony od menu (`--nav-h` + 32 px), bo
+  menu jest sticky. Poniżej 860 px szyna `display: contents`: H2 nad akordeonem,
+  ramka pod nim → 1 → beż.
 - `.faq--wykaz` (+ `.faq__glowa`, `.faq__nr`, `.faq__tytul`, `.faq__zajawka`)
-  → ten sam akordeon w roli ponumerowanego wykazu spraw → N → piasek. Numer
-  stoi tam, gdzie `.wykaz` stawia rok. Wiersz zamknięty pokazuje nazwę
-  **i zajawkę**, więc sekcja mówi coś także zwinięta. Wiersz otwarty puszcza
-  opis **pełną szerokością sekcji** — decyzja Mikołaja, podtrzymana mimo
-  zgłoszonego zastrzeżenia, że przy kontenerze 1200 px wiersz ma ok. 120
-  znaków wobec normy 65–75. Cofnięcie = `max-width` na
-  `.faq--wykaz .faq__tresc p`, nic więcej.
-- `.rozpoznanie` (+ `__poz`, `__cytat`, `__odp`, `__cta`) → dwie kolumny par
-  „zdanie klienta w pierwszej osobie + odpowiedź kancelarii". Cudzysłów wisi
-  w marginesie (`::before`), cytat idzie szeryfem, odpowiedź zaczyna się od
-  krótkiej brązowej kreski. Bez kart, bez ramek, bez hoveru — pozycje NIE są
-  linkami → N → len. Cytat ma `min-height` dwóch wierszy, żeby kreski
-  w sąsiednich kolumnach stały na jednej wysokości.
+  → ten sam akordeon w roli ponumerowanego wykazu spraw → N → biel. Numer
+  w tym samym rzędzie flex co tytuł (28 px + gap 16 px, linia bazowa, Inter 400
+  13 px, `#6B4A2F`), treść wcięta o 44 px, maks. 62ch. Wiersz zamknięty pokazuje
+  nazwę **i zajawkę** (Inter 400 15 px). Pozycje są **grupą wyłączną**
+  (`<details name="rodzinne">`) — otwarta jest zawsze dokładnie jedna, bez JS-u.
+  Każda pozycja: jeden akapit, trzy zdania.
+- `.rozpoznanie` (+ `__poz`, `__cytat`, `__odp`, `__cta`, `__cta-tekst`,
+  `__cta-tytul`, `__cta-opis`, `__przycisk`) → **kafle** „zdanie klienta
+  + odpowiedź" (przebudowa 14 września 2026): 2 kolumny, gap 20 px, karta
+  w `--krem`, ramka `rgba(46,38,32,.08)`, radius 4 px, bez cieni. Wypowiedź
+  Interem 600 w cudzysłowach drukarskich „ ” (w HTML), hairline, odpowiedź
+  Interem 400 15 px — **maks. 2 wiersze, pisane pod miarę, nie przycinane**.
+  Hover: cieplejsze tło i mocniejsza ramka, 150 ms, bez podnoszenia. Siódma
+  pozycja `__cta` na pełną szerokość z ramką `#6B4A2F` i przyciskiem
+  `__przycisk` (tel.). Bez ikon, bez numeracji, bez `data-odslon` → 6+1 → len.
+  Karta to `subgrid` na dwa wiersze, więc hairline'y w rzędzie stoją równo.
+  Nagłówek sekcji: `.naglowek-sekcji--sytuacje` (etykieta i lead Interem,
+  H2 40 px, odstęp do siatki 64 px).
 - `.opinia-wiodaca` / `.opinie-rzad` / `.opinia-kolumna` + `.gwiazdki` → opinie Google.
+  Wariant `.opinie-rzad--ramka` (+ `.opinia-kolumna__zrodlo`, `.opinie-wszystkie`)
+  → jedna ramka w bieli z pionowymi hairline'ami, kolumn tyle, ile opinii
+  (`grid-auto-flow: column`, nigdy pusta kolumna), cytat Inter 15 px **maks. 240
+  znaków skracanych w treści**, link do Google wyśrodkowany pod ramką → 1 → beż.
 - `.mikrofakty` / `.mikrofakt` → pas trzech faktów → 3.
 - `.wyimek`, `.podejscie`, `.dyzury__tresc` → wyimek i bloki eseju.
 - `.akcent` (+ `--luz`) → pojedynczy akapit wyjęty z toku tekstu, panel w piasku
@@ -132,17 +205,69 @@ klasy sprawdzaj grepem po słowniku niżej.
 - `.wykaz` / `.wykaz__poz` (+ `__rok`, `__tytul`, `__opis`) → suchy wykaz faktów:
   rok po lewej, fakt po prawej, linia pod pozycją → N → piasek. Od `.osczasu`
   różni się tym, że jest pionowy i bez limitu czterech pól.
+- `.os-dni` (+ `__krok`, `--termin`, `__nr`, `__tytul`, `__opis`, `__termin`, `__final`,
+  `__zdanie`) → oś czasu: pionowa szyna z numerowanymi węzłami (32 px), tytuł kroku
+  po lewej (17 rem), opis po prawej; krok z terminem ma wypełniony węzeł i znacznik
+  tekstowy. Szyna kończy się pełną kropką przy zdaniu i przycisku `.btn--akcent`.
+  Poniżej 860 px opis schodzi pod tytuł. Kolor węzła = kolor pola (`--os-tlo`) →
+  1 → beż. Od `.kroki` różni się kierunkiem (pion) i gęstością.
+- `.progi` (+ `__tabela`, `__kol--lzej/--ciezej`, `__wiersz--kwalifikacja`, `__karty`,
+  `__karta--lzej/--ciezej`, `__lista`, `__dopisek`) → tabela porównawcza dwóch stanów:
+  hairline'y, nagłówki kolumn Inter 600 13 px z górnym paskiem (cięższa kolumna
+  w akcencie), wiersze min. 52 px. Poniżej 861 px tabela znika, a ta sama treść
+  stoi jako dwie karty `<dl>` → 1 → biel. **Treść w dwóch miejscach.**
+- `.mozliwosci` (+ `__tekst`, `__akapit`, `--pierwszy`, `__ramka`, `__uczciwie`) →
+  blok na espresso: tekst 7/12, ramka ze zdaniem i `.btn--jasny` 5/12 wyrównana do
+  dołu, krótki pasek `--braz-jasny` na krawędzi ramki → 1 → espresso.
+- `.dyskrecja` (+ `__pierwszy`, `__drugi`) → jedyny wyśrodkowany blok: H2, krótka
+  kreska w akcencie, większy i spokojniejszy akapit, miara 42 rem → 1 → biel.
+- `.btn--akcent` → wypełniony przycisk `#6B4A2F` (Inter 600 16 px, 14/28 px, radius 4),
+  ten sam wygląd co `.rozpoznanie__przycisk`. `.wizualnie-ukryte` → tekst tylko dla
+  czytników ekranu (np. `<caption>`). `.naglowek-sekcji--modul` → alias
+  `.naglowek-sekcji--sytuacje` dla nagłówków nowych modułów.
+- `.dwie-drogi` (+ `__droga`, `__glowa`, `__ikona`, `__tytul`, `__lista`, `__wniosek`,
+  `__zamkniecie`) → wybór ścieżki: jeden panel w bieli na dwie równorzędne kolumny
+  (ikona Lucide w obrysie, lista warunków z kropką, wniosek), pod panelem zdanie
+  z kreską w akcencie → 1 → beż.
+- `.plan` (+ `__tekst`, `__nota`, `__arkusz`, `__glowa`, `__lista`, `__haczyk`) →
+  tekst 5/12 + arkusz dokumentu w beżu 7/12 (ikona pliku, pozycje z haczykiem) →
+  1 → biel.
+- `.ugoda` (+ `__glowa`, `__wstep`, `__punkty`, `__punkt`, `__tytul`, `__zamkniecie`) →
+  na espresso: H2 + akapit w dwóch kolumnach, trzy punkty z paskiem `--braz-jasny`,
+  zdanie zamykające → 1 → espresso.
+- `.druga-strona` (+ `__tekst`, `__wstep`, `__zasady`, `__nr`, `__stopka`) → karta
+  w bieli z górnym paskiem 3 px w akcencie, `scroll-margin-top` pod menu, zasady 2 × 2
+  z numerem w kółku, stopka: zdanie + `.btn--akcent` → 1 → beż. Nosi kotwicę.
+- `li.oddzielona` (z `oddzielona: true` w `USLUGI`) → pozycja drop-downu i stopki
+  oddzielona od reszty; dziś tylko Mediacje.
+- `.wykaz-dopisek` → jedno zdanie z `.link` pod `.faq--wykaz`, wcięte o 44 px do
+  krawędzi tytułów; odsyła do osobnej podstrony, żeby dwie strony nie konkurowały
+  o te same frazy → 0–1 → biel. Stoi na `sprawy-karne.html`.
 - `.rozwidlenie` (+ `__rola`, `__albo`, `__nota`) → dwie wykluczające się opcje
   jako para kart ze spójnikiem między nimi → 1 → len.
+- `.panel-mediacje--ciemny` (+ `.btn--jasny`) → mediacja na espresso: panel bez
+  tła, etykieta i akcenty w `--braz-jasny`, treść w `--biel-85`, `.rozwidlenie`
+  jako trzeci wiersz siatki panelu (pola z ramką `--biel-linia`, gap 0, „albo"
+  między nimi), nota wyśrodkowana w `--biel-70` → 1 → espresso.
 - `.tekst--lead` → wariant `.tekst` w rozmiarze leadu, maks. 46 znaków w wierszu.
 - `.foto` (+ proporcje), `.portret`, `.pas-foto`, `.podpis-foto` → zdjęcia i miejsca
-  na zdjęcia z sesji (jeszcze nie ma zdjęć — `.portret` to placeholder).
+  na zdjęcia. `.portret` bez modyfikatora to placeholder (faktura + sygnet);
+  `.portret.portret--zdjecie` z `<img>` w środku to portret klientki
+  (`assets/beata-cupial-kowalska.jpg` 1024 px + `-600.jpg` w `srcset`, ramka 2:3 jak
+  zdjęcie, więc nic nie jest ucięte; obróbka jak `.foto`). Stoi we wszystkich 9 miejscach na portret.
 - `.sylwetka` (+ `__foto`, `__tekst`, `__tytul`, `__zawod`, `__nazwa`, `__akapit`,
   `__akcja`) → sekcja „portret + kto to jest": portret 3:4 po lewej, po prawej H2
   w dwóch wierszach (tytuł zawodowy groteskiem, nazwisko szeryfem) i akapity
   o sobie → 1 → biel. Wszystkie `__akapit` mają ten sam krój, stopień i miarę —
   to nie jest para lead + tekst. Nie mylić z `.wstep` (hero strony głównej),
   `.naglowek-strony` (nagłówek podstrony) ani `.wizytowka` (kanały kontaktu).
+- `.osoba` (+ `__tekst`, `__akapit`, `__wiecej`, `__foto`, `__cytat`, `__slowa`,
+  `__podpis`) → odwrotność `.sylwetka` z cytatem: H2 i akapity po lewej (7/5),
+  portret 4:5 po prawej, a cytat klientki jako biała plansza leży na dolnej
+  krawędzi zdjęcia i wchodzi w szczelinę między kolumnami; podpis z krótką
+  kreską `--braz-jasny` → 1 → piasek. Poniżej 860 px tekst nad portretem.
+  Stoi na `rozwod-i-sprawy-rodzinne.html` (#o-mnie) i zastępuje tam dawne
+  „Podejście" + „Kto poprowadzi Twoją sprawę".
 
 **Baza wiedzy i wpisy**
 - `.archiwum` / `.archiwum__grupa` (+ `__glowa`, `__licznik`) → wpisy pogrupowane
@@ -166,7 +291,7 @@ klasy sprawdzaj grepem po słowniku niżej.
   Sticky od 1025 px, więc towarzyszy całej liście.
 - `.wpis-wiodacy__tytul` / `__zajawka` / `__akcja` → najnowszy wpis wyjęty przed
   archiwum, na siatce `.siatka-7-5` → 1 → biel.
-- `.wpis-glowa__tytul` → H1 wpisu wewnątrz `.naglowek-strony` (szeryf, mniejszy
+- `.wpis-glowa__tytul` → H1 wpisu wewnątrz `.naglowek-strony` (grotesk, mniejszy
   od `.naglowek-strony__tytul`, bo tytuł wpisu jest zdaniem). Zdanie wprowadzające
   bierze wprost `.naglowek-strony__podtytul`.
 - `.wpis-meta` → data · kategoria · autor pod hairlinem, domyka nagłówek wpisu → 1.
@@ -199,6 +324,14 @@ klasy sprawdzaj grepem po słowniku niżej.
   podstronę, ok. 300 px: okruszki, nazwa zakładki jako **H1** i jedno zdanie
   podtytułu → 1 na podstronę → **piasek** (biel zlałaby się z nawigacją).
   Tytuł i podtytuł stoją w HTML, bo są treścią danej podstrony.
+  Wariant `--uslugi` (podstrona usługowa, **tło `.biel`** — wyjątek od piasku
+  z decyzji Mikołaja z 14 września 2026; od nawigacji odcina go tylko jej dolny
+  hairline; padding 48/44 px): okruszki Interem
+  13 px → H1 36 px w `--espresso`, bez akcentu i bez kropki → `__lead` (Inter,
+  48ch) → `__kontakt` = `__telefon` (ikona + numer, Inter 600 18 px, `#6B4A2F`)
+  + `__spotkania` w jednym wierszu → `__meta` pod hairlinem (Inter 14 px,
+  separator `·` w akcencie). **Bez** wypełnionego przycisku, `.mikrofakty`,
+  etykiety nad H1 i portretu; bez `min-height` i bez `data-odslon`.
 - `.okruszki` (+ `__grupa`, `__tu`) → ścieżka do strony głównej wewnątrz
   `.naglowek-strony`. Markup składa `site.js` z `NAV` (także z pozycji
   drop-downu), strona ma tylko `<div data-okruszki></div>`. Bez własnego tła.
@@ -215,6 +348,10 @@ klasy sprawdzaj grepem po słowniku niżej.
 
 - Menu: Strona główna · **Usługi (drop-down)** · O mnie · Baza wiedzy · Kontakt
   + numer telefonu jako CTA.
+- Logo (menu i stopka) to jeden złoty PNG z przezroczystym tłem:
+  `assets/logo-cupial-kowalska.png` (sygnet + nazwisko + „Adwokat"), składa go
+  `marka()` jako `img.marka__logo` — 48 px wysokości w menu, 56 px w stopce.
+  Nazwę czyta `aria-label` linku. Nie odrysowuj sygnetu w SVG ani tekstem.
 - Pozycja z tablicą `children` renderuje się jako drop-down (`.nav__grupa` + `.nav__rozwin`
   + `.nav__podmenu`). Lista obszarów siedzi w tablicy `USLUGI` i napędza **jednocześnie**
   drop-down i kolumnę „Sprawy" w stopce — zmieniasz w jednym miejscu.
@@ -225,7 +362,8 @@ klasy sprawdzaj grepem po słowniku niżej.
 - `HOME = 'index.html'`, bo projekt chodzi lokalnie z pliku. **Przy imporcie na
   WordPressa zmienić na `'/'`** — to jedyna linia do ruszenia.
 - Stopka: dane kancelarii + kolumny „Sprawy" i „Kancelaria". Rok w linii prawnej
-  liczy się sam.
+  liczy się sam. Za `<main class="strona-uslugowa">` stopka stoi na espresso
+  (selektor `.strona-uslugowa ~ .stopka`), na pozostałych stronach zostaje jasna.
 
 ## Jak stworzyć NOWĄ podstronę (szybko)
 
@@ -256,9 +394,13 @@ w `baza-wiedzy.html` — tytuły i zajawki do zatwierdzenia przez klientkę, tek
 i daty do napisania; wszystkie wiersze prowadzą na razie do `wpis-szablon.html`),
 **NIP** (`<span class="todo">` w stopce i w `.dane`), **endpoint
 formularza** (`action` w `kontakt.html`), **polityka prywatności** i **informacja RODO**
-(oba `href="#"`), **link do opinii Google**, **zdjęcia z sesji** (`.portret` to na razie
-placeholder), podstrony **mediacji** i **obszarów spraw** (`href="#"` w `.rejestr`
+(oba `href="#"`), **link do opinii Google**, **zdjęcia z sesji** (portret klientki już jest, jeden
+na całą stronę — brakuje kadru „przy biurku" do sekcji o mnie na stronie głównej,
+gdzie dziś stoi ten sam portret co w hero), **status mediatora** (lista stałych mediatorów przy SO w Częstochowie, pytanie 32) (`href="#"` w `.rejestr`
 i w panelu mediacji na stronie głównej; w `.rejestr` na `o-mnie.html` wiersze
-prowadzą tymczasowo do `index.html#sprawy`), a także **cała ścieżka zawodowa**
+prowadzą tymczasowo do `index.html#sprawy`; wszystkie obszary spraw i mediacje mają
+już podstrony), **progi i kwoty na `jazda-po-alkoholu.html`**
+(do weryfikacji na dzień publikacji),
+**opłata sądowa w FAQ spadków** (`.todo`, 100 zł z copy kontra 50 zł z ustawy), a także **cała ścieżka zawodowa**
 na `o-mnie.html`: pięć dat, uczelnia, izba aplikacji, numer wpisu i podstawa
 uprawnień mediatora — wszystko jako `<span class="todo">`.

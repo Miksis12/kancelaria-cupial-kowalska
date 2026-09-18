@@ -234,12 +234,11 @@ p + p { margin-top: 1em; }
   height: var(--nav-h);
   display: flex; align-items: center; justify-content: space-between; gap: 2rem;
 }
-.marka { display: inline-flex; align-items: center; gap: .8rem; }
-.marka__sygnet { width: 40px; height: 44px; flex: none; color: var(--braz-jasny); }
-.marka__sygnet text { font-family: var(--font-display); font-weight: 600; fill: var(--umbra); }
-.marka__nazwa { display: flex; flex-direction: column; line-height: 1.1; }
-.marka__nazwa b { font-family: var(--font-display); font-weight: 600; font-size: 1.02rem; letter-spacing: -.01em; }
-.marka__nazwa span { font-family: var(--font-ui); font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2); margin-top: .25rem; }
+/* logo klientki jako jeden złoty PNG (sygnet + nazwisko + „Adwokat");
+   proporcja pliku 1910 × 431, szerokość liczy się z wysokości */
+.marka { display: inline-flex; align-items: center; }
+.marka__logo { display: block; height: 48px; width: auto; }
+.stopka .marka__logo { height: 56px; }
 
 .nav__menu { display: flex; align-items: center; gap: 1.9rem; }
 .nav__menu a {
@@ -1480,10 +1479,10 @@ html { background: var(--biel); }
   display: grid;
   gap: clamp(.9rem, 1.8vw, 1.35rem);
 }
-/* szeryf, tak jak nagłówek hero na stronie głównej i nazwisko w sylwetce —
-   duży krój treściowy jest na tej witrynie sygnaturą tytułów, nie ozdobą */
+/* grotesk z bazowego h1 — POPRAWKA z 14 września 2026 (Mikołaj): nagłówki
+   podstron idą bezszeryfowo, szeryf zostaje w treści. Wcześniej był tu
+   Source Serif jako „sygnatura tytułów", co dawało miks krojów w nagłówkach. */
 .naglowek-strony__tytul {
-  font-family: var(--font-body); font-weight: 500;
   font-size: clamp(2.5rem, 5vw, 4rem);
   line-height: 1.04; letter-spacing: -.015em;
 }
@@ -1544,106 +1543,169 @@ html { background: var(--biel); }
    nie trzyma takiej pary:
      .rejestr  — wiersz jest linkiem i prowadzi gdzieś dalej;
                  tu nie ma dokąd prowadzić,
-     .kafle    — karta z ramką robi z cudzej wypowiedzi produkt,
+     .kafle    — karta z ramką robi z cudzej wypowiedzi produkt
+                 (od 14 września 2026 .rozpoznanie SAMO jest kaflami,
+                 na wyraźne życzenie Mikołaja — zob. blok niżej),
      .faq      — pytanie chowa odpowiedź; te sześć zdań ma być
                  widocznych naraz, bo czyta się je skanując,
-     .wykaz    — po lewej stoi liczba, tu po lewej stoi cudzysłów,
+     .wykaz    — po lewej stoi liczba, a tu para zdanie + odpowiedź,
      .mikrofakty — pas trzech faktów, nie sześciu wypowiedzi.
    ============================================================ */
 
-/* ---------- .rozpoznanie — sześć zdań klienta i sześć odpowiedzi ---------- */
-/* Dwie kolumny bez kart, bez ramek i bez teł. Całą robotę robią trzy rzeczy:
-   cudzysłów wiszący w marginesie, szeryf w cytacie i krótka brązowa kreska,
-   od której zaczyna się odpowiedź. Pozycje nie są klikalne i nie udają, że są:
-   nie mają hoveru ani strzałki. */
+/* ---------- .rozpoznanie — kafle: sześć sytuacji + karta z telefonem ---------- */
+/* PRZEBUDOWA z 14 września 2026 (specyfikacja Mikołaja). Wcześniej dwie
+   kolumny bez kart; teraz kafle w kremie na lnie, bez cieni, bez gradientów,
+   bez ikon i bez numeracji (numery należą do „Zakresu pomocy" na tej samej
+   stronie). Typografia sekcji: H2 szeryfem (reguła .strona-uslugowa),
+   wszystko inne Interem. Animacji wejścia nie ma — sekcja nie używa
+   data-odslon. Wartości liczbowe są wprost ze specyfikacji. */
+:root {
+  --espresso:          #2E2620;                 /* wypowiedź klienta w karcie */
+  --kafel-linia:       rgba(46, 38, 32, .08);   /* ramka karty i hairline */
+  --kafel-linia-hover: rgba(46, 38, 32, .16);
+  --kafel-hover:       #F8F2E8;                 /* o stopień cieplej niż --krem */
+}
+
+/* ---------- nagłówek sekcji ---------- */
+.naglowek-sekcji--sytuacje,
+.naglowek-sekcji--modul { margin-bottom: 4rem; }          /* lead → siatka: 64 px */
+.naglowek-sekcji--sytuacje .etykieta,
+.naglowek-sekcji--modul .etykieta {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: .75rem;                                         /* 12 px */
+  letter-spacing: .12em;
+  color: var(--akcent-rodzinne);
+}
+/* 40 px na desktopie. Miara trzyma obecny podział na dwa wiersze —
+   przy 18 znakach w wierszu H2 rozsypałby się na cztery. */
+.naglowek-sekcji--sytuacje h2,
+.naglowek-sekcji--modul h2 {
+  font-size: clamp(1.9rem, 4vw, 2.5rem);
+  line-height: 1.15;
+  max-width: 30ch;
+}
+.naglowek-sekcji--sytuacje h2 em,
+.naglowek-sekcji--modul h2 em { color: var(--akcent-rodzinne); }
+.naglowek-sekcji--sytuacje .lead,
+.naglowek-sekcji--modul .lead {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 1.0625rem;                                      /* 17 px */
+  line-height: 1.7;
+  color: var(--umbra-2);
+  max-width: 52ch;
+}
+
+/* ---------- siatka ---------- */
 .rozpoznanie {
   list-style: none;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: clamp(2rem, 5vw, 4.5rem);
-  row-gap: clamp(2.25rem, 4.5vw, 3.5rem);
+  gap: 1.25rem;                                              /* 20 px */
+  align-items: stretch;
 }
 
+/* ---------- karta sytuacji ---------- */
+/* Karta zajmuje dwa wiersze siatki (wypowiedź + odpowiedź) i dziedziczy je
+   przez subgrid: karty w jednym rzędzie mają równą wysokość, a hairline'y
+   stoją na jednej linii także wtedy, gdy jedna wypowiedź ma dwa wiersze,
+   a sąsiednia jeden. Bez subgridu karta jest zwykłym stosem. */
 .rozpoznanie__poz {
-  position: relative;
-  padding-left: clamp(2rem, 3.5vw, 2.75rem);
+  display: grid;
+  grid-row: span 2;
+  grid-template-rows: subgrid;
+  row-gap: 0;
+  align-content: start;
+  padding: 1.75rem 1.75rem 1.875rem;                         /* 28 / 28 / 30 px */
+  background: var(--krem);
+  border: 1px solid var(--kafel-linia);
+  border-radius: 4px;
+  transition: background-color 150ms var(--ease), border-color 150ms var(--ease);
 }
-/* cudzysłów jest znakiem na marginesie, nie pierwszym znakiem zdania: dzięki
-   temu pierwsze słowa wszystkich sześciu cytatów stoją w jednej pionowej linii.
-   Rysowany przez ::before, więc nie ma go w treści i nie miesza się w zaznaczaniu. */
-.rozpoznanie__poz::before {
-  content: "„";
-  position: absolute; left: 0; top: 0;
-  /* pudełko wysokości PIERWSZEGO wiersza cytatu, glif wyśrodkowany w pionie
-     przy zerowej interlinii — dzięki temu znak siada na pierwszym wierszu
-     niezależnie od tego, czy cytat ma jeden wiersz, czy dwa.
-     Clamp to dokładnie clamp cytatu (1.15–1.35rem) razy jego interlinia 1.34,
-     więc wyrównanie trzyma się na każdej szerokości, nie tylko na desktopie. */
-  height: clamp(1.54rem, 2.28vw, 1.81rem);
-  display: grid; align-items: center;
-  font-family: var(--font-body);
-  font-size: clamp(2.4rem, 4vw, 3rem);
-  line-height: 0;
-  color: var(--braz-jasny);
+.rozpoznanie__poz:hover {
+  background: var(--kafel-hover);
+  border-color: var(--kafel-linia-hover);
 }
 
-/* szeryf, bo to cudza wypowiedź, a nie tytuł sekcji — ta sama zasada
-   co w .wyimek i .opinia-wiodaca__cytat. Kursywy nie ma: kursywa w tym
-   systemie należy do .wyimek i nie może znaczyć dwóch rzeczy naraz. */
+/* wypowiedź klienta — cudzysłowy drukarskie stoją w treści HTML */
 .rozpoznanie__cytat {
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: clamp(1.15rem, 1.7vw, 1.35rem);
-  line-height: 1.34;
-  letter-spacing: -.005em;
-  color: var(--umbra);
-  max-width: 24ch;
-  /* dwa wiersze na sztywno: cytaty mają jeden albo dwa wiersze, a bez tego
-     kreska i odpowiedź startowały w sąsiadujących kolumnach na różnej
-     wysokości i cała siatka czytała się jak krzywa */
-  min-height: 2.68em;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.0625rem;                                      /* 17 px */
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: var(--espresso);
+  text-wrap: pretty;
 }
 
-/* krótka kreska, nie linia przez całą kolumnę: to granica między głosem
-   klienta a głosem kancelarii, a nie podział listy na wiersze. Nigdzie
-   indziej na stronie kreska nie jest krótsza od kolumny, w której stoi. */
+/* hairline przez całe wnętrze karty, 16 px nad i pod.
+   Dwa wiersze to limit treści: odpowiedzi są pisane pod tę miarę,
+   nie przycinane — line-clamp schowałby część zdania. */
 .rozpoznanie__odp {
-  position: relative;
-  margin-top: 1.05rem;
-  padding-top: 1.2rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--kafel-linia);
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: .9375rem;                                       /* 15 px */
+  line-height: 1.7;
   color: var(--umbra-2);
-  line-height: 1.6;
-  max-width: 54ch;
-}
-.rozpoznanie__odp::before {
-  content: "";
-  position: absolute; left: 0; top: 0;
-  width: 2.25rem; height: 1px;
-  background: var(--braz);
 }
 
-/* domknięcie sekcji: kreska na całą szerokość i jedno wezwanie */
+/* ---------- karta CTA: siódma, na pełną szerokość ---------- */
 .rozpoznanie__cta {
-  margin-top: clamp(2.5rem, 5vw, 3.75rem);
-  padding-top: clamp(1.75rem, 3vw, 2.25rem);
-  border-top: 1px solid var(--linia-mocna);
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1.25rem 2rem;
+  padding: 1.75rem 2rem;                                     /* 28 / 32 px */
+  background: var(--krem);
+  border: 1px solid var(--akcent-rodzinne);
+  border-radius: 4px;
 }
+.rozpoznanie__cta-tekst { font-family: var(--font-inter); }
+.rozpoznanie__cta-tytul {
+  font-weight: 600;
+  font-size: 1.0625rem;                                      /* 17 px */
+  line-height: 1.45;
+  color: var(--espresso);
+}
+.rozpoznanie__cta-opis {
+  font-weight: 400;
+  font-size: .9375rem;                                       /* 15 px */
+  line-height: 1.7;
+  color: var(--umbra-2);
+}
+.rozpoznanie__cta-tekst p + p { margin-top: .25rem; }
+
+.rozpoznanie__przycisk {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .875rem 1.75rem;                                  /* 14 / 28 px */
+  background: var(--akcent-rodzinne);
+  color: var(--biel);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1rem;                                           /* 16 px */
+  line-height: 1.25;
+  font-variant-numeric: lining-nums;   /* bez tabular-nums: robi dziurę po „Zadzwoń:" */
+  white-space: nowrap;
+  border-radius: 4px;
+  transition: background-color 150ms var(--ease);
+}
+.rozpoznanie__przycisk:hover { background: #5A3E27; }
 
 @media (max-width: 860px) {
-  .rozpoznanie { grid-template-columns: 1fr; row-gap: clamp(1.75rem, 5vw, 2.5rem); }
-  .rozpoznanie__cytat { max-width: 28ch; }
+  .rozpoznanie { grid-template-columns: 1fr; }
 }
 @media (max-width: 560px) {
-  .rozpoznanie__poz { padding-left: 1.85rem; }
-  .rozpoznanie__poz::before { font-size: 2.5rem; }
-  .rozpoznanie__cta .btn { width: 100%; }
+  .rozpoznanie__cta { flex-direction: column; align-items: stretch; }
+  .rozpoznanie__przycisk { width: 100%; }
 }
 
 /* ---------- Warianty istniejących komponentów (bez nowego CSS-u „na zapas") ---------- */
 
 /* para przycisków w toku sekcji (nie w hero — .wstep__akcja trzyma jeden) */
-.akcje-para { display: flex; flex-wrap: wrap; gap: .75rem; }
-@media (max-width: 560px) { .akcje-para .btn { width: 100%; } }
 
 /* ---------- .faq--wykaz — ponumerowany wykaz spraw jako akordeon ----------
    Sekcja „Sprawy rodzinne, które prowadzę" jest akordeonem na życzenie
@@ -1963,14 +2025,13 @@ html { background: var(--biel); }
    bierze wprost .naglowek-strony__podtytul, bo pełni tę samą rolę.
    Własną klasę dostaje TYLKO tytuł: nazwa zakładki to jedno słowo i znosi
    4 rem, tytuł wpisu jest całym zdaniem i w tej skali zająłby pół ekranu.
-   Krój zostaje szeryfowy — na tej witrynie duży szeryf jest sygnaturą
-   tytułów, a wpis nie ma powodu wyłamywać się z tej zasady.
+   Krój idzie za .naglowek-strony__tytul: od 14 września 2026 grotesk
+   z bazowego h1, bo wpis nie ma powodu wyłamywać się z nagłówków podstron.
 
    UWAGA: .naglowek-strony .kontener jest siatką z własnym `gap`, więc
    odstępy pionowe w tym nagłówku liczy ona, a nie marginesy elementów.
    Stąd tutaj żadnego margin-top poza świadomą dokładką przy metryczce. */
 .wpis-glowa__tytul {
-  font-family: var(--font-body); font-weight: 500;
   font-size: clamp(2rem, 3.6vw, 3rem);
   line-height: 1.08; letter-spacing: -.015em;
   max-width: 17em;
@@ -2076,4 +2137,1466 @@ html { background: var(--biel); }
 @media (max-width: 1024px) {
   /* szyna przestaje być szyną: spis treści ląduje nad tekstem, kontakt pod nim */
   .wpis-szyna { gap: 1.25rem; }
+}
+
+/* ============================================================
+   POPRAWKA · sekcja „Sprawy rodzinne, które prowadzę"
+   (rozwod-i-sprawy-rodzinne.html #zakres) — decyzja Mikołaja
+   z 10 września 2026.
+
+   ODSTĘPSTWO OD SYSTEMU, ŚWIADOME I ZAWĘŻONE. Reszta serwisu
+   jedzie na parze Schibsted Grotesk + Source Serif 4 i na akcencie
+   --braz #7E5E36. Ta jedna sekcja dostaje Inter (400 i 600) na
+   wszystkim poza H2 (szeryf z reguły .strona-uslugowa) oraz ciemniejszy
+   akcent #6B4A2F. Selektory są
+   zawężone do .naglowek-sekcji--wykaz i .faq--wykaz, więc nic poza
+   tą sekcją tego nie widzi. Cofnięcie = usunięcie całego bloku
+   i klasy --wykaz z nagłówka sekcji.
+
+   Jedna miara tekstu: lead, podtytuł pozycji i treść mają 68ch.
+   Hairline'y i wiersz nagłówka zostają na pełną szerokość kontenera,
+   bo linia przez całą sekcję jest tu rytmem — zawęża się tekst,
+   nie linia.
+   ============================================================ */
+:root {
+  --font-inter:      "Inter", "Schibsted Grotesk", "Segoe UI", system-ui, sans-serif;
+  --akcent-rodzinne: #6B4A2F;   /* ciemniejszy od --braz; tylko ta sekcja */
+  --miara-rodzinne:  68ch;
+}
+
+/* ---------- nagłówek sekcji: H2 z reguły strony, Inter w leadzie ---------- */
+/* Krój i wagę H2 (Source Serif 4, 400) daje .strona-uslugowa na końcu arkusza,
+   wspólnie dla wszystkich H2 tej podstrony. */
+.naglowek-sekcji--wykaz {
+  max-width: none;              /* bazowe 40em ucinałoby lead przed 68ch */
+  margin-bottom: 3rem;          /* lead → pierwszy hairline: 48 px */
+}
+.naglowek-sekcji--wykaz h2 em { color: var(--akcent-rodzinne); }
+.naglowek-sekcji--wykaz .lead {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  max-width: var(--miara-rodzinne);
+}
+
+/* ---------- wiersz pozycji — PAKIET 1 z 14 września 2026, punkt C ---------- */
+/* Wspólna mechanika wiersza (hairline na górze, min. 64 px, glif plus)
+   stoi w bloku STRONA USŁUGOWA na końcu arkusza, bo tak samo jedzie
+   akordeon pytań. Tutaj tylko to, co ma wyłącznie wykaz spraw. */
+
+/* numer w tym samym rzędzie flex co tytuł: 28 px szerokości, 16 px do
+   tytułu, na linii bazowej tytułu — bez pustej kolumny obok */
+.faq--wykaz .faq__glowa { align-items: baseline; gap: 1rem; }
+.faq--wykaz .faq__nr {
+  flex: none;
+  width: 1.75rem;               /* 28 px */
+  min-width: 0;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: .8125rem;          /* 13 px */
+  line-height: 1;
+  letter-spacing: 0;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--akcent-rodzinne);
+}
+
+.faq--wykaz .faq__tytul {
+  gap: .25rem;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.0625rem;         /* 17 px */
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: var(--umbra);
+}
+.faq--wykaz .faq__poz[open] .faq__tytul { color: var(--akcent-rodzinne); }
+
+.faq--wykaz .faq__zajawka,
+.faq--wykaz .faq__poz[open] .faq__zajawka {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: .9375rem;          /* 15 px */
+  line-height: 1.5;
+  letter-spacing: 0;
+  color: var(--umbra-2);
+  max-width: 62ch;
+}
+
+/* treść wcięta o numer + gap = 44 px, czyli staje na krawędzi tytułu */
+.faq--wykaz .faq__tresc {
+  padding: 0 0 1.5rem 2.75rem;  /* 44 px */
+  max-width: none;
+}
+.faq--wykaz .faq__tresc p { max-width: 62ch; }
+
+@media (max-width: 560px) {
+  /* powtórzone za wcześniejszym blokiem .faq--wykaz: ten stoi dalej w arkuszu */
+  .faq--wykaz .faq__glowa { gap: 1rem; }
+  .faq--wykaz .faq__tresc { padding-left: 2.75rem; }
+}
+
+/* ============================================================
+   NOWY KOMPONENT · .osoba — portret z cytatem obok tekstu
+   (rozwod-i-sprawy-rodzinne.html #o-mnie) — decyzja Mikołaja
+   z 14 września 2026: sekcje „Podejście" i „Kto poprowadzi
+   Twoją sprawę" zbite w jedną, z miejscem na zdjęcie.
+
+   Dlaczego nie .sylwetka: tamta stawia portret po lewej i nie ma
+   gdzie trzymać cytatu. Tu tekst idzie pierwszy (to argument,
+   nie wizytówka), portret stoi po prawej, a cytat klientki leży
+   na dolnej krawędzi zdjęcia jako biała plansza i wchodzi
+   w szczelinę między kolumnami — słowa są „przy portrecie",
+   a plansza spina obie kolumny. Zero cieni: planszę od zdjęcia
+   odcina sama płaszczyzna bieli.
+
+   Od 861 px dwie kolumny 7/5, poniżej tekst nad portretem,
+   plansza przesuwa się w prawo i dalej zachodzi na zdjęcie.
+   ============================================================ */
+.osoba {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+
+/* ---------- tekst ---------- */
+.osoba__tekst { display: grid; gap: clamp(1.15rem, 2vw, 1.5rem); }
+/* odstępy w tej kolumnie liczy wyłącznie gap */
+.osoba__tekst p + p { margin-top: 0; }
+.osoba__tekst h2 { max-width: 14em; margin-bottom: clamp(.25rem, 1vw, .6rem); }
+
+/* ten sam stopień i miara co akapity .sylwetka — oba mówią o tej samej osobie */
+.osoba__akapit { font-size: 1.15rem; line-height: 1.7; max-width: 52ch; }
+.osoba__wiecej { margin-top: clamp(.25rem, 1vw, .5rem); }
+
+/* ---------- portret + cytat ---------- */
+.osoba__foto { display: grid; }
+.osoba__foto .portret {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  /* sygnet i opis placeholdera siadają w części zdjęcia, której nie zakrywa cytat */
+  padding-bottom: clamp(4.5rem, 8vw, 6.5rem);
+}
+
+.osoba__cytat {
+  position: relative;
+  margin: calc(-1 * clamp(3.5rem, 6vw, 5rem)) clamp(1.25rem, 3vw, 2.5rem) 0 calc(-1 * clamp(1.5rem, 4vw, 3.5rem));
+  padding: clamp(1.25rem, 2.2vw, 1.75rem) clamp(1.25rem, 2.4vw, 1.9rem);
+  background: var(--biel);
+  border-radius: var(--r-karta);
+}
+.osoba__slowa p {
+  font-family: var(--font-body);
+  font-size: clamp(1.15rem, 1.6vw, 1.35rem);
+  line-height: 1.45;
+  color: var(--umbra);
+  text-wrap: pretty;
+  /* otwierający „ wisi przed krawędzią tekstu */
+  text-indent: -.42em;
+}
+.osoba__podpis {
+  display: flex; align-items: center; gap: .75rem;
+  margin-top: 1rem;
+  font-family: var(--font-ui); font-weight: 500;
+  font-size: .78rem; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--umbra-2);
+}
+.osoba__podpis::before {
+  content: ""; flex: none;
+  width: 1.5rem; height: 1px;
+  background: var(--braz-jasny);
+}
+
+@media (max-width: 860px) {
+  .osoba { grid-template-columns: 1fr; gap: clamp(2.25rem, 6vw, 3rem); }
+  .osoba__foto { width: min(100%, 26rem); }
+  .osoba__cytat { margin: calc(-1 * clamp(2.5rem, 8vw, 3.5rem)) 0 0 clamp(1rem, 6vw, 2.5rem); }
+}
+@media (max-width: 560px) {
+  .osoba__foto { width: 100%; }
+  .osoba__cytat { margin-left: 1rem; }
+}
+
+/* ============================================================
+   STRONA USŁUGOWA · typografia, pola, akordeony
+   (rozwod-i-sprawy-rodzinne.html, <main class="strona-uslugowa">)
+   — PAKIET 1 z 14 września 2026 (specyfikacja Mikołaja).
+
+   TYPOGRAFIA. Source Serif 4 wyłącznie dla H1, H2 i cytatu
+   w cudzysłowach (.osoba__slowa). Inter dla wszystkiego innego.
+   Zamiast przepisywać krój w każdym komponencie, blok podmienia
+   w zasięgu strony trzy tokeny krojów na Inter — dzięki temu także
+   sekcje, których ten pakiet nie przebudowuje (kroki, podejście,
+   kontakt), nie mają już szeryfowej treści pod szeryfowym H2.
+
+   POWIERZCHNIE. Trzy: ciepła biel (--biel), beż (--piasek), espresso
+   (--espresso). Jasny beż (--len) i głęboki piasek (--piasek-2) są
+   w zasięgu strony zmapowane na beż, krem (--krem) na ciepłą biel.
+   Jeden akcent na jasnym tle: --braz wskazuje na #6B4A2F. Na
+   espresso akcentem jest ciepły piasek (--braz-jasny).
+
+   POLA. Tło zmienia się tylko przy zmianie roli treści:
+     biel     nagłówek strony
+     beż      karty sytuacji
+     biel     zakres pomocy
+     espresso mediacja
+     biel     pierwsza rozmowa
+     beż      podejście + opinie + FAQ + kontakt
+     espresso stopka
+   Między polami: 112 px paddingu, bez linii. Wewnątrz pola sekcja
+   z klasą .sekcja--ciag zaczyna się hairline'em na szerokość
+   kontenera, 96 px nad nim i pod nim. Na wąskich ekranach oba
+   odstępy skalują się w dół (clamp), pełne wartości od ok. 1120 px.
+
+   UWAGA: brief klientki wykluczał ciemne sekcje. Espresso na tej
+   stronie to świadoma decyzja Mikołaja z 14 września 2026 —
+   zawężona klasą na <main> i stopką tuż za nim; reszta serwisu
+   zostaje jasna. Cofnięcie = usunięcie klasy z <main>.
+   ============================================================ */
+:root {
+  --font-serif:  "Source Serif 4", Georgia, "Times New Roman", serif;
+  --biel-85:     #DEDCD9;                     /* ciepła biel 85% na espresso, kolor pełny */
+  --biel-70:     #BFBCB9;                     /* ciepła biel 70% na espresso, kolor pełny */
+  --biel-linia:  rgba(253, 252, 250, .22);    /* obramowania na espresso */
+  --linia-ramki: rgba(46, 38, 32, .10);       /* ramki opinii i karty z telefonem */
+  --pole:        clamp(4.5rem, 10vw, 7rem);   /* 112 px między polami */
+  --pole-ciag:   clamp(3.5rem, 8.5vw, 6rem);  /* 96 px nad i pod hairline'em w polu */
+}
+
+.strona-uslugowa,
+.strona-uslugowa ~ .stopka {
+  --font-display: var(--font-inter);
+  --font-ui:      var(--font-inter);
+  --font-body:    var(--font-inter);
+  --len:          var(--piasek);
+  --piasek-2:     var(--piasek);
+  --krem:         var(--biel);
+  --braz:         var(--akcent-rodzinne);
+  font-family: var(--font-inter);
+}
+.strona-uslugowa { background-color: var(--piasek); }
+
+/* ---------- serif: H1, H2 i cytat w cudzysłowach ---------- */
+.strona-uslugowa h1,
+.strona-uslugowa h2 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  letter-spacing: -.01em;
+}
+.strona-uslugowa .osoba__slowa p { font-family: var(--font-serif); }
+
+/* ---------- pola ---------- */
+.espresso { background-color: var(--espresso); color: var(--biel-85); }
+.espresso :focus-visible { outline-color: var(--braz-jasny); }
+
+.strona-uslugowa > .sekcja { padding-block: var(--pole); }
+.strona-uslugowa > .sekcja--ciag { padding-top: 0; }
+.strona-uslugowa > .sekcja:has(+ .sekcja--ciag) { padding-bottom: var(--pole-ciag); }
+.strona-uslugowa > .sekcja--ciag > .kontener::before {
+  content: "";
+  display: block;
+  height: 1px;
+  margin-bottom: var(--pole-ciag);
+  background: var(--linia);
+}
+
+/* ---------- akordeony: wykaz spraw i pytania ---------- */
+/* hairline na górze każdego wiersza, jedna linia domyka listę */
+.strona-uslugowa .faq { border-top: 0; border-bottom: 1px solid var(--linia); }
+.strona-uslugowa .faq__poz { border-top: 1px solid var(--linia); border-bottom: 0; }
+.strona-uslugowa .faq__poz summary,
+.strona-uslugowa .faq--wykaz .faq__poz summary,
+.strona-uslugowa .faq--wykaz .faq__poz[open] summary {
+  min-height: 4rem;             /* 64 px, cały wiersz jest klikalny */
+  padding: 1.25rem 0;
+  align-items: center;
+  gap: 1.5rem;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.0625rem;         /* 17 px */
+  line-height: 1.45;
+  letter-spacing: 0;
+}
+.strona-uslugowa .faq__poz summary:hover { color: var(--akcent-rodzinne); }
+
+/* JEDEN glif w dwóch stanach: plus (Lucide, 16 px, 1.5 px) obrócony o 45°.
+   non-scaling-stroke trzyma 1.5 px mimo skalowania viewBoxu 24 → 16. */
+.strona-uslugowa .faq__poz summary .plus {
+  width: 1rem; height: 1rem;
+  color: var(--akcent-rodzinne);
+  transition: transform 150ms var(--ease);
+}
+.strona-uslugowa .faq__poz summary .plus svg { display: block; }
+.strona-uslugowa .faq__poz summary .plus path { vector-effect: non-scaling-stroke; }
+.strona-uslugowa .faq__poz[open] summary .plus { transform: rotate(45deg); }
+
+/* treść pytań: bez wcięcia (pytania nie mają numeru) */
+.uklad-faq .faq__tresc {
+  padding: 0 0 1.5rem;
+  font-size: .9375rem;          /* 15 px */
+  line-height: 1.7;
+  color: var(--umbra);
+  max-width: 62ch;
+}
+.faq--wykaz .faq__tresc {
+  font-size: .9375rem;          /* 15 px */
+  line-height: 1.7;
+  color: var(--umbra);
+}
+
+/* ============================================================
+   MEDIACJA NA ESPRESSO · .panel-mediacje--ciemny (punkt B)
+   ============================================================ */
+.panel-mediacje--ciemny {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+}
+.panel-mediacje--ciemny .etykieta {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: .75rem;            /* 12 px */
+  letter-spacing: .12em;
+  color: var(--braz-jasny);
+}
+.panel-mediacje--ciemny .panel-mediacje__tytul {
+  font-size: clamp(1.875rem, 3.5vw, 2.25rem);   /* 36 px */
+  line-height: 1.2;
+  color: var(--biel);
+}
+.panel-mediacje--ciemny .panel-mediacje__tytul em { color: var(--braz-jasny); }
+.panel-mediacje--ciemny .panel-mediacje__tekst p,
+.panel-mediacje--ciemny .panel-mediacje__tekst p:first-child {
+  font-size: 1.0625rem;         /* 17 px */
+  line-height: 1.7;
+  color: var(--biel-85);
+}
+
+/* jasny przycisk na ciemnym polu */
+.btn--jasny {
+  min-height: 0;
+  padding: .875rem 1.75rem;     /* 14 / 28 px */
+  border-radius: 4px;
+  background: var(--biel);
+  color: var(--espresso);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+  transition: background-color 150ms var(--ease), color 150ms var(--ease);
+}
+.btn--jasny:hover { background: var(--piasek); color: var(--espresso); }
+
+/* rozwidlenie jako trzeci wiersz siatki panelu, na całą szerokość */
+.panel-mediacje--ciemny .rozwidlenie {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  margin-top: clamp(3rem, 6vw, 4.5rem);
+  column-gap: 0;
+  row-gap: 1.75rem;
+}
+.panel-mediacje--ciemny .rozwidlenie__rola {
+  background: none;
+  border: 1px solid var(--biel-linia);
+  border-radius: 4px;
+  padding: 1.5rem 1.75rem;      /* 24 / 28 px */
+}
+.panel-mediacje--ciemny .rozwidlenie__rola h3 {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.0625rem;         /* 17 px */
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: var(--biel);
+}
+.panel-mediacje--ciemny .rozwidlenie__albo {
+  padding-inline: 1.25rem;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: .8125rem;          /* 13 px */
+  letter-spacing: .1em;
+  color: var(--braz-jasny);
+}
+.panel-mediacje--ciemny .rozwidlenie__albo::before,
+.panel-mediacje--ciemny .rozwidlenie__albo::after { background: var(--braz-jasny); }
+.panel-mediacje--ciemny .rozwidlenie__nota {
+  justify-self: center;
+  max-width: 62ch;
+  text-align: center;
+  font-family: var(--font-inter);
+  font-size: .9375rem;          /* 15 px */
+  line-height: 1.7;
+  color: var(--biel-70);
+}
+
+@media (max-width: 860px) {
+  .panel-mediacje--ciemny .rozwidlenie { grid-row: auto; }
+}
+@media (max-width: 640px) {
+  .panel-mediacje--ciemny .rozwidlenie { row-gap: .75rem; }
+  .panel-mediacje--ciemny .rozwidlenie__albo { justify-items: center; padding-block: .25rem; }
+  .panel-mediacje--ciemny .rozwidlenie__nota { margin-top: 1rem; }
+}
+
+/* ============================================================
+   OPINIE W JEDNEJ RAMCE · .opinie-rzad--ramka (punkt D)
+   Kolumn jest tyle, ile opinii (grid-auto-flow: column), więc przy
+   dwóch opiniach ramka ma dwie kolumny i nigdy pustej trzeciej.
+   ============================================================ */
+.opinie-rzad--ramka {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: none;
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(0, 1fr);
+  gap: 0;
+  align-items: stretch;
+  padding: 2.5rem 0;            /* 40 px */
+  background: var(--biel);
+  border: 1px solid var(--linia-ramki);
+  border-radius: 4px;
+}
+.opinie-rzad--ramka .opinia-kolumna {
+  display: flex; flex-direction: column; align-items: flex-start;
+  padding: 0 2rem;              /* 32 px */
+  border-top: 0;
+}
+/* pionowy hairline na pełną wysokość kolumny */
+.opinie-rzad--ramka .opinia-kolumna + .opinia-kolumna { border-left: 1px solid var(--linia-ramki); }
+
+.opinie-rzad--ramka .gwiazdki {
+  width: auto;
+  height: .875rem;              /* 14 px */
+  color: var(--akcent-rodzinne);
+}
+.opinie-rzad--ramka .opinia-kolumna__cytat {
+  margin-top: 1rem;             /* 16 px */
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: .9375rem;          /* 15 px */
+  line-height: 1.7;
+  color: var(--umbra);
+}
+.opinie-rzad--ramka .opinia-kolumna__autor {
+  margin-top: 1.25rem;          /* 20 px */
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: .875rem;           /* 14 px */
+  line-height: 1.45;
+  color: var(--umbra);
+}
+.opinia-kolumna__zrodlo {
+  display: block;
+  margin-top: .125rem;
+  font-weight: 400;
+  font-size: .8125rem;          /* 13 px */
+  color: var(--umbra-2);
+}
+
+.opinie-wszystkie { margin-top: 1.5rem; text-align: center; }
+.opinie-wszystkie a {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: .9375rem;          /* 15 px */
+  color: var(--akcent-rodzinne);
+  text-decoration: underline;
+  text-decoration-color: transparent;
+  text-underline-offset: .22em;
+  transition: text-decoration-color 150ms var(--ease);
+}
+.opinie-wszystkie a:hover { text-decoration-color: currentColor; }
+
+@media (max-width: 860px) {
+  .opinie-rzad--ramka { grid-auto-flow: row; grid-template-columns: 1fr; padding: 0; }
+  .opinie-rzad--ramka .opinia-kolumna { padding: 1.75rem 1.5rem; }
+  .opinie-rzad--ramka .opinia-kolumna + .opinia-kolumna { border-left: 0; border-top: 1px solid var(--linia-ramki); }
+}
+
+/* ============================================================
+   FAQ · .uklad-faq (punkt E)
+   Lewa kolumna 320 px przyklejona do góry, prawa — akordeon.
+   top liczy się od dolnej krawędzi nawigacji: menu jest sticky
+   (72 px), więc samo 32 px schowałoby H2 pod menu.
+   Żaden przodek nie ma overflow: hidden/clip — inaczej sticky
+   przestaje działać.
+   ============================================================ */
+.uklad-faq {
+  display: grid;
+  grid-template-columns: 20rem minmax(0, 1fr);   /* 320 px / 1fr */
+  column-gap: 4.5rem;                            /* 72 px */
+  align-items: start;
+}
+.uklad-faq__szyna {
+  position: sticky;
+  top: calc(var(--nav-h) + 2rem);
+  align-self: start;
+}
+.uklad-faq__karta {
+  margin-top: 2rem;             /* 32 px */
+  padding: 1.5rem;              /* 24 px */
+  background: var(--biel);
+  border: 1px solid var(--linia-ramki);
+  border-radius: 4px;
+}
+.uklad-faq__karta p { font-size: .9375rem; line-height: 1.6; color: var(--umbra-2); }
+.uklad-faq__telefon {
+  display: inline-block;
+  margin-top: .5rem;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.25rem;           /* 20 px */
+  line-height: 1.3;
+  font-variant-numeric: lining-nums;
+  color: var(--akcent-rodzinne);
+  transition: color 150ms var(--ease);
+}
+.uklad-faq__telefon:hover { color: #5A3E27; }
+
+@media (max-width: 860px) {
+  .uklad-faq { grid-template-columns: 1fr; row-gap: 2rem; }
+  /* szyna znika z układu: H2 nad akordeonem, ramka z telefonem pod nim */
+  .uklad-faq__szyna { display: contents; position: static; }
+  .uklad-faq__tytul { order: 1; }
+  .uklad-faq__lista { order: 2; }
+  .uklad-faq__karta { order: 3; margin-top: 0; }
+}
+
+/* ============================================================
+   STOPKA NA ESPRESSO (pole 6) — tylko za <main class="strona-uslugowa">
+   ============================================================ */
+.strona-uslugowa ~ .stopka {
+  background-color: var(--espresso);
+  color: var(--biel-85);
+  border-top: 0;
+  padding-block: var(--pole) 2rem;
+}
+.strona-uslugowa ~ .stopka h4 { color: var(--braz-jasny); }
+.strona-uslugowa ~ .stopka .stopka__opis { color: var(--biel-70); }
+.strona-uslugowa ~ .stopka a:hover { color: var(--biel); }
+.strona-uslugowa ~ .stopka .stopka__prawna { color: var(--biel-70); border-top-color: var(--biel-linia); }
+.strona-uslugowa ~ .stopka .todo { background: rgba(184, 149, 94, .16); color: var(--braz-jasny); }
+.strona-uslugowa ~ .stopka :focus-visible { outline-color: var(--braz-jasny); }
+
+/* ============================================================
+   WARIANT · .naglowek-strony--uslugi — nagłówek strony usługowej
+   (rozwod-i-sprawy-rodzinne.html, pierwsza sekcja) — specyfikacja
+   Mikołaja z 14 września 2026, druga wersja tego dnia.
+
+   Zwarty blok w ciepłej bieli (wcześniej piasek): okruszki → H1 → lead → linia kontaktu →
+   hairline → linia meta. H1 szeryfem daje reguła .strona-uslugowa;
+   wszystko inne Interem. Świadomie bez wypełnionego przycisku, bez
+   trzech kolumn z pionowymi liniami (.mikrofakty), bez etykiety nad
+   H1 i bez portretu — pierwsza wersja z przyciskami i pasem faktów
+   została tą specyfikacją cofnięta.
+
+   .naglowek-strony .kontener jest siatką z gap-em liczonym pod trzy
+   elementy. Tu każdy odstęp jest inny, więc gap schodzi do zera,
+   a rytm robią marginesy (wartości wprost ze specyfikacji).
+   ============================================================ */
+.naglowek-strony--uslugi {
+  min-height: 0;
+  padding-block: 3rem 2.75rem;                               /* 48 / 44 px */
+}
+.naglowek-strony--uslugi .kontener { gap: 0; }
+
+/* ---------- okruszki: Inter 400, 13 px, kolor drugorzędny ---------- */
+.naglowek-strony--uslugi .okruszki li {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: .8125rem;
+}
+.naglowek-strony--uslugi .okruszki a,
+.naglowek-strony--uslugi .okruszki__grupa,
+.naglowek-strony--uslugi .okruszki__tu { color: var(--umbra-2); font-weight: 400; }
+.naglowek-strony--uslugi .okruszki a:hover { color: var(--akcent-rodzinne); }
+
+/* ---------- H1: 36 px, 1.2, espresso, bez akcentu ---------- */
+.naglowek-strony--uslugi .naglowek-strony__tytul {
+  margin-top: 1.25rem;                                       /* okruszki → H1: 20 px */
+  font-size: clamp(1.875rem, 4vw, 2.25rem);                  /* 36 px; 30 px na telefonie */
+  line-height: 1.2;
+  color: var(--espresso);
+}
+
+/* ---------- lead: Inter 400, 17 px, 1.7, ciepły szary, 48ch ---------- */
+.naglowek-strony__lead {
+  margin-top: 1rem;                                          /* H1 → lead: 16 px */
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--umbra-2);
+  max-width: 48ch;
+}
+
+/* ---------- linia kontaktu: telefon + dopisek w jednym wierszu ---------- */
+.naglowek-strony__kontakt {
+  margin-top: 1.5rem;                                        /* lead → kontakt: 24 px */
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: .5rem 1.25rem;
+}
+.naglowek-strony__telefon {
+  display: inline-flex; align-items: center; gap: .5rem;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.125rem;                                       /* 18 px */
+  line-height: 1.3;
+  font-variant-numeric: lining-nums;
+  color: var(--akcent-rodzinne);
+  white-space: nowrap;
+  transition: color 150ms var(--ease);
+}
+.naglowek-strony__telefon svg { flex: none; }
+.naglowek-strony__telefon:hover { color: #5A3E27; }
+.naglowek-strony__spotkania {
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: .9375rem;                                       /* 15 px */
+  line-height: 1.5;
+  color: var(--umbra-2);
+}
+
+/* ---------- hairline + linia meta ---------- */
+/* Flex, nie tekst ciągły: przy zawijaniu łamie się między pozycjami, nigdy
+   w środku frazy; kropka zostaje na końcu wiersza, nie otwiera następnego. */
+.naglowek-strony__meta {
+  list-style: none;
+  margin-top: 2rem;                                          /* kontakt → hairline: 32 px */
+  padding-top: 1.25rem;                                      /* hairline → meta: 20 px */
+  border-top: 1px solid var(--linia);
+  display: flex; flex-wrap: wrap;
+  row-gap: .25rem;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: .875rem;                                        /* 14 px */
+  line-height: 1.6;
+  color: var(--umbra-2);
+}
+.naglowek-strony__meta li { white-space: nowrap; }
+.naglowek-strony__meta li:not(:last-child)::after {
+  content: "·";
+  margin-inline: .625rem;
+  color: var(--akcent-rodzinne);
+}
+
+@media (max-width: 560px) {
+  .naglowek-strony__kontakt { flex-direction: column; align-items: flex-start; gap: .375rem; }
+}
+
+/* ============================================================
+   DOPISEK POD WYKAZEM SPRAW · .wykaz-dopisek
+   (sprawy-karne.html #zakres) — 14 września 2026.
+
+   Jedno zdanie z linkiem pod akordeonem .faq--wykaz, odsyłające do
+   osobnej podstrony (tu: jazda po alkoholu), żeby dwie strony nie
+   konkurowały o te same frazy. Wcięty o 44 px, czyli staje na
+   krawędzi tytułów wykazu, nie numerów. Link bierze .link — w zasięgu
+   .strona-uslugowa to Inter i akcent #6B4A2F.
+   ============================================================ */
+.wykaz-dopisek {
+  margin-top: 1.5rem;
+  padding-left: 2.75rem;                       /* numer 28 px + gap 16 px */
+  max-width: calc(62ch + 2.75rem);
+  font-family: var(--font-inter);
+  font-size: .9375rem;                         /* 15 px */
+  line-height: 1.7;
+  color: var(--umbra-2);
+}
+
+/* ============================================================
+   JAZDA PO ALKOHOLU · cztery moduły własne
+   (jazda-po-alkoholu.html) — 14 września 2026, projekt według
+   UI/UX Pro Max w granicach systemu: trzy powierzchnie, zero cieni,
+   radius 4 px, Inter poza H1/H2, akcent #6B4A2F (na espresso
+   --braz-jasny), bez animacji wejścia.
+
+   .os-dni      oś czasu: pionowa szyna z numerowanymi węzłami, tytuł
+                kroku po lewej, opis po prawej. Różni się od .kroki
+                (pozioma oś trzech pól) kierunkiem i gęstością, więc
+                oba moduły mogą stać na jednej stronie. Szyna kończy
+                się pełną kropką przy zdaniu „zadzwoń dziś".
+   .progi       tabela porównawcza. Hairline'y zamiast obramowań,
+                nagłówki kolumn Inter 600 13 px, wiersze min. 52 px.
+                Kolumna cięższa (przestępstwo) ma górny pasek
+                w akcencie; znaczenie niesie też tekst, nie sam kolor.
+                Poniżej 861 px tabela znika, a ta sama treść stoi jako
+                dwie karty <dl> jedna pod drugą (bez przewijania w bok).
+   .mozliwosci  blok na espresso: tekst 7/12, ramka ze zdaniem „nie
+                obiecuję wyniku" i telefonem 5/12, wyrównana do dołu.
+   .dyskrecja   jedyny wyśrodkowany blok na stronie; wąska miara
+                i krótka kreska w akcencie pod nagłówkiem.
+
+   .btn--akcent, .wizualnie-ukryte i alias .naglowek-sekcji--modul
+   (ten sam nagłówek co karty sytuacji) są ogólne.
+   ============================================================ */
+
+/* ---------- utilki ---------- */
+.wizualnie-ukryte {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  margin: -1px; padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* wypełniony przycisk w akcencie, ten sam wygląd co .rozpoznanie__przycisk */
+.btn--akcent {
+  min-height: 0;
+  padding: .875rem 1.75rem;                        /* 14 / 28 px, cel 48 px */
+  border-radius: 4px;
+  background: var(--akcent-rodzinne);
+  color: var(--biel);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25;
+  letter-spacing: 0;
+  transition: background-color 150ms var(--ease), color 150ms var(--ease);
+}
+.btn--akcent:hover { background: #5A3E27; color: var(--biel); }
+
+/* ============================================================
+   .os-dni — oś czasu pierwszych dni po zatrzymaniu
+   ============================================================ */
+/* zmienne na liście i na zakończeniu osi: to rodzeństwo, nie rodzic i dziecko */
+.os-dni,
+.os-dni__final {
+  --os-kol: 3rem;                                  /* kolumna węzłów */
+  --os-wezel: 2rem;                                /* średnica węzła */
+  --os-odstep: clamp(1.25rem, 3vw, 2.5rem);
+  --os-pion: 1.25rem;                              /* padding wiersza */
+  --os-tlo: var(--piasek);                         /* węzeł przykrywa szynę kolorem pola */
+}
+.os-dni { list-style: none; }
+.os-dni__krok {
+  position: relative;
+  display: grid;
+  grid-template-columns: var(--os-kol) minmax(0, 17rem) minmax(0, 1fr);
+  column-gap: var(--os-odstep);
+  align-items: start;
+  padding-block: var(--os-pion);
+}
+/* szyna: od dołu węzła do góry węzła w następnym wierszu */
+.os-dni__krok::before {
+  content: "";
+  position: absolute;
+  left: calc(var(--os-kol) / 2 - .5px);
+  top: calc(var(--os-pion) + var(--os-wezel));
+  bottom: calc(-1 * var(--os-pion));
+  width: 1px;
+  background: var(--linia-mocna);
+}
+/* ostatni odcinek schodzi do kropki przy zdaniu końcowym */
+.os-dni__krok:last-child::before { bottom: calc(-1 * var(--os-pion) - .5rem); }
+/* hairline między krokami, tylko pod treścią; szyna zostaje ciągła */
+.os-dni__krok + .os-dni__krok::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0;
+  left: calc(var(--os-kol) + var(--os-odstep));
+  height: 1px;
+  background: var(--linia);
+}
+
+.os-dni__nr {
+  grid-column: 1;
+  justify-self: center;
+  position: relative; z-index: 1;
+  width: var(--os-wezel); height: var(--os-wezel);
+  display: grid; place-items: center;
+  border: 1px solid var(--akcent-rodzinne);
+  border-radius: 50%;
+  background: var(--os-tlo);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: .8125rem;                             /* 13 px */
+  line-height: 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--akcent-rodzinne);
+}
+.os-dni__tytul {
+  grid-column: 2;
+  padding-top: .25rem;                             /* środek pierwszego wiersza na środku węzła */
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.0625rem;                            /* 17 px */
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: var(--espresso);
+}
+.os-dni__opis {
+  grid-column: 3;
+  padding-top: .1875rem;
+  max-width: 62ch;
+  font-family: var(--font-inter);
+  font-size: .9375rem;                             /* 15 px */
+  line-height: 1.7;
+  color: var(--umbra-2);
+}
+
+/* krok z terminem: wypełniony węzeł + znacznik tekstowy */
+.os-dni__krok--termin .os-dni__nr { background: var(--akcent-rodzinne); color: var(--biel); }
+.os-dni__termin {
+  display: inline-block;
+  padding: .125rem .5rem;
+  border: 1px solid var(--akcent-rodzinne);
+  border-radius: 4px;
+  font-weight: 600;
+  font-size: .75rem;                               /* 12 px */
+  line-height: 1.5;
+  letter-spacing: .02em;
+  color: var(--akcent-rodzinne);
+}
+.os-dni__opis p + .os-dni__termin { margin-top: .625rem; }
+
+/* zakończenie osi: pełna kropka, zdanie, przycisk */
+.os-dni__final {
+  display: grid;
+  grid-template-columns: var(--os-kol) minmax(0, 1fr);
+  column-gap: var(--os-odstep);
+  padding-top: 1.25rem;
+}
+.os-dni__final::before {
+  content: "";
+  grid-column: 1;
+  justify-self: center;
+  width: .75rem; height: .75rem;
+  margin-top: .5rem;
+  border-radius: 50%;
+  background: var(--akcent-rodzinne);
+}
+.os-dni__zdanie {
+  grid-column: 2;
+  max-width: 44ch;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.1875rem;                            /* 19 px */
+  line-height: 1.5;
+  color: var(--espresso);
+}
+.os-dni__final .btn { grid-column: 2; justify-self: start; margin-top: 1.25rem; }
+
+@media (max-width: 860px) {
+  .os-dni,
+  .os-dni__final { --os-kol: 2.5rem; --os-odstep: 1rem; }
+  .os-dni__krok { grid-template-columns: var(--os-kol) minmax(0, 1fr); }
+  .os-dni__nr { grid-row: 1 / span 2; align-self: start; }
+  .os-dni__opis { grid-column: 2; padding-top: .375rem; }
+}
+@media (max-width: 560px) {
+  .os-dni__final .btn { justify-self: stretch; }
+}
+
+/* ============================================================
+   .progi — tabela: wykroczenie czy przestępstwo
+   ============================================================ */
+.progi { font-family: var(--font-inter); }
+
+.progi__tabela {
+  width: 100%;
+  border-collapse: collapse;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.progi__tabela th,
+.progi__tabela td { text-align: left; vertical-align: top; }
+.progi__rog { width: 28%; }
+
+.progi__kol {
+  width: 36%;
+  padding: 1.25rem 1.5rem 1rem;
+  border-top: 2px solid var(--linia-mocna);
+  border-left: 1px solid var(--linia);
+  font-weight: 600;
+  font-size: .8125rem;                             /* 13 px */
+  line-height: 1.4;
+  letter-spacing: .02em;
+  color: var(--espresso);
+}
+.progi__kol--lzej   { border-top-color: var(--linia-mocna); }
+.progi__kol--ciezej { border-top-color: var(--akcent-rodzinne); }
+
+.progi__tabela tbody tr { border-top: 1px solid var(--linia); }
+.progi__tabela tbody tr:last-child { border-bottom: 1px solid var(--linia); }
+.progi__tabela tbody th,
+.progi__tabela tbody td { height: 3.25rem; }     /* 52 px: w tabeli height działa jak min-height */
+.progi__tabela tbody th {
+  padding: .9375rem 1.5rem .9375rem 0;
+  font-weight: 400;
+  font-size: .875rem;                              /* 14 px */
+  line-height: 1.5;
+  color: var(--umbra-2);
+}
+.progi__tabela tbody td {
+  padding: .9375rem 1.5rem;
+  border-left: 1px solid var(--linia);
+  font-size: .9375rem;                             /* 15 px */
+  line-height: 1.5;
+  color: var(--umbra);
+}
+.progi__wiersz--kwalifikacja td,
+.progi__wiersz--kwalifikacja dd { font-weight: 600; color: var(--espresso); }
+.progi__tabela .progi__wiersz--kwalifikacja td:last-child,
+.progi__karta--ciezej .progi__wiersz--kwalifikacja dd { color: var(--akcent-rodzinne); }
+
+/* karty: ukryte na desktopie */
+.progi__karty { display: none; }
+.progi__karta {
+  padding: 1.25rem 1.25rem .25rem;
+  border: 1px solid var(--linia-ramki);
+  border-top: 2px solid var(--linia-mocna);
+  border-radius: 4px;
+}
+.progi__karta--lzej   { border-top-color: var(--linia-mocna); }
+.progi__karta--ciezej { border-top-color: var(--akcent-rodzinne); }
+.progi__karta-tytul {
+  padding-bottom: .75rem;
+  font-weight: 600;
+  font-size: .9375rem;
+  line-height: 1.4;
+  color: var(--espresso);
+}
+.progi__lista > div {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: .25rem 1rem;
+  padding-block: .8125rem;
+  border-top: 1px solid var(--linia);
+}
+.progi__lista dt { font-size: .8125rem; line-height: 1.5; color: var(--umbra-2); }
+.progi__lista dd { font-size: .9375rem; line-height: 1.5; color: var(--umbra); font-variant-numeric: lining-nums tabular-nums; }
+
+.progi__dopisek {
+  margin-top: 1.5rem;
+  max-width: 62ch;
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--umbra-2);
+}
+
+@media (max-width: 860px) {
+  .progi__tabela { display: none; }
+  .progi__karty { display: grid; gap: 1rem; }
+}
+@media (max-width: 480px) {
+  .progi__lista > div { grid-template-columns: 1fr; gap: .125rem; }
+}
+
+/* ============================================================
+   .mozliwosci — blok na espresso
+   ============================================================ */
+.mozliwosci {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  column-gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: end;
+}
+.mozliwosci__tekst { min-width: 0; }
+.mozliwosci .etykieta {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: .75rem;
+  letter-spacing: .12em;
+  color: var(--braz-jasny);
+}
+.mozliwosci h2 {
+  max-width: 20ch;
+  font-size: clamp(1.875rem, 3.5vw, 2.25rem);     /* 36 px */
+  line-height: 1.2;
+  color: var(--biel);
+}
+.mozliwosci h2 em { color: var(--braz-jasny); }
+.mozliwosci__akapit {
+  margin-top: 1.25rem;
+  max-width: 58ch;
+  font-family: var(--font-inter);
+  font-size: 1.0625rem;                            /* 17 px */
+  line-height: 1.7;
+  color: var(--biel-85);
+}
+.mozliwosci h2 + .mozliwosci__akapit { margin-top: 1.5rem; }
+.mozliwosci__akapit--pierwszy { color: var(--biel); }
+
+.mozliwosci__ramka {
+  position: relative;
+  padding: 2rem;
+  border: 1px solid var(--biel-linia);
+  border-radius: 4px;
+}
+/* krótki pasek w akcencie na górnej krawędzi ramki */
+.mozliwosci__ramka::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 2rem;
+  width: 2.5rem; height: 2px;
+  background: var(--braz-jasny);
+}
+.mozliwosci__uczciwie {
+  font-family: var(--font-inter);
+  font-size: 1.1875rem;                            /* 19 px */
+  line-height: 1.6;
+  color: var(--biel);
+}
+.mozliwosci__ramka .btn { margin-top: 1.5rem; }
+
+@media (max-width: 860px) {
+  .mozliwosci { grid-template-columns: 1fr; row-gap: 2.5rem; align-items: start; }
+}
+@media (max-width: 560px) {
+  .mozliwosci__ramka { padding: 1.5rem; }
+  .mozliwosci__ramka::before { left: 1.5rem; }
+  .mozliwosci__ramka .btn { width: 100%; }
+}
+
+/* ============================================================
+   .dyskrecja — wyśrodkowany blok o tajemnicy adwokackiej
+   ============================================================ */
+.dyskrecja {
+  max-width: 42rem;
+  margin-inline: auto;
+  text-align: center;
+}
+.dyskrecja h2 {
+  font-size: clamp(1.875rem, 4vw, 2.5rem);        /* 40 px */
+  line-height: 1.15;
+}
+.dyskrecja h2 em { color: var(--akcent-rodzinne); }
+.dyskrecja h2::after {
+  content: "";
+  display: block;
+  width: 2.5rem; height: 1px;
+  margin: 1.75rem auto 0;
+  background: var(--akcent-rodzinne);
+}
+.dyskrecja__pierwszy {
+  margin-top: 1.75rem;
+  font-family: var(--font-inter);
+  font-size: 1.1875rem;                            /* 19 px */
+  line-height: 1.6;
+  color: var(--espresso);
+}
+.dyskrecja__drugi {
+  margin: 1.25rem auto 0;
+  max-width: 58ch;
+  font-family: var(--font-inter);
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--umbra-2);
+}
+
+/* ============================================================
+   MEDIACJE · zakładka niezależna (mediacje.html) — 14 września
+   2026, projekt według UI/UX Pro Max w granicach systemu.
+
+   Strona stoi na .strona-uslugowa (typografia, pola, akordeon,
+   ciemna stopka) i dokłada .strona-mediacje dla korekt komponentów
+   wziętych z innych stron. Cztery moduły własne:
+
+   .dwie-drogi    jeden panel w bieli na dwie kolumny: „mediacja ma
+                  sens" i „sąd jest właściwą drogą". Wzorzec wyboru
+                  ścieżki: obie strony równorzędne (ta sama ikona
+                  w obrysie, ten sam znacznik), żeby strona nie
+                  namawiała do mediacji samą grafiką.
+   .plan          plan rodzicielski jako arkusz dokumentu w beżu na
+                  bieli: nagłówek z ikoną pliku, cztery pozycje
+                  z haczykiem. Różni się od kart (brak ramki) i od
+                  wykazu (brak numerów).
+   .ugoda         trzy punkty na espresso z krótkim paskiem w ciepłym
+                  piasku; nagłówek i akapit otwierający w dwóch
+                  kolumnach, zdanie zamykające pod spodem.
+   .druga-strona  karta w bieli z górnym paskiem w akcencie, odcięta
+                  od reszty strony, z kotwicą #dla-drugiej-strony
+                  (scroll-margin pod menu). Zasady 2 × 2 z numerem
+                  w kółku, stopka karty: zdanie + telefon.
+   ============================================================ */
+
+/* ---------- menu i stopka: pozycja oddzielona hairline'em ---------- */
+/* Mediacje siedzą w „Usługach", ale to nie jest kolejna usługa:
+   w USLUGI mają `oddzielona: true`, a site.js dokleja klasę do <li>. */
+.nav__podmenu li.oddzielona {
+  margin-top: .35rem;
+  padding-top: .35rem;
+  border-top: 1px solid var(--linia);
+}
+.stopka li.oddzielona { margin-top: 1rem; }
+
+/* ---------- korekty komponentów na tej stronie ---------- */
+/* rozwidlenie na jasnym polu: te same miary co wersja na espresso */
+.strona-mediacje .rozwidlenie { margin-top: 0; column-gap: 0; }
+.strona-mediacje .rozwidlenie__rola {
+  padding: 1.5rem 1.75rem;                        /* 24 / 28 px */
+  background: var(--biel);
+  border: 1px solid var(--linia-ramki);
+  border-radius: 4px;
+}
+.strona-mediacje .rozwidlenie__rola h3 {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.0625rem;                           /* 17 px */
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: var(--espresso);
+}
+.strona-mediacje .rozwidlenie__albo {
+  padding-inline: 1.25rem;
+  font-family: var(--font-inter);
+  font-weight: 400;
+  font-size: .8125rem;                            /* 13 px */
+  letter-spacing: .1em;
+  color: var(--akcent-rodzinne);
+}
+@media (max-width: 640px) {
+  .strona-mediacje .rozwidlenie { row-gap: .75rem; }
+  .strona-mediacje .rozwidlenie__albo { justify-items: center; padding-block: .25rem; }
+}
+
+/* wykaz spraw: opis w mierze czytelnej */
+.strona-mediacje .wykaz__opis { max-width: 62ch; line-height: 1.7; }
+
+/* ============================================================
+   .dwie-drogi
+   ============================================================ */
+.dwie-drogi {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  background: var(--biel);
+  border: 1px solid var(--linia-ramki);
+  border-radius: 4px;
+}
+.dwie-drogi__droga { padding: clamp(1.75rem, 3.5vw, 2.75rem); }
+.dwie-drogi__droga + .dwie-drogi__droga { border-left: 1px solid var(--linia-ramki); }
+
+.dwie-drogi__glowa {
+  display: flex; align-items: center; gap: 1rem;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid var(--linia);
+}
+.dwie-drogi__ikona {
+  flex: none;
+  width: 2.75rem; height: 2.75rem;                /* 44 px */
+  display: grid; place-items: center;
+  border: 1px solid var(--akcent-rodzinne);
+  border-radius: 50%;
+  color: var(--akcent-rodzinne);
+}
+.dwie-drogi__tytul {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.1875rem;                           /* 19 px */
+  line-height: 1.35;
+  letter-spacing: 0;
+  color: var(--espresso);
+}
+
+.dwie-drogi__lista { list-style: none; }
+.dwie-drogi__lista li {
+  position: relative;
+  padding: 1rem 0 1rem 1.5rem;
+  border-bottom: 1px solid var(--linia);
+  font-family: var(--font-inter);
+  font-size: .9375rem;                            /* 15 px */
+  line-height: 1.7;
+  color: var(--umbra);
+}
+.dwie-drogi__lista li:last-child { border-bottom: 0; padding-bottom: 0; }
+/* znacznik na wysokości pierwszego wiersza */
+.dwie-drogi__lista li::before {
+  content: "";
+  position: absolute;
+  left: .25rem;
+  top: calc(1rem + .85em - 3px);
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--akcent-rodzinne);
+}
+.dwie-drogi__wniosek {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--linia);
+  font-family: var(--font-inter);
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--umbra-2);
+}
+
+.dwie-drogi__zamkniecie {
+  margin-top: 2rem;
+  max-width: 62ch;
+  padding-left: 1.25rem;
+  border-left: 2px solid var(--akcent-rodzinne);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.0625rem;                           /* 17 px */
+  line-height: 1.6;
+  color: var(--espresso);
+}
+
+@media (max-width: 860px) {
+  .dwie-drogi { grid-template-columns: 1fr; }
+  .dwie-drogi__droga + .dwie-drogi__droga { border-left: 0; border-top: 1px solid var(--linia-ramki); }
+}
+
+/* ============================================================
+   .plan — plan rodzicielski jako arkusz dokumentu
+   ============================================================ */
+.plan {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: center;
+}
+.plan__tekst { min-width: 0; }
+.plan .naglowek-sekcji { margin-bottom: 0; }
+.plan__nota {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  max-width: 52ch;
+  border-top: 1px solid var(--linia);
+  font-family: var(--font-inter);
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--umbra-2);
+}
+
+.plan__arkusz {
+  padding: clamp(1.5rem, 3.5vw, 2.5rem);
+  background: var(--piasek);
+  border-radius: 4px;
+}
+.plan__glowa {
+  display: flex; align-items: center; gap: .625rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--linia-mocna);
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: .8125rem;                            /* 13 px */
+  line-height: 1.4;
+  letter-spacing: .02em;
+  color: var(--espresso);
+}
+.plan__glowa svg { flex: none; color: var(--akcent-rodzinne); }
+
+.plan__lista { list-style: none; }
+.plan__lista li {
+  display: grid;
+  grid-template-columns: 1.125rem minmax(0, 1fr);
+  gap: .875rem;
+  align-items: start;
+  padding-block: 1.125rem;
+  border-bottom: 1px solid var(--linia);
+  font-family: var(--font-inter);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--umbra);
+}
+.plan__lista li:last-child { border-bottom: 0; padding-bottom: 0; }
+.plan__haczyk { margin-top: .2em; color: var(--akcent-rodzinne); }
+
+@media (max-width: 860px) {
+  .plan { grid-template-columns: 1fr; align-items: start; }
+}
+
+/* ============================================================
+   .ugoda — co daje ugoda, na espresso
+   ============================================================ */
+.ugoda__glowa {
+  display: grid;
+  grid-template-columns: minmax(0, 6fr) minmax(0, 5fr);
+  gap: clamp(1.5rem, 6vw, 6rem);
+  align-items: end;
+}
+.ugoda .etykieta {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: .75rem;
+  letter-spacing: .12em;
+  color: var(--braz-jasny);
+}
+.ugoda h2 {
+  max-width: 18ch;
+  font-size: clamp(1.875rem, 3.5vw, 2.25rem);    /* 36 px */
+  line-height: 1.2;
+  color: var(--biel);
+}
+.ugoda h2 em { color: var(--braz-jasny); }
+.ugoda__wstep {
+  max-width: 52ch;
+  font-family: var(--font-inter);
+  font-size: 1.0625rem;                           /* 17 px */
+  line-height: 1.7;
+  color: var(--biel-85);
+}
+
+.ugoda__punkty {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+  margin-top: clamp(2.5rem, 5vw, 4rem);
+}
+.ugoda__punkt {
+  position: relative;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--biel-linia);
+}
+.ugoda__punkt::before {
+  content: "";
+  position: absolute;
+  top: -1px; left: 0;
+  width: 2.5rem; height: 2px;
+  background: var(--braz-jasny);
+}
+.ugoda__tytul {
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+  letter-spacing: 0;
+  color: var(--biel);
+}
+.ugoda__punkt p {
+  margin-top: .625rem;
+  font-family: var(--font-inter);
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--biel-85);
+}
+.ugoda__zamkniecie {
+  margin-top: clamp(2.5rem, 5vw, 3.5rem);
+  max-width: 54ch;
+  font-family: var(--font-inter);
+  font-size: 1.1875rem;                           /* 19 px */
+  line-height: 1.6;
+  color: var(--biel);
+}
+
+@media (max-width: 860px) {
+  .ugoda__glowa { grid-template-columns: 1fr; align-items: start; }
+  .ugoda__punkty { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   .druga-strona — karta z kotwicą do wysłania linkiem
+   ============================================================ */
+.druga-strona {
+  scroll-margin-top: calc(var(--nav-h) + 2rem);   /* link otwiera kartę pod menu */
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  column-gap: clamp(2rem, 5vw, 4.5rem);
+  row-gap: 2.5rem;
+  padding: clamp(1.75rem, 4vw, 3.5rem);
+  background: var(--biel);
+  border: 1px solid var(--linia-ramki);
+  border-top: 3px solid var(--akcent-rodzinne);
+  border-radius: 4px;
+}
+.druga-strona__tekst { min-width: 0; }
+.druga-strona h2 {
+  font-size: clamp(1.75rem, 3.2vw, 2.25rem);
+  line-height: 1.2;
+}
+.druga-strona h2 em { color: var(--akcent-rodzinne); }
+.druga-strona__wstep {
+  margin-top: 1rem;
+  max-width: 40ch;
+  font-family: var(--font-inter);
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--umbra-2);
+}
+
+.druga-strona__zasady {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.75rem 2rem;
+  align-content: start;
+}
+.druga-strona__zasady li {
+  display: grid;
+  grid-template-columns: 1.75rem minmax(0, 1fr);
+  gap: .875rem;
+  align-items: start;
+}
+.druga-strona__nr {
+  width: 1.75rem; height: 1.75rem;                /* 28 px */
+  display: grid; place-items: center;
+  border: 1px solid var(--akcent-rodzinne);
+  border-radius: 50%;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: .8125rem;
+  line-height: 1;
+  font-variant-numeric: tabular-nums lining-nums;
+  color: var(--akcent-rodzinne);
+}
+.druga-strona__zasady p {
+  font-family: var(--font-inter);
+  font-size: .9375rem;
+  line-height: 1.7;
+  color: var(--umbra);
+}
+
+.druga-strona__stopka {
+  grid-column: 1 / -1;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--linia);
+}
+.druga-strona__stopka p {
+  max-width: 48ch;
+  font-family: var(--font-inter);
+  font-weight: 600;
+  font-size: 1.0625rem;
+  line-height: 1.5;
+  color: var(--espresso);
+}
+
+@media (max-width: 860px) {
+  .druga-strona { grid-template-columns: 1fr; row-gap: 2rem; }
+}
+@media (max-width: 640px) {
+  .druga-strona__zasady { grid-template-columns: 1fr; gap: 1.25rem; }
+}
+@media (max-width: 560px) {
+  .druga-strona__stopka { flex-direction: column; align-items: stretch; }
+  .druga-strona__stopka .btn { width: 100%; }
+}
+
+/* ============================================================
+   PORTRET KLIENTKI — zdjęcie w miejscu placeholdera .portret
+   (14 września 2026). .portret--zdjecie zdejmuje fakturę i padding
+   placeholdera; obraz leży absolutnie, więc wymiar ramki dalej liczy
+   układ.
+   Ramka ma proporcje zdjęcia (2:3), nie placeholdera (3:4 / 4:5) — przy
+   3:4 kadr ucinał dłoń. W hero ramka stoi na stretch, więc tam 2:3 robi
+   szerokość kolumny liczona od wysokości bloku.
+   Obróbka jak w .foto: lekkie odsycenie + lniana przesłona, bo tło
+   zdjęcia jest chłodnoszare.
+   Plik: assets/beata-cupial-kowalska.jpg (1024 px) + -600.jpg (srcset).
+   ============================================================ */
+.portret.portret--zdjecie {
+  position: relative;
+  padding: 0;
+  aspect-ratio: 2 / 3;
+  background: var(--piasek);
+}
+@media (min-width: 1025px) {
+  .wstep:has(.portret--zdjecie) {
+    grid-template-columns: minmax(0, 1fr) calc(var(--wstep-h) * 2 / 3);
+  }
+}
+.portret--zdjecie img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover; object-position: 50% 0;
+  filter: saturate(.88) contrast(.97);
+}
+.portret--zdjecie::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: rgba(184, 149, 94, .06);
+  mix-blend-mode: multiply;
 }

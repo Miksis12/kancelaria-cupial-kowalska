@@ -291,3 +291,249 @@ skracamy do ogólnika — usuwamy ją w całości i przenumerowujemy resztę.
   okruszki, pierwszy wiersz rejestru na `index.html` i na `o-mnie.html`.
   Wszystkie idą z jednej tablicy `USLUGI` w `site.js` albo z ręcznego `href`
   w dwóch rejestrach.
+
+---
+
+## Pytania do klientki — podstrona „Sprawy spadkowe" (14 września 2026)
+
+Powstał `sprawy-spadkowe.html` na copy `spadki-copy.md`, sklonowany 1:1 z podstrony
+„Rozwód i sprawy rodzinne". Wejścia: drop-down „Usługi", kolumna „Sprawy" w stopce,
+okruszki, wiersz „Sprawy spadkowe" w rejestrze na `index.html` i na `o-mnie.html`.
+
+### 16. Opłata sądowa w FAQ: 100 zł czy 50 zł? 🔴
+**Dlaczego pytamy:** copy podaje „100 zł od wniosku + 5 zł za wpis w Rejestrze
+Spadkowym" i samo oznacza to jako do potwierdzenia. Według ustawy o kosztach
+sądowych w sprawach cywilnych (art. 49) opłata stała od wniosku o stwierdzenie
+nabycia spadku to **50 zł**, do tego 5 zł za wpis do Rejestru Spadkowego.
+Trzeba sprawdzić stan prawny na dzień publikacji.
+**Przyjęte założenie:** zdanie stoi na stronie jako `<span class="todo">`
+i **nie wchodzi do JSON-LD**.
+**Co się zmieni po odpowiedzi:** jedno zdanie w FAQ i odpowiedź w `FAQPage`.
+
+### 17. Testamenty i darowizny: czy klientka to prowadzi? 🟡
+**Dlaczego pytamy:** pozycja 06 „Zanim dojdzie do sporu" mówi o pomocy przy
+testamencie, darowiznach i umowie o zrzeczenie się dziedziczenia.
+**Przyjęte założenie:** tak, pozycja stoi.
+**Co się zmieni po odpowiedzi:** przy „nie" pozycja 06 wypada w całości,
+wykaz ma pięć pozycji.
+
+### 18. Zachowek po stronie zobowiązanego 🟡
+**Dlaczego pytamy:** pozycja 03 kończy się zdaniem „Prowadzę te sprawy z obu stron,
+także wtedy, gdy to od Ciebie ktoś żąda zapłaty".
+**Przyjęte założenie:** tak.
+**Co się zmieni po odpowiedzi:** przy „nie" wypada ostatnie zdanie pozycji 03
+i druga połowa jej zajawki.
+
+### 19. Status mediatora 🟡
+Jak w pytaniu 13: do czasu potwierdzenia stoi „Jestem czynnym mediatorem".
+
+### Założenia dodatkowe (bez pytania, do wiedzy)
+
+- **Etykiety sekcji:** copy podaje pięć („W czym pomagam", „Bez niespodzianek",
+  „Jak pracuję" ponad dwie ze wzorca). System dopuszcza trzy na stronę, więc
+  zostały dwie, dokładnie jak na stronie rozwodów.
+- **Opinie:** trzy z wizytówki Google, które nie nazywają rodzaju sprawy
+  (Irys 2006, Kamila Sapota, Karolina Bieniek). Opinia o sprawie rozwodowej
+  została na stronie rozwodów.
+- **Dojście do kancelarii:** copy miało „Lokal na parterze, pierwsze piętro,
+  po prawej" z dopiskiem do uzupełnienia. Na stronie stoi opis z danych realnych:
+  „Lewa oficyna, pierwsze piętro, po prawej stronie".
+- **„Bez stałych godzin przyjęć"** z copy nie weszło: kancelaria ma znane godziny
+  pracy (klientka zdjęła je tylko ze strony), więc zdanie mogłoby być nieprawdziwe.
+  Zostało „Termin dogrywamy telefonicznie".
+- **Nazwa pozycji w menu:** „Spadki i dział spadku" → „Sprawy spadkowe", tak jak
+  w okruszkach z copy i w rejestrze na stronie głównej. Ta sama nazwa kategorii
+  w `baza-wiedzy.html`, bo kategorie odpowiadają tablicy `USLUGI`.
+
+---
+
+## Pytania do klientki — podstrona „Sprawy karne" (14 września 2026)
+
+Powstał `sprawy-karne.html` na copy `sprawy-karne-copy.md`, sklonowany 1:1 z podstrony
+„Rozwód i sprawy rodzinne". Wejścia: drop-down „Usługi", kolumna „Sprawy" w stopce,
+okruszki, wiersz „Sprawy karne" w rejestrze na `index.html` i na `o-mnie.html`.
+
+### 20. Reprezentacja pokrzywdzonego 🟡
+**Dlaczego pytamy:** pozycja 04 w zakresie pomocy pokazuje kancelarię także po
+drugiej stronie sali. To wyróżnik, ale kieruje na stronę inny typ klienta.
+**Przyjęte założenie:** tak, pozycja stoi.
+**Co się zmieni po odpowiedzi:** przy „nie" wypada pozycja 04, a z pozycji 03
+i karty „Zgłosiłem przestępstwo, a sprawę umorzono" trzeba zdjąć wątek pokrzywdzonego.
+
+### 21. Apelacja w sprawach po innym obrońcy 🟡
+**Przyjęte założenie:** tak (ostatnie zdanie pozycji 06).
+**Co się zmieni po odpowiedzi:** przy „nie" wypada to jedno zdanie.
+
+### 22. Sprawy przed sądem okręgowym w pierwszej instancji 🟡
+**Przyjęte założenie:** tak (ostatnie pytanie FAQ).
+**Co się zmieni po odpowiedzi:** przy „nie" wypada zdanie o sądzie okręgowym,
+w FAQ i w JSON-LD.
+
+### 23. Terminy procesowe w liczbach ⚪
+FAQ i zakres podają terminy ogólnie („krótki termin", „kilka dni"); liczbą stoi
+tylko czternaście dni na apelację. Jeśli klientka woli konkretne liczby
+(np. siedem dni na wniosek o uzasadnienie wyroku), wchodzą po jej weryfikacji.
+
+### Założenia dodatkowe (bez pytania, do wiedzy)
+
+- **Link do strony o jeździe po alkoholu** pod listą spraw prowadzi na razie do
+  listy spraw na stronie głównej (`index.html#sprawy`), jak pozycja w menu.
+  Po powstaniu podstrony podmienia się jeden `href`.
+- **Etykiety sekcji, opinie, dojście do kancelarii i „bez stałych godzin przyjęć"**
+  potraktowane tak samo jak na stronie spadków (patrz wyżej).
+
+---
+
+## Pytania do klientki — podstrona „Sprawy cywilne" (14 września 2026)
+
+Powstał `sprawy-cywilne.html` na copy `sprawy-cywilne-copy.md`, sklonowany 1:1
+z podstrony „Rozwód i sprawy rodzinne". Wejścia: drop-down „Usługi", kolumna
+„Sprawy" w stopce, okruszki, wiersz „Sprawy cywilne" w rejestrze na `index.html`
+i na `o-mnie.html`.
+
+### 24. Egzekucja i współwłasność (pozycje 05 i 06) 🟡
+**Dlaczego pytamy:** copy dopisało je jako propozycję rozszerzenia; na spotkaniu
+padły wprost tylko pozwy o zapłatę i eksmisje.
+**Przyjęte założenie:** obie pozycje stoją.
+**Co się zmieni po odpowiedzi:** przy „nie" wypadają pozycje 05 i 06, karty
+„Komornik zajął mi konto" i „Mam nieruchomość na współwłasność" oraz ostatnie
+pytanie FAQ (także w JSON-LD). Kart jest wtedy cztery, siatka zostaje równa.
+
+### 25. Eksmisje po stronie lokatorów 🟡
+**Przyjęte założenie:** po obu stronach (ostatnie zdanie pozycji 02).
+**Co się zmieni po odpowiedzi:** przy „nie" zdanie brzmi „wyłącznie dla właścicieli".
+
+### 26. Sprawdzanie umów przed podpisaniem 🟡
+**Przyjęte założenie:** tak (ostatnie zdanie pozycji 04).
+**Co się zmieni po odpowiedzi:** przy „nie" wypada to jedno zdanie.
+
+### 27. Kwoty opłat i liczba dni na sprzeciw ⚪
+Celowo ich nie ma: opłata od pozwu zależy od wartości sporu. Wchodzą tylko
+po weryfikacji, jeśli klientka będzie chciała.
+
+### Założenia dodatkowe (bez pytania, do wiedzy)
+
+- **Poprawka merytoryczna w pozycji 05:** copy miało „doprowadzić do wznowienia
+  terminu". Takiej instytucji nie ma; chodzi o **przywrócenie terminu** (tak samo
+  pisze copy w FAQ). Na stronie stoi „przywrócenia terminu".
+- **Zajawka pozycji 02 „Najczęstsza sprawa cywilna, jaką prowadzę"** to deklaracja
+  o praktyce kancelarii, oparta na briefie (eksmisje jako trzon). Do potwierdzenia
+  przy okazji pytania 25.
+- **Etykiety sekcji, opinie, dojście do kancelarii i „bez stałych godzin przyjęć"**
+  potraktowane tak samo jak na stronie spadków.
+
+---
+
+## Pytania do klientki — podstrona „Jazda po alkoholu" (14 września 2026)
+
+Powstał `jazda-po-alkoholu.html` na copy `jazda-po-alkoholu-copy.md`: szkielet
+podstrony usługowej plus cztery moduły własne (oś czasu, tabela progów, blok
+możliwości, blok dyskrecji), bez bloku mediacji. Wejścia: drop-down „Usługi",
+kolumna „Sprawy" w stopce, okruszki, wiersz w rejestrze na `index.html`
+i na `o-mnie.html`, link pod wykazem spraw na `sprawy-karne.html`.
+
+### 28. Progi, kary, zakazy i świadczenie w tabeli i FAQ 🔴
+**Dlaczego pytamy:** copy samo oznacza wszystkie liczby do weryfikacji na dzień
+publikacji. Sprawdziłem je z tym, co wiem o przepisach (art. 87 kw, art. 178a,
+42, 43a i 44b kk, ustawa o wychowaniu w trzeźwości): wartości w copy się zgadzają.
+**Przyjęte założenie:** liczby stoją na stronie bez `.todo`, z komentarzem
+w HTML. Tabela jest w kodzie **dwa razy** (tabela na desktop, karty na telefon).
+**Co się zmieni po odpowiedzi:** poprawka liczby = tabela, karta i FAQ naraz,
+także w JSON-LD.
+
+### 29. Wypadki ze skutkiem śmiertelnym lub ciężkim uszczerbkiem 🟡
+**Przyjęte założenie:** tak (pozycja 06 zakresu).
+**Co się zmieni po odpowiedzi:** przy „nie" pozycja 06 zawęża się do jazdy mimo zakazu.
+
+### 30. Zdanie o prawie do obrony w bloku dyskrecji 🟡
+**Dlaczego pytamy:** copy wskazuje je jako najbardziej narażony wizerunkowo fragment.
+**Przyjęte założenie:** zostaje.
+**Co się zmieni po odpowiedzi:** przy „nie" wypada drugie zdanie drugiego akapitu.
+
+### 31. Warunkowe umorzenie jako realna droga 🟡
+**Przyjęte założenie:** strona o nim mówi (zakres 03, blok możliwości, FAQ, karta
+„To był pierwszy raz"), ostrożnie i bez obietnicy wyniku.
+**Co się zmieni po odpowiedzi:** przy „nie" blok możliwości trzeba przepisać.
+
+### Poprawki merytoryczne względem copy (do wiedzy)
+
+- **Warunkowe umorzenie a rejestr karny.** Copy w trzech miejscach twierdziło,
+  że przy warunkowym umorzeniu **nie ma wpisu** do Krajowego Rejestru Karnego.
+  To nieprawda: KRK gromadzi dane o osobach, wobec których warunkowo umorzono
+  postępowanie, a wpis usuwa się po zakończeniu okresu próby. Na stronie stoi
+  „wpis jest tylko czasowy" (zakres 03, blok możliwości, FAQ „Czy da się uniknąć
+  wpisu do rejestru karnego?"). Sama teza „bez skazania" jest prawdziwa i została.
+- **Jazda mimo zakazu:** copy mówiło, że „zakaz zostaje przedłużony". Sąd orzeka
+  **kolejny** zakaz; tak stoi na stronie.
+- **Literówki:** „na wprawę" → „na rozprawę" (oś czasu, krok 06), „nie mieszczę
+  mi się to w głowie" → „nie mieści mi się to w głowie" (karta sytuacji).
+
+### Założenia dodatkowe (bez pytania, do wiedzy)
+
+- **Etykiety:** copy podaje siedem. Zostały trzy (oś czasu, tabela, blok
+  możliwości); karty sytuacji stoją tu bez etykiety.
+- **Znacznik „Termin: 7 dni od doręczenia"** przy kroku 05 osi czasu to wyróżnienie
+  faktu z tekstu kroku, nie nowa treść.
+- **Nazwa w menu:** „Prawo jazdy i jazda po alkoholu" → „Jazda po alkoholu", jak
+  w okruszkach z copy; ta sama nazwa kategorii w `baza-wiedzy.html`.
+- **Opinie, dojście do kancelarii i „bez stałych godzin przyjęć"** potraktowane tak
+  samo jak na pozostałych podstronach usługowych.
+
+---
+
+## Pytania do klientki — zakładka „Mediacje" (14 września 2026)
+
+Powstał `mediacje.html` na copy `mediacje-copy.md`. To zakładka niezależna, nie
+podstrona usługowa: dziesięć sekcji, bez „Podejścia" i bez opinii Google. W menu
+stoi w „Usługach" (decyzja Mikołaja), oddzielona hairline'em od reszty pozycji;
+copy rekomendowało osobną pozycję w menu głównym. Wszystkie przyciski „Więcej
+o mediacjach" (strona główna i cztery podstrony usługowe) prowadzą teraz tutaj.
+
+### 32. Lista stałych mediatorów przy Sądzie Okręgowym w Częstochowie 🔴
+**Przyjęte założenie:** „czynny mediator", jak w całym serwisie.
+**Co się zmieni po odpowiedzi:** przy „tak" konkret wchodzi do leadu nagłówka
+i zmienia brzmienie sekcji „W jakich sprawach mediuję" oraz FAQ.
+
+### 33. Kategorie mediacji 🟡
+**Dlaczego pytamy:** pozycje 04 (sprawy o zapłatę) i 05 (pojednanie w sprawach
+karnych) to propozycja rozszerzenia z copy.
+**Co się zmieni po odpowiedzi:** pozycja, której klientka nie prowadzi, wypada.
+
+### 34. Zdanie o nieudanej mediacji 🟡
+**Dlaczego pytamy:** „jeżeli mediacja się nie powiedzie, w tej samej sprawie nie
+będę mogła reprezentować żadnej ze stron". Kosztuje klientów, ale jest najbardziej
+wiarygodnym fragmentem strony.
+**Przyjęte założenie:** zostaje.
+
+### 35. Plan rodzicielski jako efekt mediacji 🟡
+**Przyjęte założenie:** tak, cała sekcja 04 na tym stoi.
+**Co się zmieni po odpowiedzi:** przy „nie" sekcja wypada, a pole bieli ma dwie sekcje.
+
+### 36. Rozliczanie kosztów mediacji ⚪
+FAQ mówi „strony zwykle dzielą koszty po połowie". Do potwierdzenia.
+
+### Poprawki merytoryczne względem copy (do wiedzy)
+
+- **Zwrot opłaty sądowej po ugodzie przed mediatorem.** Copy mówiło, że przy ugodzie
+  przed rozpoczęciem rozprawy „zwrot jest pełny". Z tego, co wiem, ustawa o kosztach
+  sądowych w sprawach cywilnych (art. 79) przewiduje w takich sytuacjach zwrot
+  **części** opłaty od pozwu (większej przed rozpoczęciem rozprawy, mniejszej
+  później), a nie całości. Na stronie stoi zdanie bez ułamka: „zwrot części opłaty
+  od pozwu, a im wcześniej do niej dojdzie, tym ten zwrot jest wyższy". Warto
+  sprawdzić aktualne brzmienie przepisu przed publikacją.
+- **Do wiedzy, bez zmiany tekstu:** FAQ „Odmowa nie działa na Twoją niekorzyść"
+  jest prawdziwe dla odmowy zgody na mediację. Kodeks pozwala jednak obciążyć
+  kosztami stronę, która **uchyla się** od mediacji, na którą wcześniej się zgodziła
+  (art. 103 kpc). Zdania o wycofaniu zgody „na każdym etapie" to nie przekreśla,
+  ale klientka może chcieć to doprecyzować.
+
+### Założenia dodatkowe (bez pytania, do wiedzy)
+
+- **Okruszki:** Strona główna › Usługi › Mediacje (copy: bez „Usługi"), bo strona
+  siedzi w drop-downie.
+- **Kotwica `#dla-drugiej-strony`** stoi na samej karcie, z odstępem pod menu.
+  Link do wysłania: `mediacje.html#dla-drugiej-strony`, po imporcie na WordPressa
+  `/mediacje/#dla-drugiej-strony`.
+- **Etykiety:** trzy z pięciu z copy (dwie drogi, plan rodzicielski, ugoda).
+- **Dojście do kancelarii:** dane realne zamiast „do uzupełnienia" z copy.
+

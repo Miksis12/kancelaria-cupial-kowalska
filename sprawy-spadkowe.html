@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sprawy spadkowe · Adwokat Beata Cupiał-Kowalska, Częstochowa</title>
+  <meta name="description" content="Stwierdzenie nabycia spadku, dział spadku, zachowek, długi spadkowe i testament. Adwokat Beata Cupiał-Kowalska prowadzi sprawy spadkowe w Częstochowie osobiście, od pierwszej rozmowy do końca. Jest też mediatorem. Tel. 534 477 596.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/site.js" defer></script>
+</head>
+<body>
+
+  <div data-nav></div>
+
+  <!-- PODSTRONA USŁUGOWA sklonowana z rozwod-i-sprawy-rodzinne.html (plik-wzorzec),
+       copy: spadki-copy.md. Te same pola, te same komponenty, zero nowego CSS.
+       .strona-uslugowa: serif tylko H1, H2 i cytat w cudzysłowach, reszta Inter;
+       pola tła, wspólny akordeon i ciemna stopka — blok na końcu styles.css.
+       Etykiety sekcji jak we wzorcu (dwie): copy podaje pięć, a system
+       dopuszcza najwyżej trzy na stronę. -->
+  <main id="gora" class="strona-uslugowa">
+
+    <!-- ============ 01 · NAGŁÓWEK STRONY USŁUGOWEJ ============
+         Pole biel. Okruszki składa site.js z USLUGI: Strona główna › Usługi ›
+         Sprawy spadkowe. Bez data-odslon — to pierwszy ekran. -->
+    <section class="naglowek-strony naglowek-strony--uslugi biel">
+      <div class="kontener">
+        <div data-okruszki></div>
+        <h1 class="naglowek-strony__tytul">Sprawy spadkowe w Częstochowie</h1>
+        <p class="naglowek-strony__lead">Przejdziemy przez to po kolei. Nie musisz mieć skompletowanych dokumentów ani wiedzieć, czy w ogóle jest testament. Wystarczy, że opowiesz, co się wydarzyło.</p>
+
+        <p class="naglowek-strony__kontakt">
+          <a class="naglowek-strony__telefon" href="tel:+48534477596">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>534&nbsp;477&nbsp;596</span>
+          </a>
+          <span class="naglowek-strony__spotkania">Spotkania w Częstochowie, online i telefonicznie</span>
+        </p>
+
+        <ul class="naglowek-strony__meta">
+          <li>Sprawę prowadzę osobiście</li>
+          <li>Czynny mediator</li>
+          <li>Oddzwaniam po rozprawie</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 02 · CZY TO TWOJA SYTUACJA ============
+         Pole beż. Kafle .rozpoznanie: sześć kart „zdanie klienta + odpowiedź"
+         i karta z telefonem na pełną szerokość. Bez numeracji i bez
+         animacji wejścia. -->
+    <section class="sekcja pas" id="sytuacje">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--sytuacje">
+          <p class="etykieta">Od czego zaczynają moi klienci</p>
+          <h2>Większość osób trafia do mnie w <em>jednej z tych sytuacji</em></h2>
+          <p class="lead">Jeśli rozpoznajesz tu siebie, to dobry moment na rozmowę. Nie musisz jeszcze wiedzieć, czego chcesz.</p>
+        </div>
+
+        <ul class="rozpoznanie">
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Zmarł rodzic i nie wiem, od czego zacząć”</h3>
+            <p class="rozpoznanie__odp">Pierwszym krokiem prawie zawsze jest ustalenie, kto dziedziczy. Dopiero potem można cokolwiek podzielić czy przepisać.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Odziedziczyliśmy z rodzeństwem i nie umiemy się podzielić”</h3>
+            <p class="rozpoznanie__odp">Wspólny spadek potrafi wisieć latami. Da się to zamknąć ugodą albo działem spadku przed sądem.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Zostałem pominięty w testamencie”</h3>
+            <p class="rozpoznanie__odp">Pominięcie nie zawsze oznacza, że nic Ci się nie należy. Sprawdzimy, czy masz prawo do zachowku.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Boję się, że odziedziczę długi”</h3>
+            <p class="rozpoznanie__odp">Terminy w sprawach spadkowych biegną od momentu, w którym dowiedziałeś się o powołaniu do spadku. To sytuacja, w której warto zadzwonić od razu.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„Ten testament nie wygląda na wolę mamy”</h3>
+            <p class="rozpoznanie__odp">Testament można podważyć, ale tylko z konkretnych przyczyn i w określonym czasie. Ocenimy, czy w Twojej sprawie są podstawy.</p>
+          </li>
+          <li class="rozpoznanie__poz">
+            <h3 class="rozpoznanie__cytat">„W domu po rodzicach mieszka tylko jedno z nas”</h3>
+            <p class="rozpoznanie__odp">Korzystanie z odziedziczonej nieruchomości przez jedną osobę można rozliczyć. To część działu spadku, nie osobna wojna.</p>
+          </li>
+          <li class="rozpoznanie__cta">
+            <div class="rozpoznanie__cta-tekst">
+              <p class="rozpoznanie__cta-tytul">Nie ma tu Twojej sytuacji?</p>
+              <p class="rozpoznanie__cta-opis">Opowiedz mi, co się dzieje. Pierwsza rozmowa niczego nie przesądza.</p>
+            </div>
+            <a class="rozpoznanie__przycisk" href="tel:+48534477596">Zadzwoń:&nbsp;534&nbsp;477&nbsp;596</a>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ============ 03 · ZAKRES POMOCY ============
+         Pole biel. Akordeon .faq--wykaz: numer w rzędzie z tytułem, zajawka
+         widoczna przy zwiniętym wierszu, jeden akapit (trzy zdania) po
+         otwarciu. Grupa wyłączna name="spadkowe" — otwarta jest jedna pozycja. -->
+    <section class="sekcja biel" id="zakres">
+      <div class="kontener">
+        <div class="naglowek-sekcji naglowek-sekcji--wykaz">
+          <h2>Sprawy spadkowe, <em>które prowadzę</em></h2>
+          <p class="lead">Każdą z nich zajmuję się osobiście, od pierwszego pisma do zakończenia, przed sądami w Częstochowie i okolicy.</p>
+        </div>
+
+        <div class="faq faq--wykaz">
+          <details class="faq__poz" name="spadkowe" open>
+            <summary><span class="faq__glowa"><span class="faq__nr">01</span><span class="faq__tytul">Stwierdzenie nabycia spadku<span class="faq__zajawka">Pierwszy krok, bez którego nie da się zrobić nic dalej.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Sąd ustala, kto dziedziczy i w jakich częściach, i to postanowienie jest dokumentem, którego zażąda od Ciebie bank, urząd i notariusz. Jeśli wszyscy spadkobiercy są zgodni i mogą stawić się razem, tę samą rzecz da się zamknąć u notariusza aktem poświadczenia dziedziczenia. Przy pierwszej rozmowie powiem Ci, która droga w Twojej sytuacji będzie szybsza.</p>
+            </div>
+          </details>
+          <details class="faq__poz" name="spadkowe">
+            <summary><span class="faq__glowa"><span class="faq__nr">02</span><span class="faq__tytul">Dział spadku<span class="faq__zajawka">Kiedy wiadomo już, kto dziedziczy, ale nie wiadomo, kto co dostaje.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Stwierdzenie nabycia spadku mówi tylko o udziałach, a dział spadku dzieli konkretne rzeczy: mieszkanie, działkę, samochód, oszczędności. Jeśli jest zgoda co do sposobu podziału, sprawa bywa krótka, a przy nieruchomości można ją przeprowadzić u notariusza. Gdy zgody nie ma, sąd może przyznać rzecz jednej osobie i zasądzić spłatę na rzecz pozostałych, także w ratach.</p>
+            </div>
+          </details>
+          <!-- 【DO UZUPEŁNIENIA】 czy klientka chce prowadzić sprawy o zachowek także
+               po stronie zobowiązanego do zapłaty (ostatnie zdanie pozycji 03). -->
+          <details class="faq__poz" name="spadkowe">
+            <summary><span class="faq__glowa"><span class="faq__nr">03</span><span class="faq__tytul">Zachowek<span class="faq__zajawka">Dla pominiętych w testamencie i dla tych, którzy mają zachowek zapłacić.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Zachowek należy się najbliższym, którzy dziedziczyliby z ustawy, i wynosi połowę wartości ich udziału, a przy osobach małoletnich i trwale niezdolnych do pracy dwie trzecie. Do rachunku dolicza się darowizny poczynione za życia, dlatego często spór dotyczy nie samego prawa, tylko wartości. Prowadzę te sprawy z obu stron, także wtedy, gdy to od Ciebie ktoś żąda zapłaty.</p>
+            </div>
+          </details>
+          <details class="faq__poz" name="spadkowe">
+            <summary><span class="faq__glowa"><span class="faq__nr">04</span><span class="faq__tytul">Długi spadkowe i odrzucenie spadku<span class="faq__zajawka">Terminy tu biegną same, niezależnie od tego, czy o nich wiesz.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Spadek dziedziczy się dziś z dobrodziejstwem inwentarza, czyli z odpowiedzialnością ograniczoną do wartości tego, co zostało, ale to nie zamyka tematu, bo wierzyciele i tak się odezwą. Na odrzucenie spadku jest sześć miesięcy od dnia, w którym dowiedziałeś się o powołaniu, a odrzucenie w imieniu dziecka to osobna procedura z własnymi wymogami. Jeśli ktoś w rodzinie odrzucił spadek, sprawdzamy od razu, na kogo przeszedł.</p>
+            </div>
+          </details>
+          <details class="faq__poz" name="spadkowe">
+            <summary><span class="faq__glowa"><span class="faq__nr">05</span><span class="faq__tytul">Ważność testamentu i wydziedziczenie<span class="faq__zajawka">Kiedy ostatnia wola budzi wątpliwości.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Testament można podważyć, jeśli sporządzono go w stanie wyłączającym świadome podjęcie decyzji, pod wpływem błędu albo groźby, i na powołanie się na te przyczyny są ustawowe terminy. Wydziedziczenie jest skuteczne tylko wtedy, gdy testament podaje przyczynę mieszczącą się w kodeksie, a nie samo poczucie krzywdy. Osobną drogą jest uznanie spadkobiercy za niegodnego dziedziczenia.</p>
+            </div>
+          </details>
+          <!-- 【DO UZUPEŁNIENIA】 czy klientka pomaga przy sporządzaniu testamentów
+               i doradza przy darowiznach. Jeśli nie, pozycja 06 wypada w całości,
+               a wykaz ma pięć pozycji. -->
+          <details class="faq__poz" name="spadkowe">
+            <summary><span class="faq__glowa"><span class="faq__nr">06</span><span class="faq__tytul">Zanim dojdzie do sporu<span class="faq__zajawka">Sprawy spadkowe da się w dużej części rozegrać za życia.</span></span></span><span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+            <div class="faq__tresc">
+              <p>Pomagam sporządzić testament tak, żeby był ważny i czytelny, a nie żeby po latach dzieci spierały się o jego brzmienie. Doradzam też przy darowiznach i przy umowie o zrzeczenie się dziedziczenia, bo jedno i drugie realnie zmienia to, co wydarzy się później. To najtańszy moment na uporządkowanie majątku i jednocześnie ten, o którym prawie nikt nie myśli.</p>
+            </div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 04 · MEDIACJA ============
+         Pole espresso. Cały blok z rozwidleniem ról i notą w jednym
+         .panel-mediacje--ciemny. -->
+    <section class="sekcja espresso" id="mediacje">
+      <div class="kontener">
+        <div class="panel-mediacje panel-mediacje--ciemny">
+          <p class="etykieta panel-mediacje__etykieta">Druga droga</p>
+          <div class="panel-mediacje__glowa">
+            <h2 class="panel-mediacje__tytul">Sprawy spadkowe rzadko dotyczą <em>tylko pieniędzy</em></h2>
+            <p class="panel-mediacje__akcja"><a class="btn btn--jasny" href="mediacje.html">Więcej o mediacjach
+              <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a></p>
+          </div>
+          <!-- 【DO UZUPEŁNIENIA】 czy klientka jest wpisana na listę stałych mediatorów
+               przy Sądzie Okręgowym w Częstochowie. Do czasu potwierdzenia stoi tu
+               sformułowanie ze strony głównej („czynny mediator"), które jest pewne. -->
+          <div class="panel-mediacje__tekst">
+            <p>Jestem czynnym mediatorem. W sprawach spadkowych to ma szczególne znaczenie, bo po drugiej stronie stołu nie siedzi obcy człowiek, tylko brat, siostra albo matka. Wyrok kończy sprawę, ale nie kończy tego, co zostaje między Wami na kolejne dwadzieścia lat.</p>
+            <p>Jeżeli wszyscy spadkobiercy są w stanie usiąść do rozmowy, dział spadku można zamknąć ugodą, a przy nieruchomości aktem notarialnym. Ugoda zawarta przed mediatorem i zatwierdzona przez sąd ma taką samą moc jak wyrok. Różnica jest taka, że warunki układacie sami.</p>
+          </div>
+
+          <div class="rozwidlenie">
+            <div class="rozwidlenie__rola">
+              <h3>Twoim pełnomocnikiem</h3>
+            </div>
+            <p class="rozwidlenie__albo">albo</p>
+            <div class="rozwidlenie__rola">
+              <h3>Mediatorem dla całej rodziny</h3>
+            </div>
+            <p class="rozwidlenie__nota">W jednej sprawie mogę być tylko jedną z tych osób. Mediator musi być bezstronny, więc te role się wykluczają. Na pierwszej rozmowie ustalimy, która droga ma w Waszej sytuacji sens.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 05 · JAK WYGLĄDA PIERWSZA ROZMOWA ============
+         Pole biel. .kroki--trzy jak we wzorcu. -->
+    <section class="sekcja biel" id="rozmowa">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Zanim zdecydujesz się na cokolwiek, <em>po prostu porozmawiajmy</em></h2>
+          <p class="lead">Wiele osób odkłada telefon do prawnika, bo nie wie, czego się spodziewać. Wygląda to tak.</p>
+        </div>
+
+        <div class="kroki kroki--trzy" data-odslon>
+          <div class="krok">
+            <span class="krok__nr">01</span>
+            <h3>Rozmowa</h3>
+            <p>Opowiadasz swoimi słowami, kto zmarł, kto został w rodzinie i co po nim zostało. Nie musisz mieć ze sobą dokumentów ani wiedzieć, czy jest testament. Ja dopytam o resztę.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">02</span>
+            <h3>Ocena sytuacji i plan</h3>
+            <p>Mówię, którą drogą warto pójść, ile realnie może to potrwać i z jakimi kosztami się wiąże. Także wtedy, gdy wystarczy wizyta u notariusza i nie potrzebujesz pełnomocnika.</p>
+          </div>
+          <div class="krok">
+            <span class="krok__nr">03</span>
+            <h3>Prowadzenie sprawy</h3>
+            <p>Jeśli zdecydujesz się na współpracę, przygotowuję pisma i reprezentuję Cię przed sądem. Na bieżąco wiesz, na jakim etapie jesteśmy.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 06 · PODEJŚCIE I O MNIE ============
+         Pole beż (otwiera ostatnie pole: podejście, opinie, FAQ, kontakt).
+         .osoba jak we wzorcu; copy dokłada trzeci akapit i dopisek o zakresie
+         praktyki, więc kolumna tekstu jest tu dłuższa. -->
+    <section class="sekcja pas" id="o-mnie">
+      <div class="kontener">
+        <div class="osoba">
+          <div class="osoba__tekst" data-odslon>
+            <h2>Każda sprawa jest inna, bo <em>każda osoba jest inna</em></h2>
+            <p class="osoba__akapit">Dwie sprawy spadkowe nigdy nie wyglądają tak samo, nawet jeśli w papierach różnią się jednym zdaniem. Za każdą stoi konkretna rodzina, konkretny dom i konkretna historia sprzed lat. Dlatego nie mam jednego schematu, który podkładam pod każdą sytuację.</p>
+            <p class="osoba__akapit">Prowadzę kancelarię w Częstochowie samodzielnie i właśnie dlatego mogę tak pracować. Osoba, z którą rozmawiasz przy pierwszym telefonie, i osoba, która stoi obok Ciebie na sali rozpraw, to ta sama osoba. Nikt nie przejmuje Twojej sprawy w połowie i nie zaczyna jej czytać od nowa.</p>
+            <p class="osoba__akapit">Nie ma przy tym znaczenia, jak duży jest spadek ani jaki masz status majątkowy. Pomoc jest w każdym z tych przypadków tak samo fachowa.</p>
+            <p class="male drugorzedny">Zajmuję się przede wszystkim sprawami rodzinnymi, spadkowymi i karnymi.</p>
+            <p class="osoba__wiecej"><a class="link" href="o-mnie.html">Poznaj kancelarię</a></p>
+          </div>
+
+          <div class="osoba__foto" data-odslon>
+            <div class="portret portret--zdjecie">
+              <img src="assets/beata-cupial-kowalska.jpg" srcset="assets/beata-cupial-kowalska-600.jpg 600w, assets/beata-cupial-kowalska.jpg 1024w" sizes="(max-width: 560px) 100vw, 30rem" width="1024" height="1536" alt="Adwokat Beata Cupiał-Kowalska" loading="lazy" decoding="async">
+            </div>
+            <figure class="osoba__cytat">
+              <blockquote class="osoba__slowa">
+                <p>„Do każdego podchodzi się indywidualnie. Trzeba dla każdej sprawy znaleźć sposób działania adekwatny do jej sytuacji.”</p>
+              </blockquote>
+              <figcaption class="osoba__podpis">Adwokat Beata Cupiał-Kowalska</figcaption>
+            </figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 07 · OPINIE ============
+         Pole beż, hairline nad sekcją. Trzy opinie z wizytówki Google (te same
+         co na stronie głównej, imiona jak w źródle). Opinia o sprawie
+         rozwodowej została na stronie rozwodów; tu stoją trzy, które nie
+         nazywają rodzaju sprawy. Ramka układa tyle kolumn, ile opinii. -->
+    <section class="sekcja pas sekcja--ciag" id="opinie">
+      <div class="kontener">
+        <div class="naglowek-sekcji">
+          <h2>Opinie osób, którym pomogłam</h2>
+        </div>
+
+        <div class="opinie-rzad opinie-rzad--ramka">
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Serdecznie polecam! Pełen profesjonalizm, rzetelne podejście do sprawy i ogromne zaangażowanie. Empatyczna i zawsze dostępna. Fachowe doradztwo i miła atmosfera współpracy. Polecam z całego serca!</p>
+            <footer class="opinia-kolumna__autor">Irys 2006<span class="opinia-kolumna__zrodlo">opinia w Google</span></footer>
+          </blockquote>
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Polecam serdecznie prowadziła mi sprawy z wielkim zaangażowaniem interesowała się każdym szczegółem w sprawie. Kontakt z nią o każdej porze bez problemu. Oczywiscie sprawy wygrane! Polecam w 100 % Pani Mecenas jest najlepsza.</p>
+            <footer class="opinia-kolumna__autor">Kamila Sapota<span class="opinia-kolumna__zrodlo">opinia w Google</span></footer>
+          </blockquote>
+          <blockquote class="opinia-kolumna">
+            <svg class="gwiazdki" viewBox="0 0 84 16" width="66" height="12.6" role="img" aria-label="Ocena pięć na pięć"><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(17)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(34)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(51)"/><path d="M8 1.4l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.2l-3.8 2 .7-4.3-3.1-3 4.3-.6z" fill="currentColor" transform="translate(68)"/></svg>
+            <p class="opinia-kolumna__cytat">Polecam Pani Beata wie co robi zna się na swojej pracy, walczy do samego końca póki nie wygra sprawy klienta, każdemu pomoże do zwycięstwa. Jeszcze raz serdecznie POLECAM</p>
+            <footer class="opinia-kolumna__autor">Karolina Bieniek<span class="opinia-kolumna__zrodlo">opinia w Google</span></footer>
+          </blockquote>
+        </div>
+
+        <!-- 【DO UZUPEŁNIENIA】 link do wizytówki Google -->
+        <p class="opinie-wszystkie"><a href="#">Zobacz wszystkie opinie w Google</a></p>
+      </div>
+    </section>
+
+    <!-- ============ 08 · NAJCZĘSTSZE PYTANIA ============
+         Pole beż, hairline nad sekcją. .uklad-faq: lewa kolumna sticky
+         (H2 + ramka z telefonem), prawa: akordeon name="pytania". -->
+    <section class="sekcja pas sekcja--ciag" id="pytania">
+      <div class="kontener">
+        <div class="uklad-faq">
+          <div class="uklad-faq__szyna">
+            <h2 class="uklad-faq__tytul">Pytania, które słyszę <em>najczęściej</em></h2>
+            <div class="uklad-faq__karta">
+              <p>Nie ma tu Twojego pytania? Zadzwoń i po prostu spytaj.</p>
+              <a class="uklad-faq__telefon" href="tel:+48534477596">534&nbsp;477&nbsp;596</a>
+            </div>
+          </div>
+
+          <div class="faq uklad-faq__lista">
+            <details class="faq__poz" name="pytania" open>
+              <summary>Ile trwa sprawa spadkowa?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Samo stwierdzenie nabycia spadku, gdy nikt się nie spiera i wszyscy spadkobiercy są znani, zamyka się zwykle w kilku miesiącach. Dział spadku ze sporem o wartość nieruchomości i z opinią biegłego trwa dłużej, bo to już postępowanie dowodowe. Po pierwszej rozmowie powiem Ci, w którym z tych scenariuszy prawdopodobnie jesteś.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy muszę iść do sądu, czy wystarczy notariusz?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Notariusz wystarczy, jeżeli wszyscy spadkobiercy są zgodni, znani i mogą stawić się razem, a spadkodawca zmarł po 1 lipca 1984 roku. Jeżeli ktoś się nie zgadza, jest nieznany z miejsca pobytu albo trwa spór o testament, sprawa musi trafić do sądu. Droga notarialna bywa szybsza, ale nie zawsze tańsza.</div>
+            </details>
+            <!-- 【DO UZUPEŁNIENIA】 kwoty opłat sądowych do weryfikacji na dzień publikacji
+                 (w copy w nawiasie kwadratowym). Zdanie stoi w .todo i NIE wchodzi
+                 do JSON-LD, dopóki nie zostanie potwierdzone. -->
+            <details class="faq__poz" name="pytania">
+              <summary>Ile kosztuje sprawa o stwierdzenie nabycia spadku?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc"><span class="todo" title="Do potwierdzenia: kwoty opłat sądowych na dzień publikacji">Opłata sądowa od wniosku wynosi obecnie 100 zł, do tego dochodzi 5 zł za wpis w Rejestrze Spadkowym.</span> Osobno liczy się wynagrodzenie pełnomocnika, które ustalamy przed przyjęciem sprawy, żeby nie było niespodzianek. Przy dziale spadku i zachowku opłaty są wyższe i zależą od wartości sprawy.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Ile czasu mam na odrzucenie spadku?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Sześć miesięcy od dnia, w którym dowiedziałeś się o tytule swojego powołania do spadku, czyli zwykle od dowiedzenia się o śmierci bliskiego albo o odrzuceniu spadku przez kogoś przed Tobą. Ten termin biegnie niezależnie od tego, czy ktoś Cię o nim poinformował. Jeżeli został Ci tydzień albo dwa, zadzwoń dziś, a nie po weekendzie.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy odpowiadam za długi zmarłego?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Co do zasady odpowiadasz tylko do wartości tego, co odziedziczyłeś, bo spadek dziedziczy się dziś z dobrodziejstwem inwentarza. To nie znaczy, że wierzyciele przestaną się odzywać, i nie zwalnia z ustalenia, co realnie wchodzi do spadku. Jeśli długi przewyższają majątek, rozmawiamy o odrzuceniu spadku, ale tylko w terminie.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Komu należy się zachowek i ile wynosi?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Zachowek przysługuje zstępnym, małżonkowi i rodzicom spadkodawcy, o ile w danej sytuacji dziedziczyliby z ustawy. Wynosi połowę wartości udziału, który by im przypadał, a dla osób małoletnich i trwale niezdolnych do pracy dwie trzecie. Do podstawy dolicza się darowizny, dlatego spór najczęściej dotyczy wyceny, a nie samej zasady.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Czy da się podważyć testament?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Da się, ale nie dlatego, że jest niesprawiedliwy. Podstawą jest sporządzenie testamentu w stanie wyłączającym świadome albo swobodne podjęcie decyzji, pod wpływem błędu lub groźby, albo naruszenie wymogów formalnych danej formy testamentu. Na powołanie się na te przyczyny są terminy, więc im później się tym zajmiemy, tym mniej zostaje opcji.</div>
+            </details>
+            <details class="faq__poz" name="pytania">
+              <summary>Który sąd rozpoznaje sprawy spadkowe w Częstochowie?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
+              <div class="faq__tresc">Właściwy jest sąd ostatniego miejsca zwykłego pobytu spadkodawcy, więc jeżeli mieszkał w Częstochowie, sprawa trafia do tutejszego sądu rejonowego. Nie ma znaczenia, gdzie mieszkają spadkobiercy ani gdzie leży odziedziczona nieruchomość. Jeżeli mieszkasz w innym mieście, nie musisz jeździć na każdy termin, bo mogę reprezentować Cię na rozprawie.</div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 09 · KONTAKT ============
+         Pole beż, hairline nad sekcją. Opis dojścia z danych realnych
+         (lewa oficyna, pierwsze piętro, po prawej); wersja z copy była
+         wewnętrznie sprzeczna i oznaczona do uzupełnienia. -->
+    <section class="sekcja pas sekcja--ciag" id="kontakt">
+      <div class="kontener">
+        <div class="naglowek-sekcji" data-odslon>
+          <h2>Najtrudniejszy jest ten <em>pierwszy telefon</em></h2>
+          <p class="lead">Potem jest już tylko rozmowa. Zadzwoń i opowiedz, co się wydarzyło. Powiem Ci, jakie masz możliwości i co warto zrobić w pierwszej kolejności.</p>
+        </div>
+
+        <div class="kontakt-telefon" data-odslon>
+          <a class="telefon-duzy" href="tel:+48534477596">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.2 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            534 477 596
+          </a>
+          <p class="telefon-podpis">Jeśli nie odbieram, jestem na rozprawie. Oddzwaniam.</p>
+        </div>
+
+        <div class="kontakt-siatka" data-odslon>
+          <div class="kontakt-kol">
+            <h4>E-mail</h4>
+            <p><a href="mailto:kancelaria@cupial-kowalska.pl">kancelaria@cupial-kowalska.pl</a></p>
+            <p class="male drugorzedny">Odpisuję zwykle tego samego albo następnego dnia.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Kancelaria</h4>
+            <p>ul. Kilińskiego 5 lok. 4<br>42-202 Częstochowa</p>
+            <p class="male drugorzedny">Lewa oficyna, pierwsze piętro, po prawej stronie.</p>
+          </div>
+          <div class="kontakt-kol">
+            <h4>Spotkania</h4>
+            <p>Osobiście w Częstochowie, online albo telefonicznie.</p>
+            <p class="male drugorzedny">Termin dogrywamy telefonicznie. Dojazd, mapa i formularz z prośbą o telefon: <a href="kontakt.html">strona kontaktu</a>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <div data-footer></div>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Service",
+        "name": "Sprawy spadkowe",
+        "serviceType": "Prowadzenie spraw spadkowych: stwierdzenie nabycia spadku, dział spadku, zachowek, długi spadkowe i odrzucenie spadku, ważność testamentu i wydziedziczenie",
+        "areaServed": { "@type": "City", "name": "Częstochowa" },
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "servicePhone": { "@type": "ContactPoint", "telephone": "+48534477596" },
+          "availableLanguage": "pl"
+        },
+        "provider": {
+          "@type": "Attorney",
+          "name": "Kancelaria Adwokacka Beata Cupiał-Kowalska",
+          "telephone": "+48534477596",
+          "email": "kancelaria@cupial-kowalska.pl",
+          "areaServed": "Częstochowa",
+          "knowsLanguage": "pl",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "ul. Kilińskiego 5 lok. 4",
+            "postalCode": "42-202",
+            "addressLocality": "Częstochowa",
+            "addressCountry": "PL"
+          },
+          "founder": {
+            "@type": "Person",
+            "name": "Beata Cupiał-Kowalska",
+            "jobTitle": "adwokat"
+          }
+        }
+      },
+      {
+        "@type": "FAQPage",
+        "mainEntity": [
+          { "@type": "Question", "name": "Ile trwa sprawa spadkowa?", "acceptedAnswer": { "@type": "Answer", "text": "Samo stwierdzenie nabycia spadku, gdy nikt się nie spiera i wszyscy spadkobiercy są znani, zamyka się zwykle w kilku miesiącach. Dział spadku ze sporem o wartość nieruchomości i z opinią biegłego trwa dłużej, bo to już postępowanie dowodowe." } },
+          { "@type": "Question", "name": "Czy muszę iść do sądu, czy wystarczy notariusz?", "acceptedAnswer": { "@type": "Answer", "text": "Notariusz wystarczy, jeżeli wszyscy spadkobiercy są zgodni, znani i mogą stawić się razem, a spadkodawca zmarł po 1 lipca 1984 roku. Jeżeli ktoś się nie zgadza, jest nieznany z miejsca pobytu albo trwa spór o testament, sprawa musi trafić do sądu." } },
+          { "@type": "Question", "name": "Ile kosztuje sprawa o stwierdzenie nabycia spadku?", "acceptedAnswer": { "@type": "Answer", "text": "Wynagrodzenie pełnomocnika ustalamy przed przyjęciem sprawy, żeby nie było niespodzianek. Przy dziale spadku i zachowku opłaty sądowe są wyższe i zależą od wartości sprawy." } },
+          { "@type": "Question", "name": "Ile czasu mam na odrzucenie spadku?", "acceptedAnswer": { "@type": "Answer", "text": "Sześć miesięcy od dnia, w którym dowiedziałeś się o tytule swojego powołania do spadku, czyli zwykle od dowiedzenia się o śmierci bliskiego albo o odrzuceniu spadku przez kogoś przed Tobą. Ten termin biegnie niezależnie od tego, czy ktoś Cię o nim poinformował." } },
+          { "@type": "Question", "name": "Czy odpowiadam za długi zmarłego?", "acceptedAnswer": { "@type": "Answer", "text": "Co do zasady odpowiadasz tylko do wartości tego, co odziedziczyłeś, bo spadek dziedziczy się dziś z dobrodziejstwem inwentarza. Jeśli długi przewyższają majątek, można odrzucić spadek, ale tylko w terminie." } },
+          { "@type": "Question", "name": "Komu należy się zachowek i ile wynosi?", "acceptedAnswer": { "@type": "Answer", "text": "Zachowek przysługuje zstępnym, małżonkowi i rodzicom spadkodawcy, o ile w danej sytuacji dziedziczyliby z ustawy. Wynosi połowę wartości udziału, który by im przypadał, a dla osób małoletnich i trwale niezdolnych do pracy dwie trzecie." } },
+          { "@type": "Question", "name": "Czy da się podważyć testament?", "acceptedAnswer": { "@type": "Answer", "text": "Da się, ale nie dlatego, że jest niesprawiedliwy. Podstawą jest sporządzenie testamentu w stanie wyłączającym świadome albo swobodne podjęcie decyzji, pod wpływem błędu lub groźby, albo naruszenie wymogów formalnych danej formy testamentu. Na powołanie się na te przyczyny są terminy." } },
+          { "@type": "Question", "name": "Który sąd rozpoznaje sprawy spadkowe w Częstochowie?", "acceptedAnswer": { "@type": "Answer", "text": "Właściwy jest sąd ostatniego miejsca zwykłego pobytu spadkodawcy, więc jeżeli mieszkał w Częstochowie, sprawa trafia do tutejszego sądu rejonowego. Nie ma znaczenia, gdzie mieszkają spadkobiercy ani gdzie leży odziedziczona nieruchomość." } }
+        ]
+      }
+    ]
+  }
+  </script>
+
+</body>
+</html>
