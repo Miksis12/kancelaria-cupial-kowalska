@@ -74,7 +74,7 @@ informacyjnej; na razie oba linki prowadzą do `#`.
 **Co się zmieni po odpowiedzi:** dochodzi podstrona `polityka-prywatnosci.html`, a linki
 w formularzu i w stopce zaczynają na nią wskazywać.
 
-### 8. NIP i dane rejestrowe kancelarii ⚪
+### 8. NIP i dane rejestrowe kancelarii ✅
 **Dlaczego pytamy:** NIP jest w stopce i w danych kontaktowych podstrony, w obu miejscach
 jako `do uzupełnienia`. Przy okazji: czy w danych ma się pojawić numer wpisu na listę
 adwokatów?
@@ -82,6 +82,9 @@ adwokatów?
 zostaje sama informacja o Okręgowej Radzie Adwokackiej w Częstochowie.
 **Co się zmieni po odpowiedzi:** dwa `<span class="todo">` w `js/site.js` (stopka) i
 `kontakt.html` (lista `.dane`).
+**Stan (21.09.2026):** NIP **5771926637** wpisany w obu miejscach — z Białej listy MF
+(Beata Cupiał-Kowalska, Kilińskiego 5/4, Częstochowa, VAT czynny). Pytanie o numer wpisu
+zostaje otwarte.
 
 ### Założenia dodatkowe (bez pytania, do wiedzy)
 
@@ -124,7 +127,7 @@ i wchodzi to jednocześnie w menu i w stopkę.
 Powstał `o-mnie.html` na podstawie `o-mnie-copy.md`. Siedem z ośmiu sekcji stoi na
 gotowej treści. Jedna czeka na dane, których nie da się zastąpić założeniem.
 
-### 10. Ścieżka zawodowa: pięć dat i nazw — BLOKUJE SEKCJĘ 🔴
+### 10. Ścieżka zawodowa: pięć dat i nazw — częściowo uzupełniona 🟡
 **Dlaczego pytamy:** sekcja „Krótko o tym, skąd się tu wzięłam" ma być suchym wykazem
 faktów. Jej cała wartość polega na tym, że są to daty i nazwy, a nie deklaracje. Nie da
 się jej napisać z założenia: wymyślony rok studiów albo numer wpisu to nie jest ryzyko
@@ -142,6 +145,11 @@ była adwokacka — co wynika z tytułu zawodowego, ale warto potwierdzić.
 Pozycji, której roku klientka nie poda, **nie zastępujemy ogólnikiem — usuwamy cały
 wiersz**. Jeśli nie da się podać żadnej daty, wypada cała sekcja 03; wtedy sekcja
 „Dyżury" musi przejść z bieli na piasek, żeby utrzymać naprzemienność płaszczyzn.
+**Stan (21.09.2026):** wpisane z faktów, które klientka sama podała na starej stronie
+(cupial-kowalska.pl/about): studia 2013 — WPiA Uniwersytetu Łódzkiego; aplikacja 2016
+(lata 2014–2016) — ORA w Częstochowie; wpis na listę 2017. Rok otwarcia kancelarii 2017
+z Białej listy MF (rejestracja 13.10.2017). **Nadal brakuje:** numeru wpisu, opisu „co
+robiła wcześniej" i całej pozycji mediatora (rok, podstawa, lista SO).
 
 ### 11. Akapit o wnioskach o wyznaczenie pełnomocnikiem ⚪
 **Dlaczego pytamy:** w sekcji o dyżurach stoi zdanie: „Zdarza się, że osoby, które
@@ -537,3 +545,46 @@ FAQ mówi „strony zwykle dzielą koszty po połowie". Do potwierdzenia.
 - **Etykiety:** trzy z pięciu z copy (dwie drogi, plan rodzicielski, ugoda).
 - **Dojście do kancelarii:** dane realne zamiast „do uzupełnienia" z copy.
 
+
+---
+
+## Pytania do klientki — publikacja: polityka prywatności, formularz, konta (27 października 2026)
+
+### 37. Akceptacja polityki prywatności 🔴
+**Dlaczego pytamy:** `/polityka-prywatnosci/` to projekt złożony z faktów o stronie
+(formularz, logi serwera 14 dni, czcionki i mapa Google, brak cookies strony).
+Klientka jest administratorem danych i podpisuje się pod tym tekstem.
+**Co się zmieni po odpowiedzi:** poprawki w `polityka-prywatnosci.html`, potem
+`node tools/wdroz-motyw.mjs`. Bez akceptacji nie wysyłamy prośby o zmianę DNS.
+
+### 38. Jak długo przechowywać zgłoszenia z formularza bez zlecenia 🔴
+**Dlaczego pytamy:** polityka musi podać okres. Dziś `.todo` „okres do ustalenia".
+**Co się zmieni po odpowiedzi:** jedno zdanie w sekcji „Formularz".
+
+### 39. Firma hostingowa i umowa powierzenia 🔴
+**Dlaczego pytamy:** serwer strony i skrzynka stoją u PPHU „DESIRE” / WR SYSTEMS
+(hosting-desire.pl, desire24.com) — polityka wymienia odbiorcę danych z nazwy.
+Czy kancelaria ma z dostawcą umowę powierzenia przetwarzania danych?
+**Co się zmieni po odpowiedzi:** pełna nazwa i adres w sekcji „Komu przekazuję dane".
+
+### 40. Hasło skrzynki do wysyłki formularza 🔴
+**Dlaczego pytamy:** formularz wysyła przez skrzynkę kancelaria@cupial-kowalska.pl.
+Hasło wpisuje klientka sama: panel WordPressa → „Poczta strony" → „Zapisz i sprawdź
+połączenie". Bez tego poczta idzie przez serwer bez logowania i może trafiać do spamu.
+
+### 41. Mapa i czcionki Google a zgoda na cookies 🟡
+**Dlaczego pytamy:** mapa Google (strona główna, Kontakt) może zapisywać cookies Google,
+a czcionki pobierane z Google przekazują mu adres IP. Bez banera zgód bezpieczniej
+jest mapę ładować dopiero po kliknięciu, a czcionki trzymać na własnym serwerze.
+**Przyjęte założenie:** na start zostaje jak jest, polityka to opisuje.
+**Co się zmieni po odpowiedzi:** mapa „kliknij, aby wczytać" i czcionki z serwera
+(zmiana w `<head>` wszystkich stron i w `styles.css`, potem aktualizacja polityki).
+
+### Założenia dodatkowe (bez pytania, do wiedzy)
+
+- **Konto klientki** `beata.cupial-kowalska` ma rolę redaktora: edytor CMK i „Poczta
+  strony" wymagają tylko `edit_pages`, więc pełny administrator nie jest potrzebny.
+  Hasło ustawi sama linkiem „Nie pamiętasz hasła?" po ustawieniu poczty strony.
+- **Komunikaty formularza** (sukces, braki, błąd) napisał Claude; sukces powtarza
+  zdanie z copy kontaktu („Oddzwonię tego samego dnia albo następnego rana").
+- **Baza wiedzy** schowana z menu i stopki do czasu prawdziwych wpisów.

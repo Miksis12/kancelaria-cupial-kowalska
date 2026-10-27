@@ -36,14 +36,18 @@ klasy sprawdzaj grepem po słowniku niżej.
   układzie (tekst po lewej, portret 2:3 po prawej) — warianty z 14 września 2026
   zostały odrzucone i usunięte.
 - `kontakt.html` — **PLIK-WZORZEC do klonowania podstron.** Trzy sekcje: wstęp
-  podstrony (biel), dane + mapa (len), formularz (piasek).
+  podstrony (biel), dane + mapa (len), formularz (piasek). Formularz wysyła
+  **tylko na WordPressie**: w HTML ma `action="#"`, a generator (`formularzWp`)
+  podmienia go na `admin-post.php` i dokłada pola techniczne oraz komunikat
+  po wysłaniu (`.akcent` nad formularzem). Obsługa i antyspam: `functions.php`.
 - `o-mnie.html` — podstrona „O mnie", dziewięć sekcji: nagłówek strony (piasek),
   sylwetka (biel), dlaczego sama (len), moja historia (piasek), dyżury (biel),
   mediacja (len), podejście (piasek), zakres praktyki (biel), kontakt (len) —
   czysty cykl piasek → biel → len ×3. Nie ma hero: po nagłówku strony idzie
-  sekcja „portret + dwa akapity o sobie". **Sekcja „Moja historia"
-  stoi na placeholderach `.todo`** — czeka na daty od klientki; bez nich do
-  usunięcia w całości (wtedy „dyżury" muszą przejść z bieli na piasek).
+  sekcja „portret + dwa akapity o sobie". **Sekcja „Moja historia"** ma lata
+  i nazwy ze starej strony klientki i Białej listy MF (2013 WPiA UŁ, 2016 aplikacja
+  ORA Częstochowa, 2017 wpis, 2017 kancelaria); jako `.todo` zostały numer wpisu,
+  „co robiła wcześniej" i cała pozycja mediatora (pytanie 10 w `docs/PYTANIA.md`).
 - `rozwod-i-sprawy-rodzinne.html` — **PLIK-WZORZEC do klonowania PODSTRON USŁUGOWYCH.**
   Pierwsza podstrona obszaru spraw, dziewięć sekcji w **sześciu polach** + stopka:
   POLE biel — zwarty nagłówek `.naglowek-strony--uslugi` (okruszki, H1, lead, linia
@@ -101,12 +105,23 @@ klasy sprawdzaj grepem po słowniku niżej.
   **Wszystkie 12 pozycji czeka na treść**: daty stoją jako `.todo`, a wiersze
   prowadzą tymczasowo do `wpis-szablon.html`. Strona nie mówi o tym stanie
   odwiedzającemu — na życzenie Mikołaja nie ma nad listą żadnej noty.
+  **Od 27.10.2026 schowana z menu i stopki** (zakomentowane pozycje w `site.js`,
+  `noindex` w `STRONY`), dopóki nie ma prawdziwych wpisów. Okruszki podaje
+  sama (`data-okruszki="Baza wiedzy"`).
 - `wpis-szablon.html` — **PLIK-WZORZEC do klonowania WPISÓW.** Celowo poza menu
   i poza stopką. Cztery sekcje: nagłówek wpisu (piasek), treść + szyna ze spisem
   treści (biel), „przeczytaj też" (len), kontakt (piasek). Instrukcja, co
   podmienić przy nowym wpisie, stoi w komentarzu na górze pliku. Treść w środku
   to przykład pokazujący każdy element prozy, nie tekst zatwierdzony przez
   klientkę.
+- `polityka-prywatnosci.html` — **PROJEKT do akceptacji klientki** (27.10.2026),
+  poza menu: link w stopce i przy zgodzie w formularzu (`#formularz`). Dwie
+  sekcje: nagłówek strony (piasek) + proza `.wpis-tresc` bez szyny (biel).
+  Opisuje tylko to, co strona faktycznie robi (formularz, logi Apache 14 dni,
+  Google Fonts, mapa Google na stronie głównej i Kontakcie, brak cookies strony)
+  — **zmiana przepływu danych = aktualizacja tego tekstu**. Jako `.todo`: okres
+  przechowywania zgłoszeń, nazwa hostingu i umowa powierzenia, data obowiązywania.
+  W WP to strona ID 3, wskazana w Ustawienia → Prywatność.
 - `css/styles.css` — wspólne style (unia wszystkich sekcji, tokeny w `:root`).
 - `js/site.js` — menu + stopka + menu mobilne + odsłanianie `[data-odslon]`;
   dane kontaktowe i lista pozycji menu są **tutaj**.
@@ -346,8 +361,8 @@ klasy sprawdzaj grepem po słowniku niżej.
 
 ## Nawigacja / stopka (`js/site.js`)
 
-- Menu: Strona główna · **Usługi (drop-down)** · O mnie · Baza wiedzy · Kontakt
-  + numer telefonu jako CTA.
+- Menu: Strona główna · **Usługi (drop-down)** · O mnie · Kontakt
+  + numer telefonu jako CTA. „Baza wiedzy" schowana do czasu wpisów (27.10.2026).
 - Logo (menu i stopka) to jeden złoty PNG z przezroczystym tłem:
   `assets/logo-cupial-kowalska.png` (sygnet + nazwisko + „Adwokat"), składa go
   `marka()` jako `img.marka__logo` — 48 px wysokości w menu, 56 px w stopce.
@@ -359,16 +374,19 @@ klasy sprawdzaj grepem po słowniku niżej.
   Samo `"#"` zostaje `"#"` (placeholder bez celu, nie skacze na stronę główną).
   Aktywna pozycja dostaje `aria-current="page"` przez `match:['plik.html']`; rodzic
   drop-downu dostaje `data-aktywna="tak"`, gdy aktywne jest któreś dziecko.
-- `HOME = 'index.html'`, bo projekt chodzi lokalnie z pliku. **Przy imporcie na
-  WordPressa zmienić na `'/'`** — to jedyna linia do ruszenia.
+- `site.js` ma **dwa tryby w jednym pliku**. Wersja plikowa: `HOME = 'index.html'`,
+  linki to nazwy plików. WordPress: `<script>` ma `data-home` (dokłada go
+  generator motywu) — wtedy `x.html` → `HOME + 'x/'`, bieżąca strona liczy się
+  z adresu WP (więc `match` z nazwami plików działa bez zmian), logo idzie
+  z katalogu motywu. Niczego nie przełączasz ręcznie.
 - Stopka: dane kancelarii + kolumny „Sprawy" i „Kancelaria". Rok w linii prawnej
   liczy się sam. Za `<main class="strona-uslugowa">` stopka stoi na espresso
   (selektor `.strona-uslugowa ~ .stopka`), na pozostałych stronach zostaje jasna.
 
 ## Jak stworzyć NOWĄ podstronę (szybko)
 
-1. Skopiuj `<head>` z `kontakt.html` (fonty + `styles.css` + `site.js` z `defer`),
-   podmień `<title>` i `meta description`.
+1. Skopiuj `<head>` z `kontakt.html` (ikony `assets/favicon*` + fonty + `styles.css`
+   + `site.js` z `defer`), podmień `<title>` i `meta description`.
 2. `<body>` zaczyna `<div data-nav></div>`, kończy `<div data-footer></div>`.
    Pierwsza sekcja w `<main>` to `.naglowek-strony pas` z `<div data-okruszki></div>`,
    H1 (nazwa zakładki) i podtytułem; okruszki same znajdą nazwę w `NAV` po `match`,
@@ -381,6 +399,63 @@ klasy sprawdzaj grepem po słowniku niżej.
 6. Nowy CSS wyłącznie na końcu `styles.css`, we własnym bloku z nagłówkiem-komentarzem.
 7. Sprawdź po kodzie: klasy ↔ `styles.css`, bilans znaczników, linki i kotwice.
 
+## WordPress (lokalnie: Local, `cupial.local`)
+
+- Strona stoi na WP jako **klasyczny motyw `cupial-kowalska`** generowany z tych
+  plików HTML: `node tools/build-wp-theme.mjs` → pisze wprost do
+  `C:/Users/mikol/Local Sites/cupial/app/public/wp-content/themes/cupial-kowalska`
+  (inny cel: argument albo `WP_THEME_DIR`). **Motywu nie edytuj** — zmiana HTML,
+  `styles.css` albo `site.js` = przebudowa motywu, nic więcej.
+- Każda strona z `STRONY` w generatorze = szablon `szablony/{slug}.php` i strona
+  WP o tym slugu (strona główna: slug `strona-glowna`, ustawiona jako front page).
+  **Nowa podstrona** = wpis w `STRONY` + przebudowa + strona w WP z tym szablonem.
+- Generator: linki `x.html` → `home_url('/x/')`, `assets/ css/ js/` → katalog
+  motywu (CSS i JS z `?v=` hasha treści), `wp_head()`/`wp_footer()`, a teksty
+  i obrazy w `<main>` owija w `cmk_block`/`cmk_img` (edycja przez wtyczkę
+  **CMS-Mikołaj Kubiak**, kit w `cms-mikolaj-kubiak-kit/`, manifest kluczy
+  `inc/cmk-keys.php`). Kontroluje, że owijanie nie zmienia ani bajta treści.
+- Render gościa = HTML 1:1 z plikiem (WP dokłada tylko canonical i robots),
+  zrzuty desktop 1440 / mobile 390 zgodne piksel w piksel (21 września 2026).
+- Menu i stopka **nie są edytowalne w CMK** (składa je `site.js`); JSON-LD pod
+  `<main>` też nie idzie za poprawkami z edytora. Klucz CMK = hash tekstu:
+  zmiana tekstu w HTML odpina poprawkę klientki w tym miejscu.
+- **SEO przeniesienia ze starej strony** (Laravel, 4 adresy) — w generatorze:
+  `STARE_ADRESY` (301 `/about` → `/o-mnie/`, `/contact` → `/kontakt/`,
+  `/services` → `/` + stare obrazki), flaga `noindex` w `STRONY` (dziś
+  `/wpis-szablon/` i `/baza-wiedzy/`: noindex i poza mapą witryny), mapa `/wp-sitemap.xml` bez
+  użytkowników i taksonomii, 404 z noindex, ikona witryny w WP (opcja `site_icon`).
+  Docelowy adres `https://www.cupial-kowalska.pl/`. Analiza, `.htaccess` na
+  produkcję i lista kroków na dzień publikacji (**uwaga na pocztę przy DNS**):
+  `docs/SEO-MIGRACJA.md`.
+- `404.php` i `index.php` składa generator z `.naglowek-strony` — **tekst 404
+  nie pochodzi od klientki**, do przejrzenia.
+- WP-CLI dla tej instalacji: PHP z `%APPDATA%/Local/lightning-services/php-8.2.29+0`,
+  `-c %APPDATA%/Local/run/0JX071YGQ/conf/php/php.ini` (baza na porcie 10090),
+  phar z `C:/Program Files (x86)/Local/resources/extraResources/bin/wp-cli/`.
+
+## Produkcja (VPS, od 27.10.2026)
+
+- Strona stoi na VPS-ie `cupial-kowalska-2` (176.112.77.211), WordPress
+  w `/var/www/cupial-kowalska`, SSH aliasami `cupial-vps` / `cupial-vps-root`
+  (`~/.ssh/config`, klucz). **Treść żyje tam** (poprawki CMK klientki), Local
+  jest już tylko warsztatem — bazy z Local na serwer nie wgrywamy ponownie.
+- **Zmiana HTML / `styles.css` / `site.js` = `node tools/wdroz-motyw.mjs`**:
+  build do katalogu tymczasowego, `php -l` na serwerze, podmiana katalogu
+  motywu; poprzedni zostaje w `/root/motyw-poprzedni`. Baza nie jest ruszana.
+  Nowa podstrona = jeszcze strona WP z szablonem (`sudo -u www-data wp …`).
+- **Poczta strony** (menu w panelu WP, uprawnienie `edit_pages`): adres i hasło
+  skrzynki kancelarii wpisuje klientka, hasło leży w bazie zaszyfrowane solą
+  AUTH z `wp-config.php`. SMTP `serwer.hosting-desire.pl:465` (na tę nazwę jest
+  certyfikat, nie na `mail.cupial-kowalska.pl`). Bez ustawień WP wysyła przez
+  Postfix na serwerze — maile mogą trafiać do spamu.
+- Konta WP: `mikolaj` (administrator), `beata.cupial-kowalska` (redaktor — CMK
+  wymaga tylko `edit_pages`). `admin` z Local do usunięcia, gdy Mikołaj zaloguje
+  się swoim kontem.
+- Do dnia publikacji vhost wpuszcza tylko IP Mikołaja, a HTTPS ma certyfikat
+  samopodpisany. Po zmianie rekordów A: `/root/publikacja.sh` (sprawdza DNS,
+  zdejmuje blokadę, certbot, testy). Kopie: codziennie 3:30, 14 dni,
+  `/var/backups/cupial`. Stan serwera i decyzje: `docs/SEO-MIGRACJA.md`.
+
 ## Dane realne i placeholdery
 
 Realne (z briefu i starej strony): telefon **534 477 596**,
@@ -392,15 +467,18 @@ jak w źródle).
 Do uzupełnienia: **treść wpisów w bazie wiedzy** (12 zaproponowanych tematów
 w `baza-wiedzy.html` — tytuły i zajawki do zatwierdzenia przez klientkę, teksty
 i daty do napisania; wszystkie wiersze prowadzą na razie do `wpis-szablon.html`),
-**NIP** (`<span class="todo">` w stopce i w `.dane`), **endpoint
-formularza** (`action` w `kontakt.html`), **polityka prywatności** i **informacja RODO**
-(oba `href="#"`), **link do opinii Google**, **zdjęcia z sesji** (portret klientki już jest, jeden
+**hasło skrzynki do wysyłki formularza** (klientka, menu „Poczta strony" w WP),
+**akceptacja polityki prywatności** i jej trzy `.todo`, **link do opinii Google**, **zdjęcia z sesji** (portret klientki już jest, jeden
 na całą stronę — brakuje kadru „przy biurku" do sekcji o mnie na stronie głównej,
 gdzie dziś stoi ten sam portret co w hero), **status mediatora** (lista stałych mediatorów przy SO w Częstochowie, pytanie 32) (`href="#"` w `.rejestr`
 i w panelu mediacji na stronie głównej; w `.rejestr` na `o-mnie.html` wiersze
 prowadzą tymczasowo do `index.html#sprawy`; wszystkie obszary spraw i mediacje mają
 już podstrony), **progi i kwoty na `jazda-po-alkoholu.html`**
 (do weryfikacji na dzień publikacji),
-**opłata sądowa w FAQ spadków** (`.todo`, 100 zł z copy kontra 50 zł z ustawy), a także **cała ścieżka zawodowa**
-na `o-mnie.html`: pięć dat, uczelnia, izba aplikacji, numer wpisu i podstawa
-uprawnień mediatora — wszystko jako `<span class="todo">`.
+**opłata sądowa w FAQ spadków** (`.todo`, 100 zł z copy kontra 50 zł z ustawy), a także **reszta ścieżki zawodowej**
+na `o-mnie.html`: numer wpisu, „co robiła wcześniej", rok i podstawa uprawnień
+mediatora — jako `<span class="todo">`.
+
+Uzupełnione 21.09.2026 z publicznych źródeł: **NIP 5771926637** (Biała lista MF)
+w stopce (`KONTAKT.nip` w `site.js`) i w `.dane` na kontakcie; lata i nazwy
+w „Moja historia" ze starej strony klientki.

@@ -11,15 +11,39 @@
    DODANIE POZYCJI MENU / ZMIANA DANYCH KONTAKTU = edycja TUTAJ (NAV / KONTAKT).
    Wchodzi od razu na wszystkich stronach. NIE wpisuj menu ani stopki do HTML.
 
-   HOME = 'index.html', bo projekt chodzi lokalnie z pliku. Przy imporcie na
-   WordPressa zmienia się na '/' — to jedyna linia do ruszenia.
+   DWA TRYBY, jeden plik:
+   · wersja plikowa (ten folder): HOME = 'index.html', linki to nazwy plików;
+   · WordPress (motyw z tools/build-wp-theme.mjs): <script> ma atrybut
+     data-home z adresem strony głównej. Wtedy linki `x.html` stają się
+     adresami `HOME + x/`, bieżąca „strona" liczy się z adresu WP (tak, że
+     `match` z nazwami plików działa bez zmian), a logo bierze się z katalogu
+     motywu. Bez data-home nic się nie zmienia.
    ========================================================================= */
 (function () {
   "use strict";
 
-  var HOME = "index.html";
-  var here = location.pathname.split("/").pop() || "index.html";
+  var skrypt = document.currentScript;
+  var WP = skrypt ? skrypt.getAttribute("data-home") : null;
+  var HOME = WP || "index.html";
+  /* w WP assets/ leży obok js/ w katalogu motywu */
+  var ASSETS = WP ? skrypt.src.replace(/js\/site\.js(\?.*)?$/, "assets/") : "assets/";
+  var here = WP ? plikZAdresu() : (location.pathname.split("/").pop() || "index.html");
   var onHome = (here === "" || here === "index.html");
+
+  /* WP: /o-mnie/ → „o-mnie.html", strona główna → „index.html" */
+  function plikZAdresu() {
+    var baza = new URL(WP, location.href).pathname;
+    var sciezka = location.pathname;
+    var slug = sciezka.indexOf(baza) === 0 ? sciezka.slice(baza.length) : sciezka;
+    slug = slug.replace(/^\/+|\/+$/g, "");
+    return slug ? slug + ".html" : "index.html";
+  }
+  /* WP: „kontakt.html#x" → HOME + „kontakt/#x"; inne adresy bez zmian */
+  function adresWP(href) {
+    var m = /^([\w-]+)\.html(#.*)?$/.exec(href);
+    if (!m) return href;
+    return (m[1] === "index" ? HOME : HOME + m[1] + "/") + (m[2] || "");
+  }
 
   /* ---------- Usługi: jedna lista na menu i na stopkę ----------
      Pozycje bez własnej podstrony prowadzą na razie do rejestru spraw na stronie
@@ -43,11 +67,14 @@
     { label: "Strona główna", href: HOME, match: ["index.html"] },
     { label: "Usługi",        children: USLUGI },
     { label: "O mnie",        href: "o-mnie.html", match: ["o-mnie.html"] },
-    /* Zakładka z wpisami. Etykieta „Baza wiedzy”, a nie „Aktualności”: treść
-       evergreen nie starzeje się jak newsy. Powrót do dawnej nazwy = zmiana
-       samego `label` (plik i tak zostaje). Szablon wpisu celowo NIE jest
-       w menu — to plik do klonowania, nie zakładka. */
-    { label: "Baza wiedzy",   href: "baza-wiedzy.html", match: ["baza-wiedzy.html"] },
+    /* Zakładka z wpisami SCHOWANA do czasu prawdziwych wpisów (Mikołaj,
+       27.10.2026): 12 pozycji prowadzi dziś do jednego przykładowego szablonu.
+       Strona baza-wiedzy.html żyje dalej (noindex w generatorze motywu).
+       Powrót = ta linia z powrotem w menu, druga w STOPKA_KANCELARIA i zdjęcie
+       `noindex` w STRONY (tools/build-wp-theme.mjs). Etykieta „Baza wiedzy”,
+       a nie „Aktualności”: treść evergreen nie starzeje się jak newsy.
+       Szablon wpisu celowo NIE jest w menu — to plik do klonowania.
+    { label: "Baza wiedzy",   href: "baza-wiedzy.html", match: ["baza-wiedzy.html"] }, */
     { label: "Kontakt",       href: "kontakt.html", match: ["kontakt.html"] }
   ];
 
@@ -59,7 +86,7 @@
     firma: "Kancelaria Adwokacka Beata Cupiał-Kowalska",
     ulica: "ul. Kilińskiego 5 lok. 4",
     miasto: "42-202 Częstochowa",
-    nip: null,          /* 【DO UZUPEŁNIENIA】 numer NIP kancelarii */
+    nip: "5771926637",  /* Biała lista MF, sprawdzone 21.09.2026 */
     izba: "Adwokat wpisana na listę Okręgowej Rady Adwokackiej w Częstochowie"
   };
 
@@ -67,11 +94,11 @@
   var STOPKA_SPRAWY = USLUGI;
   var STOPKA_KANCELARIA = [
     { label: "O mnie", href: "o-mnie.html", match: ["o-mnie.html"] },
-    { label: "Baza wiedzy", href: "baza-wiedzy.html", match: ["baza-wiedzy.html"] },
+    /* { label: "Baza wiedzy", href: "baza-wiedzy.html", match: ["baza-wiedzy.html"] }, — schowana, zob. NAV */
     { label: "Pytania", href: "#pytania" },
     { label: "Kontakt", href: "kontakt.html", match: ["kontakt.html"] },
     { label: "Opinie w Google", href: "#" },
-    { label: "Polityka prywatności", href: "#" }
+    { label: "Polityka prywatności", href: "polityka-prywatnosci.html", match: ["polityka-prywatnosci.html"] }
   ];
 
   /* ---------- Pomocnicze ---------- */
@@ -79,7 +106,7 @@
     /* samo "#" to placeholder — nie ma dokąd prowadzić, więc nie doklejamy HOME */
     if (href === "#") return "#";
     if (href.charAt(0) === "#") return onHome ? href : HOME + href;
-    return href;
+    return WP ? adresWP(href) : href;
   }
   function aktywna(poz) {
     return !!(poz.match && poz.match.indexOf(here) !== -1);
@@ -103,7 +130,7 @@
      + nazwisko + „Adwokat" w jednym pliku. Nazwę czyta aria-label linku. */
   function marka(opis) {
     return '<a class="marka" href="' + (onHome ? "#gora" : HOME) + '" aria-label="' + opis + '">'
-      + '<img class="marka__logo" src="assets/logo-cupial-kowalska.png" width="213" height="48" alt="">'
+      + '<img class="marka__logo" src="' + ASSETS + 'logo-cupial-kowalska.png" width="213" height="48" alt="">'
       + "</a>";
   }
   function ikonaTelefonu(rozmiar, grubosc) {

@@ -1,0 +1,15 @@
+# Node (tools/annotate.mjs)
+node_modules/
+npm-debug.log*
+package-lock.json
+
+# OS / edytory
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Lokalne klucze/sekrety (NIE commitować) — trzymaj tylko *.example.php
+examples/keys.php
+**/keys.php
+*.local.php

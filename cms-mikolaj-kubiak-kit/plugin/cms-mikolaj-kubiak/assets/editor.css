@@ -1,0 +1,61 @@
+/* CMS-Mikołaj Kubiak — UI edytora (ładowane tylko dla redaktora).
+   Adaptuje się do brandu strony przez zmienne --cmk-* (ustawiane w admin.php
+   z filtra cmk_ui, domyślnie z tokenów hosta --c-orange/--font…). Fallbacki
+   w nawiasach var() działają, gdyby zmiennych zabrakło. Prefiks .cmk- by nie kolidować. */
+
+.cmk-launch, .cmk-bar, .cmk-toast,
+.cmk-bar button { font-family: var(--cmk-font, system-ui, -apple-system, 'Segoe UI', sans-serif); }
+
+/* przycisk startowy */
+.cmk-launch {
+  position: fixed; right: 20px; bottom: 20px; z-index: 2147483000;
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 12px 18px; border: 0; border-radius: 999px;
+  background: var(--cmk-accent, #F26722); color: var(--cmk-on-accent, #fff); cursor: pointer;
+  font-weight: 600; font-size: 15px; line-height: 1;
+  box-shadow: 0 6px 22px rgba(0,0,0,.22);
+}
+.cmk-launch:hover { background: var(--cmk-accent-2, #E15A12); }
+.cmk-dot { width: 9px; height: 9px; border-radius: 50%; background: var(--cmk-on-accent, #fff); box-shadow: 0 0 0 2px rgba(255,255,255,.5); }
+
+/* pasek narzędzi (dół) */
+.cmk-bar {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 2147483000;
+  display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+  padding: 10px 16px; background: var(--cmk-bar-bg, #23231e); color: var(--cmk-bar-fg, #f6f3ec);
+  font-weight: 500; font-size: 14px; line-height: 1;
+  box-shadow: 0 -6px 22px rgba(0,0,0,.28);
+}
+.cmk-bar-title { font-weight: 800; letter-spacing: .02em; color: var(--cmk-accent, #F26722); }
+.cmk-grp { display: inline-flex; gap: 4px; padding: 0 6px; border-left: 1px solid rgba(255,255,255,.16); border-right: 1px solid rgba(255,255,255,.16); }
+.cmk-grp button { min-width: 32px; height: 32px; padding: 0 8px; border: 0; border-radius: 7px; background: rgba(255,255,255,.1); color: inherit; cursor: pointer; font-size: 15px; }
+.cmk-grp button:hover { background: rgba(255,255,255,.2); }
+.cmk-state { font-size: 12px; opacity: .7; min-width: 92px; }
+.cmk-spacer { flex: 1 1 auto; }
+.cmk-b { height: 34px; padding: 0 14px; border: 0; border-radius: 8px; cursor: pointer; background: rgba(255,255,255,.12); color: inherit; font-weight: 600; font-size: 13px; }
+.cmk-b:hover { background: rgba(255,255,255,.22); }
+.cmk-b--primary { background: var(--cmk-accent, #F26722); color: var(--cmk-on-accent, #fff); }
+.cmk-b--primary:hover { background: var(--cmk-accent-2, #E15A12); }
+.cmk-b--ghost { background: transparent; box-shadow: inset 0 0 0 1px rgba(255,255,255,.24); }
+
+/* odstęp na pasek, żeby nie zasłaniał stopki */
+body.cmk-editing { padding-bottom: 64px; }
+
+/* obrysy pól edytowalnych (outline nie wpływa na layout → zero CLS) */
+body.cmk-editing [data-cmk] { outline: 1px dashed var(--cmk-accent, #F26722); outline-offset: 3px; cursor: text; border-radius: 2px; }
+body.cmk-editing [data-cmk]:hover { outline-width: 2px; }
+body.cmk-editing [data-cmk]:focus { outline: 2px solid var(--cmk-accent, #F26722); outline-offset: 3px; }
+
+/* edytowalne zdjęcia */
+body.cmk-editing [data-cmk-img] { outline: 2px dashed var(--cmk-accent, #F26722); outline-offset: 3px; cursor: pointer; }
+body.cmk-editing [data-cmk-img]:hover { filter: brightness(.94); }
+
+/* toast */
+.cmk-toast {
+  position: fixed; left: 50%; bottom: 76px; transform: translate(-50%, 12px); z-index: 2147483001;
+  padding: 11px 18px; border-radius: 10px; color: #fff; font-weight: 600; font-size: 14px;
+  opacity: 0; transition: opacity .25s, transform .25s; pointer-events: none; box-shadow: 0 8px 24px rgba(0,0,0,.25);
+}
+.cmk-toast.is-in { opacity: 1; transform: translate(-50%, 0); }
+.cmk-toast--ok { background: #2f7d32; }
+.cmk-toast--err { background: #b3261e; }
