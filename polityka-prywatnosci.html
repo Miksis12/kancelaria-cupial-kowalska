@@ -8,9 +8,6 @@
   <link rel="icon" href="assets/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="96x96" href="assets/favicon-96.png">
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
   <script src="js/site.js" defer></script>
 </head>
@@ -21,8 +18,10 @@
   <main id="gora">
 
     <!-- PROJEKT (27.10.2026) — tekst złożony z faktów o stronie i serwerze
-         (formularz, logi Apache 14 dni, Google Fonts, mapa Google na stronie
-         głównej i na Kontakcie, brak cookies strony). Wymaga akceptacji
+         (formularz, logi Apache 14 dni, mapa Google na stronie głównej
+         i na Kontakcie — od 12.11.2026 dopiero po zgodzie z okienka cookies,
+         brak cookies strony, wybór w localStorage na 12 miesięcy; fonty
+         z własnego serwera, nie z Google Fonts). Wymaga akceptacji
          klientki przed publikacją. Braki stoją jako .todo. Link do tej strony
          jest w stopce (site.js) i przy zgodzie w formularzu (#formularz). -->
 
@@ -62,11 +61,13 @@
           <p>Przy każdym wejściu na stronę serwer zapisuje w dziennikach informacje techniczne: adres IP, datę i godzinę, adres odwiedzonej podstrony i typ przeglądarki. Służą one bezpieczeństwu strony, na przykład blokowaniu prób włamania (art. 6 ust. 1 lit. f RODO). Dzienniki są usuwane automatycznie po 14 dniach.</p>
 
           <h2 id="cookies">Pliki cookies</h2>
-          <p>Sama strona nie zapisuje w Twojej przeglądarce plików cookies i nie korzysta z narzędzi analitycznych ani reklamowych. Pliki cookies może zapisać osadzona mapa Google — o tym niżej.</p>
+          <p>Sama strona nie zapisuje w Twojej przeglądarce plików cookies i nie korzysta z narzędzi analitycznych ani reklamowych. Pamięta tylko Twój wybór z okienka o plikach cookies: zapisuje go w pamięci przeglądarki (localStorage) na 12 miesięcy, żeby nie pytać Cię na każdej podstronie. Ten zapis nie trafia na serwer.</p>
+          <p>Pliki cookies może zapisać osadzona mapa Google, dlatego wczytuje się ona dopiero po Twojej zgodzie — o tym niżej.</p>
 
-          <h2 id="google">Czcionki i mapa Google</h2>
-          <p>Strona pobiera kroje pisma z serwerów Google (Google Fonts), a na stronie głównej i na podstronie Kontakt wyświetla mapę Google Maps z dojazdem do kancelarii. Twoja przeglądarka łączy się wtedy z serwerami Google i przekazuje im między innymi adres IP. Mapa może też zapisać pliki cookies Google.</p>
-          <p>Dostawcą tych usług jest Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlandia. Dane mogą trafiać do Google LLC w Stanach Zjednoczonych na podstawie decyzji Komisji Europejskiej w sprawie ram ochrony danych UE–USA (EU-US Data Privacy Framework). Zasady Google opisuje strona <a href="https://policies.google.com/privacy?hl=pl">policies.google.com/privacy</a>.</p>
+          <h2 id="google">Mapa Google</h2>
+          <p>Na stronie głównej i na podstronie Kontakt jest mapa Google Maps z dojazdem do kancelarii. Wczytuje się dopiero wtedy, gdy się na to zgodzisz: w okienku o plikach cookies albo przyciskiem „Pokaż mapę” w miejscu mapy. Twoja przeglądarka łączy się wtedy z serwerami Google i przekazuje im między innymi adres IP, a Google może zapisać pliki cookies. Podstawą jest Twoja zgoda (art. 6 ust. 1 lit. a RODO). Bez zgody zamiast mapy widzisz zwykły odnośnik do Google Maps.</p>
+          <p>Zgodę możesz w każdej chwili wycofać przyciskiem „Ustawienia cookies” w stopce strony. Pliki, które Google zdążył już zapisać, usuniesz w ustawieniach przeglądarki. Kroje pisma strona wczytuje z własnego serwera, bez łączenia się z Google.</p>
+          <p>Dostawcą tej usługi jest Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlandia. Dane mogą trafiać do Google LLC w Stanach Zjednoczonych na podstawie decyzji Komisji Europejskiej w sprawie ram ochrony danych UE–USA (EU-US Data Privacy Framework). Zasady Google opisuje strona <a href="https://policies.google.com/privacy?hl=pl">policies.google.com/privacy</a>.</p>
 
           <h2 id="odbiorcy">Komu przekazuję dane</h2>
           <ul>

@@ -119,12 +119,19 @@ na serwerze poza punktem 3.
 > zdejmuje blokadę IP, pobiera certyfikat Let's Encrypt (`--agree-tos` —
 > akceptacja warunków Let's Encrypt, za zgodą Mikołaja) i robi testy z sekcji
 > „Zaraz po przełączeniu". Odhaczone niżej: zrobione na serwerze.
+>
+> **Stan 12.11.2026 — opublikowane.** Dostawca przełączył rekordy A (`@` i `www`
+> → 176.112.77.211) w nocy 11/12.11; od ok. 00:08 UTC do 10:57 UTC obcy widzieli
+> ostrzeżenie o certyfikacie i 403. O 10:57 UTC `/root/publikacja.sh` (za zgodą
+> Mikołaja): blokada IP zdjęta, certyfikat Let's Encrypt dla obu nazw (ważny do
+> 10.02.2027, odnawia `certbot.timer`), testy przeszły. Kopia vhosta i `.htaccess`
+> sprzed zmiany: `/root/kopie-konfiguracji/2026-11-12/`.
 
 ### Przed przełączeniem DNS
 
 - [x] **Hosting docelowy**: WordPress pod `www.cupial-kowalska.pl` (VPS).
-      [ ] **Certyfikat Let's Encrypt** dla obu nazw — robi `/root/publikacja.sh`
-      po zmianie DNS (wcześniej się nie da: walidacja idzie po DNS).
+      [x] **Certyfikat Let's Encrypt** dla obu nazw — zrobił `/root/publikacja.sh`
+      12.11.2026 (ważny do 10.02.2027, odnowienie automatyczne).
 - [x] Przeniesienie bazy z podmianą `http://cupial.local` → `https://www.cupial-kowalska.pl`
       (WP-CLI `search-replace --export`, 24 podmiany, 0 pozostałości).
 - [x] Ustawienia → Ogólne: oba adresy = `https://www.cupial-kowalska.pl`.
@@ -159,9 +166,11 @@ RewriteRule ^ https://www.cupial-kowalska.pl%{REQUEST_URI} [L,R=301]
 
 ### Przełączenie DNS — **uwaga na pocztę**
 
-- [ ] Zmieniamy **tylko rekordy A dla `@` i `www`** na IP nowego hostingu.
-- [ ] **Nie ruszamy** rekordów `MX`, `mail` (A → `176.112.79.50`) ani `TXT` (SPF).
+- [x] Zmieniamy **tylko rekordy A dla `@` i `www`** na IP nowego hostingu
+      (sprawdzone 12.11.2026, NS bez zmian: ns1/ns2.hosting-desire.pl).
+- [x] **Nie ruszamy** rekordów `MX`, `mail` (A → `176.112.79.50`) ani `TXT` (SPF).
       Poczta `kancelaria@cupial-kowalska.pl` działa na starym hostingu i ma działać dalej.
+      (12.11.2026: MX, `mail` i SPF bez zmian.)
 - [ ] Jeśli zmieniają się **serwery nazw** (NS), w nowej strefie trzeba odtworzyć
       MX → `mail.cupial-kowalska.pl` (priorytet 10), A `mail` → `176.112.79.50`
       i SPF `v=spf1 a mx ip4:176.112.79.50 ~all`. Bez tego klientka przestanie
@@ -173,9 +182,10 @@ RewriteRule ^ https://www.cupial-kowalska.pl%{REQUEST_URI} [L,R=301]
 for h in http://cupial-kowalska.pl http://www.cupial-kowalska.pl https://cupial-kowalska.pl https://www.cupial-kowalska.pl; do for p in / /about /contact /services; do curl -s -o /dev/null -w "$h$p -> %{http_code} %{redirect_url}\n" "$h$p"; done; done
 ```
 
-- [ ] `https://www.cupial-kowalska.pl/wp-sitemap.xml` — 10 adresów, wszystkie `https://www.`
-- [ ] `https://www.cupial-kowalska.pl/robots.txt` — linia `Sitemap:` z `https://www.`
-- [ ] Na każdej stronie `<link rel="canonical">` z `https://www.` i brak `noindex`
+- [x] Test 16 adresów: każdy jednym skokiem 301 na cel, `https://www.…/` → 200 (12.11.2026).
+- [x] `https://www.cupial-kowalska.pl/wp-sitemap.xml` — 10 adresów, wszystkie `https://www.`
+- [x] `https://www.cupial-kowalska.pl/robots.txt` — linia `Sitemap:` z `https://www.`
+- [x] Na każdej stronie `<link rel="canonical">` z `https://www.` i brak `noindex`
       (poza `/wpis-szablon/`).
 
 ### Google

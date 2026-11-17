@@ -208,7 +208,7 @@ Wiele osób odkłada telefon do prawnika, bo nie wie, czego się spodziewać. Wy
 Opowiadasz swoimi słowami, co się stało, kiedy i co masz w ręku: pokwitowanie, wezwanie, pismo z sądu. Jeżeli masz datę doręczenia, podaj ją od razu, bo od niej liczą się terminy.
 
 **02 · Ocena sytuacji i plan**
-Mówię, czy to sprawa o wykroczenie czy o przestępstwo, jakie realnie są scenariusze i czy warunkowe umorzenie jest w zasięgu. Także wtedy, gdy najrozsądniej jest przyjąć propozycję prokuratora.
+Mówię, czy to sprawa o wykroczenie, czy o przestępstwo, jakie realnie są scenariusze i czy warunkowe umorzenie jest w zasięgu. Także wtedy, gdy najrozsądniej jest przyjąć propozycję prokuratora.
 
 **03 · Prowadzenie sprawy**
 Jeśli zdecydujesz się na współpracę, przygotowuję pisma i reprezentuję Cię w postępowaniu. Na bieżąco wiesz, na jakim etapie jesteśmy.

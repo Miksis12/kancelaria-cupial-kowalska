@@ -79,7 +79,7 @@ Zatrzymany ma prawo do kontaktu z adwokatem i do odmowy składania wyjaśnień, 
 **02 · Przestępstwa przeciwko mieniu**
 *Kradzież, przywłaszczenie, oszustwo, uszkodzenie mienia.*
 
-To najliczniejsza grupa spraw, w której o kwalifikacji często decyduje wartość i sposób działania, a granica między wykroczeniem a przestępstwem bywa cienka. Sprawdzam, czy materiał dowodowy rzeczywiście wspiera stawiany zarzut, i czy nie da się doprowadzić do łagodniejszej kwalifikacji. Przy naprawieniu szkody i przy sprawcach niekaranych realnie w grę wchodzi rozstrzygnięcie bez skazania.
+To najliczniejsza grupa spraw, w której o kwalifikacji często decyduje wartość i sposób działania, a granica między wykroczeniem a przestępstwem bywa cienka. Sprawdzam, czy materiał dowodowy rzeczywiście wspiera stawiany zarzut i czy nie da się doprowadzić do łagodniejszej kwalifikacji. Przy naprawieniu szkody i przy sprawcach niekaranych realnie w grę wchodzi rozstrzygnięcie bez skazania.
 
 **03 · Przestępstwa przeciwko osobie i sprawy z tłem rodzinnym**
 *Znęcanie się, groźby, uporczywe nękanie, naruszenie nietykalności.*

@@ -127,10 +127,15 @@
   }
 
   /* logo klientki (złote, PNG z przezroczystym tłem): sygnet w sześciokącie
-     + nazwisko + „Adwokat" w jednym pliku. Nazwę czyta aria-label linku. */
+     + nazwisko + „Adwokat" w jednym pliku. Nazwę czyta aria-label linku.
+     Plik -955 to połowa oryginału (1910 px) uśredniana 2×2 — dokładnie
+     pierwszy poziom mipmapy, który przeglądarka i tak by z oryginału
+     zrobiła — zapisany jako PNG 8-bit (jeden kolor + alfa): 12 KB zamiast
+     38 KB, a obraz zgodny z oryginałem przy gęstości ekranu 1–3 (sprawdzone
+     zrzutami 12.11.2026). Oryginał zostaje w assets/ jako źródło. */
   function marka(opis) {
     return '<a class="marka" href="' + (onHome ? "#gora" : HOME) + '" aria-label="' + opis + '">'
-      + '<img class="marka__logo" src="' + ASSETS + 'logo-cupial-kowalska.png" width="213" height="48" alt="">'
+      + '<img class="marka__logo" src="' + ASSETS + 'logo-cupial-kowalska-955.png" width="213" height="48" alt="">'
       + "</a>";
   }
   function ikonaTelefonu(rozmiar, grubosc) {
@@ -267,12 +272,13 @@
       +         nip
       +       "</p>"
       +     "</div>"
-      +     "<div><h4>Sprawy</h4><ul>" + lista(STOPKA_SPRAWY) + "</ul></div>"
-      +     "<div><h4>Kancelaria</h4><ul>" + lista(STOPKA_KANCELARIA) + "</ul></div>"
+      +     "<div><h3>Sprawy</h3><ul>" + lista(STOPKA_SPRAWY) + "</ul></div>"
+      +     "<div><h3>Kancelaria</h3><ul>" + lista(STOPKA_KANCELARIA) + "</ul></div>"
       +   "</div>"
       +   '<div class="stopka__prawna">'
       +     "<span>© " + new Date().getFullYear() + " " + KONTAKT.firma + "</span>"
       +     "<span>" + KONTAKT.izba + "</span>"
+      +     '<button type="button" class="stopka__cookies" data-zgoda-ustawienia>Ustawienia cookies</button>'
       +   "</div>"
       + "</div></footer>";
   }
@@ -403,6 +409,103 @@
     ustaw(location.hash.replace("#", "") || "wszystkie");
   }
 
+  /* ---------- Zgoda na pliki cookies (mapa Google) ----------
+     Sama strona nie zapisuje cookies. Zapisać je może tylko osadzona mapa
+     Google (strona główna i Kontakt), dlatego jej <iframe> ma w HTML
+     data-src zamiast src (i atrybut hidden) — adres dostaje dopiero po zgodzie.
+     Do tego czasu w miejscu mapy stoi zastępnik z przyciskiem „Pokaż mapę"
+     (kliknięcie = zgoda) i zwykłym linkiem do Google Maps. Okienko pokazuje
+     się, dopóki nie ma wyboru; przyciski „Zgadzam się" i „Nie zgadzam się"
+     mają tę samą wagę. Wybór pamięta localStorage przez 12 miesięcy (to nie
+     cookie, a bez tego trzeba by pytać na każdej podstronie); zmienia się go
+     przyciskiem „Ustawienia cookies" w stopce. Ten przepływ opisuje polityka
+     prywatności (#cookies, #google) — zmiana tutaj = zmiana tamtego tekstu. */
+  var ZGODA_KLUCZ = "cupial-zgoda-cookies";
+  var ZGODA_DNI = 365;
+  var zgodaTeraz = null;      /* wybór z tej wizyty, gdy localStorage jest zablokowany */
+  var zgodaWywolal = null;    /* przycisk w stopce, do którego wraca fokus */
+  var MAPA_GOOGLE = "https://www.google.com/maps/search/?api=1&query="
+    + encodeURIComponent("Kilińskiego 5, 42-202 Częstochowa");
+
+  function zgodaOdczyt() {
+    if (zgodaTeraz) return zgodaTeraz;
+    try {
+      var z = JSON.parse(localStorage.getItem(ZGODA_KLUCZ) || "null");
+      if (z && typeof z.mapa === "boolean" && Date.now() - Date.parse(z.data) < ZGODA_DNI * 864e5) return z;
+    } catch (e) { /* prywatne okno albo zablokowane dane strony */ }
+    return null;
+  }
+  function zgodaZapisz(mapa) {
+    zgodaTeraz = { mapa: mapa, data: new Date().toISOString() };
+    try { localStorage.setItem(ZGODA_KLUCZ, JSON.stringify(zgodaTeraz)); } catch (e) { /* jw. */ }
+  }
+
+  function mapaZastepnikHTML() {
+    return '<div class="mapa__zgoda">'
+      + '<p class="mapa__zgoda-tekst"><b>Mapa dojazdu</b>'
+      +   "Mapa Google może zapisać pliki cookies, dlatego wczytuje się dopiero po Twojej zgodzie.</p>"
+      + '<p class="mapa__zgoda-akcje">'
+      +   '<button type="button" class="btn btn--obrys btn--maly" data-zgoda-mapa>Pokaż mapę</button>'
+      +   '<a class="link" href="' + MAPA_GOOGLE + '" target="_blank" rel="noopener">Otwórz w Google Maps</a>'
+      + "</p></div>";
+  }
+  /* pokaz = true: iframe dostaje adres z data-src; false: pusta ramka + zastępnik */
+  function mapy(pokaz) {
+    [].forEach.call(document.querySelectorAll("iframe[data-src]"), function (f) {
+      var zast = f.parentNode.querySelector(".mapa__zgoda");
+      if (pokaz) {
+        if (f.getAttribute("src") !== f.getAttribute("data-src")) f.setAttribute("src", f.getAttribute("data-src"));
+        f.hidden = false;
+        if (zast) zast.parentNode.removeChild(zast);
+      } else {
+        /* cofnięcie zgody: ramka przestaje rozmawiać z Google od razu */
+        if (f.hasAttribute("src")) f.setAttribute("src", "about:blank");
+        f.hidden = true;
+        if (!zast) f.insertAdjacentHTML("afterend", mapaZastepnikHTML());
+      }
+    });
+  }
+
+  function zgodaPanelHTML(stan) {
+    var obecny = stan ? (stan.mapa ? " Teraz mapa jest włączona." : " Teraz mapa jest wyłączona.") : "";
+    return '<div class="zgoda-cookies" role="region" aria-label="Zgoda na pliki cookies" data-zgoda-panel>'
+      + '<p class="zgoda-cookies__tytul">Pliki cookies</p>'
+      + '<p class="zgoda-cookies__tekst">Strona sama nie zapisuje plików cookies. Może je zapisać tylko '
+      +   "mapa Google z dojazdem do kancelarii, dlatego wczytuje się ona dopiero po Twojej zgodzie. "
+      +   "Wybór zmienisz w każdej chwili w stopce strony." + obecny + " "
+      +   '<a class="link" href="' + url("polityka-prywatnosci.html#cookies") + '">Polityka prywatności</a></p>'
+      + '<div class="zgoda-cookies__akcje">'
+      +   '<button type="button" class="btn btn--obrys btn--maly" data-zgoda="tak">Zgadzam się</button>'
+      +   '<button type="button" class="btn btn--obrys btn--maly" data-zgoda="nie">Nie zgadzam się</button>'
+      + "</div></div>";
+  }
+  function zgodaPokaz(zFokusem) {
+    if (!document.querySelector("[data-zgoda-panel]")) {
+      /* na początku <body>: klawiatura i czytnik trafiają na okienko przed menu */
+      document.body.insertAdjacentHTML("afterbegin", zgodaPanelHTML(zgodaOdczyt()));
+    }
+    if (zFokusem) document.querySelector("[data-zgoda-panel] button").focus();
+  }
+  function zgodaZamknij() {
+    var p = document.querySelector("[data-zgoda-panel]");
+    if (p) p.parentNode.removeChild(p);
+    if (zgodaWywolal) { zgodaWywolal.focus(); zgodaWywolal = null; }
+  }
+  function zgodaCookies() {
+    var z = zgodaOdczyt();
+    mapy(!!(z && z.mapa));
+    if (!z) zgodaPokaz(false);
+    document.addEventListener("click", function (e) {
+      var t = e.target.closest && e.target.closest("[data-zgoda], [data-zgoda-mapa], [data-zgoda-ustawienia]");
+      if (!t) return;
+      if (t.hasAttribute("data-zgoda-ustawienia")) { zgodaWywolal = t; zgodaPokaz(true); return; }
+      var tak = t.hasAttribute("data-zgoda-mapa") || t.getAttribute("data-zgoda") === "tak";
+      zgodaZapisz(tak);
+      mapy(tak);
+      zgodaZamknij();
+    });
+  }
+
   function wstrzyknij() {
     var n = document.querySelector("[data-nav]");
     if (n) n.outerHTML = nawigacjaHTML();
@@ -415,6 +518,7 @@
     rozwijane();
     filtrKategorii();
     odslanianie();
+    zgodaCookies();
   }
 
   /* klasa .js włącza stan początkowy [data-odslon] — zanim cokolwiek się pokaże */

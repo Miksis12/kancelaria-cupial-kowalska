@@ -237,7 +237,9 @@ p + p { margin-top: 1em; }
 /* logo klientki jako jeden złoty PNG (sygnet + nazwisko + „Adwokat");
    proporcja pliku 1910 × 431, szerokość liczy się z wysokości */
 .marka { display: inline-flex; align-items: center; }
-.marka__logo { display: block; height: 48px; width: auto; }
+/* aspect-ratio trzyma proporcję oryginału (1910 × 431) także dla pliku -955,
+   który po zaokrągleniu ma 955 × 216 — bez tego logo byłoby o 0,5 px węższe */
+.marka__logo { display: block; height: 48px; width: auto; aspect-ratio: 1910 / 431; }
 .stopka .marka__logo { height: 56px; }
 
 .nav__menu { display: flex; align-items: center; gap: 1.9rem; }
@@ -502,8 +504,9 @@ a.sytuacja:hover .strzalka { transform: translateX(3px); }
   border-top: 1px solid var(--linia-mocna);
   padding-top: clamp(1.75rem, 3vw, 2.5rem);
 }
-.kontakt-kol h4 {
-  font-family: var(--font-ui); font-size: var(--fs-label); font-weight: 600;
+/* h3 na stronach (kolejność nagłówków po H2 sekcji), h4 w dokumentach roboczych */
+.kontakt-kol h3, .kontakt-kol h4 {
+  font-family: var(--font-ui); font-size: var(--fs-label); font-weight: 600; line-height: 1.35;
   letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2);
   margin-bottom: 1rem;
 }
@@ -557,7 +560,7 @@ textarea.pole__wejscie { min-height: 8rem; resize: vertical; }
 .stopka { border-top: 1px solid var(--linia-mocna); padding-block: 3.5rem 2rem; }
 .stopka__siatka { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr); gap: 2.5rem; }
 .stopka__opis { margin-top: 1rem; color: var(--umbra-2); font-size: var(--fs-small); max-width: 26em; }
-.stopka h4 { font-family: var(--font-ui); font-size: var(--fs-label); letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2); margin-bottom: 1rem; font-weight: 600; }
+.stopka h3, .stopka h4 { font-family: var(--font-ui); font-size: var(--fs-label); line-height: 1.35; letter-spacing: .12em; text-transform: uppercase; color: var(--umbra-2); margin-bottom: 1rem; font-weight: 600; }
 .stopka li + li { margin-top: .5rem; }
 .stopka li a { font-family: var(--font-ui); font-size: .95rem; }
 .stopka li a:hover { color: var(--braz); }
@@ -1142,7 +1145,11 @@ html { background: var(--biel); }
 
 @media (max-width: 860px) {
   .uklad-kontakt { grid-template-columns: 1fr; }
-  .uklad-kontakt > * { grid-column: 1; grid-row: auto; }
+  /* te same selektory co wyżej: samo „> *" przegrywało z „> .dojazd" (wyższa
+     specyficzność) i na telefonie tekst dojazdu siedział w wąskiej 2. kolumnie */
+  .uklad-kontakt > *,
+  .uklad-kontakt > .wizytowka,
+  .uklad-kontakt > .dojazd { grid-column: 1; grid-row: auto; }
 }
 
 /* ---------- Formularz „oddzwonię" ---------- */
@@ -1696,11 +1703,15 @@ html { background: var(--biel); }
 .rozpoznanie__przycisk:hover { background: #5A3E27; }
 
 @media (max-width: 860px) {
-  .rozpoznanie { grid-template-columns: 1fr; }
+  .rozpoznanie { grid-template-columns: minmax(0, 1fr); }
 }
 @media (max-width: 560px) {
   .rozpoznanie__cta { flex-direction: column; align-items: stretch; }
   .rozpoznanie__przycisk { width: 100%; }
+}
+/* najwęższe telefony (320 px): przycisk z numerem mieści się w karcie */
+@media (max-width: 400px) {
+  .rozpoznanie__przycisk { white-space: normal; padding-inline: 1rem; }
 }
 
 /* ---------- Warianty istniejących komponentów (bez nowego CSS-u „na zapas") ---------- */
@@ -2670,7 +2681,7 @@ html { background: var(--biel); }
   border-top: 0;
   padding-block: var(--pole) 2rem;
 }
-.strona-uslugowa ~ .stopka h4 { color: var(--braz-jasny); }
+.strona-uslugowa ~ .stopka h3, .strona-uslugowa ~ .stopka h4 { color: var(--braz-jasny); }
 .strona-uslugowa ~ .stopka .stopka__opis { color: var(--biel-70); }
 .strona-uslugowa ~ .stopka a:hover { color: var(--biel); }
 .strona-uslugowa ~ .stopka .stopka__prawna { color: var(--biel-70); border-top-color: var(--biel-linia); }
@@ -2773,6 +2784,8 @@ html { background: var(--biel); }
   color: var(--umbra-2);
 }
 .naglowek-strony__meta li { white-space: nowrap; }
+/* 320 px: „Mediacje rodzinne, spadkowe i majątkowe" nie mieści się w jednej linii */
+@media (max-width: 400px) { .naglowek-strony__meta li { white-space: normal; } }
 .naglowek-strony__meta li:not(:last-child)::after {
   content: "·";
   margin-inline: .625rem;
@@ -3577,6 +3590,8 @@ html { background: var(--biel); }
    Obróbka jak w .foto: lekkie odsycenie + lniana przesłona, bo tło
    zdjęcia jest chłodnoszare.
    Plik: assets/beata-cupial-kowalska.jpg (1024 px) + -600.jpg (srcset).
+   Wariant 800 px sprawdzony 12.11.2026 i odrzucony: na ekranach 2× był
+   o ok. 11% mniej ostry niż 1024 px, a przy tej samej ostrości ważył tyle co on.
    ============================================================ */
 .portret.portret--zdjecie {
   position: relative;
@@ -3599,4 +3614,350 @@ html { background: var(--biel); }
   content: ""; position: absolute; inset: 0; pointer-events: none;
   background: rgba(184, 149, 94, .06);
   mix-blend-mode: multiply;
+}
+
+/* ============================================================
+   ZGODA NA PLIKI COOKIES (12.11.2026, na prośbę Mikołaja)
+   .zgoda-cookies — okienko na dole ekranu, składa je site.js
+   (zgodaCookies), pierwsze w <body>. Nie blokuje strony i nie ma
+   cieni: biała karta z mocną ramką i paskiem w akcencie u góry
+   (ten sam sygnał co .druga-strona). Dwa przyciski o tej samej wadze —
+   odmowa ma być tak samo łatwa jak zgoda. Pod menu (z-index 40 < 50),
+   więc otwarte menu mobilne je przykrywa.
+   .mapa__zgoda — zastępnik mapy Google do czasu zgody, w środku
+   .mapa--osadzona (ta sama płaszczyzna i wysokość co mapa).
+   .stopka__cookies — przycisk „Ustawienia cookies" w linii prawnej
+   stopki, wygląda jak link.
+   ============================================================ */
+.zgoda-cookies {
+  position: fixed; z-index: 40;
+  left: 1rem; bottom: 1rem;
+  width: min(30rem, calc(100% - 2rem));
+  padding: 1.25rem 1.25rem 1.125rem;
+  background: var(--biel);
+  border: 1px solid var(--linia-mocna);
+  border-top: 3px solid var(--braz);
+  border-radius: var(--r-karta);
+  font-family: var(--font-ui);
+  color: var(--umbra);
+}
+.zgoda-cookies__tytul { font-weight: 600; font-size: 1rem; margin-bottom: .4rem; }
+.zgoda-cookies__tekst { font-size: .9rem; line-height: 1.55; color: var(--umbra-2); }
+.zgoda-cookies__tekst .link { white-space: nowrap; }
+.zgoda-cookies__akcje { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 1rem; }
+.zgoda-cookies__akcje .btn { flex: 1 1 auto; }
+@media (max-width: 560px) {
+  .zgoda-cookies { left: .75rem; bottom: .75rem; width: calc(100% - 1.5rem); padding: 1rem 1rem .9rem; }
+}
+@media print { .zgoda-cookies { display: none; } }
+
+/* ramka mapy bez zgody: atrybut hidden musi wygrać z display:block z .mapa--osadzona */
+.mapa--osadzona iframe[hidden] { display: none; }
+.mapa__zgoda {
+  height: 100%;
+  display: grid; place-content: center; justify-items: center; gap: .9rem;
+  padding: 1.25rem; text-align: center;
+  font-family: var(--font-ui); font-size: .9rem; color: var(--umbra-2);
+}
+.mapa__zgoda-tekst { max-width: 34rem; }
+.mapa__zgoda-akcje {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+  gap: .5rem 1.25rem;
+}
+
+.stopka__cookies {
+  font: inherit; color: inherit; background: none; border: 0; cursor: pointer;
+  padding: .25rem 0; margin-block: -.25rem;          /* wyższy cel dotyku, ta sama linia */
+  text-decoration: underline; text-decoration-color: var(--braz-jasny); text-underline-offset: .22em;
+}
+.stopka__cookies:hover { color: var(--braz); }
+.strona-uslugowa ~ .stopka .stopka__cookies:hover { color: var(--biel); }
+
+/* ============================================================
+   FONTY Z WŁASNEGO SERWERA (12.11.2026) — zamiast fonts.googleapis.com
+   Te same pliki woff2 i te same deklaracje @font-face, które Google
+   Fonts podaje Chrome'owi na Windows (wariant z tabelą prep pod
+   ClearType; macOS, iOS i Android i tak ją pomijają) — kształt liter
+   1:1 jak wcześniej. Zysk: bez dwóch połączeń z Google i bez
+   blokującego arkusza z zewnątrz, pliki z tego samego serwera (HTTP/2,
+   cache na rok), a przeglądarka odwiedzającego nie wysyła jego IP do
+   Google (polityka prywatności, sekcja #google).
+   Licencja: SIL Open Font License 1.1 (Inter, Schibsted Grotesk,
+   Source Serif 4) — informacja o licencji jest w tabeli name plików.
+   Pliki: assets/fonty/. Przeglądarka pobiera tylko podzbiory, których
+   znaki są na stronie (unicode-range): zwykle latin i latin-ext.
+   Inter jest tu dla wszystkich stron, ale sięgają po niego tylko
+   podstrony usługowe i mediacje (--font-inter), więc reszta go nie
+   pobiera. Aktualizacja = pobrać nowy CSS z Google (UA Chrome/Windows)
+   i podmienić pliki oraz ten blok.
+   ============================================================ */
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-cyrillic-ext.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-cyrillic.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-greek-ext.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-greek.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-vietnamese.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-cyrillic-ext.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-cyrillic.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-greek-ext.woff2") format('woff2');
+  unicode-range: U+1F00-1FFF;
+}
+/* greek */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-greek.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-vietnamese.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("../assets/fonty/inter-normal-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("../assets/fonty/schibsted-grotesk-italic-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: italic;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("../assets/fonty/schibsted-grotesk-italic-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("../assets/fonty/schibsted-grotesk-normal-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Schibsted Grotesk';
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("../assets/fonty/schibsted-grotesk-normal-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-italic-cyrillic-ext.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-italic-cyrillic.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-italic-greek.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-italic-vietnamese.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-italic-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-italic-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+/* cyrillic-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-normal-cyrillic-ext.woff2") format('woff2');
+  unicode-range: U+0460-052F, U+1C80-1C8A, U+20B4, U+2DE0-2DFF, U+A640-A69F, U+FE2E-FE2F;
+}
+/* cyrillic */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-normal-cyrillic.woff2") format('woff2');
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+/* greek */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-normal-greek.woff2") format('woff2');
+  unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1, U+03A3-03FF;
+}
+/* vietnamese */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-normal-vietnamese.woff2") format('woff2');
+  unicode-range: U+0102-0103, U+0110-0111, U+0128-0129, U+0168-0169, U+01A0-01A1, U+01AF-01B0, U+0300-0301, U+0303-0304, U+0308-0309, U+0323, U+0329, U+1EA0-1EF9, U+20AB;
+}
+/* latin-ext */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-normal-latin-ext.woff2") format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C4, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+/* latin */
+@font-face {
+  font-family: 'Source Serif 4';
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("../assets/fonty/source-serif-4-normal-latin.woff2") format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }

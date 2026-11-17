@@ -51,7 +51,7 @@ To się zdarza częściej, niż myślisz, zwykle po nakazie wysłanym na stary a
 **„Zapłaciłem zaliczkę i nic z tego nie wyszło”**
 Zaliczka i zadatek to dwie różne rzeczy, z różnymi skutkami. Sprawdzimy, co realnie da się odzyskać.
 
-**„Mam nieruchomość na współwłasność i nie da się nią zarządzać”**
+**„Mam nieruchomość we współwłasności i nie da się nią zarządzać”**
 Współwłasność można znieść, także wtedy, gdy pozostali współwłaściciele nie chcą współpracować.
 
 **Karta CTA (pełna szerokość):**

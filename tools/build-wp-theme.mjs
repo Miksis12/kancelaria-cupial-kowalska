@@ -28,6 +28,7 @@ import { createHash } from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import vm from 'node:vm';
 
 import { annotate } from '../cms-mikolaj-kubiak-kit/tools/annotate.mjs';
 
@@ -98,6 +99,76 @@ function podmienRaz(tekst, fraza, nowa, gdzie) {
 
 function phpStr(s) {
   return "'" + s.replace(/\\/g, '\\\\').replace(/'/g, "\\'") + "'";
+}
+
+/** Minifikacja CSS bez zależności (12.11.2026). Wycina komentarze i zbędne
+ *  białe znaki: spacje zostają pojedyncze, znikają tylko przy { } ; , oraz
+ *  po „:", a średnik przed „}" odpada. Zawartości cudzysłowów nie dotyka,
+ *  wartości i selektorów nie przerabia — spacja przed „(" zostaje (`and (`
+ *  w @media), `+`/`-` w calc() też. Źródło w css/ zostaje czytelne. */
+export function minifikujCss(css, gdzie = 'CSS') {
+  let out = '';
+  let spacja = false;
+  for (let i = 0; i < css.length;) {
+    const c = css[i];
+    if (c === '/' && css[i + 1] === '*') {
+      const k = css.indexOf('*/', i + 2);
+      if (k < 0) throw new Error(`${gdzie}: niedomknięty komentarz`);
+      i = k + 2;
+      continue;
+    }
+    if (/\s/.test(c)) { spacja = true; i++; continue; }
+    let token = c;
+    if (c === '"' || c === "'") {
+      let j = i + 1;
+      while (j < css.length && css[j] !== c) {
+        if (css[j] === '\\') j++;
+        else if (css[j] === '\n') throw new Error(`${gdzie}: cudzysłów bez zamknięcia w linii`);
+        j++;
+      }
+      token = css.slice(i, j + 1);
+      i = j + 1;
+    } else {
+      i++;
+    }
+    if (spacja && out && !'{};,:'.includes(out[out.length - 1]) && !'{};,'.includes(token[0])) out += ' ';
+    spacja = false;
+    if (token === '}' && out.endsWith(';')) out = out.slice(0, -1);
+    out += token;
+  }
+  return out + '\n';
+}
+
+/** Minifikacja JS — celowo tylko liniowa: wypada komentarz blokowy, który
+ *  zaczyna linię, wcięcia i puste linie. Kodu nie składa w jedną linię
+ *  (ASI zostaje nietknięte) i nie musi rozumieć regexów ani stringów.
+ *  Szablony `…` i kontynuacje „\" na końcu linii przerywają build, bo tam
+ *  zdjęcie wcięcia zmieniłoby treść. Wynik musi się skompilować. */
+export function minifikujJs(js, gdzie = 'JS') {
+  const out = [];
+  let wKomentarzu = false;
+  for (const linia of js.split(/\r?\n/)) {
+    const t = linia.trim();
+    if (wKomentarzu) {
+      const k = t.indexOf('*/');
+      if (k < 0) continue;
+      wKomentarzu = false;
+      if (t.slice(k + 2).trim()) throw new Error(`${gdzie}: kod za końcem komentarza: ${t}`);
+      continue;
+    }
+    if (t.startsWith('/*')) {
+      const k = t.indexOf('*/', 2);
+      if (k < 0) { wKomentarzu = true; continue; }
+      if (!t.slice(k + 2).trim()) continue;
+    }
+    if (!t) continue;
+    if (t.includes('`') || t.endsWith('\\')) throw new Error(`${gdzie}: szablon lub kontynuacja linii — minifikacja liniowa niebezpieczna: ${t}`);
+    out.push(t);
+  }
+  if (wKomentarzu) throw new Error(`${gdzie}: niedomknięty komentarz`);
+  const wynik = out.join('\n') + '\n';
+  new vm.Script(wynik, { filename: gdzie });   // rzuci SyntaxError, gdyby coś się rozjechało
+  return wynik;
 }
 
 function kopiuj(zrodlo, cel) {
@@ -232,9 +303,6 @@ function widokAwaryjny(wersje, { tytul, okruszki, h1, tresc, noindex }) {
 ${noindex ? '  <meta name="robots" content="noindex, follow">\n' : ''}  <link rel="icon" href="${T}/assets/favicon.ico" sizes="32x32">
   <link rel="icon" type="image/png" sizes="96x96" href="${T}/assets/favicon-96.png">
   <link rel="apple-touch-icon" href="${T}/assets/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400..900;1,400..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,300..700;1,8..60,300..700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="${T}/css/styles.css?v=${wersje['css/styles.css']}">
   <script src="${T}/js/site.js?v=${wersje['js/site.js']}" data-home="<?php echo esc_url( home_url( '/' ) ); ?>" defer></script>
 <?php wp_head(); ?>
@@ -770,12 +838,24 @@ function main() {
   kopiuj(path.join(ROOT, 'css'), path.join(MOTYW, 'css'));
   kopiuj(path.join(ROOT, 'js'), path.join(MOTYW, 'js'));
   kopiuj(path.join(ROOT, 'assets'), path.join(MOTYW, 'assets'));
+  // Do motywu idą wersje zminifikowane (mniej bajtów na łączu); ?v= liczy się
+  // ze źródła, więc zmienia się razem z nim.
+  const zysk = [];
+  for (const [kat, ext, fn] of [['css', '.css', minifikujCss], ['js', '.js', minifikujJs]]) {
+    for (const plik of fs.readdirSync(path.join(ROOT, kat)).filter(f => f.endsWith(ext))) {
+      const zrodlo = fs.readFileSync(path.join(ROOT, kat, plik), 'utf8');
+      const min = fn(zrodlo, `${kat}/${plik}`);
+      fs.writeFileSync(path.join(MOTYW, kat, plik), min);
+      zysk.push(`${kat}/${plik} ${Math.round(zrodlo.length / 1024)} → ${Math.round(min.length / 1024)} KB`);
+    }
+  }
 
   for (const [slug, keys] of klucze) {
     console.log(`+ szablony/${slug}.php`.padEnd(44) + `${keys.length} kluczy CMK`);
   }
   console.log(`+ 404.php, index.php, style.css, functions.php, inc/cmk-keys.php`);
   console.log(`+ css/ js/ assets/   (styles.css?v=${wersje['css/styles.css']}, site.js?v=${wersje['js/site.js']})`);
+  console.log(`  minifikacja: ${zysk.join(', ')}`);
   console.log(`→ ${MOTYW}`);
 }
 

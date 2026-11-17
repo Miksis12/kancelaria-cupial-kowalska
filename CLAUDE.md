@@ -118,7 +118,9 @@ klasy sprawdzaj grepem po słowniku niżej.
   poza menu: link w stopce i przy zgodzie w formularzu (`#formularz`). Dwie
   sekcje: nagłówek strony (piasek) + proza `.wpis-tresc` bez szyny (biel).
   Opisuje tylko to, co strona faktycznie robi (formularz, logi Apache 14 dni,
-  Google Fonts, mapa Google na stronie głównej i Kontakcie, brak cookies strony)
+  mapa Google na stronie głównej i Kontakcie — od 12.11.2026 dopiero po zgodzie
+  z okienka cookies, wybór w localStorage na 12 miesięcy; brak cookies strony;
+  fonty z własnego serwera)
   — **zmiana przepływu danych = aktualizacja tego tekstu**. Jako `.todo`: okres
   przechowywania zgłoszeń, nazwa hostingu i umowa powierzenia, data obowiązywania.
   W WP to strona ID 3, wskazana w Ustawienia → Prywatność.
@@ -137,7 +139,12 @@ klasy sprawdzaj grepem po słowniku niżej.
   (`.pas`) · `--piasek-2 #DFD4C0` (`.zacheta`) · `--krem #FAF7F1` (karty na lnie).
 - Tekst: `--umbra #3A2F27`, drugorzędny `--umbra-2 #6A5E55`. Akcent `--braz #7E5E36`
   (wszystko klikalne), `--braz-jasny #B8955E` (wyłącznie dekoracja).
-- Kroje: Schibsted Grotesk (nagłówki, UI) + Source Serif 4 (treść). `em` w h1/h2
+- Kroje: Schibsted Grotesk (nagłówki, UI) + Source Serif 4 (treść), na podstronach
+  usługowych także Inter. **Fonty z własnego serwera** (od 12.11.2026): pliki
+  `assets/fonty/*.woff2` i blok `@font-face` na końcu `styles.css` — te same pliki
+  i deklaracje, które Google Fonts podaje Chrome'owi na Windows. **Nie linkuj
+  fonts.googleapis.com** (polityka prywatności mówi, że strona nie łączy się
+  z Google po fonty). `em` w h1/h2
   to nie kursywa, tylko kolor `--braz`. **Podstrona usługowa ma regułę odwrotną**
   (Mikołaj, 14 września 2026, reguła nadrzędna): Source Serif 4 **wyłącznie dla H1,
   H2 i cytatów w cudzysłowach**, **Inter** dla wszystkiego innego (nagłówki wierszy,
@@ -319,6 +326,9 @@ klasy sprawdzaj grepem po słowniku niżej.
 **Kontakt**
 - `.telefon-duzy` + `.telefon-podpis` → telefon jako element typograficzny → 1 na stronę.
 - `.kontakt-siatka` / `.kontakt-kol` → trzy kolumny kontaktu (strona główna).
+  Nagłówki kolumn to **`h3`** (po H2 sekcji — kolejność nagłówków dla czytników
+  i Lighthouse); styl ten sam co dawne `h4`, które zostały w dokumentach roboczych.
+  Tak samo nagłówki kolumn stopki (`site.js`).
 - `.uklad-kontakt` → siatka sekcji danych: h2 w wierszu 1 lewej kolumny, wizytówka
   i tekst dojazdu w wierszu 2, więc obie kolumny startują na tej samej wysokości.
 - `.wizytowka` → kanały kontaktu jako osobne karty: `__kanal` (klikalny, biel),
@@ -328,6 +338,17 @@ klasy sprawdzaj grepem po słowniku niżej.
 - `.godziny` → tabela dzień → godziny → 5 wierszy. Wolna: klient zdjął godziny
   ze strony, komponent żyje już tylko w `design-system.html` i `mockup.html`.
 - `.mapa` (+ `--pas`, `--osadzona`) → mapa Google w pasie na całą szerokość.
+  **Od 12.11.2026 tylko po zgodzie na cookies:** `<iframe>` ma w HTML `data-src`
+  zamiast `src` i atrybut `hidden`; adres podstawia `site.js` (`zgodaCookies`).
+  Bez zgody w ramce stoi `.mapa__zgoda` (tytuł, zdanie, „Pokaż mapę" = zgoda,
+  link „Otwórz w Google Maps"). Nowa mapa = ten sam wzór, nigdy gołe `src`.
+- `.zgoda-cookies` (+ `__tytul`, `__tekst`, `__akcje`) → okienko zgody na dole
+  ekranu, składa je `site.js`, pierwsze w `<body>`; biała karta z ramką i paskiem
+  `--braz` u góry, bez cieni; „Zgadzam się" / „Nie zgadzam się" w tym samym stylu
+  (`.btn--obrys`), z-index pod menu. Wybór w `localStorage`
+  (`cupial-zgoda-cookies`, 12 miesięcy). `.stopka__cookies` → przycisk
+  „Ustawienia cookies" w linii prawnej stopki (otwiera okienko ponownie).
+  **Zmiana przepływu = zmiana polityki prywatności** (`#cookies`, `#google`).
 - `.formularz` (+ `__para`, `__stopka`, `__nota`) + `.pole`, `.pole__wejscie`,
   `.pole__pomoc`, `.pole__blad`, `.zgoda` → formularz „oddzwonię" → 1 → piasek.
 
@@ -364,8 +385,12 @@ klasy sprawdzaj grepem po słowniku niżej.
 - Menu: Strona główna · **Usługi (drop-down)** · O mnie · Kontakt
   + numer telefonu jako CTA. „Baza wiedzy" schowana do czasu wpisów (27.10.2026).
 - Logo (menu i stopka) to jeden złoty PNG z przezroczystym tłem:
-  `assets/logo-cupial-kowalska.png` (sygnet + nazwisko + „Adwokat"), składa go
-  `marka()` jako `img.marka__logo` — 48 px wysokości w menu, 56 px w stopce.
+  `assets/logo-cupial-kowalska.png` (sygnet + nazwisko + „Adwokat", 1910 px —
+  plik źródłowy). Na stronę idzie `-955.png`: połowa oryginału uśredniana 2×2
+  (pierwszy poziom mipmapy), PNG 8-bit jeden kolor + alfa, 12 KB zamiast 38 KB,
+  obraz zgodny z oryginałem przy DPR 1–3 (zrzuty 12.11.2026). Nowe logo = podmień
+  oryginał i wygeneruj -955 tak samo. `.marka__logo` ma `aspect-ratio: 1910 / 431`.
+  Składa je `marka()` jako `img.marka__logo` — 48 px wysokości w menu, 56 px w stopce.
   Nazwę czyta `aria-label` linku. Nie odrysowuj sygnetu w SVG ani tekstem.
 - Pozycja z tablicą `children` renderuje się jako drop-down (`.nav__grupa` + `.nav__rozwin`
   + `.nav__podmenu`). Lista obszarów siedzi w tablicy `USLUGI` i napędza **jednocześnie**
@@ -380,13 +405,15 @@ klasy sprawdzaj grepem po słowniku niżej.
   z adresu WP (więc `match` z nazwami plików działa bez zmian), logo idzie
   z katalogu motywu. Niczego nie przełączasz ręcznie.
 - Stopka: dane kancelarii + kolumny „Sprawy" i „Kancelaria". Rok w linii prawnej
-  liczy się sam. Za `<main class="strona-uslugowa">` stopka stoi na espresso
+  liczy się sam, obok przycisk „Ustawienia cookies". `site.js` składa też okienko
+  zgody na cookies i podpina mapy Google na zgodę (zob. `.zgoda-cookies`). Za `<main class="strona-uslugowa">` stopka stoi na espresso
   (selektor `.strona-uslugowa ~ .stopka`), na pozostałych stronach zostaje jasna.
 
 ## Jak stworzyć NOWĄ podstronę (szybko)
 
-1. Skopiuj `<head>` z `kontakt.html` (ikony `assets/favicon*` + fonty + `styles.css`
-   + `site.js` z `defer`), podmień `<title>` i `meta description`.
+1. Skopiuj `<head>` z `kontakt.html` (ikony `assets/favicon*` + `styles.css`
+   + `site.js` z `defer`; fontów nie linkujesz — są w `styles.css`), podmień
+   `<title>` i `meta description`.
 2. `<body>` zaczyna `<div data-nav></div>`, kończy `<div data-footer></div>`.
    Pierwsza sekcja w `<main>` to `.naglowek-strony pas` z `<div data-okruszki></div>`,
    H1 (nazwa zakładki) i podtytułem; okruszki same znajdą nazwę w `NAV` po `match`,
@@ -410,7 +437,9 @@ klasy sprawdzaj grepem po słowniku niżej.
   WP o tym slugu (strona główna: slug `strona-glowna`, ustawiona jako front page).
   **Nowa podstrona** = wpis w `STRONY` + przebudowa + strona w WP z tym szablonem.
 - Generator: linki `x.html` → `home_url('/x/')`, `assets/ css/ js/` → katalog
-  motywu (CSS i JS z `?v=` hasha treści), `wp_head()`/`wp_footer()`, a teksty
+  motywu (CSS i JS z `?v=` hasha treści; do motywu idą **zminifikowane** przez
+  `minifikujCss` / `minifikujJs` — źródło w `css/` i `js/` zostaje czytelne,
+  computed style wszystkich elementów 1:1 sprawdzony 12.11.2026), `wp_head()`/`wp_footer()`, a teksty
   i obrazy w `<main>` owija w `cmk_block`/`cmk_img` (edycja przez wtyczkę
   **CMS-Mikołaj Kubiak**, kit w `cms-mikolaj-kubiak-kit/`, manifest kluczy
   `inc/cmk-keys.php`). Kontroluje, że owijanie nie zmienia ani bajta treści.
@@ -451,10 +480,18 @@ klasy sprawdzaj grepem po słowniku niżej.
 - Konta WP: `mikolaj` (administrator), `beata.cupial-kowalska` (redaktor — CMK
   wymaga tylko `edit_pages`). `admin` z Local do usunięcia, gdy Mikołaj zaloguje
   się swoim kontem.
-- Do dnia publikacji vhost wpuszcza tylko IP Mikołaja, a HTTPS ma certyfikat
-  samopodpisany. Po zmianie rekordów A: `/root/publikacja.sh` (sprawdza DNS,
-  zdejmuje blokadę, certbot, testy). Kopie: codziennie 3:30, 14 dni,
-  `/var/backups/cupial`. Stan serwera i decyzje: `docs/SEO-MIGRACJA.md`.
+- **Opublikowana 12.11.2026**: DNS (`@` i `www`) wskazuje VPS, vhost wpuszcza
+  wszystkich, HTTPS ma certyfikat Let's Encrypt dla obu nazw (odnawia
+  `certbot.timer`). Poczta (MX → `mail` u hosting-desire) bez zmian.
+- **Wydajność na serwerze (12.11.2026):** HTTP/2 (`a2enmod http2`), brotli przed
+  gzipem (`mods-available/brotli.conf`, jakość 9 — 11 za wolna), w vhoście 443
+  `Cache-Control`: CSS/JS/woff2 motywu rok + `immutable` (CSS i JS mają `?v=`),
+  obrazy motywu i `uploads` 30 dni. Obrazy motywu **nie mają wersji w adresie** —
+  podmiana pliku pod tą samą nazwą dotrze do części odwiedzających dopiero po
+  30 dniach, więc nowy obraz = nowa nazwa pliku. Kopie vhosta sprzed zmian:
+  `/root/kopie-konfiguracji/2026-11-12/`.
+- Kopie zapasowe strony: codziennie 3:30, 14 dni, `/var/backups/cupial`. Stan
+  serwera i decyzje: `docs/SEO-MIGRACJA.md`.
 
 ## Dane realne i placeholdery
 
