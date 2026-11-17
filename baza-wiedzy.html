@@ -34,7 +34,13 @@
          Jeden wpis wyjęty przed archiwum. Układ 7-5 występuje na tej stronie
          tylko tutaj: po lewej tytuł i zajawka, po prawej metryczka w karcie.
          Karta jest biała, bo sekcja jest biała — ramka niesie granicę,
-         nie kolor. -->
+         nie kolor.
+         WORDPRESS (17.11.2026): fragmenty między znacznikami WP-PETLA generator
+         motywu zamienia na funkcje z inc/blog.php (źródło tools/wp/blog.php),
+         które składają ten sam markup z prawdziwych wpisów WP
+         (cupial_petla_<nazwa>). Treść poniżej to podgląd projektu na stronie
+         statycznej. Bez wpisów ta sekcja znika. -->
+    <!-- WP-PETLA:najnowszy -->
     <section class="sekcja biel">
       <div class="kontener">
         <div class="siatka-7-5">
@@ -67,6 +73,7 @@
         </div>
       </div>
     </section>
+    <!-- /WP-PETLA:najnowszy -->
 
     <!-- ============ 03 · ARCHIWUM ============
          Wpisy pogrupowane pod nazwami kategorii. Kategorie odpowiadają
@@ -79,14 +86,16 @@
 
         <div class="naglowek-sekcji" data-odslon>
           <h2>Wszystkie <em>wpisy</em></h2>
-          <p class="lead">Dwanaście tekstów w sześciu kategoriach. Wybierz obszar, żeby zawęzić listę do jednej dziedziny.</p>
+          <p class="lead">Wybierz obszar, żeby zawęzić listę do jednej dziedziny.</p>
         </div>
 
         <!-- Wybór kategorii dla CAŁEJ listy. Pozycje są linkami do grup, więc
              bez JS-a działają jak spis kategorii i prowadzą do właściwego
              miejsca. Z JS-em `site.js` przechwytuje kliknięcie i chowa
              pozostałe grupy — nagłówki kategorii zostają tam, gdzie były,
-             zmienia się tylko to, ile ich widać. -->
+             zmienia się tylko to, ile ich widać. Na WordPressie pasek stoi
+             tylko wtedy, gdy wpisy są w co najmniej dwóch kategoriach. -->
+        <!-- WP-PETLA:filtr -->
         <nav class="filtr-kategorii" data-filtr aria-label="Kategorie wpisów" data-odslon>
           <a class="filtr-kategorii__poz" href="#archiwum" data-kategoria="wszystkie" aria-current="true">Wszystkie <span class="filtr-kategorii__ile">12</span></a>
           <a class="filtr-kategorii__poz" href="#k-rodzinne" data-kategoria="k-rodzinne">Rozwód i sprawy rodzinne <span class="filtr-kategorii__ile">3</span></a>
@@ -96,11 +105,15 @@
           <a class="filtr-kategorii__poz" href="#k-cywilne" data-kategoria="k-cywilne">Sprawy cywilne <span class="filtr-kategorii__ile">1</span></a>
           <a class="filtr-kategorii__poz" href="#k-mediacje" data-kategoria="k-mediacje">Mediacje <span class="filtr-kategorii__ile">2</span></a>
         </nav>
+        <!-- /WP-PETLA:filtr -->
 
         <div class="siatka-8-4">
 
         <div class="archiwum">
 
+          <!-- Na WordPressie: grupa na każdą niepustą kategorię, w kolejności
+               USLUGI (site.js), id grupy = „k-" + slug kategorii WP. -->
+          <!-- WP-PETLA:archiwum -->
           <!-- ---- Rozwód i sprawy rodzinne ---- -->
           <section class="archiwum__grupa" id="k-rodzinne" data-odslon>
             <div class="archiwum__glowa">
@@ -256,6 +269,7 @@
               </li>
             </ul>
           </section>
+          <!-- /WP-PETLA:archiwum -->
 
         </div>
 

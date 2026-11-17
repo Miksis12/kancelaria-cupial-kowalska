@@ -3976,3 +3976,40 @@ html { background: var(--biel); }
   .wykaz--zakresy .wykaz__poz { grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); }
 }
 .wykaz--zakresy .wykaz__rok { white-space: nowrap; }
+
+/* ============================================================
+   TREŚĆ WPISU Z EDYTORA WORDPRESSA · .wpis-tresc (single.php)
+   — 17 listopada 2026.
+
+   Od tego dnia wpisy Bazy wiedzy to wpisy WP. Edytor blokowy składa
+   cytat jako <blockquote class="wp-block-quote"> (z <cite>), obraz jako
+   <figure class="wp-block-image"> z <figcaption>. Arkusz bloków WP jest
+   zdjęty (functions.php), więc wygląd biorą stąd: cytat = .wyimek
+   w prozie, podpis cytatu = .wyimek__podpis, obraz na szerokość
+   kolumny z promieniem karty, podpis obrazu = .podpis-foto.
+   Lista punktowana: reset na górze arkusza (ul { list-style: none })
+   zdejmował punktory także w prozie wpisu, choć ::marker ma tu kolor
+   akcentu — w .wpis-tresc wracają.
+   ============================================================ */
+.wpis-tresc ul { list-style: disc; }
+.wpis-tresc blockquote {
+  margin: clamp(1.75rem, 3vw, 2.5rem) 0;
+  padding-left: clamp(1rem, 2vw, 1.75rem);
+  border-left: 2px solid var(--braz-jasny);
+  font-size: clamp(1.45rem, 2.5vw, 2.05rem);
+  line-height: 1.32; font-style: italic; color: var(--umbra);
+  max-width: 20em;
+}
+.wpis-tresc blockquote p { line-height: inherit; }
+.wpis-tresc blockquote p + p { margin-top: .6em; }
+.wpis-tresc blockquote cite {
+  display: block; margin-top: 1.1rem;
+  font-family: var(--font-ui); font-style: normal; font-weight: 500;
+  font-size: .82rem; letter-spacing: .1em; text-transform: uppercase; color: var(--umbra-2);
+}
+.wpis-tresc figure { margin: clamp(1.75rem, 3vw, 2.5rem) 0; }
+.wpis-tresc figure img { border-radius: var(--r-karta); }
+.wpis-tresc figcaption {
+  font-family: var(--font-ui); font-size: .82rem; color: var(--umbra-2);
+  margin-top: .8rem; line-height: 1.5; max-width: 46ch;
+}

@@ -68,12 +68,12 @@
     { label: "Usługi",        children: USLUGI },
     { label: "O mnie",        href: "o-mnie.html", match: ["o-mnie.html"] },
     /* Zakładka z wpisami SCHOWANA do czasu prawdziwych wpisów (Mikołaj,
-       27.10.2026): 12 pozycji prowadzi dziś do jednego przykładowego szablonu.
-       Strona baza-wiedzy.html żyje dalej (noindex w generatorze motywu).
-       Powrót = ta linia z powrotem w menu, druga w STOPKA_KANCELARIA i zdjęcie
-       `noindex` w STRONY (tools/build-wp-theme.mjs). Etykieta „Baza wiedzy”,
+       27.10.2026, potwierdzone 17.11.2026). Od 17.11.2026 wpisy to wpisy
+       WordPressa (archiwum = strona baza-wiedzy, wpis = single.php).
+       Powrót = ta linia z powrotem w menu, druga w STOPKA_KANCELARIA
+       i BLOG_UKRYTY = false w tools/build-wp-theme.mjs (zdejmuje noindex,
+       wpuszcza wpisy do mapy witryny i RSS). Etykieta „Baza wiedzy”,
        a nie „Aktualności”: treść evergreen nie starzeje się jak newsy.
-       Szablon wpisu celowo NIE jest w menu — to plik do klonowania.
     { label: "Baza wiedzy",   href: "baza-wiedzy.html", match: ["baza-wiedzy.html"] }, */
     { label: "Kontakt",       href: "kontakt.html", match: ["kontakt.html"] }
   ];

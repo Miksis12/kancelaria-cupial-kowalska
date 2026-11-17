@@ -2,29 +2,25 @@
 <html lang="pl">
 <head>
   <!-- =====================================================================
-       SZABLON WPISU — plik do KLONOWANIA, nie zakładka.
+       SZABLON WPISU — źródło widoku pojedynczego wpisu WordPressa.
        Nie ma go w menu i nie ma go w stopce; site.js o nim nie wie.
 
-       NOWY WPIS = kopia tego pliku pod własną nazwą (np.
-       `wpis-ile-trwa-rozwod.html`) i podmiana SIEDMIU rzeczy:
+       OD 17.11.2026 WPISY TO WPISY WORDPRESSA (Wpisy → Dodaj nowy), a nie
+       kopie tego pliku. Generator motywu robi z niego single.php:
+         · <title>, meta description i okruszki biorą tytuł wpisu,
+         · fragmenty między znacznikami WP-PETLA zastępuje funkcjami
+           z functions.php (cupial_petla_<nazwa>): nagłówek z tytułem,
+           zajawką (pole „Zajawka" w edytorze WP) i metryczką; spis treści
+           składany sam ze śródtytułów H2 (od dwóch w górę); treść wpisu;
+           „Przeczytaj też" — do trzech wpisów, najpierw z tej samej kategorii,
+         · reszta (karta z telefonem, zastrzeżenie, sekcja kontaktu) jest
+           wspólna dla wszystkich wpisów.
+       Wpis nie jest edytowalny przez CMK — treść zmienia się w edytorze WP.
 
-         1. <title> i <meta name="description">
-         2. data-okruszki — po pionowej kresce tytuł wpisu
-         3. h1.wpis-glowa__tytul — ten sam tytuł
-         4. p.naglowek-strony__podtytul — jedno zdanie wprowadzające
-         5. .wpis-meta — data, kategoria (link do grupy w archiwum), autor
-         6. .spis__lista + .wpis-tresc — spis treści i sama treść
-         7. .wpisy w sekcji „Przeczytaj też" — trzy inne wpisy
-
-       Potem jeszcze DWA miejsca poza tym plikiem:
-         · baza-wiedzy.html — nowy wiersz w odpowiedniej kategorii
-           (i licznik w nagłówku grupy oraz w chipie),
-         · jeśli wpis ma być najnowszy — sekcja 02 na tamtej stronie.
-
-       Treść poniżej to PRZYKŁAD pokazujący każdy element, jaki wpis może
-       zawierać: lead, śródtytuły h2 i h3, akapity, lista, wyimek, link
-       w toku zdania, wyróżnienie i zastrzeżenie na końcu. Nie jest to
-       tekst zatwierdzony przez klientkę.
+       Treść między znacznikami to PRZYKŁAD pokazujący każdy element, jaki
+       wpis może zawierać: lead, śródtytuły h2 i h3, akapity, lista, wyimek,
+       link w toku zdania, wyróżnienie. Nie jest to tekst zatwierdzony przez
+       klientkę i na WordPress nie trafia.
        ===================================================================== -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,6 +47,7 @@
       <div class="kontener">
         <div data-okruszki="Baza wiedzy|Ile trwa rozwód"></div>
 
+        <!-- WP-PETLA:wpis_naglowek -->
         <h1 class="wpis-glowa__tytul">Ile trwa rozwód i od czego to naprawdę zależy</h1>
         <p class="naglowek-strony__podtytul">Uczciwa odpowiedź brzmi: to zależy. Ale nie od przypadku — od trzech rzeczy, które da się nazwać już przy pierwszej rozmowie.</p>
 
@@ -59,19 +56,22 @@
           <span>Kategoria: <a href="baza-wiedzy.html#k-rodzinne">Rozwód i sprawy rodzinne</a></span>
           <span><b>Beata Cupiał-Kowalska</b>, adwokat</span>
         </p>
+        <!-- /WP-PETLA:wpis_naglowek -->
       </div>
     </section>
 
     <!-- ============ 02 · TREŚĆ WPISU ============
          Układ 4-8: po lewej szyna ze spisem treści i kartą kontaktu
          (przyklejona od 1025 px), po prawej sama treść w kolumnie 66 znaków.
-         Spis treści jest ręczny — każdy punkt to kotwica do h2 niżej.
-         Dodajesz śródtytuł, dodajesz mu id i wiersz w spisie. -->
+         Na WordPressie spis składa się sam: każdy śródtytuł H2 w treści
+         dostaje kotwicę i wiersz w spisie (karta znika przy mniej niż
+         dwóch śródtytułach). -->
     <section class="sekcja biel">
       <div class="kontener">
         <div class="siatka-4-8">
 
           <div class="wpis-szyna" data-odslon>
+            <!-- WP-PETLA:spis -->
             <div class="szyna-karta">
               <p class="spis__tytul">W tym wpisie</p>
               <ul class="spis__lista">
@@ -81,14 +81,16 @@
                 <li><a href="#co-zrobic">Co możesz zrobić już teraz</a></li>
               </ul>
             </div>
+            <!-- /WP-PETLA:spis -->
 
             <div class="szyna-karta">
-              <p>Chcesz wiedzieć, w którym scenariuszu jesteś? Powiedz mi przez telefon, jak wygląda Twoja sytuacja.</p>
+              <p>Chcesz wiedzieć, jak to wygląda w Twojej sprawie? Opowiedz mi przez telefon, co się stało.</p>
               <a class="link liczby" href="tel:+48534477596">534 477 596</a>
             </div>
           </div>
 
           <article class="wpis-tresc" data-odslon>
+            <!-- WP-PETLA:tresc -->
             <p class="lead">Pytanie o czas pada prawie w każdej pierwszej rozmowie o rozwodzie — i słusznie, bo od odpowiedzi zależy bardzo wiele decyzji: o mieszkaniu, o pracy, czasem o tym, komu i kiedy powiedzieć.</p>
 
             <p>Nie da się podać jednej liczby, która byłaby uczciwa. Da się natomiast pokazać, co dokładnie przesuwa termin — i które z tych rzeczy leżą po Twojej stronie.</p>
@@ -128,8 +130,10 @@
             <p>Zanim złożysz pozew, zbierz dokumenty: odpis aktu małżeństwa, akty urodzenia dzieci i to, co dotyczy sytuacji majątkowej. Spisz też, co jest między Wami uzgodnione, a co nie — to zwykle pokazuje więcej niż długa rozmowa.</p>
 
             <p>Po pierwszej rozmowie zwykle jestem w stanie powiedzieć, w którym z powyższych scenariuszy prawdopodobnie jesteś. Jeśli chcesz to sprawdzić, <a href="kontakt.html">napisz albo zadzwoń do kancelarii</a>.</p>
+            <!-- /WP-PETLA:tresc -->
 
-            <!-- Zastrzeżenie zostaje w KAŻDYM wpisie, bez zmian. -->
+            <!-- Zastrzeżenie zostaje w KAŻDYM wpisie, bez zmian — dokłada je
+                 szablon, autorka wpisu go nie wpisuje. -->
             <p class="akcent">Ten wpis wyjaśnia zagadnienie ogólnie i nie jest poradą prawną w konkretnej sprawie. O tym, co jest możliwe w Twojej sytuacji, decydują jej szczegóły — te omawiamy indywidualnie.</p>
           </article>
 
@@ -139,7 +143,10 @@
 
     <!-- ============ 03 · PRZECZYTAJ TEŻ ============
          Trzy inne wpisy — ten sam komponent .wpisy co w archiwum, więc
-         wiersz zachowuje się identycznie. Podmieniasz trzy pozycje. -->
+         wiersz zachowuje się identycznie. Na WordPressie: najpierw wpisy
+         z tej samej kategorii, potem najnowsze; bez innych wpisów sekcja
+         znika (biel treści przechodzi wtedy prosto w piasek kontaktu). -->
+    <!-- WP-PETLA:przeczytaj -->
     <section class="sekcja">
       <div class="kontener">
         <div class="naglowek-sekcji naglowek-sekcji--rozdzielony" data-odslon>
@@ -175,6 +182,7 @@
         </ul>
       </div>
     </section>
+    <!-- /WP-PETLA:przeczytaj -->
 
     <!-- ============ 04 · KONTAKT ============
          Domknięcie wpisu telefonem. Układ 5-7 występuje na tej stronie
@@ -184,7 +192,7 @@
         <div class="siatka-5-7">
           <div data-odslon>
             <h2>Twoja sprawa ma <em>swoje szczegóły</em></h2>
-            <p class="lead">Ten wpis mówi o tym, co powtarza się w wielu rozwodach. O tym, co jest możliwe u Ciebie, rozstrzygają rzeczy, których nie ma w żadnym tekście.</p>
+            <p class="lead">Ten wpis mówi o tym, co powtarza się w wielu sprawach. O tym, co jest możliwe u Ciebie, rozstrzygają rzeczy, których nie ma w żadnym tekście.</p>
           </div>
 
           <div data-odslon>

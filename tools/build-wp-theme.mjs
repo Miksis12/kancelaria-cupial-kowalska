@@ -37,24 +37,29 @@ const DOMYSLNY_MOTYW =
   'C:/Users/mikol/Local Sites/cupial/app/public/wp-content/themes/cupial-kowalska';
 const MOTYW = process.argv[2] || process.env.WP_THEME_DIR || DOMYSLNY_MOTYW;
 
+// BAZA WIEDZY NA WPISACH WORDPRESSA (od 17.11.2026). Archiwum to strona WP
+// „baza-wiedzy" (szablon z baza-wiedzy.html), wpis to wpis WP (single.php
+// z wpis-szablon.html), adres wpisu /baza-wiedzy/<slug>/. Logika: tools/wp/blog.php.
+// BLOG_UKRYTY = true (Mikołaj, 17.11.2026: „ukryte, dopóki nie ma wpisów"):
+// archiwum i wpisy z noindex, wpisy poza mapą witryny, bez RSS. ODSŁONIĘCIE =
+// false tutaj + odkomentowane pozycje „Baza wiedzy" w NAV i STOPKA_KANCELARIA
+// (js/site.js) + przebudowa i wdrożenie motywu.
+const BLOG_UKRYTY = true;
+
 // Strony serwisu → strony WordPressa. slug = adres strony w WP i zakres kluczy
 // CMK. design-system.html i mockup.html to dokumenty robocze — nie idą na WP.
+// wpis-szablon.html nie jest stroną — robi z niego single.php widokWpisu().
 export const STRONY = [
   { plik: 'index.html',                    slug: 'strona-glowna',            tytul: 'Strona główna' },
   { plik: 'o-mnie.html',                   slug: 'o-mnie',                   tytul: 'O mnie' },
   { plik: 'kontakt.html',                  slug: 'kontakt',                  tytul: 'Kontakt' },
-  // noindex: schowana z menu, dopóki 12 pozycji prowadzi do przykładowego
-  // szablonu (Mikołaj, 27.10.2026). Powrót: zdjąć flagę + NAV w site.js.
-  { plik: 'baza-wiedzy.html',              slug: 'baza-wiedzy',              tytul: 'Baza wiedzy', noindex: true },
+  { plik: 'baza-wiedzy.html',              slug: 'baza-wiedzy',              tytul: 'Baza wiedzy', noindex: BLOG_UKRYTY },
   { plik: 'rozwod-i-sprawy-rodzinne.html', slug: 'rozwod-i-sprawy-rodzinne', tytul: 'Rozwód i sprawy rodzinne' },
   { plik: 'sprawy-spadkowe.html',          slug: 'sprawy-spadkowe',          tytul: 'Sprawy spadkowe' },
   { plik: 'sprawy-karne.html',             slug: 'sprawy-karne',             tytul: 'Sprawy karne' },
   { plik: 'sprawy-cywilne.html',           slug: 'sprawy-cywilne',           tytul: 'Sprawy cywilne' },
   { plik: 'jazda-po-alkoholu.html',        slug: 'jazda-po-alkoholu',        tytul: 'Jazda po alkoholu' },
   { plik: 'mediacje.html',                 slug: 'mediacje',                 tytul: 'Mediacje' },
-  // noindex: przykładowa treść, której klientka nie zatwierdziła — poza indeksem
-  // i poza mapą witryny, dopóki nie powstaną prawdziwe wpisy.
-  { plik: 'wpis-szablon.html',             slug: 'wpis-szablon',             tytul: 'Szablon wpisu', noindex: true },
   // Poza menu, link w stopce i przy zgodzie w formularzu. W WP to strona
   // wskazana w Ustawienia → Prywatność (opcja wp_page_for_privacy_policy).
   { plik: 'polityka-prywatnosci.html',     slug: 'polityka-prywatnosci',     tytul: 'Polityka prywatności' },
@@ -245,6 +250,16 @@ function oznaczMain(html, slug, gdzie) {
   return { html: html.slice(0, a) + wynik + html.slice(b + '</main>'.length), keys };
 }
 
+/** Fragment <!-- WP-PETLA:x --> … <!-- /WP-PETLA:x --> → cupial_petla_x()
+ *  z inc/blog.php (ten sam markup, ale z wpisów WP). Treść pomiędzy
+ *  znacznikami to podgląd na stronie statycznej i do motywu nie trafia. */
+function wstawPetle(html, gdzie) {
+  const wynik = html.replace(/<!-- WP-PETLA:([a-z_]+) -->[\s\S]*?<!-- \/WP-PETLA:\1 -->/g,
+    (m, nazwa) => `<?php cupial_petla_${nazwa}(); ?>`);
+  if (/<!-- \/?WP-PETLA:/.test(wynik)) throw new Error(`${gdzie}: niedomknięty znacznik WP-PETLA`);
+  return wynik;
+}
+
 /** Formularz „oddzwonię": action na admin-post.php, komunikat po wysłaniu
  *  i pola techniczne (oba składa functions.php). W HTML formularz ma
  *  action="#" — na stronie statycznej nie wysyła. */
@@ -273,6 +288,17 @@ function szablon(strona, wersje) {
   const gdzie = strona.plik;
   let html = fs.readFileSync(path.join(ROOT, strona.plik), 'utf8');
 
+  html = wstawPetle(html, gdzie);
+  html = wspolnePrzejscia(html, wersje, gdzie);
+  if (strona.plik === 'kontakt.html') html = formularzWp(html, gdzie);
+
+  const { html: oznaczony, keys } = oznaczMain(html, strona.slug, gdzie);
+  return { php: naglowekSzablonu(strona.tytul, strona.plik) + oznaczony, keys };
+}
+
+/** Linki, assety, site.js w trybie WP, wp_head/wp_footer — wspólne dla stron
+ *  i widoku wpisu. */
+function wspolnePrzejscia(html, wersje, gdzie) {
   html = przepiszLinki(html, gdzie);
   html = przepiszAssety(html, wersje);
   html = podmienRaz(html,
@@ -281,10 +307,44 @@ function szablon(strona, wersje) {
     gdzie);
   html = podmienRaz(html, '</head>', '<?php wp_head(); ?>\n</head>', gdzie);
   html = podmienRaz(html, '</body>', '<?php wp_footer(); ?>\n</body>', gdzie);
-  if (strona.plik === 'kontakt.html') html = formularzWp(html, gdzie);
+  return html;
+}
 
-  const { html: oznaczony, keys } = oznaczMain(html, strona.slug, gdzie);
-  return { php: naglowekSzablonu(strona.tytul, strona.plik) + oznaczony, keys };
+/** single.php — pojedynczy wpis WP z wpis-szablon.html. Bez CMK: treść wpisu
+ *  zmienia się w edytorze WordPressa, a reszta strony jest wspólna dla
+ *  wszystkich wpisów (klucz CMK per wpis nie miałby sensu). Komentarze HTML
+ *  wypadają — w źródle opisują przykład, nie konkretny wpis. */
+function widokWpisu(wersje) {
+  const gdzie = 'wpis-szablon.html';
+  let html = fs.readFileSync(path.join(ROOT, gdzie), 'utf8');
+
+  html = wstawPetle(html, gdzie);
+  html = html.replace(/[ \t]*<!--[\s\S]*?-->\n?/g, '');
+  if (policz(html, '<title>') !== 1) throw new Error(`${gdzie}: oczekiwano jednego <title>`);
+  html = html.replace(/<title>[^<]*<\/title>/, () =>
+    '<title><?php echo esc_html( wp_strip_all_tags( get_the_title() ) ); ?> · Adwokat Beata Cupiał-Kowalska</title>');
+  if (policz(html, '<meta name="description" content=') !== 1) throw new Error(`${gdzie}: oczekiwano jednego meta description`);
+  html = html.replace(/<meta name="description" content="[^"]*">/, () =>
+    '<meta name="description" content="<?php echo esc_attr( cupial_wpis_opis() ); ?>">');
+  html = podmienRaz(html, 'data-okruszki="Baza wiedzy|Ile trwa rozwód"',
+    'data-okruszki="Baza wiedzy|<?php echo esc_attr( cupial_wpis_okruszek() ); ?>"', gdzie);
+  html = wspolnePrzejscia(html, wersje, gdzie);
+
+  return `<?php
+/**
+ * Pojedynczy wpis Bazy wiedzy (wpis WordPressa). Fragmenty z wpisami składa
+ * inc/blog.php (cupial_petla_*). Wygenerowane z ${gdzie} przez
+ * tools/build-wp-theme.mjs — NIE EDYTUJ.
+ */
+if ( ! have_posts() ) {
+	include get_template_directory() . '/404.php';
+	return;
+}
+the_post();
+cupial_wpis_przygotuj();
+$t = get_template_directory_uri();
+?>
+` + html;
 }
 
 
@@ -349,12 +409,12 @@ $t = get_template_directory_uri();
 }
 
 function widokIndex(wersje) {
-  // Wpis / archiwum / wyszukiwarka WordPressa — serwis ich nie używa, ale motyw
-  // musi mieć index.php. Pusta pętla = to samo co 404.
+  // Archiwa / wyszukiwarka / strona bez szablonu — serwis ich nie używa, ale
+  // motyw musi mieć index.php. Wpis ma single.php. Pusta pętla = to samo co 404.
   return `<?php
 /**
- * Awaryjny widok WordPressa (wpisy, archiwa, wyszukiwarka). Serwis z nich nie
- * korzysta — wszystkie strony mają własne szablony w szablony/.
+ * Awaryjny widok WordPressa (wyszukiwarka, strona bez szablonu). Strony mają
+ * własne szablony w szablony/, wpisy single.php, archiwa przekierowują.
  * Wygenerowane przez tools/build-wp-theme.mjs — NIE EDYTUJ.
  */
 if ( ! have_posts() ) {
@@ -420,6 +480,14 @@ if ( ! function_exists( 'cmk_img' ) ) {
 		if ( is_callable( $render ) ) { $render(); } else { echo $render; }
 	}
 }
+
+/* --- Baza wiedzy: wpisy WordPressa -----------------------------------------
+ * Archiwum (szablony/baza-wiedzy.php), widok wpisu (single.php) i zachowanie
+ * WP przy wpisach: inc/blog.php (źródło: tools/wp/blog.php w projekcie).
+ * CUPIAL_BLOG_UKRYTY = BLOG_UKRYTY z generatora: noindex, poza mapą, bez RSS.
+ */
+define( 'CUPIAL_BLOG_UKRYTY', ${BLOG_UKRYTY} );
+require_once __DIR__ . '/inc/blog.php';
 
 /* --- Branding edytora CMK --------------------------------------------------
  * Motyw nie używa tokenów --c-orange / --font, więc mapujemy tokeny strony:
@@ -527,8 +595,9 @@ add_filter( 'wp_robots', function ( $robots ) {
 	return $robots;
 } );
 
-/* Mapa witryny: same strony. Lista użytkowników zdradzałaby login konta
- * administratora, taksonomie są puste (serwis nie ma wpisów WP). */
+/* Mapa witryny: strony (i wpisy, gdy blog nie jest ukryty — inc/blog.php).
+ * Lista użytkowników zdradzałaby login konta administratora, a kategorie nie
+ * mają własnych stron (przekierowanie do grupy w Bazie wiedzy). */
 add_filter( 'wp_sitemaps_add_provider', function ( $provider, $nazwa ) {
 	return in_array( $nazwa, array( 'users', 'taxonomies' ), true ) ? false : $provider;
 }, 10, 2 );
@@ -817,8 +886,10 @@ function main() {
     pliki.push([`szablony/${s.slug}.php`, php]);
     klucze.push([s.slug, keys]);
   }
+  pliki.push(['single.php', widokWpisu(wersje)]);
   pliki.push(['404.php', widok404(wersje)]);
   pliki.push(['index.php', widokIndex(wersje)]);
+  pliki.push(['inc/blog.php', fs.readFileSync(path.join(ROOT, 'tools', 'wp', 'blog.php'), 'utf8')]);
   pliki.push(['style.css', styleCss()]);
   pliki.push(['functions.php', functionsPhp()]);
   pliki.push(['inc/cmk-keys.php', manifest(klucze)]);
@@ -853,6 +924,7 @@ function main() {
   for (const [slug, keys] of klucze) {
     console.log(`+ szablony/${slug}.php`.padEnd(44) + `${keys.length} kluczy CMK`);
   }
+  console.log(`+ single.php (wpis WP), inc/blog.php — blog ${BLOG_UKRYTY ? 'UKRYTY (noindex, poza mapą, bez RSS)' : 'WIDOCZNY'}`);
   console.log(`+ 404.php, index.php, style.css, functions.php, inc/cmk-keys.php`);
   console.log(`+ css/ js/ assets/   (styles.css?v=${wersje['css/styles.css']}, site.js?v=${wersje['js/site.js']})`);
   console.log(`  minifikacja: ${zysk.join(', ')}`);

@@ -104,19 +104,28 @@ klasy sprawdzaj grepem po słowniku niżej.
   pasek `.filtr-kategorii` nad całą listą, pod nim `.siatka-8-4` — wpisy
   pogrupowane po kategoriach po lewej, `.karta-autora` (sticky) po prawej.
   Kategorie odpowiadają tablicy `USLUGI` w `site.js` i stoją w tej
-  samej kolejności — po imporcie na WordPressa mapują się 1:1 na kategorie WP.
-  **Wszystkie 12 pozycji czeka na treść**: daty stoją jako `.todo`, a wiersze
-  prowadzą tymczasowo do `wpis-szablon.html`. Strona nie mówi o tym stanie
-  odwiedzającemu — na życzenie Mikołaja nie ma nad listą żadnej noty.
+  samej kolejności. **Od 17.11.2026 lista składa się z wpisów WordPressa**
+  (zob. „Baza wiedzy na wpisach WP" w sekcji WordPress): sekcje „Najnowszy
+  wpis", pasek kategorii i grupy archiwum stoją w HTML między znacznikami
+  `<!-- WP-PETLA:… -->` i na WP zastępuje je `inc/blog.php`. 12 wierszy
+  w HTML to już tylko podgląd projektu (proponowane tematy, nie wpisy).
+  Bez wpisów na WP: archiwum pokazuje „Pierwsze wpisy są w przygotowaniu.",
+  sekcja „Najnowszy wpis" i pasek znikają.
   **Od 27.10.2026 schowana z menu i stopki** (zakomentowane pozycje w `site.js`,
-  `noindex` w `STRONY`), dopóki nie ma prawdziwych wpisów. Okruszki podaje
-  sama (`data-okruszki="Baza wiedzy"`).
-- `wpis-szablon.html` — **PLIK-WZORZEC do klonowania WPISÓW.** Celowo poza menu
-  i poza stopką. Cztery sekcje: nagłówek wpisu (piasek), treść + szyna ze spisem
-  treści (biel), „przeczytaj też" (len), kontakt (piasek). Instrukcja, co
-  podmienić przy nowym wpisie, stoi w komentarzu na górze pliku. Treść w środku
-  to przykład pokazujący każdy element prozy, nie tekst zatwierdzony przez
-  klientkę.
+  `BLOG_UKRYTY` w generatorze), dopóki nie ma prawdziwych wpisów. Okruszki
+  podaje sama (`data-okruszki="Baza wiedzy"`).
+- `wpis-szablon.html` — **źródło widoku wpisu WP (`single.php`)**, nie plik do
+  klonowania i nie strona WP. Celowo poza menu i poza stopką. Cztery sekcje:
+  nagłówek wpisu (piasek), treść + szyna ze spisem treści (biel), „przeczytaj
+  też" (len), kontakt (piasek). Fragmenty zależne od wpisu stoją między
+  znacznikami `WP-PETLA`; karta z telefonem, zastrzeżenie `.akcent` i sekcja
+  kontaktu są wspólne dla wszystkich wpisów (teksty ogólne, bez „rozwodu").
+  Treść między znacznikami to przykład każdego elementu prozy, nie tekst
+  zatwierdzony przez klientkę.
+- `tools/wp/blog.php` — PHP Bazy wiedzy na WP (pętle `cupial_petla_*`, spis
+  treści z H2, „przeczytaj też", noindex/mapa/RSS przy ukrytym blogu,
+  przekierowania archiwów, wyłączone komentarze). Generator kopiuje go do
+  motywu jako `inc/blog.php`.
 - `polityka-prywatnosci.html` — **PROJEKT do akceptacji klientki** (27.10.2026),
   poza menu: link w stopce i przy zgodzie w formularzu (`#formularz`). Dwie
   sekcje: nagłówek strony (piasek) + proza `.wpis-tresc` bez szyny (biel).
@@ -330,6 +339,10 @@ klasy sprawdzaj grepem po słowniku niżej.
 - `.wpis-tresc` → proza wpisu: `h2`/`h3` z własnymi `id`, akapity, listy, `.wyimek`,
   linki stylowane bez klasy, `.akcent` jako zastrzeżenie na końcu → 1 → biel.
   Maks. 66 znaków w wierszu (`.tekst` ma 62 — to blok w sekcji, a nie cała treść).
+  Od 17.11.2026 trzyma też markup edytora WP: `blockquote` (+ `cite`) wygląda
+  jak `.wyimek`, `figure`/`figcaption` jak zdjęcie z `.podpis-foto`, `ul` ma
+  punktory (globalny reset `ul { list-style: none }` je zdejmował). H2 dostają
+  `id` same (`inc/blog.php`), autorka niczego nie wpisuje ręcznie.
 
 **Kontakt**
 - `.telefon-duzy` + `.telefon-podpis` → telefon jako element typograficzny → 1 na stronę.
@@ -459,8 +472,25 @@ klasy sprawdzaj grepem po słowniku niżej.
 - **SEO przeniesienia ze starej strony** (Laravel, 4 adresy) — w generatorze:
   `STARE_ADRESY` (301 `/about` → `/o-mnie/`, `/contact` → `/kontakt/`,
   `/services` → `/` + stare obrazki), flaga `noindex` w `STRONY` (dziś
-  `/wpis-szablon/` i `/baza-wiedzy/`: noindex i poza mapą witryny), mapa `/wp-sitemap.xml` bez
+  `/baza-wiedzy/`, sterowana `BLOG_UKRYTY`: noindex i poza mapą witryny), mapa `/wp-sitemap.xml` bez
   użytkowników i taksonomii, 404 z noindex, ikona witryny w WP (opcja `site_icon`).
+- **Baza wiedzy na wpisach WP (od 17.11.2026).** Wpis = Wpisy → Dodaj nowy
+  (konto klientki — redaktor — może pisać i publikować). Adres
+  `/baza-wiedzy/<slug>/` (`permalink_structure` = `/baza-wiedzy/%postname%/`,
+  strony bez zmian). Archiwum to dalej strona WP `baza-wiedzy` z szablonem
+  i CMK na stałych tekstach; widok wpisu `single.php` z `wpis-szablon.html`,
+  **bez CMK** (treść z edytora WP). Pole „Zajawka" = zdanie pod H1 i opis
+  w Google; puste → zajawka na liście robi się sama (30 słów + „…").
+  Spis treści sam z H2 (od dwóch), zastrzeżenie dokłada szablon. Kategorie WP
+  (slug = podstrona usługi): `rozwod-i-sprawy-rodzinne`, `sprawy-spadkowe`,
+  `jazda-po-alkoholu`, `sprawy-karne`, `sprawy-cywilne`, `mediacje` + domyślna
+  `pozostale` (dawne Uncategorized, grupa na końcu). Kategoria/tag/data →
+  301 do archiwum (`#k-<slug>`), komentarze i pingbacki wyłączone.
+  **`BLOG_UKRYTY = true`** w generatorze: archiwum i wpisy noindex, wpisy
+  poza mapą witryny, RSS → strona główna. **Odsłonięcie** = `false` +
+  odkomentowane „Baza wiedzy" w `NAV` i `STOPKA_KANCELARIA` (`site.js`) +
+  `node tools/wdroz-motyw.mjs`. Strona WP `wpis-szablon` (ID 17) w koszu.
+  Sprawdzone na produkcji dwoma wpisami próbnymi (usunięte).
   Docelowy adres `https://www.cupial-kowalska.pl/`. Analiza, `.htaccess` na
   produkcję i lista kroków na dzień publikacji (**uwaga na pocztę przy DNS**):
   `docs/SEO-MIGRACJA.md`.
@@ -509,9 +539,9 @@ Częstochowa** (lewa oficyna, I piętro, po prawej), godziny pracy pn-wt 8:30-17
 śr-czw 8:30-15:00, pt po umówieniu, ORA w Częstochowie, opinie Google (imiona autorów
 jak w źródle).
 
-Do uzupełnienia: **treść wpisów w bazie wiedzy** (12 zaproponowanych tematów
-w `baza-wiedzy.html` — tytuły i zajawki do zatwierdzenia przez klientkę, teksty
-i daty do napisania; wszystkie wiersze prowadzą na razie do `wpis-szablon.html`),
+Do uzupełnienia: **wpisy w Bazie wiedzy** (wpisy WP; 12 proponowanych tematów
+z tytułami i zajawkami stoi jako podgląd w `baza-wiedzy.html` — do zatwierdzenia
+przez klientkę i napisania),
 **hasło skrzynki do wysyłki formularza** (klientka, menu „Poczta strony" w WP),
 **akceptacja polityki prywatności** i **umowa powierzenia** z dostawcami hostingu
 (pytanie 39), **zdjęcia z sesji** (portret klientki już jest, jeden
