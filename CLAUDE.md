@@ -44,10 +44,12 @@ klasy sprawdzaj grepem po słowniku niżej.
   sylwetka (biel), dlaczego sama (len), moja historia (piasek), dyżury (biel),
   mediacja (len), podejście (piasek), zakres praktyki (biel), kontakt (len) —
   czysty cykl piasek → biel → len ×3. Nie ma hero: po nagłówku strony idzie
-  sekcja „portret + dwa akapity o sobie". **Sekcja „Moja historia"** ma lata
-  i nazwy ze starej strony klientki i Białej listy MF (2013 WPiA UŁ, 2016 aplikacja
-  ORA Częstochowa, 2017 wpis, 2017 kancelaria); jako `.todo` zostały numer wpisu,
-  „co robiła wcześniej" i cała pozycja mediatora (pytanie 10 w `docs/PYTANIA.md`).
+  sekcja „portret + dwa akapity o sobie". **Sekcja „Moja historia"** — daty
+  poprawione 17.11.2026 według Mikołaja: studia 2007–2012 WPiA UŁ (podane
+  z „chyba”), aplikacja 2014–2017 ORA Częstochowa, wpis 2017, kancelaria 2017,
+  mediator 2021. Zakresy lat trzyma `.wykaz--zakresy` (kolumna roku 11 rem).
+  Jako `.todo` zostały numer wpisu, „co robiła wcześniej" i podstawa uprawnień
+  mediatora (pytanie 10 w `docs/PYTANIA.md`).
 - `rozwod-i-sprawy-rodzinne.html` — **PLIK-WZORZEC do klonowania PODSTRON USŁUGOWYCH.**
   Pierwsza podstrona obszaru spraw, dziewięć sekcji w **sześciu polach** + stopka:
   POLE biel — zwarty nagłówek `.naglowek-strony--uslugi` (okruszki, H1, lead, linia
@@ -226,7 +228,9 @@ klasy sprawdzaj grepem po słowniku niżej.
   (na `.pas` przechodzi w biel) → N → len / biel. To nie cytat: cytat bierze `.wyimek`.
 - `.wykaz` / `.wykaz__poz` (+ `__rok`, `__tytul`, `__opis`) → suchy wykaz faktów:
   rok po lewej, fakt po prawej, linia pod pozycją → N → piasek. Od `.osczasu`
-  różni się tym, że jest pionowy i bez limitu czterech pól.
+  różni się tym, że jest pionowy i bez limitu czterech pól. Modyfikator
+  `--zakresy` (od 561 px kolumna roku 11 rem zamiast 8,5, rok bez łamania)
+  — dla zakresów typu „2014–2017"; stoi na `o-mnie.html`.
 - `.os-dni` (+ `__krok`, `--termin`, `__nr`, `__tytul`, `__opis`, `__termin`, `__final`,
   `__zdanie`) → oś czasu: pionowa szyna z numerowanymi węzłami (32 px), tytuł kroku
   po lewej (17 rem), opis po prawej; krok z terminem ma wypełniony węzeł i znacznik
@@ -513,7 +517,7 @@ prowadzą tymczasowo do `index.html#sprawy`; wszystkie obszary spraw i mediacje 
 już podstrony), **progi i kwoty na `jazda-po-alkoholu.html`**
 (do weryfikacji na dzień publikacji),
 **opłata sądowa w FAQ spadków** (`.todo`, 100 zł z copy kontra 50 zł z ustawy), a także **reszta ścieżki zawodowej**
-na `o-mnie.html`: numer wpisu, „co robiła wcześniej", rok i podstawa uprawnień
+na `o-mnie.html`: numer wpisu, „co robiła wcześniej", podstawa uprawnień
 mediatora — jako `<span class="todo">`.
 
 Uzupełnione 21.09.2026 z publicznych źródeł: **NIP 5771926637** (Biała lista MF)

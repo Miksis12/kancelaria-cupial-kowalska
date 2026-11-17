@@ -3961,3 +3961,18 @@ html { background: var(--biel); }
   src: url("../assets/fonty/source-serif-4-normal-latin.woff2") format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+/* ============================================================
+   WYKAZ Z ZAKRESAMI LAT · .wykaz--zakresy
+   (o-mnie.html #sciezka) — 17 listopada 2026.
+
+   Studia i aplikacja stoją jako zakresy („2007–2012"). W bazowej
+   kolumnie .wykaz (8,5 rem) zakres łamał się po półpauzie na dwa
+   wiersze. Tu kolumna roku ma 11 rem (zakres w największym stopniu
+   to 10,5 rem), a rok nie łamie się nigdy. Poniżej 561 px zostaje
+   bazowy układ w jednej kolumnie. Wykaz na mediacjach (01–05) bez zmian.
+   ============================================================ */
+@media (min-width: 561px) {
+  .wykaz--zakresy .wykaz__poz { grid-template-columns: minmax(0, 11rem) minmax(0, 1fr); }
+}
+.wykaz--zakresy .wykaz__rok { white-space: nowrap; }

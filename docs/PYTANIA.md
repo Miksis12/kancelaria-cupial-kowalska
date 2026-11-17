@@ -150,6 +150,11 @@ wiersz**. Jeśli nie da się podać żadnej daty, wypada cała sekcja 03; wtedy 
 (lata 2014–2016) — ORA w Częstochowie; wpis na listę 2017. Rok otwarcia kancelarii 2017
 z Białej listy MF (rejestracja 13.10.2017). **Nadal brakuje:** numeru wpisu, opisu „co
 robiła wcześniej" i całej pozycji mediatora (rok, podstawa, lista SO).
+**Stan (17.11.2026, od Mikołaja, wdrożone na produkcję):** studia **2007–2012**
+(podane z „chyba" — stara strona mówiła o magisterium w 2013; do potwierdzenia
+u klientki), aplikacja **2014–2017**, kancelaria **2017**, mediator **od 2021**.
+Wpis na listę zostaje 2017. **Nadal brakuje:** numeru wpisu, opisu „co robiła
+wcześniej" oraz podstawy uprawnień mediatora i listy SO.
 
 ### 11. Akapit o wnioskach o wyznaczenie pełnomocnikiem ⚪
 **Dlaczego pytamy:** w sekcji o dyżurach stoi zdanie: „Zdarza się, że osoby, które
