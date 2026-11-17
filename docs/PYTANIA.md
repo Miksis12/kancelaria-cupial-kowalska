@@ -153,8 +153,9 @@ robiła wcześniej" i całej pozycji mediatora (rok, podstawa, lista SO).
 **Stan (17.11.2026, od Mikołaja, wdrożone na produkcję):** studia **2007–2012**
 (podane z „chyba" — stara strona mówiła o magisterium w 2013; do potwierdzenia
 u klientki), aplikacja **2014–2017**, kancelaria **2017**, mediator **od 2021**.
-Wpis na listę zostaje 2017. **Nadal brakuje:** numeru wpisu, opisu „co robiła
-wcześniej" oraz podstawy uprawnień mediatora i listy SO.
+Wpis na listę zostaje 2017. **Reszta uzupełniona tego samego dnia** z publicznych
+źródeł (sekcja „Uzupełnione z researchu" na końcu pliku); opis „co robiła
+wcześniej" usunięty, bo nie ma go w żadnym źródle.
 
 ### 11. Akapit o wnioskach o wyznaczenie pełnomocnikiem ⚪
 **Dlaczego pytamy:** w sekcji o dyżurach stoi zdanie: „Zdarza się, że osoby, które
@@ -593,3 +594,59 @@ jest mapę ładować dopiero po kliknięciu, a czcionki trzymać na własnym ser
 - **Komunikaty formularza** (sukces, braki, błąd) napisał Claude; sukces powtarza
   zdanie z copy kontaktu („Oddzwonię tego samego dnia albo następnego rana").
 - **Baza wiedzy** schowana z menu i stopki do czasu prawdziwych wpisów.
+
+
+---
+
+## Uzupełnione z researchu (17 listopada 2026)
+
+Na prośbę Mikołaja: co da się znaleźć publicznie — wpisane; co ogólne — uzupełnione
+założeniem; czego nie wiadomo z żadnego źródła — usunięte. Na stronach publicznych
+nie ma już żadnego `.todo` ani martwego linku `href="#"`.
+
+- **Pytanie 10 (numer wpisu):** **CZE/Adw/592**, wpis 1.06.2017 — Krajowy Rejestr
+  Adwokatów (rejestradwokatow.pl, profil „Cupiał-Kowalska Beata Anna").
+  Opis „co robiła przed kancelarią" usunięty z wykazu (brak w rejestrze, na starej
+  stronie i w innych źródłach).
+- **Pytania 13, 19, 32 (status mediatora): rozstrzygnięte.** Klientka jest na
+  **liście stałych mediatorów Sądu Okręgowego w Częstochowie** (stan 26.10.2026,
+  poz. 25; czestochowa.so.gov.pl → Mediacje → Lista stałych mediatorów): szkolenie
+  w Centrum Mediacji przy NRA, sprawy **cywilne, gospodarcze, rodzinne**. Na
+  rozwodach, spadkach, cywilnych, mediacjach i w „Moja historia" stoi teraz
+  „stały mediator przy Sądzie Okręgowym w Częstochowie". **Nie ma jej w wykazie
+  mediatorów w sprawach karnych** — na `sprawy-karne.html` zostaje „czynny
+  mediator" (🟡 do decyzji klientki, czy w ogóle mówić tam o mediacji karnej).
+- **Pytanie 16 (opłata w FAQ spadków):** **100 zł jest poprawne** — art. 49 ust. 1
+  pkt 1 ustawy o kosztach sądowych w sprawach cywilnych (t.j. Dz.U. 2025 poz. 1228,
+  tekst ujednolicony Kancelarii Sejmu z 9.11.2026); 50 zł to stawka sprzed
+  21.08.2019. 5 zł za wpis do Rejestru Spadkowego — rozporządzenie MS, Dz.U. 2016
+  poz. 1420. Zdanie bez `.todo`, wchodzi do JSON-LD.
+- **Pytanie 28 (progi i kary):** sprawdzone z tekstami ujednoliconymi Kancelarii
+  Sejmu. Zgodne: progi (art. 46 ustawy o wychowaniu w trzeźwości), wykroczenie
+  (art. 87 § 1 k.w. — areszt albo grzywna od 2500 zł; zakaz 6 mies.–3 lata,
+  art. 29 § 1 k.w.), zakaz 3–15 lat (art. 42 § 2, 43 § 1 k.k.), świadczenie od
+  5000 zł (art. 43a § 2 k.k.), przepadek od 1,5‰ i nawiązka (art. 44b k.k.),
+  warunkowe umorzenie (art. 66 k.k.). **Poprawione:** art. 178a § 1 k.k. (stan
+  29.10.2026) przewiduje **tylko pozbawienie wolności do 3 lat**; grzywna albo
+  ograniczenie wolności wchodzą w grę zamiast niej (art. 37a k.k.). Copy mówiło
+  „grzywna, ograniczenie wolności albo pozbawienie wolności" — zmienione w tabeli,
+  karcie mobilnej, FAQ, JSON-LD i w `jazda-po-alkoholu-copy.md`.
+- **Link do opinii Google:** wizytówka „Kancelaria Adwokacka Adwokat Beata
+  Cupiał-Kowalska" (5,0, 8 opinii) — `https://www.google.com/maps?cid=395690172084249377`.
+  Strona główna, 5 podstron usługowych i stopka; otwiera się w nowej karcie.
+- **Pytanie 38 (okres przechowywania zgłoszeń):** wpisane **12 miesięcy**
+  (założenie: czas na powrót klienta i sprawdzenie konfliktu interesów). 🟡 do
+  potwierdzenia przez klientkę.
+- **Pytanie 39 (hosting):** serwer strony — **WR SYSTEMS Estera Lipska** (karta
+  przekazania VPS z 18.10.2026); poczta i DNS (hosting-desire.pl) — **PPHU DESIRE
+  Damian Lipski**, NIP 5771877206 (regulamin na desire24.com, Biała lista MF);
+  obie firmy: Ogorzelnik 57, 42-320 Niegowa. W polityce wymienione obie, bez
+  wzmianki o umowie powierzenia. 🔴 **Regulamin DESIRE nie zawiera umowy
+  powierzenia** (klauzula RODO dotyczy tylko danych klientów hostingu) —
+  klientka jako administrator powinna ją podpisać z dostawcą (art. 28 RODO).
+- **Data obowiązywania polityki:** 17 listopada 2026 r. (dzień uzupełnienia
+  braków; strona działa od 12.11.2026).
+- **Bez zmian, świadomie:** daty wpisów w `baza-wiedzy.html` i `wpis-szablon.html`
+  (strony ukryte, `noindex`; daty przyjdą z prawdziwymi wpisami, wymyślanie ich
+  byłoby nieprawdą) oraz komentarze `【DO UZUPEŁNIENIA】` z pytaniami o zakres spraw
+  (decyzje klientki, niewidoczne dla odwiedzających).

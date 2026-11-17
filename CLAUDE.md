@@ -48,8 +48,9 @@ klasy sprawdzaj grepem po słowniku niżej.
   poprawione 17.11.2026 według Mikołaja: studia 2007–2012 WPiA UŁ (podane
   z „chyba”), aplikacja 2014–2017 ORA Częstochowa, wpis 2017, kancelaria 2017,
   mediator 2021. Zakresy lat trzyma `.wykaz--zakresy` (kolumna roku 11 rem).
-  Jako `.todo` zostały numer wpisu, „co robiła wcześniej" i podstawa uprawnień
-  mediatora (pytanie 10 w `docs/PYTANIA.md`).
+  Od 17.11.2026 bez `.todo`: numer wpisu CZE/Adw/592 (Krajowy Rejestr
+  Adwokatów), przy mediatorze szkolenie CM przy NRA i lista stałych mediatorów
+  SO w Częstochowie; opis „co robiła przed kancelarią" usunięty (brak źródła).
 - `rozwod-i-sprawy-rodzinne.html` — **PLIK-WZORZEC do klonowania PODSTRON USŁUGOWYCH.**
   Pierwsza podstrona obszaru spraw, dziewięć sekcji w **sześciu polach** + stopka:
   POLE biel — zwarty nagłówek `.naglowek-strony--uslugi` (okruszki, H1, lead, linia
@@ -66,9 +67,9 @@ klasy sprawdzaj grepem po słowniku niżej.
 - `sprawy-spadkowe.html` — druga podstrona usługowa, **klon 1:1**
   `rozwod-i-sprawy-rodzinne.html` na copy `spadki-copy.md`: te same pola, te same
   komponenty, zero nowego CSS. Zakres pomocy to grupa `name="spadkowe"`, dwie
-  etykiety jak we wzorcu. W FAQ zdanie o opłacie sądowej stoi jako `.todo`
-  i nie wchodzi do JSON-LD (pytanie 16 w `docs/PYTANIA.md`). Pozycja „Sprawy
-  spadkowe" w `USLUGI`.
+  etykiety jak we wzorcu. Opłata w FAQ (100 zł z art. 49 u.k.s.c. + 5 zł za
+  wpis do Rejestru Spadkowego) sprawdzona 17.11.2026, stoi też w JSON-LD
+  (pytanie 16 w `docs/PYTANIA.md`). Pozycja „Sprawy spadkowe" w `USLUGI`.
 - `sprawy-karne.html` — trzecia podstrona usługowa, **klon 1:1** wzorca na copy
   `sprawy-karne-copy.md`. Różnice: w linii meta tajemnica adwokacka zamiast
   mediatora, pod wykazem spraw `.wykaz-dopisek` z linkiem do (przyszłej) strony
@@ -123,8 +124,11 @@ klasy sprawdzaj grepem po słowniku niżej.
   mapa Google na stronie głównej i Kontakcie — od 12.11.2026 dopiero po zgodzie
   z okienka cookies, wybór w localStorage na 12 miesięcy; brak cookies strony;
   fonty z własnego serwera)
-  — **zmiana przepływu danych = aktualizacja tego tekstu**. Jako `.todo`: okres
-  przechowywania zgłoszeń, nazwa hostingu i umowa powierzenia, data obowiązywania.
+  — **zmiana przepływu danych = aktualizacja tego tekstu**. Od 17.11.2026 bez
+  `.todo`: zgłoszenia 12 miesięcy (założenie), hosting = WR SYSTEMS Estera
+  Lipska (VPS) i PPHU DESIRE Damian Lipski (poczta, DNS), oboje Ogorzelnik 57,
+  obowiązuje od 17.11.2026. **Umowy powierzenia nie ma** (regulamin DESIRE jej
+  nie zawiera) — do podpisania przez klientkę, pytanie 39.
   W WP to strona ID 3, wskazana w Ustawienia → Prywatność.
 - `css/styles.css` — wspólne style (unia wszystkich sekcji, tokeny w `:root`).
 - `js/site.js` — menu + stopka + menu mobilne + odsłanianie `[data-odslon]`;
@@ -509,16 +513,20 @@ Do uzupełnienia: **treść wpisów w bazie wiedzy** (12 zaproponowanych temató
 w `baza-wiedzy.html` — tytuły i zajawki do zatwierdzenia przez klientkę, teksty
 i daty do napisania; wszystkie wiersze prowadzą na razie do `wpis-szablon.html`),
 **hasło skrzynki do wysyłki formularza** (klientka, menu „Poczta strony" w WP),
-**akceptacja polityki prywatności** i jej trzy `.todo`, **link do opinii Google**, **zdjęcia z sesji** (portret klientki już jest, jeden
+**akceptacja polityki prywatności** i **umowa powierzenia** z dostawcami hostingu
+(pytanie 39), **zdjęcia z sesji** (portret klientki już jest, jeden
 na całą stronę — brakuje kadru „przy biurku" do sekcji o mnie na stronie głównej,
-gdzie dziś stoi ten sam portret co w hero), **status mediatora** (lista stałych mediatorów przy SO w Częstochowie, pytanie 32) (`href="#"` w `.rejestr`
-i w panelu mediacji na stronie głównej; w `.rejestr` na `o-mnie.html` wiersze
-prowadzą tymczasowo do `index.html#sprawy`; wszystkie obszary spraw i mediacje mają
-już podstrony), **progi i kwoty na `jazda-po-alkoholu.html`**
-(do weryfikacji na dzień publikacji),
-**opłata sądowa w FAQ spadków** (`.todo`, 100 zł z copy kontra 50 zł z ustawy), a także **reszta ścieżki zawodowej**
-na `o-mnie.html`: numer wpisu, „co robiła wcześniej", podstawa uprawnień
-mediatora — jako `<span class="todo">`.
+gdzie dziś stoi ten sam portret co w hero), decyzje klientki z komentarzy
+`【DO UZUPEŁNIENIA】` w kodzie (zakres spraw — niewidoczne dla odwiedzających).
+
+Uzupełnione 17.11.2026 z publicznych źródeł (szczegóły i linki w
+`docs/PYTANIA.md`, sekcja z tą datą): numer wpisu **CZE/Adw/592**; **stały
+mediator SO w Częstochowie** (cywilne, gospodarcze, rodzinne — **nie** karne,
+więc na `sprawy-karne.html` zostaje „czynny mediator"); **link do opinii Google**
+`https://www.google.com/maps?cid=395690172084249377` (6 stron + stopka, nowa
+karta); opłata w FAQ spadków; **progi i kary** na `jazda-po-alkoholu.html`
+(poprawiona kara z art. 178a § 1 k.k.); trzy braki polityki prywatności.
+Na stronach publicznych nie ma już ani jednego `.todo` ani `href="#"`.
 
 Uzupełnione 21.09.2026 z publicznych źródeł: **NIP 5771926637** (Biała lista MF)
 w stopce (`KONTAKT.nip` w `site.js`) i w `.dane` na kontakcie; lata i nazwy

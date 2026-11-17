@@ -111,7 +111,7 @@ Od tego jednego wyniku zależy, czy sprawa skończy się grzywną i wpisem do re
 | Zawartość alkoholu we krwi | [od 0,2 do 0,5 promila] | [powyżej 0,5 promila] |
 | W wydychanym powietrzu | [od 0,1 do 0,25 mg/l] | [powyżej 0,25 mg/l] |
 | Kwalifikacja | wykroczenie | przestępstwo |
-| Kara | [areszt albo grzywna nie niższa niż 2500 zł] | [grzywna, ograniczenie wolności albo pozbawienie wolności do 3 lat] |
+| Kara | [areszt albo grzywna nie niższa niż 2500 zł] | [pozbawienie wolności do 3 lat (sąd może je zamienić na grzywnę albo ograniczenie wolności)] |
 | Zakaz prowadzenia | [od 6 miesięcy do 3 lat] | [od 3 do 15 lat] |
 | Świadczenie pieniężne | nie orzeka się | [co najmniej 5000 zł] |
 | Wpis do Krajowego Rejestru Karnego | nie | tak, w razie skazania |
@@ -253,7 +253,7 @@ Pytania, które słyszę najczęściej
 Granica przebiega przy [pół promila we krwi, czyli 0,25 mg/l w wydychanym powietrzu]. Poniżej tej wartości, ale powyżej [0,2 promila], mówimy o stanie po użyciu alkoholu i o wykroczeniu. Powyżej niej jest to stan nietrzeźwości i sprawa karna, z zupełnie innymi konsekwencjami.
 
 **Co grozi za jazdę po alkoholu pierwszy raz?**
-Przy przestępstwie sąd może orzec grzywnę, ograniczenie wolności albo pozbawienie wolności, do tego obowiązkowy zakaz prowadzenia na [co najmniej 3 lata] i świadczenie pieniężne. To, co realnie zostanie orzeczone, zależy od wyniku badania, okoliczności jazdy i Twojej wcześniejszej karalności. Przy osobach niekaranych i niższych wynikach w grę wchodzi także warunkowe umorzenie.
+Przy przestępstwie ustawa przewiduje pozbawienie wolności do 3 lat, ale sąd może zamiast tej kary orzec grzywnę albo ograniczenie wolności. Do tego dochodzi obowiązkowy zakaz prowadzenia na [co najmniej 3 lata] i świadczenie pieniężne. To, co realnie zostanie orzeczone, zależy od wyniku badania, okoliczności jazdy i Twojej wcześniejszej karalności. Przy osobach niekaranych i niższych wynikach w grę wchodzi także warunkowe umorzenie.
 
 **Zatrzymali mi prawo jazdy, kiedy je odzyskam?**
 Nie wcześniej niż po zakończeniu sprawy i po upływie orzeczonego zakazu. Jeżeli zakaz trwał dłużej niż rok, do odzyskania uprawnień potrzebny jest ponowny egzamin, a często także badania lekarskie i psychologiczne. Po połowie okresu zakazu można natomiast wystąpić o blokadę alkoholową.

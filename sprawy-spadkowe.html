@@ -166,11 +166,11 @@
               <svg class="strzalka" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h11M8.5 3.5 13 8l-4.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </a></p>
           </div>
-          <!-- 【DO UZUPEŁNIENIA】 czy klientka jest wpisana na listę stałych mediatorów
-               przy Sądzie Okręgowym w Częstochowie. Do czasu potwierdzenia stoi tu
-               sformułowanie ze strony głównej („czynny mediator"), które jest pewne. -->
+          <!-- Status sprawdzony 17.11.2026: lista stałych mediatorów Sądu Okręgowego
+               w Częstochowie (stan 26.10.2026, poz. 25 — sprawy cywilne,
+               gospodarcze, rodzinne). -->
           <div class="panel-mediacje__tekst">
-            <p>Jestem czynnym mediatorem. W sprawach spadkowych to ma szczególne znaczenie, bo po drugiej stronie stołu nie siedzi obcy człowiek, tylko brat, siostra albo matka. Wyrok kończy sprawę, ale nie kończy tego, co zostaje między Wami na kolejne dwadzieścia lat.</p>
+            <p>Jestem stałym mediatorem przy Sądzie Okręgowym w Częstochowie. W sprawach spadkowych to ma szczególne znaczenie, bo po drugiej stronie stołu nie siedzi obcy człowiek, tylko brat, siostra albo matka. Wyrok kończy sprawę, ale nie kończy tego, co zostaje między Wami na kolejne dwadzieścia lat.</p>
             <p>Jeżeli wszyscy spadkobiercy są w stanie usiąść do rozmowy, dział spadku można zamknąć ugodą, a przy nieruchomości aktem notarialnym. Ugoda zawarta przed mediatorem i zatwierdzona przez sąd ma taką samą moc jak wyrok. Różnica jest taka, że warunki układacie sami.</p>
           </div>
 
@@ -277,8 +277,7 @@
           </blockquote>
         </div>
 
-        <!-- 【DO UZUPEŁNIENIA】 link do wizytówki Google -->
-        <p class="opinie-wszystkie"><a href="#">Zobacz wszystkie opinie w Google</a></p>
+        <p class="opinie-wszystkie"><a href="https://www.google.com/maps?cid=395690172084249377" target="_blank" rel="noopener">Zobacz wszystkie opinie w Google</a></p>
       </div>
     </section>
 
@@ -305,12 +304,14 @@
               <summary>Czy muszę iść do sądu, czy wystarczy notariusz?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
               <div class="faq__tresc">Notariusz wystarczy, jeżeli wszyscy spadkobiercy są zgodni, znani i mogą stawić się razem, a spadkodawca zmarł po 1 lipca 1984 roku. Jeżeli ktoś się nie zgadza, jest nieznany z miejsca pobytu albo trwa spór o testament, sprawa musi trafić do sądu. Droga notarialna bywa szybsza, ale nie zawsze tańsza.</div>
             </details>
-            <!-- 【DO UZUPEŁNIENIA】 kwoty opłat sądowych do weryfikacji na dzień publikacji
-                 (w copy w nawiasie kwadratowym). Zdanie stoi w .todo i NIE wchodzi
-                 do JSON-LD, dopóki nie zostanie potwierdzone. -->
+            <!-- Kwoty sprawdzone 17.11.2026: 100 zł — art. 49 ust. 1 pkt 1 ustawy
+                 o kosztach sądowych w sprawach cywilnych (t.j. Dz.U. 2025 poz. 1228,
+                 stan na 9.11.2026); 5 zł za wpis do Rejestru Spadkowego —
+                 rozporządzenie MS, Dz.U. 2016 poz. 1420. Zmiana stawek = zmiana
+                 tego zdania i odpowiedzi w JSON-LD na dole strony. -->
             <details class="faq__poz" name="pytania">
               <summary>Ile kosztuje sprawa o stwierdzenie nabycia spadku?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
-              <div class="faq__tresc"><span class="todo" title="Do potwierdzenia: kwoty opłat sądowych na dzień publikacji">Opłata sądowa od wniosku wynosi obecnie 100 zł, do tego dochodzi 5 zł za wpis w Rejestrze Spadkowym.</span> Osobno liczy się wynagrodzenie pełnomocnika, które ustalamy przed przyjęciem sprawy, żeby nie było niespodzianek. Przy dziale spadku i zachowku opłaty są wyższe i zależą od wartości sprawy.</div>
+              <div class="faq__tresc">Opłata sądowa od wniosku wynosi obecnie 100 zł, do tego dochodzi 5 zł za wpis w Rejestrze Spadkowym. Osobno liczy się wynagrodzenie pełnomocnika, które ustalamy przed przyjęciem sprawy, żeby nie było niespodzianek. Przy dziale spadku i zachowku opłaty są wyższe i zależą od wartości sprawy.</div>
             </details>
             <details class="faq__poz" name="pytania">
               <summary>Ile czasu mam na odrzucenie spadku?<span class="plus"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="M12 5v14"/></svg></span></summary>
@@ -420,7 +421,7 @@
         "mainEntity": [
           { "@type": "Question", "name": "Ile trwa sprawa spadkowa?", "acceptedAnswer": { "@type": "Answer", "text": "Samo stwierdzenie nabycia spadku, gdy nikt się nie spiera i wszyscy spadkobiercy są znani, zamyka się zwykle w kilku miesiącach. Dział spadku ze sporem o wartość nieruchomości i z opinią biegłego trwa dłużej, bo to już postępowanie dowodowe." } },
           { "@type": "Question", "name": "Czy muszę iść do sądu, czy wystarczy notariusz?", "acceptedAnswer": { "@type": "Answer", "text": "Notariusz wystarczy, jeżeli wszyscy spadkobiercy są zgodni, znani i mogą stawić się razem, a spadkodawca zmarł po 1 lipca 1984 roku. Jeżeli ktoś się nie zgadza, jest nieznany z miejsca pobytu albo trwa spór o testament, sprawa musi trafić do sądu." } },
-          { "@type": "Question", "name": "Ile kosztuje sprawa o stwierdzenie nabycia spadku?", "acceptedAnswer": { "@type": "Answer", "text": "Wynagrodzenie pełnomocnika ustalamy przed przyjęciem sprawy, żeby nie było niespodzianek. Przy dziale spadku i zachowku opłaty sądowe są wyższe i zależą od wartości sprawy." } },
+          { "@type": "Question", "name": "Ile kosztuje sprawa o stwierdzenie nabycia spadku?", "acceptedAnswer": { "@type": "Answer", "text": "Opłata sądowa od wniosku wynosi obecnie 100 zł, do tego dochodzi 5 zł za wpis w Rejestrze Spadkowym. Osobno liczy się wynagrodzenie pełnomocnika, które ustalamy przed przyjęciem sprawy, żeby nie było niespodzianek. Przy dziale spadku i zachowku opłaty są wyższe i zależą od wartości sprawy." } },
           { "@type": "Question", "name": "Ile czasu mam na odrzucenie spadku?", "acceptedAnswer": { "@type": "Answer", "text": "Sześć miesięcy od dnia, w którym dowiedziałeś się o tytule swojego powołania do spadku, czyli zwykle od dowiedzenia się o śmierci bliskiego albo o odrzuceniu spadku przez kogoś przed Tobą. Ten termin biegnie niezależnie od tego, czy ktoś Cię o nim poinformował." } },
           { "@type": "Question", "name": "Czy odpowiadam za długi zmarłego?", "acceptedAnswer": { "@type": "Answer", "text": "Co do zasady odpowiadasz tylko do wartości tego, co odziedziczyłeś, bo spadek dziedziczy się dziś z dobrodziejstwem inwentarza. Jeśli długi przewyższają majątek, można odrzucić spadek, ale tylko w terminie." } },
           { "@type": "Question", "name": "Komu należy się zachowek i ile wynosi?", "acceptedAnswer": { "@type": "Answer", "text": "Zachowek przysługuje zstępnym, małżonkowi i rodzicom spadkodawcy, o ile w danej sytuacji dziedziczyliby z ustawy. Wynosi połowę wartości udziału, który by im przypadał, a dla osób małoletnich i trwale niezdolnych do pracy dwie trzecie." } },

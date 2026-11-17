@@ -97,7 +97,7 @@
     /* { label: "Baza wiedzy", href: "baza-wiedzy.html", match: ["baza-wiedzy.html"] }, — schowana, zob. NAV */
     { label: "Pytania", href: "#pytania" },
     { label: "Kontakt", href: "kontakt.html", match: ["kontakt.html"] },
-    { label: "Opinie w Google", href: "#" },
+    { label: "Opinie w Google", href: "https://www.google.com/maps?cid=395690172084249377", zewnetrzny: true },
     { label: "Polityka prywatności", href: "polityka-prywatnosci.html", match: ["polityka-prywatnosci.html"] }
   ];
 
@@ -122,7 +122,9 @@
     return pozycje.map(function (p) {
       var a = aktywna(p) ? ' aria-current="page"' : "";
       var k = p.oddzielona ? ' class="oddzielona"' : "";
-      return "<li" + k + '><a href="' + url(p.href) + '"' + a + ">" + p.label + "</a></li>";
+      /* zewnetrzny: true = adres poza stroną (wizytówka Google), w nowej karcie */
+      var z = p.zewnetrzny ? ' target="_blank" rel="noopener"' : "";
+      return "<li" + k + '><a href="' + url(p.href) + '"' + a + z + ">" + p.label + "</a></li>";
     }).join("");
   }
 
